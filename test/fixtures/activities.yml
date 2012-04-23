@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  begin: 2012-04-23 15:39:44
+  end: 2012-04-23 15:39:44
+  title: MyString
+  location: MyString
+  follow: 1
+  organizer: MyString
+  status: MyString
+  description: MyString
+
+two:
+  begin: 2012-04-23 15:39:44
+  end: 2012-04-23 15:39:44
+  title: MyString
+  location: MyString
+  follow: 1
+  organizer: MyString
+  status: MyString
+  description: MyString

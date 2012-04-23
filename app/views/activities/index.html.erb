@@ -1,0 +1,37 @@
+<h1>Listing activities</h1>
+
+<table>
+  <tr>
+    <th>Begin</th>
+    <th>End</th>
+    <th>Title</th>
+    <th>Location</th>
+    <th>Follow</th>
+    <th>Organizer</th>
+    <th>Status</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%= activity.begin %></td>
+    <td><%= activity.end %></td>
+    <td><%= activity.title %></td>
+    <td><%= activity.location %></td>
+    <td><%= activity.follow %></td>
+    <td><%= activity.organizer %></td>
+    <td><%= activity.status %></td>
+    <td><%= activity.description %></td>
+    <td><%= link_to 'Show', activity %></td>
+    <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Destroy', activity, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activity', new_activity_path %>

@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Begin:</b>
+  <%= @activity.begin %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @activity.end %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @activity.title %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @activity.location %>
+</p>
+
+<p>
+  <b>Follow:</b>
+  <%= @activity.follow %>
+</p>
+
+<p>
+  <b>Organizer:</b>
+  <%= @activity.organizer %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @activity.status %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @activity.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>
