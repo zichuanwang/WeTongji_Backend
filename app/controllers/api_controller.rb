@@ -58,15 +58,40 @@ class ApiController < ApplicationController
 	      	format.json { render json: api_return }
 	    end
   	end
+
+  	def verify_action_params(keys = [])
+  		keys.each do |key|
+  			if params[key] == nil || params[key] == ''
+  				return_response ApiReturn.new("001")
+  			end
+  		end
+  	end
   
   	# get all channels
 	def channels
-	    categories = Channels.all
+	    channels = Channel.all
 	    re = ApiReturn.new("000")
-	    re.data = categories
+	    re.data = channels
 	    return_response(re)
 	end
 
 	def channel_follow
+	end
+
+	def channel_unfollow
+	end
+
+	def activities
+		verify_action_params('channel_id')
+		activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
+		re = ApiReturn.new("000")
+	    re.data = activities
+	    return_response(re)
+	end
+
+	def activity_follow
+	end
+
+	def activity_unfollow
 	end
 end
