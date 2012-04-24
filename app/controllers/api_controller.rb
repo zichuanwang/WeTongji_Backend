@@ -41,6 +41,7 @@ class ApiController < ApplicationController
         		s[0] + "=" + s[1] 
       		end
     	end
+    	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
     	Digest::MD5.hexdigest(md5_string.compact.join("&")) == hash
   	end
 
