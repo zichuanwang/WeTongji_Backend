@@ -10,7 +10,7 @@ class ApiController < ApplicationController
 	      # check params exists system require params
 	      if verify_sys_params
 	        case params[:M]
-	        	#
+	        	# channel and activity
 	          	when "Channels.Get"
 	            	channels
 	          	when "Channel.Follow"
@@ -59,7 +59,7 @@ class ApiController < ApplicationController
 	    end
   	end
   
-  	#get all channels
+  	# get all channels
 	def channels
 	    categories = Channels.all
 	    re = ApiReturn.new("000")
