@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   # GET /activities
   # GET /activities.json
   def index
-    @activities = Activity.all
+    @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
 
     respond_to do |format|
       format.html # index.html.erb
