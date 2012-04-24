@@ -1,9 +1,9 @@
 class ApiReturn
-  attr_accessor :status, :data
+  attr_accessor :Status, :Data
   
   def initialize(status_id)
-    @status = ApiReturnStatus.new(status_id)
-    @data = []
+    @Status = ApiReturnStatus.new(status_id)
+    @Data = []
   end
   
 end

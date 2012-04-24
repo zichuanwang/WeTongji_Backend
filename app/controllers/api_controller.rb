@@ -42,6 +42,7 @@ class ApiController < ApplicationController
       		end
     	end
     	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
+    	p md5_string.compact.join("&")
     	Digest::MD5.hexdigest(md5_string.compact.join("&")) == hash
   	end
 
@@ -71,8 +72,12 @@ class ApiController < ApplicationController
   	# get all channels
 	def channels
 	    channels = Channel.all
+	    ex = []
+	    channels.each do |channel|
+	    	ex << ExChannel.init_from_channel(channel)
+	    end
 	    re = ApiReturn.new("000")
-	    re.data = channels
+	    re.Data = ex
 	    return_response(re)
 	end
 
