@@ -1,4 +1,5 @@
 class TimeTablesController < ApplicationController
+  before_filter :authenticate_admin!
   # GET /time_tables
   # GET /time_tables.json
   def index

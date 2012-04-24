@@ -1,7 +1,6 @@
 # encoding: utf-8
 class ApiReturnStatus
-  attr_reader :Id
-  attr_reader :Memo
+  attr_reader :Id, :Memo
   
   def initialize(id) 
     @Id = id
