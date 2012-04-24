@@ -1,28 +1,33 @@
-<h1>Listing channels</h1>
-
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Follow</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @channels.each do |channel| %>
-  <tr>
-    <td><%= channel.title %></td>
-    <td><%= channel.follow %></td>
-    <td><%= channel.description %></td>
-    <td><%= link_to 'Show', channel %></td>
-    <td><%= link_to 'Edit', edit_channel_path(channel) %></td>
-    <td><%= link_to 'Destroy', channel, confirm: 'Are you sure?', method: :delete %></td>
-    <td><%= link_to 'Show Activities', :controller => 'activities', :action => 'index', :channel_id => channel.id %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Channel', new_channel_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">频道列表</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+          <th width="100">序号</th>
+          <th width="400">名称</th>
+          <th width="400">Follow</th>
+          <th width="200">说明</th>
+          <th width="200">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @channels.each do |channel| %>
+        <tr>
+          <td><%= channel.id %></td>
+          <td><%= channel.title %></td>
+          <td><%= channel.follow %></td>
+          <td><%= channel.description %></td>
+          <td>
+            <%= link_to '详情', channel %>
+            <%= link_to '活动', :controller => 'activities', :action => 'index', :channel_id => channel.id %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
