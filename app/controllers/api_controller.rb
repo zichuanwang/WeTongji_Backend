@@ -88,10 +88,14 @@ class ApiController < ApplicationController
 	end
 
 	def activities
-		verify_action_params('channel_id')
-		activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
+		verify_action_params(['Channel_Id'])
+		activities = Activity.where("channel_id = :channel_id", :channel_id => params[:Channel_Id])
+		ex = []
+		activities.each do |activity|
+			ex << ExActivity.init_from_activity(activity)
+		end
 		re = ApiReturn.new("000")
-	    re.data = activities
+	    re.Data = ex
 	    return_response(re)
 	end
 
