@@ -25,6 +25,8 @@ class ActivitiesController < ApplicationController
   # GET /activities/new.json
   def new
     @activity = Activity.new
+    channel = Channel.find(params[:channel_id])
+    @activity.channel = channel
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,10 +43,13 @@ class ActivitiesController < ApplicationController
   # POST /activities.json
   def create
     @activity = Activity.new(params[:activity])
+    #channel = Channel.find(params[:channel_id])
+
+    #@activity.channel = channel
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully created.' }
+        format.html { redirect_to @activity.channel, notice: 'Activity was successfully created.' }
         format.json { render json: @activity, status: :created, location: @activity }
       else
         format.html { render action: "new" }

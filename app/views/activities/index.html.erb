@@ -34,4 +34,4 @@
 
 <br />
 
-<%= link_to 'New Activity', new_activity_path %>
+<%= link_to 'New Activity', :controller => "activities", :action => "new", :channel_id => params[:channel_id] %>
