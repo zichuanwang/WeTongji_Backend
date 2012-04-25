@@ -120,7 +120,7 @@ class ApiController < ApplicationController
 		p = params[:P]
 		uid = params[:UID]
 
-		activities = Activity.all
+		activities = Activity
 		if uid
 			user = User.find_by_uid(uid)
 			if user
@@ -137,9 +137,9 @@ class ApiController < ApplicationController
 		end
 		if p
 			p = p.to_i
-			activities = activities.limit(2).offset((p - 1) * 2)
+			activities = activities.limit(20).offset((p - 1) * 20)
 		else
-			activities = activities.limit(2)
+			activities = activities.limit(20)
 		end
 
 		ex = []
