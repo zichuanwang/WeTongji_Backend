@@ -10,40 +10,28 @@
       </ul>
     </div>
   <% end %>
-  <%= f.hidden_field :channel_id %> 
   <div class="field">
-    <%= f.label :begin %><br />
-    <%= f.datetime_select :begin %>
+    开始：<%= f.datetime_select :begin %>
   </div>
   <div class="field">
-    <%= f.label :end %><br />
-    <%= f.datetime_select :end %>
+    结束：<%= f.datetime_select :end %>
   </div>
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    标题：<%= f.text_field :title, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
+    地点：<%= f.text_field :location, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :follow %><br />
-    <%= f.number_field :follow %>
+    主办：<%= f.text_field :organizer, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :organizer %><br />
-    <%= f.text_field :organizer %>
+    状态：<%= f.text_field :status, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :status %><br />
-    <%= f.text_field :status %>
+    说明：<%= f.text_area :description, :rows => 40, :cols => 100 %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="btn_box">
+    <%= f.submit "保存", :class => "btn_2" %>
   </div>
 <% end %>

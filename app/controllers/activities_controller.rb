@@ -1,9 +1,13 @@
 class ActivitiesController < ApplicationController
   before_filter :authenticate_admin!
-  # GET /activities
-  # GET /activities.json
+
   def index
-    @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
+    @activities = nil
+    if params[:channel_id]
+      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
+    else
+      @activities = Activity.all
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,8 +15,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # GET /activities/1
-  # GET /activities/1.json
   def show
     @activity = Activity.find(params[:id])
 
@@ -22,26 +24,23 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # GET /activities/new
-  # GET /activities/new.json
   def new
     @activity = Activity.new
-    channel = Channel.find(params[:channel_id])
-    @activity.channel = channel
-
+    if params[:channel_id]
+      channel = Channel.find(params[:channel_id])
+      @activity.channel = channel
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @activity }
     end
   end
 
-  # GET /activities/1/edit
   def edit
     @activity = Activity.find(params[:id])
   end
 
-  # POST /activities
-  # POST /activities.json
   def create
     @activity = Activity.new(params[:activity])
     #channel = Channel.find(params[:channel_id])
