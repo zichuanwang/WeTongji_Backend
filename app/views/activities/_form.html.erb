@@ -20,10 +20,13 @@
     标题：<%= f.text_field :title, :class => "input_1" %>
   </div>
   <div class="field">
+    频道：<%= f.select :channel_id, Channel.all.collect{|c|[ c.title, c.id ]} %>
+  </div>
+  <div class="field">
     地点：<%= f.text_field :location, :class => "input_1" %>
   </div>
   <div class="field">
-    主办：<%= f.text_field :organizer, :class => "input_1" %>
+    主办：<%= f.select :organizer_id, Organizer.all.collect{|c|[ c.name, c.id ]} %>
   </div>
   <div class="field">
     状态：<%= f.text_field :status, :class => "input_1" %>
