@@ -8,4 +8,23 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+  validates_uniqueness_of :uid
+
+  before_create :init_model
+
+  private
+  def init_model
+  	self.uid = new_uid
+  end
+
+  def new_uid
+  	uid = Time.now.strftime("%Y%m%d%H%M%S") . SecureRandom.random_number(100)
+  	if User.find_by_uid(self.uid)
+  		new_uid
+  	else
+  		uid
+  	end
+  end
+  
 end
