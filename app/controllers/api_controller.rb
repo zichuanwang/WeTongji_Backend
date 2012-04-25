@@ -92,14 +92,58 @@ class ApiController < ApplicationController
 	end
 
 	def channel_follow
+		verify_action_params(['Id', 'UID'])
+		channel = Channel.find(params[:Id])
+		if channel
+			channel.user_follow(params[:UID])
+			channel.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
 	end
 
 	def channel_unfollow
+		verify_action_params(['Id', 'UID'])
+		channel = Channel.find(params[:Id])
+		if channel
+			channel.user_unfollow(params[:UID])
+			channel.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
 	end
 
+	# activity operate
 	def activities
-		verify_action_params(['Channel_Id'])
-		activities = Activity.where("channel_id = :channel_id", :channel_id => params[:Channel_Id])
+		channel_id = params[:Channel_Id]
+		sort = params[:Sort]
+		p = params[:P]
+		uid = params[:UID]
+
+		activities = Activity.all
+		if uid
+			user = User.find_by_uid(uid)
+			if user
+				activities = user.activities
+			end
+		end
+		if channel_id
+			activities = activities.where("channel_id = :channel_id", :channel_id => channel_id)
+		end
+		if time_begin && time_begin
+			activities = activities.where("channel_id = :channel_id", :channel_id => params[:Channel_Id])
+		end
+		if sort
+			activities = activities.order(sort)
+		else
+			activities = activities.order("id desc")
+		end
+		if p
+			activities = activities.limit(20).offset((p - 1) * 20)
+		else
+			activities = activities.limit(20)
+		end
+
 		ex = []
 		activities.each do |activity|
 			ex << ExActivity.init_from_activity(activity)

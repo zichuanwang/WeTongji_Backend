@@ -9,15 +9,26 @@ class Activity < ActiveRecord::Base
 		if self.follow < 0
 			self.follow = 0
 		end
-		self.follow = self.follow + 1
+		
 		# add to user favorite
+		user = User.find_by_uid(uid)
+		if user && !self.users.exists?(user)
+			self.users << user
+			self.follow = self.follow + 1
+		end
 	end
 
 	def user_unfollow(uid)
-		if self.follow > 0
+		# remove from user favorite
+		user = User.find_by_uid(uid)
+		if user && self.users.exists?(user)
+			self.users.delete(user)
 			self.follow = self.follow - 1
 		end
-		# remove from user favorite
+
+		if self.follow < 0
+			self.follow = 0
+		end
 	end
 
 	def user_like(uid)
