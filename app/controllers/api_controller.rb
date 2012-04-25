@@ -130,18 +130,16 @@ class ApiController < ApplicationController
 		if channel_id
 			activities = activities.where("channel_id = :channel_id", :channel_id => channel_id)
 		end
-		if time_begin && time_begin
-			activities = activities.where("channel_id = :channel_id", :channel_id => params[:Channel_Id])
-		end
 		if sort
 			activities = activities.order(sort)
 		else
 			activities = activities.order("id desc")
 		end
 		if p
-			activities = activities.limit(20).offset((p - 1) * 20)
+			p = p.to_i
+			activities = activities.limit(2).offset((p - 1) * 2)
 		else
-			activities = activities.limit(20)
+			activities = activities.limit(2)
 		end
 
 		ex = []

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UsersChannelsTest < ActiveSupport::TestCase
+class ActivitiesUsersTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

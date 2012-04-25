@@ -11,10 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425165018) do
+ActiveRecord::Schema.define(:version => 20120425183908) do
 
 # Could not dump table "activities" because of following StandardError
 #   Unknown type 'hot' for column 'hot'
+
+  create_table "activities_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -44,6 +51,13 @@ ActiveRecord::Schema.define(:version => 20120425165018) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "channelss_users", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "channel_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "courses", :force => true do |t|
@@ -124,6 +138,13 @@ ActiveRecord::Schema.define(:version => 20120425165018) do
     t.integer  "activity_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "users_channels", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "channel_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end

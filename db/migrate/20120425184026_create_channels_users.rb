@@ -1,6 +1,6 @@
-class CreateUsersChannels < ActiveRecord::Migration
+class CreateChannelsUsers < ActiveRecord::Migration
   def change
-    create_table :users_channels do |t|
+    create_table :channels_users do |t|
       t.integer :user_id
       t.integer :channel_id
 
