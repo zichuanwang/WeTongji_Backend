@@ -27,9 +27,8 @@
             <td><%= activity.title %></td>
             <td><%= activity.location %></td>
             <td><%= activity.follow %></td>
-            <td><%= activity.organizer %></td>
+            <td><%= activity.organizer.name %></td>
             <td><%= activity.status %></td>
-            <td><%= activity.description %></td>
             <td>
                 <%= link_to '详情', activity %>
                 <%= link_to '编辑', edit_activity_path(activity) %>

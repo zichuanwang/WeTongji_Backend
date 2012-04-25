@@ -1,5 +1,6 @@
 class Activity < ActiveRecord::Base
 	belongs_to :channel
+	belongs_to :organizer
 
 	before_create :init_model
 
