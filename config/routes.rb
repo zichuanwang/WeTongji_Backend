@@ -13,6 +13,8 @@ WetongjiWeb::Application.routes.draw do
 
   resources :teachers
 
+  resources :users
+
   devise_for :users
 
   resources :students

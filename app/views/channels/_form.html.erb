@@ -12,18 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
+    名称：<%= f.text_field :title, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :follow %><br />
-    <%= f.number_field :follow %>
+    题图：<%= f.file_field :image, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    描述：<%= f.text_field :description %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="btn_box">
+    <%= f.submit "保存", :class => "btn_2" %>
   </div>
 <% end %>

@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   end
 
   def new_uid
-  	uid = Time.now.strftime("%Y%m%d%H%M%S") . SecureRandom.random_number(100)
+  	uid = Time.now.strftime("%Y%m%d%H%M%S") + SecureRandom.random_number(10).to_s
   	if User.find_by_uid(self.uid)
   		new_uid
   	else

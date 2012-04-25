@@ -1,0 +1,32 @@
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">账号列表</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+          <th width="100">序号</th>
+          <th width="400">Email</th>
+          <th width="400">UID</th>
+          <th width="200">电话</th>
+          <th width="200">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+          <td><%= user.uid %></td>
+          <td><%= user.phone %></td>
+          <td>
+            <%= link_to '详情', user %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
