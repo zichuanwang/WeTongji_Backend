@@ -4,9 +4,9 @@ class ActivitiesController < ApplicationController
   def index
     @activities = nil
     if params[:channel_id]
-      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id])
+      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc")
     else
-      @activities = Activity.all
+      @activities = Activity.order("id desc")
     end
 
     respond_to do |format|

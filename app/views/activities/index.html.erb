@@ -8,12 +8,16 @@
       <thead>
         <tr>
             <tr>
+                <th>序号</th>
                 <th>开始</th>
                 <th>结束</th>
                 <th>标题</th>
                 <th>位置</th>
                 <th>Follow</th>
+                <th>Like</th>
+                <th>Hot</th>
                 <th>组织者</th>
+                <th>频道</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -22,12 +26,16 @@
       <tbody>
         <% @activities.each do |activity| %>
         <tr>
+            <td><%= activity.id %></td>
             <td><%= activity.begin %></td>
             <td><%= activity.end %></td>
             <td><%= activity.title %></td>
             <td><%= activity.location %></td>
             <td><%= activity.follow %></td>
+            <td><%= activity.like %></td>
+            <td><%= activity.hot %></td>
             <td><%= activity.organizer.name %></td>
+            <td><%= activity.channel.title %></td>
             <td><%= activity.status %></td>
             <td>
                 <%= link_to '详情', activity %>
