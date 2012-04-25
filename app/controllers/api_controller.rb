@@ -176,10 +176,27 @@ class ApiController < ApplicationController
 		verify_action_params(['UID'])
 		user = User.find_by_uid(params[:UID])
 		events = []
+		activities = []
 		if user
-
+			if params[:Begin] && params[:End]
+				evnets = user.events.where("begin < :begin && end > :end", :begin => params[:Begin], :end => params[:End])
+				activities = user.activities.where("begin < :begin && end > :end", :begin => params[:Begin], :end => params[:End])
+			else
+				evnets = user.events.where("begin < :begin && end > :end", :begin => Time.now.day - 1, :end => Time.now.day + 1)
+				activities = user.activities.where("begin < :begin && end > :end", :begin => Time.now.day - 1, :end => Time.now.day + 1)
+			end
+		end
+		ev = []
+		events.each do |event|
+			ev << ExEvent.init_from_event(event)
+		end
+		ac = []
+		activities.each do |activity|
+			ac << ExActivity.init_from_activity(activity)
 		end
 		re = ApiReturn.new("000")
+		re.add_data("Events", ev)
+		re.add_data("Activities", ac)
 	    return_response(re)
 	end
 end
