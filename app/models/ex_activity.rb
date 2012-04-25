@@ -9,7 +9,7 @@ class ExActivity
 		model.Location = activity.location
 		model.Title = activity.title
 		model.Follow = activity.follow
-		model.Organizer = activity.organizer
+		model.Organizer = activity.organizer.name
 		model.Status = activity.status
 		model.Description = activity.description
 		model
