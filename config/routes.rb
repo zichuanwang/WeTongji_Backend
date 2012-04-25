@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :events
+
   resources :organizers
 
   devise_for :admins

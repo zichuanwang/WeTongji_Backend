@@ -11,9 +11,10 @@
 	  <ul>
 	    <li><a href="/">首页</a></li>
 	    <li><a href="/">课程</a></li>
-	    <li><a href="/">活动</a></li>
 	    <li><%= link_to "账户", users_path %></li>
 	    <li><%= link_to "频道", channels_path %></li>
+	    <li><%= link_to "活动", activities_path %></li>
+	    <li><%= link_to "组织", organizers_path %></li>
 	    <li>
 			<% if admin_signed_in? %>
 				<%= link_to "注销", destroy_admin_session_path, :method => :delete %>

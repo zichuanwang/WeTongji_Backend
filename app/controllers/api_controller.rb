@@ -23,6 +23,16 @@ class ApiController < ApplicationController
 	            	activity_follow
 	            when "Activity.UnFollow"
 	            	activity_unfollow
+	            when "Activity.Like"
+	            	activity_like
+	            when "Activity.UnLike"
+	            	activity_unlike
+	            when "Activity.Add"
+	            	activity_add
+	            when "Activity.Delete"
+	            	activity_delete
+	            when "Schedule.Get"
+	            	schedule
 	        end
 	      else
 	        return_response ApiReturn.new("004")
@@ -77,7 +87,7 @@ class ApiController < ApplicationController
 	    	ex << ExChannel.init_from_channel(channel)
 	    end
 	    re = ApiReturn.new("000")
-	    re.Data = ex
+	    re.add_data("Channels", ex)
 	    return_response(re)
 	end
 
@@ -95,13 +105,81 @@ class ApiController < ApplicationController
 			ex << ExActivity.init_from_activity(activity)
 		end
 		re = ApiReturn.new("000")
-	    re.Data = ex
+	    re.add_data("Activities", ex)
 	    return_response(re)
 	end
 
 	def activity_follow
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.user_follow(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
 	end
 
 	def activity_unfollow
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.user_unfollow(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
+	end
+
+	def	activity_like
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.user_like(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
+	end
+
+	def	activity_unlike
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.user_unlike(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
+	end
+	def activity_add
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.add_to_schedule(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
+	end
+	def  activity_delete
+		verify_action_params(['Id', 'UID'])
+		activity = Activity.find(params[:Id])
+		if activity
+			activity.remove_from_schedule(params[:UID])
+			activity.save
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
+	end
+	def schedule
+		verify_action_params(['UID'])
+		user = User.find_by_uid(params[:UID])
+		events = []
+		if user
+
+		end
+		re = ApiReturn.new("000")
+	    return_response(re)
 	end
 end

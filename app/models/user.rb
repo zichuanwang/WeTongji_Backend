@@ -13,6 +13,9 @@ class User < ActiveRecord::Base
 
   before_create :init_model
 
+  has_many :events
+  has_and_belongs_to_many :activities
+
   private
   def init_model
   	self.uid = new_uid

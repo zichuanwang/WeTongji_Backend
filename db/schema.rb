@@ -11,21 +11,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120425092204) do
+ActiveRecord::Schema.define(:version => 20120425165018) do
 
-  create_table "activities", :force => true do |t|
-    t.datetime "begin"
-    t.datetime "end"
-    t.string   "title"
-    t.string   "location"
-    t.integer  "follow"
-    t.string   "status"
-    t.string   "description"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "channel_id"
-    t.integer  "organizer_id"
-  end
+# Could not dump table "activities" because of following StandardError
+#   Unknown type 'hot' for column 'hot'
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -61,6 +50,17 @@ ActiveRecord::Schema.define(:version => 20120425092204) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "begin"
+    t.datetime "end"
+    t.string   "title"
+    t.string   "location"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "organizers", :force => true do |t|
@@ -118,5 +118,12 @@ ActiveRecord::Schema.define(:version => 20120425092204) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "users_activities", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
 end
