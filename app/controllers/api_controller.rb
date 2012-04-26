@@ -115,7 +115,7 @@ class ApiController < ApplicationController
 
 	# activity operate
 	def activities
-		channel_id = params[:Channel_Id]
+		channel_ids = params[:Channel_Ids]
 		sort = params[:Sort]
 		p = params[:P]
 		uid = params[:UID]
@@ -127,8 +127,8 @@ class ApiController < ApplicationController
 				activities = user.activities
 			end
 		end
-		if channel_id
-			activities = activities.where("channel_id = :channel_id", :channel_id => channel_id)
+		if channel_ids
+			activities = activities.where(:channel_id => channel_ids.split(','))
 		end
 		if sort
 			activities = activities.order(sort)
