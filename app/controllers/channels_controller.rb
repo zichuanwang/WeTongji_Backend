@@ -3,6 +3,7 @@ class ChannelsController < ApplicationController
   # GET /channels
   # GET /channels.json
   def index
+    @menu = 'channels'
     @channels = Channel.all
 
     respond_to do |format|
@@ -14,6 +15,7 @@ class ChannelsController < ApplicationController
   # GET /channels/1
   # GET /channels/1.json
   def show
+    @menu = 'channels'
     @channel = Channel.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +27,7 @@ class ChannelsController < ApplicationController
   # GET /channels/new
   # GET /channels/new.json
   def new
+    @menu = 'channels'
     @channel = Channel.new
 
     respond_to do |format|
@@ -35,12 +38,14 @@ class ChannelsController < ApplicationController
 
   # GET /channels/1/edit
   def edit
+    @menu = 'channels'
     @channel = Channel.find(params[:id])
   end
 
   # POST /channels
   # POST /channels.json
   def create
+    @menu = 'channels'
     @channel = Channel.new(params[:channel])
 
     respond_to do |format|

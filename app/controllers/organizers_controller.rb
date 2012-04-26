@@ -1,4 +1,5 @@
 class OrganizersController < ApplicationController
+  before_filter :authenticate_admin!
   # GET /organizers
   # GET /organizers.json
   def index

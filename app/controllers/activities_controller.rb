@@ -2,6 +2,7 @@ class ActivitiesController < ApplicationController
   before_filter :authenticate_admin!
 
   def index
+    @menu = 'activities'
     @activities = nil
     if params[:channel_id]
       @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc")
@@ -16,6 +17,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    @menu = 'activities'
     @activity = Activity.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +27,7 @@ class ActivitiesController < ApplicationController
   end
 
   def new
+    @menu = 'activities'
     @activity = Activity.new
     if params[:channel_id]
       channel = Channel.find(params[:channel_id])
@@ -38,10 +41,12 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    @menu = 'activities'
     @activity = Activity.find(params[:id])
   end
 
   def create
+    @menu = 'activities'
     @activity = Activity.new(params[:activity])
     #channel = Channel.find(params[:channel_id])
 
@@ -61,6 +66,7 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1
   # PUT /activities/1.json
   def update
+    @menu = 'activities'
     @activity = Activity.find(params[:id])
 
     respond_to do |format|

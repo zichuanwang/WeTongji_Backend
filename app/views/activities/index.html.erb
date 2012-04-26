@@ -1,6 +1,10 @@
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_activities" %>
+<% end %>
+
 <div class="list_1">
   <div class="list_title">
-    <div class="list_title_left">活动列表 <%= link_to '[创建]', new_activity_path, { :class => 'screenshot' } %></div>
+    <div class="list_title_left">所有活动</div>
     <div class="list_title_right"></div>
   </div>
   <div class="tab_content">
@@ -8,18 +12,13 @@
       <thead>
         <tr>
             <tr>
-                <th>序号</th>
-                <th>组织</th>
-                <th>承办</th>
-                <th>开始</th>
-                <th>结束</th>
+                <th>组织(承办)</th>
+                <th>起止时间</th>
                 <th>标题</th>
                 <th>位置</th>
                 <th>关注度</th>
                 <th>+1</th>
                 <th>参与度</th>
-                <th>频道</th>
-                <th>状态</th>
                 <th>操作</th>
             </tr>
         </tr>
@@ -27,18 +26,13 @@
       <tbody>
         <% @activities.each do |activity| %>
         <tr>
-            <td><%= activity.id %></td>
-            <td><%= activity.organizer.name %></td>
-            <td><%= activity.sub_organizer.name %></td>
-            <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %></td>
-            <td><%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td><%= activity.organizer.name %>(<%= activity.sub_organizer.name %>)</td>
+            <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= activity.title %></td>
             <td><%= activity.location %></td>
             <td><%= activity.follow %></td>
             <td><%= activity.like %></td>
             <td><%= activity.hot %></td>
-            <td><%= activity.channel.title %></td>
-            <td><%= activity.status %></td>
             <td>
                 <%= link_to '详情', activity %>
                 <%= link_to '编辑', edit_activity_path(activity) %>

@@ -1,4 +1,5 @@
 class NewsController < ApplicationController
+  before_filter :authenticate_admin!
   # GET /news
   # GET /news.json
   def index
