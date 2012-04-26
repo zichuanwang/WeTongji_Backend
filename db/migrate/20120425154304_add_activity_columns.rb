@@ -1,7 +1,7 @@
 class AddActivityColumns < ActiveRecord::Migration
   def up
   	add_column :activities, :like, :integer
-  	add_column :activities, :hot, :hot
+  	add_column :activities, :hot, :integer
   end
 
   def down
