@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :news
+
   resources :events
 
   resources :organizers

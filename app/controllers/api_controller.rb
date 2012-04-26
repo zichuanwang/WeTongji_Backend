@@ -31,8 +31,14 @@ class ApiController < ApplicationController
 	            	activity_add
 	            when "Activity.Delete"
 	            	activity_delete
+	            # schedule
 	            when "Schedule.Get"
 	            	schedule
+	            # news
+	            when "News.GetList"
+	            	news_getlist
+	            when "News.Get"
+	            	news_get
 	        end
 	      else
 	        return_response ApiReturn.new("004")
@@ -239,6 +245,44 @@ class ApiController < ApplicationController
 		re = ApiReturn.new("000")
 		re.add_data("Events", ev)
 		re.add_data("Activities", ac)
+	    return_response(re)
+	end
+
+	# news
+	def news_getlist
+		sort = params[:Sort]
+		p = params[:P]
+
+		news = News
+		if sort
+			news = news.order(sort)
+		else
+			news = news.order("id desc")
+		end
+		if p
+			p = p.to_i
+			news = news.limit(20).offset((p - 1) * 20)
+		else
+			news = news.limit(20)
+		end
+
+		ex = []
+		news.each do |n|
+			ex << ExNews.init_from_news(n)
+		end
+		re = ApiReturn.new("000")
+	    re.add_data("News", ex)
+	    return_response(re)
+	end
+	def news_get
+		verify_action_params(['Id'])
+		news = News.find(params[:Id])
+		ex = nil
+		if news
+			ex = ExNews.init_from_news(news)
+		end
+		re = ApiReturn.new("000")
+		re.add_data("News", ex)
 	    return_response(re)
 	end
 end
