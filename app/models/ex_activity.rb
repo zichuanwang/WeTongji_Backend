@@ -1,5 +1,5 @@
 class ExActivity
-	attr_accessor :Id, :Begin, :End, :Title, :Location, :Follow, :Organizer, :Channel_Id, :ChannelId, :SubOrganizer, :Status, :Description, :Like, :Hot, :CanFollow, :CanLike, :CanHot
+	attr_accessor :Id, :Begin, :End, :Title, :Location, :Follow, :Organizer, :Channel_Id, :SubOrganizer, :Status, :Description, :Like, :Hot, :CanFollow, :CanLike, :CanHot
 
 	def self.init_from_activity(activity)
 		model = ExActivity.new
@@ -12,7 +12,6 @@ class ExActivity
 		model.Organizer = activity.organizer.name
 		model.SubOrganizer = activity.sub_organizer.name
 		model.Channel_Id = activity.channel.id
-		model.ChannelId = activity.channel.id
 		model.Status = activity.status
 		model.Description = activity.description
 		model.Like = activity.like
