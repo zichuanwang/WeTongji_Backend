@@ -4,5 +4,6 @@ class AddColumnsToStudents < ActiveRecord::Migration
   	add_column :students, :plan, :string
   	add_column :students, :gender, :string
   	add_column :students, :year, :string
+  	add_column :students, :birthday, :datetime
   end
 end

@@ -23,6 +23,11 @@ class StudentsController < ApplicationController
     path = File.join(directory, name)
     # write the file
     File.open(path, "wb") { |f| f.write(params['file'].read) }
+    StudentImport.import(path)
+    StudentImport.get_students.each do | student |
+      student.save
+    end
+    redirect_to students_path
   end
 
   def upload
