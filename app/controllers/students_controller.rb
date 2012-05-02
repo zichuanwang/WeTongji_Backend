@@ -12,6 +12,23 @@ class StudentsController < ApplicationController
     end
   end
 
+  def import
+    @menu = 'students'
+    name =  params['file'].original_filename
+    directory = "public/uploads"
+    if !File.exist?(directory)
+      Dir.mkdir(directory)
+    end
+    # create the file path
+    path = File.join(directory, name)
+    # write the file
+    File.open(path, "wb") { |f| f.write(params['file'].read) }
+  end
+
+  def upload
+    @menu = 'students'
+  end
+
   # GET /students/1
   # GET /students/1.json
   def show

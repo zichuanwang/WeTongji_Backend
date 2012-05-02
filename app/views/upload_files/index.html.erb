@@ -1,0 +1,27 @@
+<h1>Listing upload_files</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Path</th>
+    <th>Size</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @upload_files.each do |upload_file| %>
+  <tr>
+    <td><%= upload_file.name %></td>
+    <td><%= upload_file.path %></td>
+    <td><%= upload_file.size %></td>
+    <td><%= link_to 'Show', upload_file %></td>
+    <td><%= link_to 'Edit', edit_upload_file_path(upload_file) %></td>
+    <td><%= link_to 'Destroy', upload_file, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Upload file', new_upload_file_path %>

@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :upload_files
+
   resources :news
 
   resources :events
@@ -23,9 +25,12 @@ WetongjiWeb::Application.routes.draw do
 
   devise_for :users
 
+  get "students/import"
+  post "students/import"
+  get "students/upload"
   resources :students
 
-  get "students/import"
+
 
   get 'api/test'
   get 'api/call'
