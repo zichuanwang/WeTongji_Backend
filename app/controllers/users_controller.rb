@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
     def index
     @users = User.all
+    @menu = "users"
 
     respond_to do |format|
       format.html # index.html.erb
