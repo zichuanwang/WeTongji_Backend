@@ -307,7 +307,7 @@ class ApiController < ApplicationController
 
 	def user_active
 		verify_action_params(['NO', 'Name', 'Password'])
-		user = User.active_user_from_student
+		user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
 		if user
 			user.save
 			re = ApiReturn.new("000")
