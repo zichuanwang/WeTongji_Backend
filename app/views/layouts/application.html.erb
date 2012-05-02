@@ -14,9 +14,10 @@
   				<a href="#">教程</a>&nbsp;&nbsp;&nbsp;
   				<a href="#">帮助</a>&nbsp;&nbsp;&nbsp;
   				<% if admin_signed_in? %>
-				<%= link_to "注销", destroy_admin_session_path, :method => :delete %>
-				<% else %>
-				<%= link_to "登陆", new_admin_session_path %>
+  				<%= link_to current_admin.email, '' %>
+					<%= link_to "注销", destroy_admin_session_path, :method => :delete %>
+					<% else %>
+					<%= link_to "登陆", new_admin_session_path %>
 		  		<% end %>
   			</div>
 		</div>

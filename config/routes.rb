@@ -25,6 +25,8 @@ WetongjiWeb::Application.routes.draw do
 
   resources :students
 
+  get "students/import"
+
   get 'api/test'
   get 'api/call'
 

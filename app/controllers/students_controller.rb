@@ -1,9 +1,9 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_admin!
   # GET /students
-  # GET /students.json
-  before_filter :authenticate_user!
+  # GET /students.json\
   def index
+    @menu = 'students'
     @students = Student.all
 
     respond_to do |format|

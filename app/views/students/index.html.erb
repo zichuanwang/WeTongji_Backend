@@ -1,27 +1,50 @@
-<h1>Listing students</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>No</th>
-    <th>Email</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @students.each do |student| %>
-  <tr>
-    <td><%= student.name %></td>
-    <td><%= student.no %></td>
-    <td><%= student.email %></td>
-    <td><%= link_to 'Show', student %></td>
-    <td><%= link_to 'Edit', edit_student_path(student) %></td>
-    <td><%= link_to 'Destroy', student, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_students" %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Student', new_student_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有学生</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>学院</th>
+                <th>专业</th>
+                <th>学制</th>
+                <th>学历</th>
+                <th>性别</th>
+                <th>入学年份</th>
+                <th>邮箱</th>
+                <th>操作</th>
+            </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @students.each do |student| %>
+        <tr>
+            <td><%= student.no %></td>
+            <td><%= student.name %></td>
+            <td><%= student.department %></td>
+            <td><%= student.major %></td>
+            <td><%= student.plan %></td>
+            <td><%= student.year %></td>
+            <td><%= student.degree %></td>
+            <td><%= student.gander %></td>
+            <td><%= student.email %></td>
+            <td>
+                <%= link_to '详情', student %>
+                <%= link_to '编辑', edit_student_path(student) %>
+                <%= link_to '删除', student, confirm: '确认删除?', method: :delete %>
+            </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
