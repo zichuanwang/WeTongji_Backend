@@ -66,50 +66,50 @@ class ApiController < ApplicationController
 	private
 	
 	def verify_checksum
-    	hash = params[:H]
-    	md5_string = params.sort.collect do |s|
-      		unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
-        		s[0] + "=" + s[1] 
-      		end
-    	end
-    	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
-    	p md5_string.compact.join("&")
-    	Digest::MD5.hexdigest(md5_string.compact.join("&")) == hash
+  	hash = params[:H]
+  	md5_string = params.sort.collect do |s|
+    		unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
+      		s[0] + "=" + s[1] 
+    		end
   	end
+  	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
+  	p md5_string.compact.join("&")
+  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == hash
+	end
 
-  	def verify_sys_params
-    	if params[:M] && params[:H] && params[:D] && params[:V]
-      		true
-    	else
-      		false
-    	end
+	def verify_sys_params
+  	if params[:M] && params[:H] && params[:D] && params[:V]
+    		true
+  	else
+    		false
   	end
+	end
 
-  	def return_response(api_return)
-	    respond_to do |format|
-	      	format.html { render json: api_return }
-	      	format.json { render json: api_return }
-	    end
-  	end
+	def return_response(api_return)
+    respond_to do |format|
+      	format.html { render json: api_return }
+      	format.json { render json: api_return }
+    end
+	end
 
-  	def verify_action_params(keys = [])
-  		keys.each do |key|
-  			if params[key] == nil || params[key] == ''
-  				return_response ApiReturn.new("001")
-  			end
-  		end
-  	end
+	def verify_action_params(keys = [])
+		keys.each do |key|
+			if params[key] == nil || params[key] == ''
+				return_response ApiReturn.new("001")
+			end
+		end
+	end
   
-  	# get all channels
+  # get all channels
 	def channels
-	    channels = Channel.all
-	    ex = []
-	    channels.each do |channel|
-	    	ex << ExChannel.init_from_channel(channel)
-	    end
-	    re = ApiReturn.new("000")
-	    re.add_data("Channels", ex)
-	    return_response(re)
+    channels = Channel.all
+    ex = []
+    channels.each do |channel|
+    	ex << ExChannel.init_from_channel(channel)
+    end
+    re = ApiReturn.new("000")
+    re.add_data("Channels", ex)
+    return_response(re)
 	end
 
 	def channel_follow
@@ -191,7 +191,7 @@ class ApiController < ApplicationController
 			activity.save
 		end
 		re = ApiReturn.new("000")
-	    return_response(re)
+	  return_response(re)
 	end
 
 	def	activity_like
@@ -202,7 +202,7 @@ class ApiController < ApplicationController
 			activity.save
 		end
 		re = ApiReturn.new("000")
-	    return_response(re)
+	  return_response(re)
 	end
 
 	def	activity_unlike
@@ -213,8 +213,9 @@ class ApiController < ApplicationController
 			activity.save
 		end
 		re = ApiReturn.new("000")
-	    return_response(re)
+	  return_response(re)
 	end
+
 	def activity_add
 		verify_action_params(['Id', 'UID'])
 		activity = Activity.find(params[:Id])
@@ -223,8 +224,9 @@ class ApiController < ApplicationController
 			activity.save
 		end
 		re = ApiReturn.new("000")
-	    return_response(re)
+	  return_response(re)
 	end
+
 	def  activity_delete
 		verify_action_params(['Id', 'UID'])
 		activity = Activity.find(params[:Id])
@@ -233,8 +235,9 @@ class ApiController < ApplicationController
 			activity.save
 		end
 		re = ApiReturn.new("000")
-	    return_response(re)
+	  return_response(re)
 	end
+
 	def schedule
 		verify_action_params(['UID'])
 		user = User.find_by_uid(params[:UID])
@@ -260,7 +263,7 @@ class ApiController < ApplicationController
 		re = ApiReturn.new("000")
 		re.add_data("Events", ev)
 		re.add_data("Activities", ac)
-	    return_response(re)
+	  return_response(re)
 	end
 
 	# news
@@ -286,8 +289,8 @@ class ApiController < ApplicationController
 			ex << ExNews.init_from_news(n)
 		end
 		re = ApiReturn.new("000")
-	    re.add_data("News", ex)
-	    return_response(re)
+    re.add_data("News", ex)
+    return_response(re)
 	end
 
 	def news_get
@@ -299,9 +302,19 @@ class ApiController < ApplicationController
 		end
 		re = ApiReturn.new("000")
 		re.add_data("News", ex)
-	    return_response(re)
+	  return_response(re)
 	end
 
 	def user_active
+		verify_action_params(['NO', 'Name', 'Password'])
+		user = User.active_user_from_student
+		if user
+			user.save
+			re = ApiReturn.new("000")
+			return_response(re)
+		else
+			re = ApiReturn.new("002")
+			return_response(re)
+		end
 	end
 end

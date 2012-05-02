@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
-  validates_uniqueness_of :uid
+  validates_uniqueness_of :uid, :no
 
   before_create :init_model
 
@@ -18,9 +18,29 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :activities
   has_and_belongs_to_many :channles
 
+  def self.active_user_from_student(no, name, password)
+    student = Student.find_by_no_and_name(no, name)
+    if student
+      user = User.find_by_no(no)
+      unless user
+         user = User.new
+         user.email = student.email
+         user.no = student.no
+         user.password = password
+         user.password_confirmation = password
+         return user
+      end
+    end
+    nil
+  end
+
   private
   def init_model
-  	self.uid = new_uid
+    if User.find_by_no(self.no)
+      return false
+    else
+      self.uid = new_uid
+    end
   end
 
   def new_uid
