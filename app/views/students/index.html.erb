@@ -19,6 +19,8 @@
                 <th>学制</th>
                 <th>学历</th>
                 <th>性别</th>
+                <th>生日</th>
+                <th>籍贯</th>
                 <th>入学年份</th>
                 <th>邮箱</th>
                 <th>操作</th>
@@ -33,9 +35,11 @@
             <td><%= student.department %></td>
             <td><%= student.major %></td>
             <td><%= student.plan %></td>
-            <td><%= student.year %></td>
             <td><%= student.degree %></td>
-            <td><%= student.gander %></td>
+            <td><%= student.gender %></td>
+            <td><%= student.birthday %></td>
+            <td><%= student.navtiveplace %></td>
+            <td><%= student.year %></td>
             <td><%= student.email %></td>
             <td>
                 <%= link_to '详情', student %>

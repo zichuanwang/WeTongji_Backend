@@ -15,7 +15,7 @@ class StudentsController < ApplicationController
   def import
     @menu = 'students'
     name =  params['file'].original_filename
-    directory = "public/uploads"
+    directory = "public/uploads/students"
     if !File.exist?(directory)
       Dir.mkdir(directory)
     end
@@ -23,6 +23,7 @@ class StudentsController < ApplicationController
     path = File.join(directory, name)
     # write the file
     File.open(path, "wb") { |f| f.write(params['file'].read) }
+    p path
     StudentImport.import(path)
     StudentImport.get_students.each do | student |
       student.save

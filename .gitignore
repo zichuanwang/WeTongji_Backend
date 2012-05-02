@@ -16,3 +16,4 @@
 Gemfile.lock
 /public/system
 /db/schema.rb
+/public/uploads
