@@ -12,6 +12,7 @@ gem 'therubyracer'
 gem "paperclip", "~> 3.0"
 gem 'tinymce-rails'
 gem 'importex'
+gem 'ar_mailer_rails3'
 
 # Gems used only for assets and not required
 # in production environments by default.

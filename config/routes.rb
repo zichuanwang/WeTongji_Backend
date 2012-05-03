@@ -24,7 +24,7 @@ WetongjiWeb::Application.routes.draw do
   get "users/reconfirm"
   resources :users
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations", :confirmations => "confirmations" }
 
   get "students/import"
   post "students/import"
