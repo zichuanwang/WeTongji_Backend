@@ -17,6 +17,7 @@ Gemfile.lock
 /public/system
 /db/schema.rb
 /public/uploads
+.DS_Store
 
 *.rbc
 *.sassc

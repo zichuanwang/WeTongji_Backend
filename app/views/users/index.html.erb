@@ -1,39 +1,49 @@
-<h1>Listing users</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>No</th>
-    <th>Password</th>
-    <th>Password salt</th>
-    <th>Uid</th>
-    <th>Confirmation token</th>
-    <th>Confirmed at</th>
-    <th>Email</th>
-    <th>Display name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @users.each do |user| %>
-  <tr>
-    <td><%= user.name %></td>
-    <td><%= user.no %></td>
-    <td><%= user.password %></td>
-    <td><%= user.password_salt %></td>
-    <td><%= user.uid %></td>
-    <td><%= user.confirmation_token %></td>
-    <td><%= user.confirmed_at %></td>
-    <td><%= user.email %></td>
-    <td><%= user.display_name %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_users" %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New User', new_user_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有账号</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>邮箱</th>
+                <th>UID</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>操作</th>
+            </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+        <tr>
+          <td><%= user.no %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.uid %></td>
+          <td><%= user.display_name %></td>
+          <td><%= user.encrypted_password %></td>
+          <td><%= user.password_salt %></td>
+          <td><%= user.confirmation_token %></td>
+          <td><%= user.confirmed_at %></td>
+          <td>
+            <%= link_to '详情', user %>
+            <%= link_to '删除', user, confirm: '确认删除?', method: :delete %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

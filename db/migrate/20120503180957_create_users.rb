@@ -15,6 +15,13 @@ class CreateUsers < ActiveRecord::Migration
       t.string :avatar_content_type
       t.integer :avatar_file_size
       t.datetime :avatar_updated_at
+      t.datetime :last_seen_at
+      t.integer :sign_in_count, :default => 0
+      t.datetime :current_sign_in_at
+      t.datetime :last_sign_in_at
+      t.string :current_sign_in_ip
+      t.string :last_sign_in_ip
+      t.string :authentication_token
 
       t.timestamps
     end
