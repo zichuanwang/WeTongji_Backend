@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :no
 
   before_create :init_model
+  after_create :send_confirmation
 
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
@@ -74,6 +75,8 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(self.object_id.to_s + rand.to_s)
   end
 
-
+  def send_confirmation
+    UserMailer.confirmation(self).deliver
+  end
 
 end

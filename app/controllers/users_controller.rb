@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_filter :authenticate_admin!, :expext => [:confirmation, :welcome]
   # GET /users
   # GET /users.json
   def index
@@ -8,6 +9,12 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @users }
     end
+  end
+
+  def confirmation
+  end
+
+  def welcome
   end
 
   # GET /users/1

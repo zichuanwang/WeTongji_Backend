@@ -21,6 +21,8 @@ WetongjiWeb::Application.routes.draw do
 
   resources :teachers
 
+  get "users/confirmation"
+  get "users/welcome"
   resources :users
 
   get "students/import"
