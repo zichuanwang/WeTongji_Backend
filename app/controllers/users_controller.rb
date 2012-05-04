@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
-	before_filter :authenticate_admin!, :expext => [:confirmation, :welcome]
+	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
+
   # GET /users
   # GET /users.json
   def index
     @users = User.all
+    @menu = "users"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -12,9 +14,19 @@ class UsersController < ApplicationController
   end
 
   def confirmation
+  	user = User.find_by_confirmation_token(params[:token])
+  	if user && user.confirmed_at == nil
+  		user.confirmed_at = Time.now
+  		user.save
+  		UserMailer.welcome(user).deliver
+  		redirect_to :action => "welcome"
+  	else
+  		render :layout => "out"
+  	end
   end
 
   def welcome
+  	render :layout => "out"
   end
 
   # GET /users/1

@@ -16,11 +16,8 @@
                 <th>姓名</th>
                 <th>邮箱</th>
                 <th>UID</th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>显示名</th>
+                <th>确认时间</th>
                 <th>操作</th>
             </tr>
         </tr>
@@ -33,12 +30,10 @@
           <td><%= user.email %></td>
           <td><%= user.uid %></td>
           <td><%= user.display_name %></td>
-          <td><%= user.encrypted_password %></td>
-          <td><%= user.password_salt %></td>
-          <td><%= user.confirmation_token %></td>
           <td><%= user.confirmed_at %></td>
           <td>
             <%= link_to '详情', user %>
+            <%= link_to '激活', :action => "confirmation", :controller => "users", :token => user.confirmation_token %>
             <%= link_to '删除', user, confirm: '确认删除?', method: :delete %>
           </td>
         </tr>

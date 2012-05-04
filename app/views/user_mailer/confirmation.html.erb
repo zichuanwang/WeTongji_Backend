@@ -1,0 +1,1 @@
+欢迎<%= @user.name %><%= link_to "点击这里完成确认注册.", :action => "confirmation", :controller => "users", :token => @user.confirmation_token %>

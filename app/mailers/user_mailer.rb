@@ -6,4 +6,9 @@ class UserMailer < ActionMailer::Base
   	mail(:to => user.email, :subject => "请激活账户.")
   end
   
+  def welcome(user)
+  	@user = user
+  	mail(:to => user.email, :subject => '欢迎来到Wetongji!')
+  end
+
 end

@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
         user.name = student.name
         user.password = password
         user.display_name = user.name
+        user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
         return user
       end
     end
