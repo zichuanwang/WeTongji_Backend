@@ -29,18 +29,24 @@ class User < ActiveRecord::Base
 
   def self.authentication(no, password)
     user = User.find_by_no(no)
-    if user && user.encrypted_password == User.hash_password(password, user.password_salt)
+    if user && user.confirmed_at != nil && user.encrypted_password == User.hash_password(password, user.password_salt)
       user.last_seen_at = Time.now
       user.current_sign_in_at = user.last_seen_at
       user.sign_in_count = user.sign_in_count + 1
-      user.last_sign_in_ip = request.remote_ip
+      user.last_sign_in_ip = ENV["HTTP_X_FORWARDED_FOR"]
       user.authentication_token = Digest::SHA1.hexdigest(user.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
       user.save
       user
     end
   end
 
-  def logoff()
+  def self.logoff(authentication_token)
+    if authentication_token != nil && authentication_token != ''
+      user = User.find_by_authentication_token(authentication_token)
+      user.last_seen_at = Time.now
+      user.authentication_token = nil
+      user.save
+    end
   end
 
   def password  

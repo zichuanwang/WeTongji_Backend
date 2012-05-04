@@ -227,7 +227,7 @@ class ApiController < ApplicationController
 	  return_response(re)
 	end
 
-	def  activity_delete
+	def activity_delete
 		verify_action_params(['Id', 'UID'])
 		activity = Activity.find(params[:Id])
 		if activity
@@ -316,5 +316,27 @@ class ApiController < ApplicationController
 			re = ApiReturn.new("002")
 			return_response(re)
 		end
+	end
+
+	def user_logon
+		verify_action_params(['NO', 'Password'])
+		user = User.authentication(params[:NO], params[:Password])
+		if user
+			ex = ExUser.init_from_user(user)
+			re = ApiReturn.new("000")
+			re.add_data("User", ex)
+			re.add_data("Session", user.authentication_token)
+	  	return_response(re)
+		else
+			re = ApiReturn.new("002")
+			return_response(re)
+		end
+	end
+
+	def user_logoff
+		verify_action_params(['S'])
+		User.logoff(params[:NO])
+		re = ApiReturn.new("000")
+		return_response(re)
 	end
 end
