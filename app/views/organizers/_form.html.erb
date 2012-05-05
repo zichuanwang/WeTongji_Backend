@@ -12,14 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+    名称：<%= f.text_field :name, :class => "input_1" %>
   </div>
   <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
+    说明：<%= f.text_field :description, :class => "input_1" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field">
+    ICON：<input type="file" name="organizer[icon]" />
+  </div>
+  <div class="btn_box">
+    <%= f.submit "保存", :class => "btn_2" %>
   </div>
 <% end %>

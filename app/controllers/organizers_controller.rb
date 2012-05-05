@@ -4,6 +4,7 @@ class OrganizersController < ApplicationController
   # GET /organizers.json
   def index
     @organizers = Organizer.all
+    @menu = "organizers"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class OrganizersController < ApplicationController
   # GET /organizers/1
   # GET /organizers/1.json
   def show
+    @menu = "organizers"
     @organizer = Organizer.find(params[:id])
 
     respond_to do |format|
@@ -25,6 +27,7 @@ class OrganizersController < ApplicationController
   # GET /organizers/new
   # GET /organizers/new.json
   def new
+    @menu = "organizers"
     @organizer = Organizer.new
 
     respond_to do |format|
@@ -35,12 +38,14 @@ class OrganizersController < ApplicationController
 
   # GET /organizers/1/edit
   def edit
+    @menu = "organizers"
     @organizer = Organizer.find(params[:id])
   end
 
   # POST /organizers
   # POST /organizers.json
   def create
+    @menu = "organizers"
     @organizer = Organizer.new(params[:organizer])
 
     respond_to do |format|

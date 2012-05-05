@@ -1,6 +1,15 @@
-<h1>Editing organizer</h1>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_organizers" %>
+<% end %>
 
-<%= render 'form' %>
 
-<%= link_to 'Show', @organizer %> |
-<%= link_to 'Back', organizers_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">编辑组织</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+		<%= render 'form' %>
+  </div>
+</div>
+
