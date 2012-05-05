@@ -44,15 +44,21 @@ class ApiController < ApplicationController
   private
 
   def verify_checksum
-  	hash = params[:H]
-  	md5_string = params.sort.collect do |s|
-  		unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
-  			s[0] + "=" + s[1]
+  	h = params[:H]
+		md5_string = request.query_string.split('&').sort.collect do |s|
+  		key, val = s.split('=')
+  		unless key == "H"
+  			key + "=" + val
   		end
-  	end
+		end
+  	# md5_string = params.sort.collect do |s|
+  	# 	unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
+  	# 		s[0] + "=" + s[1]
+  	# 	end
+  	# end
   	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
   	p md5_string.compact.join("&")
-  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == hash
+  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == h
   end
 
   def verify_sys_params
@@ -363,8 +369,7 @@ class ApiController < ApplicationController
 	def user_update
 		if verify_action_params(['U', 'S', 'User'])
 			user = verify_user_authentication
-			ex_user = ExUser.init_from_json(JSON.parse(params[:User]))
-			ex_user.update_user(user)
+			ExUser.update_json_to_user(JSON.parse(params[:User]), user)
 			user.save
 			re = ApiReturn.new("000")
 			return_response(re)

@@ -23,22 +23,12 @@ class ExUser
 		model
 	end
 
-	def self.init_from_json(json)
-		model = ExUser.new
-		model.DisplayName = json["DisplayName"]
-		model.QQ = json["QQ"]
-		model.Email = json["Email"]
-		model.Phone = json["Phone"]
-		model.SinaWeibo = json["SinaWeibo"]
-		model
-	end
-
-	def update_user(user)
-		user.display_name = self.DisplayName
-		user.email = self.Email
-		user.qq = self.QQ
-		user.phone = self.Phone
-		user.sina_weibo = self.SinaWeibo
+	def self.update_json_to_user(json, user)
+		user.display_name = json["User"]["DisplayName"] == nil ? user.display_name : json["User"]["DisplayName"]
+		user.email = json["User"]["Email"] == nil ? user.email : json["User"]["Email"]
+		user.qq = json["User"]["QQ"] == nil ? user.qq : json["User"]["QQ"]
+		user.phone = json["User"]["Phone"] == nil ? user.phone : json["User"]["Phone"]
+		user.sina_weibo = json["User"]["SinaWeibo"] == nil ? user.sina_weibo : json["User"]["SinaWeibo"]
 		user
 	end
 end
