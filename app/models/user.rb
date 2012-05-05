@@ -53,8 +53,7 @@ class User < ActiveRecord::Base
   end
 
   def update_password(password_old, password_new)
-    if password_new != nil && password_new != '' 
-      && self.encrypted_password == User.hash_password(password_old, user.password_salt)
+    if password_new != nil && password_new != '' && self.encrypted_password == User.hash_password(password_old, user.password_salt)
       self.password = password_new
     end
   end
