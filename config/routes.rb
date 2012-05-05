@@ -34,6 +34,7 @@ WetongjiWeb::Application.routes.draw do
 
   get 'api/test'
   get 'api/call'
+  post 'api/call'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

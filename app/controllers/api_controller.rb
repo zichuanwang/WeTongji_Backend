@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-	
+	# need split to some partal files
 	def test
 		return_response ApiReturn.new("000")
 	end
@@ -24,7 +24,7 @@ class ApiController < ApplicationController
 		"User.Get" => "user_get",
 		"User.Update" => "user_update",
 		"User.Update.Avatar" => "user_update_avatar",
-		"User.Update.Password" => "user_update_password"
+		"User.Update.Password" => "user_update_password",
 	}
 
 	def call
@@ -42,7 +42,7 @@ class ApiController < ApplicationController
   end
 
   private
-  
+
   def verify_checksum
   	hash = params[:H]
   	md5_string = params.sort.collect do |s|
@@ -89,7 +89,7 @@ class ApiController < ApplicationController
 			return_response(re)
 		end
 	end
-	
+
   # get all channels
   def channels
   	channels = Channel.all
@@ -312,6 +312,7 @@ class ApiController < ApplicationController
 		verify_action_params(['NO', 'Password'])
 		user = User.authentication(params[:NO], params[:Password])
 		if user
+			user.save
 			ex = ExUser.init_from_user(user)
 			re = ApiReturn.new("000")
 			re.add_data("User", ex)
@@ -325,8 +326,47 @@ class ApiController < ApplicationController
 
 	def user_logoff
 		verify_action_params(['U', 'S'])
-		verify_user_authentication
-		User.logoff(params[:U], params[:NO])
+		user = verify_user_authentication
+		user.logoff(params[:U], params[:NO])
+		user.save
+		re = ApiReturn.new("000")
+		return_response(re)
+	end
+
+	def user_get
+		verify_action_params(['U', 'S'])
+		user = verify_user_authentication
+		ex = ExUser.init_from_user(user)
+		re = ApiReturn.new("000")
+		re.add_data("User", ex)
+		return_response(re)
+	end
+
+	# only update displayname now
+	def user_update
+		verify_action_params(['U', 'S', 'User'])
+		user = verify_user_authentication
+		ex_user = ExUser.init_from_json(JSON.parse(params[:User]))
+		ex_user.update_user(user)
+		user.save
+		re = ApiReturn.new("000")
+		return_response(re)
+	end
+
+	def user_update_avatar
+		verify_action_params(['U', 'S', 'Image'])
+		user = verify_user_authentication
+		user.avatar = params[:Image]
+		user.save
+		re = ApiReturn.new("000")
+		return_response(re)
+	end
+
+	def user_update_password
+		verify_action_params(['U', 'S', 'Old', 'New'])
+		user = verify_user_authentication
+		user.update_password(params[:Old], params[:New])
+		user.save
 		re = ApiReturn.new("000")
 		return_response(re)
 	end

@@ -35,26 +35,27 @@ class User < ActiveRecord::Base
       user.sign_in_count = user.sign_in_count + 1
       user.last_sign_in_ip = ENV["HTTP_X_FORWARDED_FOR"]
       user.authentication_token = Digest::SHA1.hexdigest(user.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
-      user.save
       user
     end
   end
 
-  def self.verify_authentication(uid, authentication_token)
-      if authentication_token != nil && uid != nil && authentication_token != '' && uid != ''
-      user = User.find_by_uid_and_authentication_token(uid, authentication_token)
+  def verify_authentication(uid, authentication_token)
+    if self.uid == uid && self.authentication_token == authentication_token
       user.last_seen_at = Time.now
-      user.save
-      user
     end
   end
 
-  def self.logoff(uid, authentication_token)
-    if authentication_token != nil && uid != nil && authentication_token != '' && uid != ''
-      user = User.find_by_uid_and_authentication_token(uid, authentication_token)
+  def logoff(uid, authentication_token)
+    if self.uid == uid && self.authentication_token == authentication_token
       user.last_seen_at = Time.now
       user.authentication_token = nil
-      user.save
+    end
+  end
+
+  def update_password(password_old, password_new)
+    if password_new != nil && password_new != '' 
+      && self.encrypted_password == User.hash_password(password_old, user.password_salt)
+      self.password = password_new
     end
   end
 
