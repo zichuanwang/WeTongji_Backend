@@ -69,7 +69,7 @@ class ApiController < ApplicationController
   	hash = params[:H]
   	md5_string = params.sort.collect do |s|
     		unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
-      		s[0] + "=" + s[1] 
+      		s[0] + "=" + CGI::unescape(s[1])
     		end
   	end
   	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
