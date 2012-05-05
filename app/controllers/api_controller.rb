@@ -333,7 +333,7 @@ class ApiController < ApplicationController
 			user = User.authentication(params[:NO], params[:Password])
 			if user
 				user.save
-				ex = ExUser.init_from_user(user)
+				ex = ExUser.init_from_user(user.reload)
 				re = ApiReturn.new("000")
 				re.add_data("User", ex)
 				re.add_data("Session", user.authentication_token)
@@ -359,7 +359,7 @@ class ApiController < ApplicationController
 		if verify_action_params(['U', 'S'])
 			user = verify_user_authentication
 			if user
-				ex = ExUser.init_from_user(user)
+				ex = ExUser.init_from_user(user.reload)
 				re = ApiReturn.new("000")
 				re.add_data("User", ex)
 				return_response(re)
@@ -374,7 +374,9 @@ class ApiController < ApplicationController
 			if user
 				ExUser.update_json_to_user(JSON.parse(params[:User]), user)
 				user.save
+				ex = ExUser.init_from_user(user.reload)
 				re = ApiReturn.new("000")
+				re.add_data("User", ex)
 				return_response(re)
 			end
 		end
@@ -383,10 +385,14 @@ class ApiController < ApplicationController
 	def user_update_avatar
 		if verify_action_params(['U', 'S', 'Image'])
 			user = verify_user_authentication
-			user.avatar = params[:Image]
-			user.save
-			re = ApiReturn.new("000")
-			return_response(re)
+			if user
+				user.avatar = params[:Image]
+				user.save
+				ex = ExUser.init_from_user(user.reload)
+				re = ApiReturn.new("000")
+				re.add_data("User", ex)
+				return_response(re)
+			end
 		end
 	end
 
@@ -395,7 +401,9 @@ class ApiController < ApplicationController
 			user = verify_user_authentication
 			user.update_password(params[:Old], params[:New])
 			user.save
+			ex = ExUser.init_from_user(user.reload)
 			re = ApiReturn.new("000")
+			re.add_data("User", ex)
 			return_response(re)
 		end
 	end
