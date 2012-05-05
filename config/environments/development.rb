@@ -35,6 +35,8 @@ WetongjiWeb::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+  Paperclip.options[:command_path] = "/usr/bin/"
+  
   # email setting
   # if mail can't send, just ignore it
   config.action_mailer.perform_deliveries = true
