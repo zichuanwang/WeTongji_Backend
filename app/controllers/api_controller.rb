@@ -4,63 +4,86 @@ class ApiController < ApplicationController
 		return_response ApiReturn.new("000")
 	end
 
+	METHODS = {
+		"Channels.Get" => "channels",
+		"Channel.Follow" => "channel_follow",
+		"Channel.UnFollow" => "channel_unfollow",
+		"Activities.Get" => "activities",
+		"Activity.Follow" => "activity_follow",
+		"Activity.UnFollow" => "activity_unfollow",
+		"Activity.Like" => "activity_like",
+		"Activity.UnLike" => "activity_unlike",
+		"Activity.Add" => "activity_add",
+		"Activity.Delete" => "activity_delete",
+		"Schedule.Get" => "schedule",
+		"News.GetList" => "news_getlist",
+		"News.Get" => "news_get",
+		"User.Active" => "user_active",
+		"User.LogOn" => "user_logon",
+		"User.LogOff" => "user_logoff",
+		"User.Get" => "user_get",
+		"User.Update" => "user_update",
+		"User.Update.Avatar" => "user_update_avatar",
+		"User.Update.Password" => "user_update_password"
+	}
+
 	def call
 		# check params check sum
-	    if verify_checksum
-	      # check params exists system require params
-	      if verify_sys_params
-	        case params[:M]
-	        	# channel and activity
-          	when "Channels.Get"
-            	channels
-          	when "Channel.Follow"
-            	channel_follow
-          	when "Channel.UnFollow"
-            	channel_unfollow
-           	when "Activities.Get"
-           		activities
-            when "Activity.Follow"
-            	activity_follow
-            when "Activity.UnFollow"
-            	activity_unfollow
-            when "Activity.Like"
-            	activity_like
-            when "Activity.UnLike"
-            	activity_unlike
-            when "Activity.Add"
-            	activity_add
-            when "Activity.Delete"
-            	activity_delete
-            # schedule
-            when "Schedule.Get"
-            	schedule
-            # news
-            when "News.GetList"
-            	news_getlist
-            when "News.Get"
-            	news_get
-            # users
-            when "User.Active"
-            	user_active
-            when "User.LogOn"
-            	user_logon
-            when "User.LogOff"
-            	user_logoff
-            when "User.Get"
-            	user_get
-            when "User.Update"
-            	user_update
-           	when "User.Update.Avatar"
-            	user_update_avatar
-            when "User.Update.Password"
-            	user_update_password	            		            	
-	        end
-	      else
-	        return_response ApiReturn.new("004")
-	      end
-	    else
-	      return_response ApiReturn.new("001")
-	    end
+    if verify_checksum
+      # check params exists system require params
+      if verify_sys_params
+        case params[:M]
+        	# channel and activity
+        	when "Channels.Get"
+          	channels
+        	when "Channel.Follow"
+          	channel_follow
+        	when "Channel.UnFollow"
+          	channel_unfollow
+         	when "Activities.Get"
+         		activities
+          when "Activity.Follow"
+          	activity_follow
+          when "Activity.UnFollow"
+          	activity_unfollow
+          when "Activity.Like"
+          	activity_like
+          when "Activity.UnLike"
+          	activity_unlike
+          when "Activity.Add"
+          	activity_add
+          when "Activity.Delete"
+          	activity_delete
+          # schedule
+          when "Schedule.Get"
+          	schedule
+          # news
+          when "News.GetList"
+          	news_getlist
+          when "News.Get"
+          	news_get
+          # users
+          when "User.Active"
+          	user_active
+          when "User.LogOn"
+          	user_logon
+          when "User.LogOff"
+          	user_logoff
+          when "User.Get"
+          	user_get
+          when "User.Update"
+          	user_update
+         	when "User.Update.Avatar"
+          	user_update_avatar
+          when "User.Update.Password"
+          	user_update_password	            		            	
+        end
+      else
+        return_response ApiReturn.new("004")
+      end
+    else
+      return_response ApiReturn.new("001")
+    end
 	end
 
 	private
@@ -92,11 +115,23 @@ class ApiController < ApplicationController
     end
 	end
 
+	# verify user log
 	def verify_action_params(keys = [])
 		keys.each do |key|
 			if params[key] == nil || params[key] == ''
 				return_response ApiReturn.new("001")
 			end
+		end
+	end
+
+	# verify for action require user logon
+	def verify_user_authentication
+		user = User.verify_authentication(params[:U], params[:S])
+		if user
+			user
+		else
+			re = ApiReturn.new("005")
+			return_response(re)
 		end
 	end
   
@@ -334,8 +369,9 @@ class ApiController < ApplicationController
 	end
 
 	def user_logoff
-		verify_action_params(['S'])
-		User.logoff(params[:NO])
+		verify_action_params(['U', 'S'])
+		verify_user_authentication
+		User.logoff(params[:U], params[:NO])
 		re = ApiReturn.new("000")
 		return_response(re)
 	end

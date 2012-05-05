@@ -40,9 +40,18 @@ class User < ActiveRecord::Base
     end
   end
 
-  def self.logoff(authentication_token)
-    if authentication_token != nil && authentication_token != ''
-      user = User.find_by_authentication_token(authentication_token)
+  def self.verify_authentication(uid, authentication_token)
+      if authentication_token != nil && uid != nil && authentication_token != '' && uid != ''
+      user = User.find_by_uid_and_authentication_token(uid, authentication_token)
+      user.last_seen_at = Time.now
+      user.save
+      user
+    end
+  end
+
+  def self.logoff(uid, authentication_token)
+    if authentication_token != nil && uid != nil && authentication_token != '' && uid != ''
+      user = User.find_by_uid_and_authentication_token(uid, authentication_token)
       user.last_seen_at = Time.now
       user.authentication_token = nil
       user.save
