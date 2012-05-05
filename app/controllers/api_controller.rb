@@ -31,53 +31,8 @@ class ApiController < ApplicationController
 		# check params check sum
     if verify_checksum
       # check params exists system require params
-      if verify_sys_params
-        case params[:M]
-        	# channel and activity
-        	when "Channels.Get"
-          	channels
-        	when "Channel.Follow"
-          	channel_follow
-        	when "Channel.UnFollow"
-          	channel_unfollow
-         	when "Activities.Get"
-         		activities
-          when "Activity.Follow"
-          	activity_follow
-          when "Activity.UnFollow"
-          	activity_unfollow
-          when "Activity.Like"
-          	activity_like
-          when "Activity.UnLike"
-          	activity_unlike
-          when "Activity.Add"
-          	activity_add
-          when "Activity.Delete"
-          	activity_delete
-          # schedule
-          when "Schedule.Get"
-          	schedule
-          # news
-          when "News.GetList"
-          	news_getlist
-          when "News.Get"
-          	news_get
-          # users
-          when "User.Active"
-          	user_active
-          when "User.LogOn"
-          	user_logon
-          when "User.LogOff"
-          	user_logoff
-          when "User.Get"
-          	user_get
-          when "User.Update"
-          	user_update
-         	when "User.Update.Avatar"
-          	user_update_avatar
-          when "User.Update.Password"
-          	user_update_password	            		            	
-        end
+      if verify_sys_params && METHODS[params[:M]]
+      	send METHODS[params[:M]]
       else
         return_response ApiReturn.new("004")
       end
