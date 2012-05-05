@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
         user.name = student.name
         user.password = password
         user.display_name = user.name
+        user.major = student.major
+        user.native_place = student.native_place
+        user.degree = student.degree
+        user.department = student.department
+        user.birthday = student.birthday
+        user.year = student.year
+        user.plan = student.plan
+        user.gender = student.gender
         user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
         user
       elsif user.confirmed_at == nil

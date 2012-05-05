@@ -24,7 +24,7 @@ class StudentImport < Importex::Base
   		s.name = item['姓名']
   		s.email = item['邮箱']
   		s.major = item['专业']
-  		s.navtiveplace = item['籍贯']
+  		s.native_place = item['籍贯']
   		s.degree = item['学历']
   		s.department = item['学院']
   		s.plan = item['学制']

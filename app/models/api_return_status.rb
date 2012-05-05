@@ -18,7 +18,7 @@ class ApiReturnStatus
       when "005"
         @Mmeo = "未获得权限，请登录。"
       when "006"
-        @Memo = "登陆超时，请重新登陆。"
+        @Memo = "登录超时，请重新登录。"
       when "007"
         @Memo = "缺少方法必须的参数。"
       when "999"
