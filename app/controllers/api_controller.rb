@@ -89,12 +89,13 @@ class ApiController < ApplicationController
 
 	# verify for action require user logon
 	def verify_user_authentication
-		user = User.verify_authentication(params[:U], params[:S])
+		user = User.get_authentication_user(params[:U], params[:S])
 		if user
-			user
+			return user
 		else
 			re = ApiReturn.new("005")
 			return_response(re)
+			return nil
 		end
 	end
 
@@ -357,10 +358,12 @@ class ApiController < ApplicationController
 	def user_get
 		if verify_action_params(['U', 'S'])
 			user = verify_user_authentication
-			ex = ExUser.init_from_user(user)
-			re = ApiReturn.new("000")
-			re.add_data("User", ex)
-			return_response(re)
+			if user
+				ex = ExUser.init_from_user(user)
+				re = ApiReturn.new("000")
+				re.add_data("User", ex)
+				return_response(re)
+			end
 		end
 	end
 
@@ -368,10 +371,12 @@ class ApiController < ApplicationController
 	def user_update
 		if verify_action_params(['U', 'S', 'User'])
 			user = verify_user_authentication
-			ExUser.update_json_to_user(JSON.parse(params[:User]), user)
-			user.save
-			re = ApiReturn.new("000")
-			return_response(re)
+			if user
+				ExUser.update_json_to_user(JSON.parse(params[:User]), user)
+				user.save
+				re = ApiReturn.new("000")
+				return_response(re)
+			end
 		end
 	end
 

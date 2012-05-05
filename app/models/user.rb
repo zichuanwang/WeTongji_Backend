@@ -49,9 +49,13 @@ class User < ActiveRecord::Base
     end
   end
 
-  def verify_authentication(uid, authentication_token)
-    if self.uid == uid && self.authentication_token == authentication_token
+  def self.get_authentication_user(uid, authentication_token)
+    user = User.find_by_uid_and_authentication_token(uid, authentication_token)
+    if user
       user.last_seen_at = Time.now
+      user
+    else
+      nil
     end
   end
 
