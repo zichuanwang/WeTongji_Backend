@@ -136,41 +136,40 @@ class ApiController < ApplicationController
 
 	# activity operate
 	def activities
-		if channel_ids = params[:Channel_Ids]
-			sort = params[:Sort]
-			p = params[:P]
-			uid = params[:UID]
+		channel_ids = params[:Channel_Ids]
+		sort = params[:Sort]
+		p = params[:P]
+		uid = params[:UID]
 
-			activities = Activity
-			if uid
-				user = User.find_by_uid(uid)
-				if user
-					activities = user.activities
-				end
+		activities = Activity
+		if uid
+			user = User.find_by_uid(uid)
+			if user
+				activities = user.activities
 			end
-			if channel_ids
-				activities = activities.where(:channel_id => channel_ids.split(','))
-			end
-			if sort
-				activities = activities.order(sort)
-			else
-				activities = activities.order("id desc")
-			end
-			if p
-				p = p.to_i
-				activities = activities.limit(20).offset((p - 1) * 20)
-			else
-				activities = activities.limit(20)
-			end
-
-			ex = []
-			activities.each do |activity|
-				ex << ExActivity.init_from_activity(activity)
-			end
-			re = ApiReturn.new("000")
-			re.add_data("Activities", ex)
-			return_response(re)
 		end
+		if channel_ids
+			activities = activities.where(:channel_id => channel_ids.split(','))
+		end
+		if sort
+			activities = activities.order(sort)
+		else
+			activities = activities.order("id desc")
+		end
+		if p
+			p = p.to_i
+			activities = activities.limit(20).offset((p - 1) * 20)
+		else
+			activities = activities.limit(20)
+		end
+
+		ex = []
+		activities.each do |activity|
+			ex << ExActivity.init_from_activity(activity)
+		end
+		re = ApiReturn.new("000")
+		re.add_data("Activities", ex)
+		return_response(re)
 	end
 
 	def activity_follow
