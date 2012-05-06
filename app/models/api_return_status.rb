@@ -21,7 +21,10 @@ class ApiReturnStatus
         @Memo = "登录超时，请重新登录。"
       when "007"
         @Memo = "缺少方法必须的参数。"
+      when "010"
+        @Memo = "密码不符合规范。"
       when "999"
+        @Memo = "UnKnown"
     end
   end
   

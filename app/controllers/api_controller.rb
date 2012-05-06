@@ -316,13 +316,18 @@ class ApiController < ApplicationController
 
 	def user_active
 		if verify_action_params(['NO', 'Name', 'Password'])
-			user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
-			if user
-				user.save
-				re = ApiReturn.new("000")
-				return_response(re)
+			if User.is_password_valid?(params[:Password])
+				user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
+				if user
+					user.save
+					re = ApiReturn.new("000")
+					return_response(re)
+				else
+					re = ApiReturn.new("003")
+					return_response(re)
+				end
 			else
-				re = ApiReturn.new("003")
+				re = ApiReturn.new("010")
 				return_response(re)
 			end
 		end
@@ -398,13 +403,20 @@ class ApiController < ApplicationController
 
 	def user_update_password
 		if verify_action_params(['U', 'S', 'Old', 'New'])
-			user = verify_user_authentication
-			user.update_password(params[:Old], params[:New])
-			user.save
-			ex = ExUser.init_from_user(user.reload)
-			re = ApiReturn.new("000")
-			re.add_data("User", ex)
-			return_response(re)
+			if User.is_password_valid?(params[:New])
+				user = verify_user_authentication
+				if user
+					user.update_password(params[:Old], params[:New])
+					user.save
+					ex = ExUser.init_from_user(user.reload)
+					re = ApiReturn.new("000")
+					re.add_data("User", ex)
+					return_response(re)
+				end
+			else
+				re = ApiReturn.new("010")
+				return_response(re)
+			end
 		end
 	end
 end

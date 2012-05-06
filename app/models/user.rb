@@ -74,13 +74,17 @@ class User < ActiveRecord::Base
 
   def password  
     @password  
-  end  
+  end
     
   def password=(pwd)  
     @password = pwd
-    return if pwd.blank?
+    return if !User.is_password_valid?(pwd)
     self.password_salt = new_salt  
     self.encrypted_password = User.hash_password(pwd, self.password_salt)  
+  end
+
+  def self.is_password_valid?(pwd)
+    !pwd.match(/[A-Z0-9a-z_]{6,}/).nil?
   end
 
   def self.hash_password(password, salt)
