@@ -36,7 +36,7 @@ WetongjiWeb::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = "/usr/bin/"
-  
+
   # email setting
   # if mail can't send, just ignore it
   config.action_mailer.perform_deliveries = true
@@ -51,4 +51,7 @@ WetongjiWeb::Application.configure do
     :password             => 'wetongji',
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
+
+  #
+  config.host = "http://106.187.95.107:8080"
 end

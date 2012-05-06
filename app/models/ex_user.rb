@@ -6,7 +6,7 @@ class ExUser
 		model = ExUser.new
 		model.UID = user.uid
 		model.DisplayName = user.display_name
-		model.Avatar = user.avatar == nil ? '' : user.avatar.url
+		model.Avatar = user.avatar == nil ? '' : Rails.configuration.host + user.avatar.url
 		model.Phone = user.phone
 		model.Email = user.email
 		model.NO = user.no
