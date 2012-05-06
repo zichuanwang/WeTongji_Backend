@@ -16,7 +16,7 @@ class ApiReturnStatus
       when "004"
         @Memo = "缺少必要的系统参数。"
       when "005"
-        @Mmeo = "未获得权限，请登录。"
+        @Memo = "未获得权限，请登录。"
       when "006"
         @Memo = "登录超时，请重新登录。"
       when "007"
