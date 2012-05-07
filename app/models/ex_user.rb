@@ -9,6 +9,7 @@ class ExUser
 		model.Avatar = user.avatar == nil ? '' : Rails.configuration.host + user.avatar.url
 		model.Phone = user.phone
 		model.Email = user.email
+		model.Name = user.name
 		model.NO = user.no
 		model.Major = user.major
 		model.NativePlace = user.native_place
