@@ -5,7 +5,6 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'devise'
 gem 'execjs'
 gem 'therubyracer'
@@ -14,6 +13,7 @@ gem 'tinymce-rails'
 gem 'importex'
 gem 'ar_mailer_rails3'
 gem 'kaminari'
+gem 'mysql2'
 
 # Gems used only for assets and not required
 # in production environments by default.
