@@ -24,8 +24,11 @@ class StudentsController < ApplicationController
     # write the file
     File.open(path, "wb") { |f| f.write(params['file'].read) }
     p path
-    StudentImport.import(path)
-    StudentImport.get_students.each do | student |
+    # StudentImport.import(path)
+    # StudentImport.get_students.each do | student |
+    #   student.save
+    # end
+    Student.import(path).each do |student|
       student.save
     end
     redirect_to students_path

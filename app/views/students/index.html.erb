@@ -17,10 +17,8 @@
                 <th>学院</th>
                 <th>专业</th>
                 <th>学制</th>
-                <th>学历</th>
                 <th>性别</th>
                 <th>生日</th>
-                <th>籍贯</th>
                 <th>入学年份</th>
                 <th>邮箱</th>
                 <th>操作</th>
@@ -35,10 +33,8 @@
             <td><%= student.department %></td>
             <td><%= student.major %></td>
             <td><%= student.plan %></td>
-            <td><%= student.degree %></td>
             <td><%= student.gender %></td>
-            <td><%= student.birthday %></td>
-            <td><%= student.native_place %></td>
+            <td><%= student.birthday.strftime("%Y/%m/%d") %></td>
             <td><%= student.year %></td>
             <td><%= student.email %></td>
             <td>
