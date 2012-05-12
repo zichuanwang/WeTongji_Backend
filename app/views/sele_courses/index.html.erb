@@ -1,0 +1,37 @@
+<h1>Listing sele_courses</h1>
+
+<table>
+  <tr>
+    <th>Student no</th>
+    <th>Course no</th>
+    <th>Teacher</th>
+    <th>Location</th>
+    <th>Week type</th>
+    <th>Week day</th>
+    <th>Section start</th>
+    <th>Section end</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sele_courses.each do |sele_course| %>
+  <tr>
+    <td><%= sele_course.student_no %></td>
+    <td><%= sele_course.course_no %></td>
+    <td><%= sele_course.teacher %></td>
+    <td><%= sele_course.location %></td>
+    <td><%= sele_course.week_type %></td>
+    <td><%= sele_course.week_day %></td>
+    <td><%= sele_course.section_start %></td>
+    <td><%= sele_course.section_end %></td>
+    <td><%= link_to 'Show', sele_course %></td>
+    <td><%= link_to 'Edit', edit_sele_course_path(sele_course) %></td>
+    <td><%= link_to 'Destroy', sele_course, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sele course', new_sele_course_path %>

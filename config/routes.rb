@@ -1,4 +1,8 @@
 WetongjiWeb::Application.routes.draw do
+  post "sele_courses/import"
+  get "sele_courses/upload"
+  resources :sele_courses
+
   post "courses/import"
   get "courses/upload"
   resources :courses
