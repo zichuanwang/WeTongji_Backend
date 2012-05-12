@@ -1,7 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  user_id: 1
+  no: MyString
+  name: MyString
+  teacher: MyString
+  point: 9.99
+  type: 
+  hours: 1
 
 two:
-  user_id: 1
+  no: MyString
+  name: MyString
+  teacher: MyString
+  point: 9.99
+  type: 
+  hours: 1

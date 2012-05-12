@@ -12,8 +12,28 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
+    <%= f.label :no %><br />
+    <%= f.text_field :no %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :teacher %><br />
+    <%= f.text_field :teacher %>
+  </div>
+  <div class="field">
+    <%= f.label :point %><br />
+    <%= f.text_field :point %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :hours %><br />
+    <%= f.number_field :hours %>
   </div>
   <div class="actions">
     <%= f.submit %>

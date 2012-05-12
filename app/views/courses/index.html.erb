@@ -2,7 +2,12 @@
 
 <table>
   <tr>
-    <th>User</th>
+    <th>No</th>
+    <th>Name</th>
+    <th>Teacher</th>
+    <th>Point</th>
+    <th>Type</th>
+    <th>Hours</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,7 +15,12 @@
 
 <% @courses.each do |course| %>
   <tr>
-    <td><%= course.user_id %></td>
+    <td><%= course.no %></td>
+    <td><%= course.name %></td>
+    <td><%= course.teacher %></td>
+    <td><%= course.point %></td>
+    <td><%= course.type %></td>
+    <td><%= course.hours %></td>
     <td><%= link_to 'Show', course %></td>
     <td><%= link_to 'Edit', edit_course_path(course) %></td>
     <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>

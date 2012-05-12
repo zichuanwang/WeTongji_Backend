@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :courses
+
   resources :upload_files
 
   resources :news
@@ -14,8 +16,6 @@ WetongjiWeb::Application.routes.draw do
   resources :channels
 
   get "home/index"
-
-  resources :courses
 
   resources :time_tables
 
