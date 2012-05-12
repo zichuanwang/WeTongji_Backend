@@ -4,7 +4,7 @@ class CreateCourses < ActiveRecord::Migration
       t.string :no
       t.string :name
       t.string :teacher
-      t.decimal :point
+      t.decimal :point, :precision => 3, :scale => 1
       t.string :required
       t.integer :hours
 
