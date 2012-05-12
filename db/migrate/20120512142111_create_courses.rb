@@ -5,7 +5,7 @@ class CreateCourses < ActiveRecord::Migration
       t.string :name
       t.string :teacher
       t.decimal :point
-      t.string :type
+      t.string :required
       t.integer :hours
 
       t.timestamps

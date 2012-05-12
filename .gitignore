@@ -15,6 +15,7 @@
 /tmp
 Gemfile.lock
 /public/system
+/public/imports
 /db/schema.rb
 /public/uploads
 .DS_Store

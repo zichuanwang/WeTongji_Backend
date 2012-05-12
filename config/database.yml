@@ -7,6 +7,7 @@ development:
   adapter: mysql2
   database: wetongji_service_dev
   username: root
+  password: 
   host: 127.0.0.1
   pool: 5
   timeout: 5000
@@ -18,6 +19,7 @@ test:
     adapter: mysql2
     database: wetongji_service_test
     username: root
+    password:
     host: 127.0.0.1
     pool: 5
     timeout: 5000
@@ -26,6 +28,7 @@ production:
     adapter: mysql2
     database: wetongji_service
     username: root
+    password:
     host: 127.0.0.1
     pool: 5
     timeout: 5000

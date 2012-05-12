@@ -1,33 +1,39 @@
-<h1>Listing courses</h1>
-
-<table>
-  <tr>
-    <th>No</th>
-    <th>Name</th>
-    <th>Teacher</th>
-    <th>Point</th>
-    <th>Type</th>
-    <th>Hours</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @courses.each do |course| %>
-  <tr>
-    <td><%= course.no %></td>
-    <td><%= course.name %></td>
-    <td><%= course.teacher %></td>
-    <td><%= course.point %></td>
-    <td><%= course.type %></td>
-    <td><%= course.hours %></td>
-    <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_courses" %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Course', new_course_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有课程</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>老师</th>
+                <th>学分</th>
+                <th>学时</th>
+                <th>类型</th>
+            </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @courses.each do |course| %>
+        <tr>
+            <td><%= course.no %></td>
+            <td><%= course.name %></td>
+            <td><%= course.teacher %></td>
+            <td><%= course.point %></td>
+            <td><%= course.hours %></td>
+            <td><%= course.required %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @courses %>
+  </div>
+</div>

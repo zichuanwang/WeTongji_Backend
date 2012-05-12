@@ -1,15 +1,36 @@
 class CoursesController < ApplicationController
   before_filter :authenticate_admin!
-  # GET /courses
-  # GET /courses.json
+
   def index
     @menu = 'courses'
-    @courses = Course.all
+    @courses = Course.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @courses }
     end
+  end
+
+  def import
+    @menu = 'courses'
+    name =  params['file'].original_filename
+    directory = "public/imports"
+    if !File.exist?(directory)
+      Dir.mkdir(directory)
+    end
+    # create the file path
+    path = File.join(directory, name)
+    # write the file
+    File.open(path, "wb") { |f| f.write(params['file'].read) }
+    p path
+    Course.import(path).each do |course|
+      course.save
+    end
+    redirect_to courses_path
+  end
+
+  def upload
+    @menu = 'courses'
   end
 
   # GET /courses/1

@@ -1,5 +1,4 @@
 WetongjiWeb::Application.routes.draw do
-  get "courses/import"
   post "courses/import"
   get "courses/upload"
   resources :courses
@@ -28,7 +27,6 @@ WetongjiWeb::Application.routes.draw do
   get "users/welcome"
   resources :users
 
-  get "students/import"
   post "students/import"
   get "students/upload"
   resources :students

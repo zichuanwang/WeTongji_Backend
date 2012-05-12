@@ -2,7 +2,7 @@
 require 'csv'
 require 'iconv'
 class Course < ActiveRecord::Base
-	validates_presence_of :name, :no, :teacher, :point, :hours, :type
+	validates_presence_of :name, :no, :teacher, :point, :hours, :required
 	validates_uniqueness_of :no
 	paginates_per 10
 
@@ -21,7 +21,7 @@ class Course < ActiveRecord::Base
   		s.teacher = row[2]
   		s.point = row[3]
   		s.hours = row[4]
-  		s.type = row[5]
+  		s.required = row[5]
   		courses << s
 		end
 

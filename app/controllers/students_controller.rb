@@ -1,7 +1,6 @@
 class StudentsController < ApplicationController
   before_filter :authenticate_admin!
-  # GET /students
-  # GET /students.json\
+
   def index
     @menu = 'students'
     @students = Student.order("id desc").page(params[:page])
@@ -15,7 +14,7 @@ class StudentsController < ApplicationController
   def import
     @menu = 'students'
     name =  params['file'].original_filename
-    directory = "public/uploads/students"
+    directory = "public/imports"
     if !File.exist?(directory)
       Dir.mkdir(directory)
     end
