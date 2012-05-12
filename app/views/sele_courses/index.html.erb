@@ -1,37 +1,41 @@
-<h1>Listing sele_courses</h1>
-
-<table>
-  <tr>
-    <th>Student no</th>
-    <th>Course no</th>
-    <th>Teacher</th>
-    <th>Location</th>
-    <th>Week type</th>
-    <th>Week day</th>
-    <th>Section start</th>
-    <th>Section end</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sele_courses.each do |sele_course| %>
-  <tr>
-    <td><%= sele_course.student_no %></td>
-    <td><%= sele_course.course_no %></td>
-    <td><%= sele_course.teacher %></td>
-    <td><%= sele_course.location %></td>
-    <td><%= sele_course.week_type %></td>
-    <td><%= sele_course.week_day %></td>
-    <td><%= sele_course.section_start %></td>
-    <td><%= sele_course.section_end %></td>
-    <td><%= link_to 'Show', sele_course %></td>
-    <td><%= link_to 'Edit', edit_sele_course_path(sele_course) %></td>
-    <td><%= link_to 'Destroy', sele_course, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_sele_courses" %>
 <% end %>
-</table>
 
-<br />
-
-<%= link_to 'New Sele course', new_sele_course_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有选课</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+            <tr>
+                <th>学号</th>
+                <th>课号</th>
+                <th>教师</th>
+                <th>周</th>
+                <th>天</th>
+                <th>跨度（节）</th>
+                <th>地点</th>
+            </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sele_courses.each do |sele_course| %>
+        <tr>
+            <td><%= sele_course.student_no %></td>
+            <td><%= sele_course.course_no %></td>
+            <td><%= sele_course.teacher %></td>
+            <td><%= sele_course.location %></td>
+            <td><%= sele_course.week_type %></td>
+            <td><%= sele_course.week_day %></td>
+            <td><%= sele_course.section_start %>～<%= sele_course.section_end %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @sele_courses %>
+  </div>
+</div>
