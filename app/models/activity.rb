@@ -8,29 +8,29 @@ class Activity < ActiveRecord::Base
 
 	before_create :init_model
 
-	def user_follow(uid)
-		if self.follow < 0
-			self.follow = 0
+	def user_favorite(uid)
+		if self.favorite < 0
+			self.favorite = 0
 		end
 		
 		# add to user favorite
 		user = User.find_by_uid(uid)
 		if user && !self.users.exists?(user)
 			self.users << user
-			self.follow = self.follow + 1
+			self.favorite = self.favorite + 1
 		end
 	end
 
-	def user_unfollow(uid)
+	def user_unfavorite(uid)
 		# remove from user favorite
 		user = User.find_by_uid(uid)
 		if user && self.users.exists?(user)
 			self.users.delete(user)
-			self.follow = self.follow - 1
+			self.favorite = self.favorite - 1
 		end
 
-		if self.follow < 0
-			self.follow = 0
+		if self.favorite < 0
+			self.favorite = 0
 		end
 	end
 
@@ -67,8 +67,8 @@ class Activity < ActiveRecord::Base
 
 	private
 	def init_model
-		self.follow = 0
+		self.favorite = 0
 		self.like = 0
-		self.hot = 0
+		self.schedule = 0
 	end
 end
