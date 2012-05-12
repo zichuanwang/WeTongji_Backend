@@ -3,6 +3,7 @@ require 'csv'
 require 'iconv'
 class Student < ActiveRecord::Base
 	validates_presence_of :name, :no, :email
+	validates_uniqueness_of :no, :email
 	paginates_per 10
 
 	def self.import(file_path)
