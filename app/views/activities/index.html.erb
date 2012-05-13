@@ -30,9 +30,9 @@
             <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= activity.title %></td>
             <td><%= activity.location %></td>
-            <td><%= activity.follow %></td>
+            <td><%= activity.favorite %></td>
             <td><%= activity.like %></td>
-            <td><%= activity.hot %></td>
+            <td><%= activity.schedule %></td>
             <td>
                 <%= link_to '详情', activity %>
                 <%= link_to '编辑', edit_activity_path(activity) %>

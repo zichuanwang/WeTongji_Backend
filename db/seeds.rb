@@ -35,20 +35,20 @@ SubOrganizer.create(:name => '职协', :organizer => org3, :description => '')
 
 Organizer.create(:name => '社团联', :description => '')
 
-a1 = Activity.create(:title => '校园十大歌手', :channel => c2, :organizer => org1, :sub_organizer => sorg1, :description => '校园十大歌手决赛', :begin => '2012.04.30 18:30', :end => '2012.04.30 20:30', :location => '大礼堂', :follow => 1000, :like => 400, :hot => 4000)
-a1.follow = 1000
+a1 = Activity.create(:title => '校园十大歌手', :channel => c2, :organizer => org1, :sub_organizer => sorg1, :description => '校园十大歌手决赛', :begin => '2012.04.30 18:30', :end => '2012.04.30 20:30', :location => '大礼堂', :favorite => 1000, :like => 400, :schedule => 4000)
+a1.favorite = 1000
 a1.like = 400
-a1.hot = 4000
+a1.schedule = 4000
 a1.save
 
-a2 = Activity.create(:title => '爱拍同济摄影大赛', :channel => c1, :organizer => org2, :sub_organizer => sorg2, :description => '校友摄影协会成立仪式暨第一次活动爱拍同济摄影大赛', :begin => '2012.05.19 8:30', :end => '2012.05.20 20:30', :location => '综合楼', :follow => 357, :like => 789, :hot => 1040)
-a2.follow = 357
+a2 = Activity.create(:title => '爱拍同济摄影大赛', :channel => c1, :organizer => org2, :sub_organizer => sorg2, :description => '校友摄影协会成立仪式暨第一次活动爱拍同济摄影大赛', :begin => '2012.05.19 8:30', :end => '2012.05.20 20:30', :location => '综合楼', :favorite => 357, :like => 789, :schedule => 1040)
+a2.favorite = 357
 a2.like = 789
-a2.hot = 1040
+a2.schedule = 1040
 a2.save
 
-a3 = Activity.create(:title => '同舟讲坛《走进你的心里》主讲人:裴刚', :channel => c3, :organizer => org1, :sub_organizer => sorg3, :description => '裴钢校长给我们做题为《走近你的心里》的学术讲座，相约星期四！', :begin => '2012.04.26 19:00', :end => '2012.04.26 21:00', :location => '逸夫楼2楼报告厅', :follow => 788, :like => 289, :hot => 3002)
-a3.follow = 788
+a3 = Activity.create(:title => '同舟讲坛《走进你的心里》主讲人:裴刚', :channel => c3, :organizer => org1, :sub_organizer => sorg3, :description => '裴钢校长给我们做题为《走近你的心里》的学术讲座，相约星期四！', :begin => '2012.04.26 19:00', :end => '2012.04.26 21:00', :location => '逸夫楼2楼报告厅', :favorite => 788, :like => 289, :schedule => 3002)
+a3.favorite = 788
 a3.like = 289
-a3.hot = 3002
+a3.schedule = 3002
 a3.save

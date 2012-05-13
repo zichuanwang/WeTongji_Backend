@@ -6,15 +6,17 @@ class ApiController < ApplicationController
 
 	METHODS = {
 		"Channels.Get" => "channels",
-		"Channel.Follow" => "channel_follow",
-		"Channel.UnFollow" => "channel_unfollow",
+		"Channel.Fovorite" => "channel_favorite",
+		"Channel.UnFavorite" => "channel_unfavorite",
+
 		"Activities.Get" => "activities",
-		"Activity.Follow" => "activity_follow",
-		"Activity.UnFollow" => "activity_unfollow",
+		"Activity.Favorite" => "activity_favorite",
+		"Activity.UnFavorite" => "activity_unfavorite",
 		"Activity.Like" => "activity_like",
 		"Activity.UnLike" => "activity_unlike",
-		"Activity.Add" => "activity_add",
-		"Activity.Delete" => "activity_delete",
+		"Activity.Schedule" => "activity_schedule",
+		"Activity.UnSchedule" => "activity_unschedule",
+
 		"Schedule.Get" => "schedule",
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
@@ -173,11 +175,11 @@ class ApiController < ApplicationController
 		return_response(re)
 	end
 
-	def activity_follow
+	def activity_favorite
 		if verify_action_params(['Id', 'UID'])
 			activity = Activity.find(params[:Id])
 			if activity
-				activity.user_follow(params[:UID])
+				activity.user_favorite(params[:UID])
 				activity.save
 			end
 			re = ApiReturn.new("000")
@@ -185,11 +187,11 @@ class ApiController < ApplicationController
 		end
 	end
 
-	def activity_unfollow
+	def activity_unfavorite
 		if verify_action_params(['Id', 'UID'])
 			activity = Activity.find(params[:Id])
 			if activity
-				activity.user_unfollow(params[:UID])
+				activity.user_unfavorite(params[:UID])
 				activity.save
 			end
 			re = ApiReturn.new("000")
@@ -221,7 +223,7 @@ class ApiController < ApplicationController
 		end
 	end
 
-	def activity_add
+	def activity_schedule
 		if verify_action_params(['Id', 'UID'])
 			activity = Activity.find(params[:Id])
 			if activity
@@ -233,7 +235,7 @@ class ApiController < ApplicationController
 		end
 	end
 
-	def activity_delete
+	def activity_unschedule
 		if verify_action_params(['Id', 'UID'])
 			activity = Activity.find(params[:Id])
 			if activity
