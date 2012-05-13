@@ -24,6 +24,8 @@ class ApiController < ApplicationController
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
 
+		"TimeTable.Get" => "timetable",
+
 		"User.Active" => "user_active",
 		"User.LogOn" => "user_logon",
 		"User.LogOff" => "user_logoff",
@@ -35,16 +37,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		#if verify_checksum
+		if verify_checksum
       # check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    #else
+    else
     	#return_response ApiReturn.new("001")
-    #end
+    end
   end
 
   private
@@ -315,6 +317,16 @@ class ApiController < ApplicationController
 			re.add_data("Events", ev)
 			re.add_data("Activities", ac)
 			return_response(re)
+		end
+	end
+
+	#timetable
+	def timetable
+		if verify_action_params(['U', 'S', 'Begin', 'End'])
+			user = verify_user_authentication
+			if user
+
+			end
 		end
 	end
 
