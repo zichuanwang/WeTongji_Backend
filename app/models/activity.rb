@@ -20,9 +20,8 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def user_unfavorite(uid)
+	def user_unfavorite(user)
 		# remove from user favorite
-		user = User.find_by_uid(uid)
 		if user && self.users_favorites.exists?(user)
 			self.users_favorites.delete(user)
 			self.favorite = self.favorite - 1
@@ -69,18 +68,16 @@ class Activity < ActiveRecord::Base
 		# remove from schedule
 	end
 
-	def can_favorite(uid)
-		user = User.find_by_uid(uid)
-		if user && !self.users_favorites.exists?(user)
-			true
-		end
-		false
+	def can_favorite(user)
+		!self.users_favorites.exists?(user)
 	end
 
 	def can_like(uid)
+		true
 	end
 
 	def can_schedule(uid)
+		true
 	end
 
 	private

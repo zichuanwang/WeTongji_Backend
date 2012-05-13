@@ -167,8 +167,11 @@ class ApiController < ApplicationController
 		end
 
 		ex = []
+
+		user = User.get_authentication_user(params[:U], params[:S])
+
 		activities.each do |activity|
-			ex << ExActivity.init_from_activity(activity)
+			ex << ExActivity.init_from_activity(activity, user)
 		end
 		re = ApiReturn.new("000")
 		re.add_data("Activities", ex)
@@ -191,14 +194,17 @@ class ApiController < ApplicationController
 	end
 
 	def activity_unfavorite
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.user_unfavorite(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_unfavorite(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
