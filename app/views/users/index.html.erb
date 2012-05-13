@@ -16,6 +16,7 @@
                 <th>姓名</th>
                 <th>邮箱</th>
                 <th>UID</th>
+                <th>Token</th>
                 <th>显示名</th>
                 <th>确认时间</th>
                 <th>Avatar</th>
@@ -30,6 +31,7 @@
           <td><%= user.name %></td>
           <td><%= user.email %></td>
           <td><%= user.uid %></td>
+          <td><%= user.authentication_token %></td>
           <td><%= user.display_name %></td>
           <td><%= user.confirmed_at %></td>
           <td><%= link_to "Avatar", user.avatar.url %></td>

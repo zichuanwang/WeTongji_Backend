@@ -31,16 +31,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		if verify_checksum
+		#if verify_checksum
       # check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    else
-    	return_response ApiReturn.new("001")
-    end
+    #else
+    	#return_response ApiReturn.new("001")
+    #end
   end
 
   private
@@ -176,14 +176,17 @@ class ApiController < ApplicationController
 	end
 
 	def activity_favorite
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.user_favorite(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_favorite(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
@@ -413,6 +416,7 @@ class ApiController < ApplicationController
 					ex = ExUser.init_from_user(user.reload)
 					re = ApiReturn.new("000")
 					re.add_data("User", ex)
+					re.add_data("Session", user.authentication_token)
 					return_response(re)
 				end
 			else

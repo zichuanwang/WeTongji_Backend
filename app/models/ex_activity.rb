@@ -1,7 +1,7 @@
 class ExActivity
 	attr_accessor :Id, :Begin, :End, :Title, :Location, :Favorite, :Organizer, :Channel_Id, :SubOrganizer, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
 
-	def self.init_from_activity(activity)
+	def self.init_from_activity(activity, uid = nil)
 		model = ExActivity.new
 		model.Id = activity.id
 		model.Begin = activity.begin
@@ -19,6 +19,12 @@ class ExActivity
 		model.CanFavorite = true
 		model.CanSchedule = true
 		model.CanLike = true
+		if uid
+			user = User.find_by_uid(uid)
+			if user
+				
+			end
+		end
 		model
 	end
 end

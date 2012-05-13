@@ -61,18 +61,20 @@ class User < ActiveRecord::Base
 
   def logoff(uid, authentication_token)
     if self.uid == uid && self.authentication_token == authentication_token
-      user.last_seen_at = Time.now
-      user.authentication_token = nil
+      self.last_seen_at = Time.now
+      self.authentication_token = nil
     end
   end
 
   def update_password(password_old, password_new)
-    if password_new != nil && password_new != '' && self.encrypted_password == User.hash_password(password_old, user.password_salt)
+    if password_new != nil && password_new != '' && self.encrypted_password == User.hash_password(password_old, self.password_salt)
       self.password = password_new
+      self.authentication_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      self.last_seen_at = Time.now
     end
   end
 
-  def password  
+  def password
     @password  
   end
     
