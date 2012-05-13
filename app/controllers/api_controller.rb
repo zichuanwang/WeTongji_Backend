@@ -17,9 +17,13 @@ class ApiController < ApplicationController
 		"Activity.Schedule" => "activity_schedule",
 		"Activity.UnSchedule" => "activity_unschedule",
 
+		"Favorite.Get" => "favorite",
+
 		"Schedule.Get" => "schedule",
+
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
+
 		"User.Active" => "user_active",
 		"User.LogOn" => "user_logon",
 		"User.LogOff" => "user_logoff",
@@ -31,16 +35,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		if verify_checksum
+		#if verify_checksum
       # check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    else
-    	return_response ApiReturn.new("001")
-    end
+    #else
+    	#return_response ApiReturn.new("001")
+    #end
   end
 
   private
@@ -138,6 +142,29 @@ class ApiController < ApplicationController
   end
 
 	# activity operate
+	def favorite
+		if verify_action_params(['U', 'S'])
+			user = verify_user_authentication
+			if user
+				activities = user.users_activities
+				p = params[:P]
+				if p
+					p = p.to_i
+					activities = activities.limit(20).offset((p - 1) * 20)
+				else
+					activities = activities.limit(20)
+				end
+				ex = []
+				activities.each do |activity|
+					ex << ExActivity.init_from_activity(activity, user)
+				end
+				re = ApiReturn.new("000")
+				re.add_data("Activities", ex)
+				return_response(re)
+			end
+		end
+	end
+
 	def activities
 		channel_ids = params[:Channel_Ids]
 		sort = params[:Sort]
@@ -155,9 +182,9 @@ class ApiController < ApplicationController
 			activities = activities.where(:channel_id => channel_ids.split(','))
 		end
 		if sort
-			activities = activities.order(sort)
+			activities = activities.order(sort).order("begin asc")
 		else
-			activities = activities.order("id desc")
+			activities = activities.order("begin asc")
 		end
 		if p
 			p = p.to_i

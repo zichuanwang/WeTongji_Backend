@@ -1,5 +1,5 @@
 <ul>
-	<li class="<%= @menu == nil ? 'current' : '' %>"><a href="/">控制台</a></li>
+	<li class="<%= @menu == nil ? 'current' : '' %>"><%= link_to "控制台", home_index_path %></li>
 	<li class="<%= @menu == 'channels' ? 'current' : '' %>"><%= link_to "频道", channels_path %></li>
 	<li class="<%= @menu == 'activities' ? 'current' : '' %>"><%= link_to "活动", activities_path %></li>
 	<li class="<%= @menu == 'organizers' ? 'current' : '' %>"><%= link_to "组织", organizers_path %></li>		

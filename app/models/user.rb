@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   before_create :init_model
   after_create :send_confirmation
+  has_and_belongs_to_many :users_activities, :class_name => "Activity", :join_table => "activities_users_favorites", :order => "begin asc"
 
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
