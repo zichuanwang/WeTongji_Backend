@@ -16,7 +16,7 @@ class Activity < ActiveRecord::Base
 		
 		if user && !self.users_favorites.exists?(user)
 			self.users_favorites << user
-			self.favorite = self.favorite + 1
+			self.favorite += 1
 		end
 	end
 
@@ -24,7 +24,7 @@ class Activity < ActiveRecord::Base
 		# remove from user favorite
 		if user && self.users_favorites.exists?(user)
 			self.users_favorites.delete(user)
-			self.favorite = self.favorite - 1
+			self.favorite -= 1
 		end
 
 		if self.favorite < 0
@@ -32,24 +32,26 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def user_like(uid)
+	def user_like(user)
 		if self.like < 0
 			self.like = 0
 		end
 		# add to user like
-		if user && !self.activities_users_likes.exists?(uid)
-			self.users << user
-			self.favorite = self.favorite + 1
+		if user && !self.users_likes.exists?(user)
+			self.users_likes << user
+			self.like += 1
 		end
-		self.like = self.like + 1
-		# add relationship
 	end
 
-	def user_unlike(uid)
-		if self.like > 0
-			self.like = self.like - 1
+	def user_unlike(user)
+		if user && self.users_likes.exists?(user)
+			self.users_likes.delete(user)
+			self.like -= 1
 		end
-		# remove relationship
+
+		if self.like < 0
+			self.like = 0
+		end
 	end
 
 	def user_schedule(uid)
@@ -72,8 +74,8 @@ class Activity < ActiveRecord::Base
 		!self.users_favorites.exists?(user)
 	end
 
-	def can_like(uid)
-		true
+	def can_like(user)
+		!self.users_likes.exists?(user)
 	end
 
 	def can_schedule(uid)

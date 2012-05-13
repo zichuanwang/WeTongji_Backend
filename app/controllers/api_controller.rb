@@ -209,26 +209,32 @@ class ApiController < ApplicationController
 	end
 
 	def	activity_like
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.user_like(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_like(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
 	def	activity_unlike
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.user_unlike(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_unlike(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
