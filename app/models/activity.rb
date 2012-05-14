@@ -7,6 +7,7 @@ class Activity < ActiveRecord::Base
 	has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "activities_users_schedules"
 
 	validates_presence_of :organizer, :sub_organizer, :title, :begin, :end, :location, :description
+	paginates_per 20
 
 	before_create :init_model
 

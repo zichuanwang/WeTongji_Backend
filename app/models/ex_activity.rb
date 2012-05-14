@@ -16,9 +16,9 @@ class ExActivity
 		model.Description = activity.description
 		model.Like = activity.like
 		model.Schedule = activity.schedule
-		model.CanFavorite = false
-		model.CanSchedule = false
-		model.CanLike = false
+		model.CanFavorite = true
+		model.CanSchedule = true
+		model.CanLike = true
 		
 		if user
 			model.CanFavorite = activity.can_favorite(user)

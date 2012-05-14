@@ -37,16 +37,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		#if verify_checksum
+		if verify_checksum
      	# check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    #else
+    else
     	#return_response ApiReturn.new("001")
-    #end
+    end
   end
 
   private
@@ -149,18 +149,16 @@ class ApiController < ApplicationController
 			user = verify_user_authentication
 			if user
 				activities = user.favorite_activities
-				p = params[:P]
-				if p
-					p = p.to_i
-					activities = activities.limit(20).offset((p - 1) * 20)
-				else
-					activities = activities.limit(20)
-				end
+				p = params[:P].nil? ? 1 : params[:P].to_i
+
+				activities = activities.page(p).per(20)
+
 				ex = []
 				activities.each do |activity|
 					ex << ExActivity.init_from_activity(activity, user)
 				end
 				re = ApiReturn.new("000")
+				re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
 				re.add_data("Activities", ex)
 				return_response(re)
 			end
@@ -170,7 +168,7 @@ class ApiController < ApplicationController
 	def activities
 		channel_ids = params[:Channel_Ids]
 		sort = params[:Sort]
-		p = params[:P]
+		p = params[:P].nil? ? 1 : params[:P].to_i
 		uid = params[:UID]
 
 		activities = Activity
@@ -188,12 +186,8 @@ class ApiController < ApplicationController
 		else
 			activities = activities.order("begin asc")
 		end
-		if p
-			p = p.to_i
-			activities = activities.limit(20).offset((p - 1) * 20)
-		else
-			activities = activities.limit(20)
-		end
+
+		activities = activities.page(p).per(20)
 
 		ex = []
 
@@ -203,7 +197,9 @@ class ApiController < ApplicationController
 			ex << ExActivity.init_from_activity(activity, user)
 		end
 		re = ApiReturn.new("000")
+		re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
 		re.add_data("Activities", ex)
+		
 		return_response(re)
 	end
 
@@ -335,7 +331,7 @@ class ApiController < ApplicationController
 	# news
 	def news_getlist
 		sort = params[:Sort]
-		p = params[:P]
+		p = params[:P].nil? ? 1 : params[:P].to_i
 
 		news = News
 		if sort
@@ -343,18 +339,15 @@ class ApiController < ApplicationController
 		else
 			news = news.order("id desc")
 		end
-		if p
-			p = p.to_i
-			news = news.limit(20).offset((p - 1) * 20)
-		else
-			news = news.limit(20)
-		end
+
+		news = news.page(p).per(20)
 
 		ex = []
 		news.each do |n|
 			ex << ExNews.init_from_news(n)
 		end
 		re = ApiReturn.new("000")
+		re.add_data("NextPager", (p < news.num_pages ? p + 1 : 0))
 		re.add_data("News", ex)
 		return_response(re)
 	end
