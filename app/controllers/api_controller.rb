@@ -37,16 +37,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		if verify_checksum
+		#if verify_checksum
      	# check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    else
-    	return_response ApiReturn.new("001")
-    end
+    #else
+    	#return_response ApiReturn.new("001")
+    #end
   end
 
   private
@@ -317,10 +317,10 @@ class ApiController < ApplicationController
 
 	#timetable
 	def timetable
-		if verify_action_params(['U', 'S', 'Begin', 'End'])
+		if verify_action_params(['U', 'S'])
 			user = verify_user_authentication
 			if user
-				courses = TimeTable.get_by_user(user, params[:Begin], params[:End])
+				courses = TimeTable.get_by_user(user)
 				ex = []
 				courses.each do |c|
 					ex << ExCourse.init_from_course_instance(c)
