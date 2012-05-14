@@ -45,7 +45,7 @@ class ApiController < ApplicationController
       	return_response ApiReturn.new("004")
       end
     else
-    	#return_response ApiReturn.new("001")
+    	return_response ApiReturn.new("001")
     end
   end
 
@@ -148,7 +148,7 @@ class ApiController < ApplicationController
 		if verify_action_params(['U', 'S'])
 			user = verify_user_authentication
 			if user
-				activities = user.users_activities
+				activities = user.favorite_activities
 				p = params[:P]
 				if p
 					p = p.to_i
@@ -302,7 +302,7 @@ class ApiController < ApplicationController
 			user = verify_user_authentication
 			if user
 				activities = []
-				activities = user.schedule_activities.where("begin <= :begin && end => :end", :begin => params[:Begin], :end => params[:End])
+				activities = user.schedule_activities.where("begin >= :begin && end <= :end", :begin => params[:Begin], :end => params[:End])
 			
 				ac = []
 				activities.each do |activity|

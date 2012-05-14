@@ -69,7 +69,7 @@ class Activity < ActiveRecord::Base
 	def user_unschedule(user)
 		# remove from user favorite
 		if user && self.users_schedules.exists?(user)
-			self.users_favorites.delete(user)
+			self.users_schedules.delete(user)
 			self.schedule -= 1
 		end
 
