@@ -4,6 +4,7 @@ class Activity < ActiveRecord::Base
 	belongs_to :sub_organizer
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "activities_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "activities_users_likes"
+	has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "activities_users_schedules"
 
 	validates_presence_of :organizer, :sub_organizer, :title, :begin, :end, :location, :description
 
@@ -54,20 +55,27 @@ class Activity < ActiveRecord::Base
 		end
 	end
 
-	def user_schedule(uid)
+	def user_schedule(user)
 		if self.schedule < 0
 			self.schedule = 0
 		end
-		self.schedule = self.schedule + 1
-		# add to schedule
+		
+		if user && !self.users_schedules.exists?(user)
+			self.users_schedules << user
+			self.schedule += 1
+		end
 	end
 
-	def user_unschedule(uid)
-		if self.schedule > 0
-			self.schedule = self.schedule - 1
+	def user_unschedule(user)
+		# remove from user favorite
+		if user && self.users_schedules.exists?(user)
+			self.users_favorites.delete(user)
+			self.schedule -= 1
 		end
 
-		# remove from schedule
+		if self.schedule < 0
+			self.schedule = 0
+		end
 	end
 
 	def can_favorite(user)
@@ -78,8 +86,8 @@ class Activity < ActiveRecord::Base
 		!self.users_likes.exists?(user)
 	end
 
-	def can_schedule(uid)
-		true
+	def can_schedule(user)
+		!self.users_schedules.exists?(user)
 	end
 
 	private

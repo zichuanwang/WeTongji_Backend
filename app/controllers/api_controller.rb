@@ -177,7 +177,7 @@ class ApiController < ApplicationController
 		if uid
 			user = User.find_by_uid(uid)
 			if user
-				activities = user.activities
+				activities = user.favorite_activities
 			end
 		end
 		if channel_ids
@@ -268,55 +268,50 @@ class ApiController < ApplicationController
 	end
 
 	def activity_schedule
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.add_to_schedule(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_schedule(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
 	def activity_unschedule
-		if verify_action_params(['Id', 'UID'])
-			activity = Activity.find(params[:Id])
-			if activity
-				activity.remove_from_schedule(params[:UID])
-				activity.save
+		if verify_action_params(['U', 'S', 'Id'])
+			user = verify_user_authentication
+			if user
+				activity = Activity.find(params[:Id])
+				if activity
+					activity.user_unschedule(user)
+					activity.save
+				end
+				re = ApiReturn.new("000")
+				return_response(re)
 			end
-			re = ApiReturn.new("000")
-			return_response(re)
 		end
 	end
 
 	def schedule
-		if verify_action_params(['UID'])
-			user = User.find_by_uid(params[:UID])
-			events = []
-			activities = []
+		if verify_action_params(['U', 'S', 'Begin', 'End'])
+			user = verify_user_authentication
 			if user
-				if params[:Begin] && params[:End]
-					evnets = user.events.where("begin < :begin && end > :end", :begin => params[:Begin], :end => params[:End])
-					activities = user.activities.where("begin < :begin && end > :end", :begin => params[:Begin], :end => params[:End])
-				else
-					evnets = user.events.where("begin < :begin && end > :end", :begin => Time.now.day - 1, :end => Time.now.day + 1)
-					activities = user.activities.where("begin < :begin && end > :end", :begin => Time.now.day - 1, :end => Time.now.day + 1)
+				activities = []
+				activities = user.schedule_activities.where("begin <= :begin && end => :end", :begin => params[:Begin], :end => params[:End])
+			
+				ac = []
+				activities.each do |activity|
+					ac << ExActivity.init_from_activity(activity, user)
 				end
+				re = ApiReturn.new("000")
+				re.add_data("Activities", ac)
+				return_response(re)
 			end
-			ev = []
-			events.each do |event|
-				ev << ExEvent.init_from_event(event)
-			end
-			ac = []
-			activities.each do |activity|
-				ac << ExActivity.init_from_activity(activity)
-			end
-			re = ApiReturn.new("000")
-			re.add_data("Events", ev)
-			re.add_data("Activities", ac)
-			return_response(re)
 		end
 	end
 
