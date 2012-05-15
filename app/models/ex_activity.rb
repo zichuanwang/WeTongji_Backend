@@ -1,9 +1,10 @@
 class ExActivity
-	attr_accessor :Id, :Begin, :End, :Title, :Location, :Favorite, :Organizer, :Channel_Id, :SubOrganizer, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
+	attr_accessor :Id, :Begin, :End, :Title, :Location, :Image, :Favorite, :Organizer, :Channel_Id, :SubOrganizer, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
 
 	def self.init_from_activity(activity, user = nil)
 		model = ExActivity.new
 		model.Id = activity.id
+		model.Image = activity.image == nil ? '' : Rails.configuration.host + activity.image.url
 		model.Begin = activity.begin
 		model.End = activity.end
 		model.Location = activity.location

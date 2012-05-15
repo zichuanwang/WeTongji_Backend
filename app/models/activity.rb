@@ -9,6 +9,8 @@ class Activity < ActiveRecord::Base
 	validates_presence_of :organizer, :sub_organizer, :title, :begin, :end, :location, :description
 	paginates_per 20
 
+	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
 	before_create :init_model
 
 	def user_favorite(user)
