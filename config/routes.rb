@@ -1,4 +1,14 @@
 WetongjiWeb::Application.routes.draw do
+  get "admins/index"
+
+  get "admins/edit"
+
+  get "admins/details"
+
+  get "admins/show"
+
+  get "admins/new"
+
   post "sele_courses/import"
   get "sele_courses/upload"
   resources :sele_courses
@@ -16,6 +26,7 @@ WetongjiWeb::Application.routes.draw do
   resources :organizers
 
   devise_for :admins
+  resources :admins
 
   resources :activities
 
