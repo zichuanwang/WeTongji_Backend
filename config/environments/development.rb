@@ -54,4 +54,6 @@ WetongjiWeb::Application.configure do
 
   #
   config.host = "http://106.187.95.107:8080"
+  config.data_of_school_year_start = "2012/02/20"
+  config.week_of_school_year = 17
 end
