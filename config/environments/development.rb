@@ -41,7 +41,7 @@ WetongjiWeb::Application.configure do
   # if mail can't send, just ignore it
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => '106.187.95.107:8080' }
+  config.action_mailer.default_url_options = { :host => 'we.tongji.edu.cn' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
@@ -53,7 +53,7 @@ WetongjiWeb::Application.configure do
     :enable_starttls_auto => true  }
 
   #
-  config.host = "http://106.187.95.107:8080"
-  config.data_of_school_year_start = "2012/02/20T00:00:00+08:00"
+  config.host = "http://we.tongji.edu.cn"
+  config.data_of_school_year_start = "2012-02-20T00:00:00+08:00"
   config.week_of_school_year = 17
 end
