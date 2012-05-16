@@ -37,16 +37,16 @@ class ApiController < ApplicationController
 
 	def call
 		# check params check sum
-		if verify_checksum
+		#if verify_checksum
      	# check params exists system require params
       if verify_sys_params && METHODS[params[:M]]
       	send METHODS[params[:M]]
       else
       	return_response ApiReturn.new("004")
       end
-    else
-    	return_response ApiReturn.new("001")
-    end
+    #else
+    #	return_response ApiReturn.new("001")
+    #end
   end
 
   private
@@ -323,8 +323,8 @@ class ApiController < ApplicationController
 				end
 				re = ApiReturn.new("000")
 				re.add_data("Courses", ex)
-				ra.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
-				ra.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
+				re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
+				re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
 				return_response(re)
 			end
 		end
