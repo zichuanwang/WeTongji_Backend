@@ -7,6 +7,7 @@ class SeleCourse < ActiveRecord::Base
 
 	def get_instance(day)
 		course = Course.find_by_no(self.course_no)
+		
 		instance = []
 		instance
 	end

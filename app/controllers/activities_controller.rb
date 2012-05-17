@@ -5,7 +5,7 @@ class ActivitiesController < ApplicationController
     @menu = 'activities'
     @activities = nil
     if params[:channel_id]
-      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc")
+      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc").page(params[:page])
     else
       @activities = Activity.order("id desc")
     end

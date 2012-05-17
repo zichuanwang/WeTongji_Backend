@@ -12,35 +12,24 @@
       <thead>
         <tr>
             <tr>
-                <th>组织(承办)</th>
-                <th>起止时间</th>
-                <th>标题</th>
-                <th>位置</th>
-                <th>关注度</th>
-                <th>+1</th>
-                <th>参与度</th>
-                <th>操作</th>
+                <th>Email</th>
+                <th>登陆次数</th>
+                <th>最后登陆时间</th>
+                <th>最后登陆IP</th>
             </tr>
         </tr>
       </thead>
       <tbody>
-        <% @activities.each do |activity| %>
+        <% @admins.each do |admin| %>
         <tr>
-            <td><%= activity.organizer.name %>(<%= activity.sub_organizer.name %>)</td>
-            <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
-            <td><%= activity.title %></td>
-            <td><%= activity.location %></td>
-            <td><%= activity.favorite %></td>
-            <td><%= activity.like %></td>
-            <td><%= activity.schedule %></td>
-            <td>
-                <%= link_to '详情', activity %>
-                <%= link_to '编辑', edit_activity_path(activity) %>
-                <%= link_to '删除', activity, confirm: '确认删除?', method: :delete %>
-            </td>
+            <td><%= admin.email %></td>
+            <td><%= admin.sign_in_count %></td>
+            <td><%= admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td><%= admin.last_sign_in_ip %></td>
         </tr>
         <% end %>
       </tbody>
     </table>
+    <%= paginate @admins %>
   </div>
 </div>
