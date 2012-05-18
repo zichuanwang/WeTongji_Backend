@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   validates_presence_of :no
   validates_uniqueness_of :no
 
+  paginates_per 10
+
   before_create :init_model
   after_create :send_confirmation
   has_and_belongs_to_many :favorite_activities, :class_name => "Activity", :join_table => "activities_users_favorites", :order => "begin asc"

@@ -182,7 +182,7 @@ class ApiController < ApplicationController
 			activities = activities.where(:channel_id => channel_ids.split(','))
 		end
 		if sort
-			activities = activities.order(sort).order("begin asc")
+			activities = activities.order(sort)
 		else
 			activities = activities.order("begin asc")
 		end

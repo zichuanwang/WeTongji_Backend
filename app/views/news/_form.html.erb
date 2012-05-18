@@ -31,3 +31,29 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<%= form_for(@news, :html => {:multipart => true}) do |f| %>
+  <% if @news.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@news.errors.count, "error") %> prohibited this news from being saved:</h2>
+
+      <ul>
+      <% @news.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    标题：<%= f.text_field :title, :class => "input_1" %>
+  </div>
+  <div class="field">
+    类别：<%= f.text_field :category, :class => "input_1" %>
+  </div>
+  <div class="field">
+    说明：<%= f.text_area :context, :rows => 40, :cols => 100 %>
+  </div>
+  <div class="btn_box">
+    <%= f.submit "保存", :class => "btn_2" %>
+  </div>
+<% end %>
