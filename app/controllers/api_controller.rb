@@ -370,13 +370,25 @@ class ApiController < ApplicationController
 	def user_active
 		if verify_action_params(['NO', 'Name', 'Password'])
 			if User.is_password_valid?(params[:Password])
-				user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
-				if user
-					user.save
-					re = ApiReturn.new("000")
-					return_response(re)
+				student = Student.find_by_no(params[:NO])
+				if student
+					student = Student.find_by_no_and_name(params[:NO], params[:Name])
+					if student
+						user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
+						if user
+							user.save
+							re = ApiReturn.new("000")
+							return_response(re)
+						else
+							re = ApiReturn.new("008")
+							return_response(re)
+						end
+					else
+						re = ApiReturn.new("009")
+						return_response(re)
+					end
 				else
-					re = ApiReturn.new("003")
+					re = ApiReturn.new("012")
 					return_response(re)
 				end
 			else
@@ -397,8 +409,20 @@ class ApiController < ApplicationController
 				re.add_data("Session", user.authentication_token)
 				return_response(re)
 			else
-				re = ApiReturn.new("002")
-				return_response(re)
+				user = User.find_by_no(params[:NO])
+				if user
+					user = User.where("no = :no and confirmed_at is not null", :no => params[:NO]).first
+					if user
+						re = ApiReturn.new("013")
+						return_response(re)
+					else
+						re = ApiReturn.new("011")
+						return_response(re)
+					end
+				else
+					re = ApiReturn.new("014")
+					return_response(re)
+				end
 			end
 		end
 	end

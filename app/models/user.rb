@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
     @password  
   end
     
-  def password=(pwd)  
+  def password=(pwd)
     @password = pwd
     return if !User.is_password_valid?(pwd)
     self.password_salt = new_salt  
