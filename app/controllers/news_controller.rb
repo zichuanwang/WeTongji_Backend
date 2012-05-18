@@ -38,12 +38,14 @@ class NewsController < ApplicationController
 
   # GET /news/1/edit
   def edit
+    @menu = 'news'
     @news = News.find(params[:id])
   end
 
   # POST /news
   # POST /news.json
   def create
+    @menu = 'news'
     @news = News.new(params[:news])
 
     respond_to do |format|
@@ -60,6 +62,7 @@ class NewsController < ApplicationController
   # PUT /news/1
   # PUT /news/1.json
   def update
+    @menu = 'news'
     @news = News.find(params[:id])
 
     respond_to do |format|
