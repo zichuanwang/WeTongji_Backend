@@ -15,6 +15,7 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
+    @menu = 'news'
     @news = News.find(params[:id])
 
     respond_to do |format|
@@ -26,6 +27,7 @@ class NewsController < ApplicationController
   # GET /news/new
   # GET /news/new.json
   def new
+    @menu = 'news'
     @news = News.new
 
     respond_to do |format|
