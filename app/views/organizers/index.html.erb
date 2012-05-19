@@ -24,7 +24,6 @@
           <td><%= organizer.name %></td>
           <td><%= link_to "Icon", organizer.icon.url %></td>
           <td>
-            <%= link_to '查看', organizer %>
             <%= link_to '编辑', edit_organizer_path(organizer) %>
             <%= link_to '删除', organizer, confirm: '确认删除?', method: :delete %>
           </td>
