@@ -8,7 +8,7 @@ gem 'rails', '3.2.2'
 gem 'devise'
 gem 'execjs'
 gem "paperclip", "~> 3.0"
-gem 'tinymce-rails'
+gem "ckeditor", "3.7.1"
 gem 'importex'
 gem 'ar_mailer_rails3'
 gem 'kaminari'
