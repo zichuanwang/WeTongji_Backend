@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
+
   get "admins/index"
 
   get "admins/edit"

@@ -1,6 +1,6 @@
 class News < ActiveRecord::Base
 	paginates_per 20
-	validates_presence_of :title, :content, :category
+	validates_presence_of :title, :context, :category
 
 	before_create :init_model
 

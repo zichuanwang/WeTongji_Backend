@@ -9,7 +9,7 @@ gem 'devise'
 gem 'execjs'
 gem 'therubyracer'
 gem "paperclip", "~> 3.0"
-gem 'ckeditor'
+gem "ckeditor", "3.7.1"
 gem 'importex'
 gem 'ar_mailer_rails3'
 gem 'kaminari'
