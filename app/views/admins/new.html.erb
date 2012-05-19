@@ -1,2 +1,28 @@
-<h1>Admins#new</h1>
-<p>Find me in app/views/admins/new.html.erb</p>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_admins" %>
+<% end %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">创建账户</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+	<%= form_for(@admin) do |f| %>
+	  <div class="field">
+	    邮箱：<%= f.text_field :email, :class => "input_1" %>
+	  </div>
+	  <div class="field">
+	    角色：<%= f.select :role, { "超级管理员" => "SuperAdmin" , "新闻发布账号" => "NewsPublisher", "社团账号" => "OrganizerAccount" } %>
+	  </div>
+	  <div class="field">
+	    密码：<%= f.password_field :password, :class => "input_1" %>
+	  </div>
+	  <div class="field">
+	    确认：<%= f.password_field :password_confirmation, :class => "input_1" %>
+	  </div>
+	  <div class="btn_box">
+	    <%= f.submit "保存", :class => "btn_2" %>
+	  </div>
+	<% end %>
+  </div>
+</div>
