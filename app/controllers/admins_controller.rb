@@ -23,4 +23,7 @@ class AdminsController < ApplicationController
 
   def new
   end
+
+  def update_password
+  end
 end

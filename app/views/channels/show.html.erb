@@ -1,20 +1,25 @@
-<p id="notice"><%= notice %></p>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_channels" %>
+<% end %>
 
-<p>
-  <b>Title:</b>
-  <%= @channel.title %>
-</p>
-
-<p>
-  <b>Follow:</b>
-  <%= @channel.follow %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @channel.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">查看频道</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <tr>
+      	<td>名称：</td>
+      	<td><%= @channel.title %></td>
+      </tr>
+      <tr>
+      	<td>Follow：</td>
+      	<td><%= @channel.follow %></td>
+      </tr>
+      <tr>
+      	<td colspan="2"><%= @channel.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -2,48 +2,45 @@
   <%= render :partial => "layouts/submenu_activities" %>
 <% end %>
 
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Begin:</b>
-  <%= @activity.begin %>
-</p>
-
-<p>
-  <b>End:</b>
-  <%= @activity.end %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @activity.title %>
-</p>
-
-<p>
-  <b>Location:</b>
-  <%= @activity.location %>
-</p>
-
-<p>
-  <b>Follow:</b>
-  <%= @activity.follow %>
-</p>
-
-<p>
-  <b>Organizer:</b>
-  <%= @activity.organizer %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @activity.status %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @activity.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_activity_path(@activity) %> |
-<%= link_to 'Back', activities_path %>
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有活动</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <tr>
+        <td>组织(承办)</td>
+        <td><%= @activity.organizer.name %>(<%= @activity.sub_organizer.name %>)</td>
+      </tr>
+      <tr>
+        <td>起止时间</td>
+        <td><%= @activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= @activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      </tr>
+      <tr>
+        <td>标题</td>
+        <td><%= @activity.title %></td>
+      </tr>
+      <tr>
+        <td>位置</td>
+        <td><%= @activity.location %></td>
+      </tr>
+      <tr>
+        <td>关注度</td>
+        <td><%= @activity.favorite %></td>
+      </tr>
+      <tr>
+        <td>+1</td>
+        <td><%= @activity.like %></td>
+      </tr>
+      <tr>
+        <td>参与度</td>
+        <td><%= @activity.schedule %></td>
+      </tr>
+      <tr>
+        <td>说明</td>
+        <td><%= @activity.description %></td>
+      </tr>
+    </table>
+  </div>
+</div>

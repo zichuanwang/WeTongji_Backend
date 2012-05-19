@@ -1,4 +1,3 @@
-<%= tinymce_assets %>
 <%= form_for(@channel) do |f| %>
   <% if @channel.errors.any? %>
     <div id="error_explanation">
@@ -19,8 +18,7 @@
     题图：<%= f.file_field :image, :class => "input_1" %>
   </div>
   <div class="field">
-    描述：<%= f.text_area :description, :class => "tinymce", :rows => 40, :cols => 100 %>
-    <%= tinymce %>
+    描述：<%= f.text_area :description, :rows => 40, :cols => 100 %>
   </div>
   <div class="btn_box">
     <%= f.submit "保存", :class => "btn_2" %>
