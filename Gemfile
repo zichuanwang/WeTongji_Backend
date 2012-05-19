@@ -7,7 +7,6 @@ gem 'rails', '3.2.2'
 
 gem 'devise'
 gem 'execjs'
-gem 'therubyracer'
 gem "paperclip", "~> 3.0"
 gem 'tinymce-rails'
 gem 'importex'
