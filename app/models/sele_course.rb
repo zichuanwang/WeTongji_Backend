@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'csv'
-require 'iconv'
 class SeleCourse < ActiveRecord::Base
 	validates_presence_of :course_no, :student_no, :location, :teacher, :week_type, :week_day, :section_start, :section_end
 	paginates_per 10

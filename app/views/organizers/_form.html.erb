@@ -1,4 +1,4 @@
-<%= form_for(@organizer) do |f| %>
+<%= form_for(@organizer, :html => {:multipart => true}) do |f| %>
   <% if @organizer.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@organizer.errors.count, "error") %> prohibited this organizer from being saved:</h2>
