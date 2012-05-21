@@ -1,2 +1,34 @@
-<h1>Admins#show</h1>
-<p>Find me in app/views/admins/show.html.erb</p>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_admins" %>
+<% end %>
+
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">账户详情</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <tr>
+        <td>登录名</td>
+        <td><%= @admin.email %></td>
+      </tr>
+      <tr>
+        <td>创建时间</td>
+        <td><%= @admin.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      </tr>
+      <tr>
+        <td>登陆次数</td>
+        <td><%= @admin.sign_in_count %></td>
+      </tr>
+      <tr>
+        <td>最后登陆</td>
+        <td><%= @admin.last_sign_in_at.nil? ? "" : @admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+      </tr>
+      <tr>
+        <td>角色</td>
+        <td><%= @admin.role %></td>
+      </tr>
+    </table>
+  </div>
+</div>

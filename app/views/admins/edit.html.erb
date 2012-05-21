@@ -1,2 +1,13 @@
-<h1>Admins#edit</h1>
-<p>Find me in app/views/admins/edit.html.erb</p>
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_admins" %>
+<% end %>
+
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">编辑账户</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+	<%= render 'form' %>
+  </div>
+</div>
