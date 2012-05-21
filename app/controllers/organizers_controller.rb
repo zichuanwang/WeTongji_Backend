@@ -1,7 +1,5 @@
 class OrganizersController < ApplicationController
-  before_filter :authenticate_admin!
-  # GET /organizers
-  # GET /organizers.json
+  load_and_authorize_resource
   def index
     @organizers = Organizer.all
     @menu = "organizers"

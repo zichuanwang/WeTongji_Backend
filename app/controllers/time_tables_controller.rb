@@ -1,7 +1,5 @@
 class TimeTablesController < ApplicationController
-  before_filter :authenticate_admin!
-  # GET /time_tables
-  # GET /time_tables.json
+  load_and_authorize_resource
   def index
     @time_tables = TimeTable.all
 

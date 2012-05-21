@@ -15,6 +15,7 @@ gem 'ar_mailer_rails3'
 gem 'kaminari'
 gem 'mysql2'
 gem 'roo'
+gem 'cancan'
 
 # Gems used only for assets and not required
 # in production environments by default.

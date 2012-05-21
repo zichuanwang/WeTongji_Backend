@@ -1,7 +1,5 @@
 class HomeController < ApplicationController
-
-	before_filter :authenticate_admin!
-  	def index
-  	end
-
+	load_and_authorize_resource
+  def index
+  end
 end

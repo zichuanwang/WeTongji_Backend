@@ -1,8 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
-
-  # GET /users
-  # GET /users.json
+	load_and_authorize_resource
   def index
     @users = User.order('id desc').page(params[:page])
     @menu = "users"

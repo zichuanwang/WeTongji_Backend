@@ -1,6 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :authenticate_admin!
-
+  load_and_authorize_resource
   def index
     @menu = 'admins'
 
@@ -47,6 +46,9 @@ class AdminsController < ApplicationController
   def update
     @menu = 'admins'
     @admin = Admin.find(params[:id])
+
+    params[:admin].delete(:password) if params[:admin][:password].blank?
+    params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
 
     respond_to do |format|
       if @admin.update_attributes(params[:admin])

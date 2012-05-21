@@ -17,7 +17,6 @@ WetongjiWeb::Application.routes.draw do
 
   resources :organizers
 
-  post "admins/update_password"
   devise_for :admins
   resources :admins
 
