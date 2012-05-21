@@ -57,5 +57,8 @@ module WetongjiWeb
     config.assets.version = '1.0'
 
     config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
+    config.host = "http://we.tongji.edu.cn"
+    config.data_of_school_year_start = "2012-02-20T00:00:00+08:00"
+    config.week_of_school_year = 20
   end
 end

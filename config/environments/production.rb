@@ -64,7 +64,4 @@ WetongjiWeb::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
-  config.host = "http://we.tongji.edu.cn"
-  config.data_of_school_year_start = "2012-02-20T00:00:00+08:00"
-  config.week_of_school_year = 17
 end
