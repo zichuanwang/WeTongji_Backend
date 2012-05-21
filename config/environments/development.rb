@@ -52,8 +52,5 @@ WetongjiWeb::Application.configure do
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
 
-  #
-  config.host = "http://we.tongji.edu.cn"
-  config.data_of_school_year_start = "2012-02-20T00:00:00+08:00"
-  config.week_of_school_year = 17
+
 end

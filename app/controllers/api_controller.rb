@@ -187,7 +187,7 @@ class ApiController < ApplicationController
 			activities = activities.order("begin asc")
 		end
 
-		activities = activities.page(p).per(20)
+		activities = activities.where("end > :end", :end => Time.now).page(p).per(20)
 
 		ex = []
 
