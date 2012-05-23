@@ -25,8 +25,15 @@ class Ability
     #
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     admin ||= Admin.new
-    p admin.role
-    can :manage, :all if admin.role == "SuperAdmin"
-
+    case admin.role
+        when "SuperAdmin"
+            can :manage, :all
+        when "NewsAdmin"
+            can :manage, News
+        when "OrganizerAdmin"
+            can :manage, Activity do |activity|
+                activity.organizer.try(:admin) == admin
+            end
+    end
   end
 end
