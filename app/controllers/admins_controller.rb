@@ -1,6 +1,5 @@
 class AdminsController < ApplicationController
-  before_filter :authenticate_admin!
-
+  authorize_resource
   def index
     @menu = 'admins'
 
@@ -13,12 +12,13 @@ class AdminsController < ApplicationController
   end
 
   def edit
-  end
-
-  def details
+    @menu = "admins"
+    @admin = Admin.find(params[:id])
   end
 
   def show
+    @menu = 'admins'
+    @admin = Admin.find(params[:id])
   end
 
   def new
@@ -37,14 +37,26 @@ class AdminsController < ApplicationController
     respond_to do |format|
       if @admin.save
         format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
-        format.json { render json: @admin, status: :created, location: @admin }
       else
-        format.html { render action: "new" }
-        format.json { render json: @admin.errors, status: :unprocessable_entity }
+        format.html { render action: "edit" }
       end
     end
   end
 
-  def update_password
+  def update
+    @menu = 'admins'
+    @admin = Admin.find(params[:id])
+
+    params[:admin].delete(:password) if params[:admin][:password].blank?
+    params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
+
+    respond_to do |format|
+      if @admin.update_attributes(params[:admin])
+        format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
+      else
+        format.html { render action: "edit" }
+      end
+    end
   end
+
 end

@@ -1,6 +1,5 @@
 class SeleCoursesController < ApplicationController
-  before_filter :authenticate_admin!
-
+  load_and_authorize_resource
   def index
     @menu = 'sele_courses'
     @sele_courses = SeleCourse.order("id desc").page(params[:page])

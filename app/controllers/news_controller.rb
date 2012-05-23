@@ -1,7 +1,5 @@
 class NewsController < ApplicationController
-  before_filter :authenticate_admin!
-  # GET /news
-  # GET /news.json
+  load_and_authorize_resource
   def index
     @menu = 'news'
     @news = News.order("id desc").page(params[:page])

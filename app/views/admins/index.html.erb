@@ -14,8 +14,10 @@
             <tr>
                 <th>Email</th>
                 <th>登陆次数</th>
+                <th>角色</th>
                 <th>最后登陆时间</th>
                 <th>最后登陆IP</th>
+                <th>操作</th>
             </tr>
         </tr>
       </thead>
@@ -24,8 +26,13 @@
         <tr>
             <td><%= admin.email %></td>
             <td><%= admin.sign_in_count %></td>
-            <td><%= admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td><%= admin.role %></td>
+            <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= admin.last_sign_in_ip %></td>
+            <td>
+                <%= link_to '详情', admin %>
+                <%= link_to '编辑', edit_admin_path(admin) %>
+            </td>
         </tr>
         <% end %>
       </tbody>

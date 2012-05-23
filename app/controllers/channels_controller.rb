@@ -1,7 +1,5 @@
 class ChannelsController < ApplicationController
-  before_filter :authenticate_admin!
-  # GET /channels
-  # GET /channels.json
+  load_and_authorize_resource
   def index
     @menu = 'channels'
     @channels = Channel.all

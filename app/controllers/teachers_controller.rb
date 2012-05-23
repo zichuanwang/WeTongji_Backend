@@ -1,7 +1,5 @@
 class TeachersController < ApplicationController
-  before_filter :authenticate_admin!
-  # GET /teachers
-  # GET /teachers.json
+  load_and_authorize_resource
   def index
     @teachers = Teacher.all
 
