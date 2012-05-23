@@ -29,13 +29,15 @@ class Ability
         when "SuperAdmin"
             can :manage, :all
         when "NewsAdmin"
-            can :manage, News
+            can :manage, News 
         when "OrganizerAdmin"
-            can :read, Activity
-            can :create, Activity
-            can :update, Activity do |activity|
+            can :read, Organizer do |organizer|
+                organizer.try(:admin_id) == admin.id
+            end
+            can :manage, Activity do |activity|
                 activity.organizer.try(:admin_id) == admin.id
             end
+            can :create, Activity
     end
   end
 end
