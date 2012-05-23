@@ -12,8 +12,8 @@ jquery_lang_js.prototype.lang.zh_cn = {
 	'Smart and Revolutionary':
 	'iOS校园信息全新体验',
 	
-	'Requirements: iOS 5.0 or higher(iPhone)':
-	'运行环境：iOS 5.0 或更高版本(iPhone)',
+	'Requirements: iOS 5.0 or higher(iPhone and iPod touch)':
+	'运行环境：iOS 5.0 或更高版本(iPhone & iPod touch)',
 	
 	'follow Snip':
 	'收听 Snip 官方微博',

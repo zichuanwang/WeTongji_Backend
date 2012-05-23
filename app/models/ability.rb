@@ -31,8 +31,10 @@ class Ability
         when "NewsAdmin"
             can :manage, News
         when "OrganizerAdmin"
-            can :manage, Activity do |activity|
-                activity.organizer.try(:admin) == admin
+            can :read, Activity
+            can :create, Activity
+            can :update, Activity do |activity|
+                activity.organizer.try(:admin_id) == admin.id
             end
     end
   end

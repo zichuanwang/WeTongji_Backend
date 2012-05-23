@@ -3,7 +3,7 @@
 	<% if can? :manage, Channel %>
 	<li class="<%= @menu == 'channels' ? 'current' : '' %>"><%= link_to "频道", channels_path %></li>
 	<% end %>
-	<% if can? :manage, Activity %>
+	<% if can? :read, Activity %>
 	<li class="<%= @menu == 'activities' ? 'current' : '' %>"><%= link_to "活动", activities_path %></li>
 	<% end %>
 	<% if can? :manage, Organizer %>
