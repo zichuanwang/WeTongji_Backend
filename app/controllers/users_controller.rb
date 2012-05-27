@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	load_and_authorize_resource
+	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
   def index
     @users = User.order('id desc').page(params[:page])
     @menu = "users"
