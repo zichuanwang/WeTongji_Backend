@@ -325,6 +325,7 @@ class ApiController < ApplicationController
 				re.add_data("Courses", ex)
 				re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
 				re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
+				re.add_data("SchoolYearCourseWeekCount"), Rails.configuration.week_of_school_year_in_course)
 				return_response(re)
 			end
 		end
