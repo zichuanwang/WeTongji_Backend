@@ -6,6 +6,6 @@ class News < ActiveRecord::Base
 
 	private
 	def init_model
-		self.read = 0
+		self.read = 1
 	end
 end

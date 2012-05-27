@@ -23,6 +23,7 @@ class ApiController < ApplicationController
 
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
+		"News.Read" => "news_read",
 
 		"TimeTable.Get" => "timetable",
 
@@ -325,7 +326,7 @@ class ApiController < ApplicationController
 				re.add_data("Courses", ex)
 				re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
 				re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
-				re.add_data("SchoolYearCourseWeekCount"), Rails.configuration.week_of_school_year_in_course)
+				re.add_data("SchoolYearCourseWeekCount", Rails.configuration.week_of_school_year_in_course)
 				return_response(re)
 			end
 		end
@@ -360,10 +361,24 @@ class ApiController < ApplicationController
 			news = News.find(params[:Id])
 			ex = nil
 			if news
+				news.read = news.read + 1
+				news.save
 				ex = ExNews.init_from_news(news)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("News", ex)
+			return_response(re)
+		end
+	end
+
+	def news_read
+		if verify_action_params(['Id'])
+			news = News.find(params[:Id])
+			if news
+				news.read = news.read + 1
+				news.save
+			end
+			re = ApiReturn.new("000")
 			return_response(re)
 		end
 	end
