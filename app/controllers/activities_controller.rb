@@ -1,14 +1,9 @@
 class ActivitiesController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
 
   def index
     @menu = 'activities'
-    @activities = nil
-    if params[:channel_id]
-      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc").page(params[:page])
-    else
-      @activities = Activity.order("id desc")
-    end
+    @activities = Activity.order("id desc")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,10 +24,6 @@ class ActivitiesController < ApplicationController
   def new
     @menu = 'activities'
     @activity = Activity.new
-    if params[:channel_id]
-      channel = Channel.find(params[:channel_id])
-      @activity.channel = channel
-    end
     
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +45,7 @@ class ActivitiesController < ApplicationController
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to :action => "index", :channel_id => @activity.channel.id, notice: 'Activity was successfully created.' }
+        format.html { redirect_to :action => "index", notice: 'Activity was successfully created.' }
         format.json { render json: @activity, status: :created, location: @activity }
       else
         format.html { render action: "new" }

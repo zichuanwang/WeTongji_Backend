@@ -31,12 +31,12 @@ class Ability
         when "NewsAdmin"
             can :manage, News 
         when "OrganizerAdmin"
-            can :read, Organizer do |organizer|
-                organizer.try(:admin_id) == admin.id
-            end
-            can :manage, Activity do |activity|
-                activity.organizer.try(:admin_id) == admin.id
-            end
+            can :read, Organizer, :admin_id => admin.id
+
+            can :read, Activity
+
+            can :manage, Activity, :organizer => { :admin_id => admin.id }
+
             can :create, Activity
     end
   end

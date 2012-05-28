@@ -35,8 +35,12 @@
             <td><%= activity.schedule %></td>
             <td>
                 <%= link_to '详情', activity %>
+                <% if can? :edit, activity %>
                 <%= link_to '编辑', edit_activity_path(activity) %>
+                <% end %>
+                <% if can? :delete, activity %>
                 <%= link_to '删除', activity, confirm: '确认删除?', method: :delete %>
+                <% end %>
             </td>
         </tr>
         <% end %>
