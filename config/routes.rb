@@ -1,4 +1,8 @@
 WetongjiWeb::Application.routes.draw do
+  post "exams/import"
+  get "exams/upload"
+  resources :exams
+
   mount Ckeditor::Engine => '/ckeditor'
 
   post "sele_courses/import"

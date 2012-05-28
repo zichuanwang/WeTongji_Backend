@@ -1,6 +1,4 @@
-# encoding: utf-8
 require 'csv'
-require 'iconv'
 class Student < ActiveRecord::Base
 	validates_presence_of :name, :no, :email
 	validates_uniqueness_of :no, :email
