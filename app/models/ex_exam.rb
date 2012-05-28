@@ -4,7 +4,7 @@ class ExExam
 	def self.init_from_exam_instance(instance)
 		model = ExExam.new
 		model.NO = instance.no
-		model.Name = instance.title
+		model.Name = instance.name
 		model.Teacher = instance.teacher
 		model.Begin = instance.begin
 		model.End = instance.end
