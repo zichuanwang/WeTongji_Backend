@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  student_no: MyString
+  course_no: MyString
+  begin: 2012-05-28 22:38:47
+  end: 2012-05-28 22:38:47
+  location: MyString
+
+two:
+  student_no: MyString
+  course_no: MyString
+  begin: 2012-05-28 22:38:47
+  end: 2012-05-28 22:38:47
+  location: MyString

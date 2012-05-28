@@ -1,0 +1,35 @@
+<% content_for :submenu do %>
+  <%= render :partial => "layouts/submenu_exams" %>
+<% end %>
+
+<div class="list_1">
+  <div class="list_title">
+    <div class="list_title_left">所有考试</div>
+    <div class="list_title_right"></div>
+  </div>
+  <div class="tab_content">
+    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
+      <thead>
+        <tr>
+            <tr>
+                <th>学号</th>
+                <th>课号</th>
+                <th>开始~结束</th>
+                <th>考场</th>
+            </tr>
+        </tr>
+      </thead>
+      <tbody>
+        <% @exams.each do |exam| %>
+        <tr>
+            <td><%= exam.student_no %></td>
+            <td><%= exam.course_no %></td>
+            <td><%= exam.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= exam.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td><%= exam.location %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= paginate @exams %>
+  </div>
+</div>

@@ -24,6 +24,9 @@
 	<% if can? :manage, SeleCourse %>
 	<li class="<%= @menu == 'sele_courses' ? 'current' : '' %>"><%= link_to "选课", sele_courses_path %></li>
 	<% end %>
+	<% if can? :manage, Exam %>
+	<li class="<%= @menu == 'exams' ? 'current' : '' %>"><%= link_to "考试", exams_path %></li>
+	<% end %>
 	<% if can? :manage, Admin %>
 	<li class="<%= @menu == 'admins' ? 'current' : '' %>"><%= link_to "账户", admins_path %></li>
 	<% end %>

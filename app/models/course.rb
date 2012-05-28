@@ -1,6 +1,5 @@
 # encoding: utf-8
 require 'csv'
-require 'iconv'
 class Course < ActiveRecord::Base
 	validates_presence_of :name, :no, :teacher, :point, :hours, :required
 	validates_uniqueness_of :no

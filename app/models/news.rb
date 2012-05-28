@@ -1,5 +1,5 @@
 class News < ActiveRecord::Base
-	paginates_per 20
+	paginates_per 10
 	validates_presence_of :title, :context, :category, :image
 
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }

@@ -1,15 +1,7 @@
-# encoding: utf-8
 require 'csv'
 class SeleCourse < ActiveRecord::Base
 	validates_presence_of :course_no, :student_no, :location, :teacher, :week_type, :week_day, :section_start, :section_end
 	paginates_per 10
-
-	def get_instance(day)
-		course = Course.find_by_no(self.course_no)
-		
-		instance = []
-		instance
-	end
 
 	def self.import(file_path)
 		courses = []

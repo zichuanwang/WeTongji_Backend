@@ -1,7 +1,7 @@
 class ExEvent
 	attr_accessor :Id, :Title, :Begin, :End, :Location, :Description
 
-	def self.init_from_event(event)
+	def self.init_from_event(instance)
 		model = ExEvent.new
 		model.Id = event.id
 		model.Title = event.title
