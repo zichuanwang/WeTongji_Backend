@@ -1,5 +1,5 @@
 class ExActivity
-	attr_accessor :Id, :Begin, :End, :Title, :Location, :Image, :Favorite, :Organizer, :OrganizerAvatar, :Channel_Id, :SubOrganizer, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
+	attr_accessor :Id, :Begin, :End, :Title, :Location, :Image, :Favorite, :Organizer, :OrganizerAvatar, :Channel_Id, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
 
 	def self.init_from_activity(activity, user = nil)
 		model = ExActivity.new
@@ -12,7 +12,6 @@ class ExActivity
 		model.Title = activity.title
 		model.Favorite = activity.favorite
 		model.Organizer = activity.organizer.name
-		model.SubOrganizer = activity.sub_organizer.name
 		model.Channel_Id = activity.channel.id
 		model.Status = activity.status
 		model.Description = activity.description
