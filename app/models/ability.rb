@@ -33,9 +33,10 @@ class Ability
         when "OrganizerAdmin"
             can :read, Organizer, :admin_id => admin.id
 
-            can :manage, Activity do |activity|
-                activity.organizer.try(:admin_id) == admin.id
-            end
+            can :read, Activity
+
+            can :manage, Activity, :organizer => { :admin_id => admin.id }
+
             can :create, Activity
     end
   end
