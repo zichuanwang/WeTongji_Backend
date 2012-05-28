@@ -1,13 +1,12 @@
 class ActivitiesController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
 
   def index
     @menu = 'activities'
-    @activities = nil
     if params[:channel_id]
-      @activities = Activity.where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc").page(params[:page])
+      @activities = Activity.accessible_by(current_ability).where("channel_id = :channel_id", :channel_id => params[:channel_id]).order("id desc").page(params[:page])
     else
-      @activities = Activity.order("id desc")
+      @activities = Activity.accessible_by(current_ability).order("id desc")
     end
 
     respond_to do |format|
