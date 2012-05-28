@@ -9,7 +9,7 @@ class Schedule
 			i.location = exam.location
 			i.begin = exam.begin
 			i.end = exam.end
-			c = Course.find_by_no(course.course_no)
+			c = Course.find_by_no(exam.course_no)
 			if c
 				i.teacher = c.teacher
 				i.name = c.name
