@@ -298,16 +298,14 @@ class ApiController < ApplicationController
 		if verify_action_params(['U', 'S', 'Begin', 'End'])
 			user = verify_user_authentication
 			if user
-				# TODO: move these codes to schedule model
-				activities = []
-				activities = user.schedule_activities.where("begin >= :begin && end <= :end", :begin => params[:Begin], :end => params[:End])
+				activities = Schedule.get_activities_by_user(user, params[:Begin], params[:End])
 			
 				ac = []
 				activities.each do |activity|
 					ac << ExActivity.init_from_activity(activity, user)
 				end
 
-				exams = Schedule.get_exams_by_user(user)
+				exams = Schedule.get_exams_by_user(user, params[:Begin], params[:End])
 				ex = []
 				exams.each do |exam|
 					ex << ExExam.init_from_exam_instance(exam)
