@@ -13,6 +13,9 @@ class Schedule
 			if c
 				i.teacher = c.teacher
 				i.name = c.name
+				i.hours = c.hours
+				i.point = c.point
+				i.required = c.required
 			end
 			instance << i
 		end
