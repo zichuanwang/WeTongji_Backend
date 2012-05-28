@@ -1,5 +1,5 @@
 class ExExam
-	attr_accessor :NO, :Name, :Teacher, :Location, :Start, :End, :Point, :Required, :Hours
+	attr_accessor :NO, :Name, :Teacher, :Location, :Begin, :End, :Point, :Required, :Hours
 
 	def self.init_from_exam_instance(instance)
 		model = ExExam.new
