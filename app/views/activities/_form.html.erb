@@ -26,10 +26,7 @@
     地点：<%= f.text_field :location, :class => "input_1" %>
   </div>
   <div class="field">
-    主办：<%= f.select :organizer_id, Organizer.all.collect{|c|[ c.name, c.id ]} %>
-  </div>
-  <div class="field">
-    承办：<%= f.select :sub_organizer_id, SubOrganizer.all.collect{|c|[ c.name, c.id ]} %>
+    组织：<%= f.select :organizer_id, Organizer.all.collect{|c|[ c.name, c.id ]} %>
   </div>
   <div class="field">
     状态：<%= f.text_field :status, :class => "input_1" %>
