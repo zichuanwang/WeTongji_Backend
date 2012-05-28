@@ -1,7 +1,7 @@
 class Schedule
-	def self.get_exams_by_user(user)
+	def self.get_exams_by_user(user, begin_at, end_at)
 		instance = []
-		exams = Exam.where("student_no = :no", :no => user.no)
+		exams = Exam.where("begin >= :begin && end <= :end && student_no = :no", :no => user.no, :begin => begin_at, :end => end_at)
 		
 		exams.each do |exam|
 			i = ExamInstance.new
@@ -21,6 +21,10 @@ class Schedule
 		end
 
 		instance
+	end
+
+	def self.get_activities_by_user(user, begin_at, end_at)
+		user.schedule_activities.where("begin >= :begin && end <= :end", :begin => begin_at, :end => end_at)
 	end
 	
 end
