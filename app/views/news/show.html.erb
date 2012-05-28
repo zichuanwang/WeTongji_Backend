@@ -27,7 +27,12 @@
       	<td><%= @news.read %></td>
       </tr>
       <tr>
-      	<td colspan="2"><%= raw @news.context %></td>
+        <td>内容：</td>
+        <td><%= @news.context %></td>
+      </tr>
+      <tr>
+        <td>图片</td>
+        <td><%= image_tag @news.image.url %></td>
       </tr>
     </table>
   </div>

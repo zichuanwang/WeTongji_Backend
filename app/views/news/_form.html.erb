@@ -10,7 +10,6 @@
       </ul>
     </div>
   <% end %>
-  <%= javascript_include_tag "ckeditor/init" %>
   <div class="field">
     标题：<%= f.text_field :title, :class => "input_1" %>
   </div>
@@ -18,7 +17,10 @@
     类别：<%= f.text_field :category, :class => "input_1" %>
   </div>
   <div class="field">
-    内容：<%= f.cktext_area :context, :toolbar => 'Full', :width => 800, :height => 400 %>
+    图片：<input type="file" name="news[image]" class="input_1" />
+  </div>
+  <div class="field">
+    内容：<%= f.text_area :context, :rows => 40, :cols => 100 %>
   </div>
   <div class="btn_box">
     <%= f.submit "保存", :class => "btn_2" %>

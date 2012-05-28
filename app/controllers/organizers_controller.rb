@@ -1,7 +1,7 @@
 class OrganizersController < ApplicationController
   load_and_authorize_resource
   def index
-    @organizers = Organizer.all
+    @organizers = Organizer.order("id desc")
     @menu = "organizers"
 
     respond_to do |format|

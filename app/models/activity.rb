@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "activities_users_likes"
 	has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "activities_users_schedules"
 
-	validates_presence_of :organizer, :sub_organizer, :title, :begin, :end, :location, :description
+	validates_presence_of :organizer, :title, :begin, :end, :location, :description
 	paginates_per 10
 
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }

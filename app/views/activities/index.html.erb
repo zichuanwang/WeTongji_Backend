@@ -12,7 +12,7 @@
       <thead>
         <tr>
             <tr>
-                <th>组织(承办)</th>
+                <th>组织</th>
                 <th>起止时间</th>
                 <th>标题</th>
                 <th>位置</th>
@@ -26,7 +26,7 @@
       <tbody>
         <% @activities.each do |activity| %>
         <tr>
-            <td><%= activity.organizer.name %>(<%= activity.sub_organizer.name %>)</td>
+            <td><%= activity.organizer.name %></td>
             <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
             <td><%= activity.title %></td>
             <td><%= activity.location %></td>
