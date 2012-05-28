@@ -2,7 +2,7 @@ class ExExam
 	attr_accessor :NO, :Name, :Teacher, :Location, :Start, :End, :Point, :Required, :Hours
 
 	def self.init_from_exam_instance(instance)
-		model = ExEaxm.new
+		model = ExExam.new
 		model.NO = instance.no
 		model.Name = instance.title
 		model.Teacher = instance.teacher
