@@ -1,5 +1,5 @@
 class ExNews
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Image
 
 	def self.init_from_news(news)
 		model = ExNews.new
@@ -9,6 +9,7 @@ class ExNews
 		model.Read = news.read
 		model.CreatedAt = news.created_at
 		model.Category = news.category
+		model.Image = news.image == nil ? '' : Rails.configuration.host + news.image.url
 		model
 	end
 end
