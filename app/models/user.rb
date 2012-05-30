@@ -120,6 +120,7 @@ class User < ActiveRecord::Base
   end
 
   def send_reset_password
+    UserMailer.reset_password(self).deliver
   end
 
 end
