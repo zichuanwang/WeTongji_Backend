@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="/stylesheets/jquery-ui-timepicker-addon.css" type="text/css"/>
+<script type="text/javascript" src="/javascripts/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="/javascripts/jquery-ui-timepicker-zh-CN.js"></script>
+
 <%= form_for(@activity, :html => {:multipart => true}) do |f| %>
   <% if @activity.errors.any? %>
     <div id="error_explanation">
@@ -11,10 +15,10 @@
     </div>
   <% end %>
   <div class="field">
-    开始：<%= f.datetime_select :begin %>
+    开始：<%= f.text_field :begin, :class => "input_1" %>
   </div>
   <div class="field">
-    结束：<%= f.datetime_select :end %>
+    结束：<%= f.text_field :end. :class => "input_1" %>
   </div>
   <div class="field">
     标题：<%= f.text_field :title, :class => "input_1" %>
@@ -41,3 +45,8 @@
     <%= f.submit "保存", :class => "btn_2" %>
   </div>
 <% end %>
+
+<script type="text/javascript">
+  $('#activity[begin]').datetimepicker();
+  $('#activity[end]').datetimepicker();
+</script>
