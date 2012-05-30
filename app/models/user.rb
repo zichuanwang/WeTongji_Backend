@@ -119,4 +119,7 @@ class User < ActiveRecord::Base
     UserMailer.confirmation(self).deliver
   end
 
+  def send_reset_password
+  end
+
 end
