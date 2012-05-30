@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="/stylesheets/jquery-ui-timepicker-addon.css" type="text/css"/>
+<link rel="stylesheet" href="/stylesheets/jquery-ui-1.8.20.custom.css" type="text/css"/>
+<script type="text/javascript" src="/javascripts/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="/javascripts/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript" src="/javascripts/jquery-ui-timepicker-zh-CN.js"></script>
 
@@ -18,7 +20,7 @@
     开始：<%= f.text_field :begin, :class => "input_1" %>
   </div>
   <div class="field">
-    结束：<%= f.text_field :end. :class => "input_1" %>
+    结束：<%= f.text_field :end, :class => "input_1" %>
   </div>
   <div class="field">
     标题：<%= f.text_field :title, :class => "input_1" %>
@@ -47,6 +49,12 @@
 <% end %>
 
 <script type="text/javascript">
-  $('#activity[begin]').datetimepicker();
-  $('#activity[end]').datetimepicker();
+  $('#activity_begin').datetimepicker({
+      timeFormat: 'hh:mm:ss',
+      dateFormat: 'yy-mm-dd',
+  });
+  $('#activity_end').datetimepicker({
+      timeFormat: 'hh:mm:ss',
+      dateFormat: 'yy-mm-dd',
+  });
 </script>
