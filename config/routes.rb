@@ -37,6 +37,8 @@ WetongjiWeb::Application.routes.draw do
 
   get "users/confirmation"
   get "users/welcome"
+  get "users/reset_password"
+  get "users/reset_password_sucess"
   resources :users
 
   post "students/import"

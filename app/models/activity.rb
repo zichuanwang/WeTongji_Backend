@@ -12,6 +12,13 @@ class Activity < ActiveRecord::Base
 
 	before_create :init_model
 
+	def delete
+		self.users_favorites.clear
+		self.users_likes.clear
+		self.users_schedules.clear
+		self.destroy
+	end
+
 	def user_favorite(user)
 		if self.favorite < 0
 			self.favorite = 0

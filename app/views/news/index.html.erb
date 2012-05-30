@@ -28,6 +28,7 @@
             <td>
                 <%= link_to '详情', item %>
                 <%= link_to '编辑', edit_news_path(item) %>
+                <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
             </td>
         </tr>
         <% end %>

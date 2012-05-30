@@ -75,7 +75,7 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1.json
   def destroy
     @activity = Activity.find(params[:id])
-    @activity.destroy
+    @activity.delete
 
     respond_to do |format|
       format.html { redirect_to activities_url }

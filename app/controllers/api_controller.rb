@@ -34,6 +34,7 @@ class ApiController < ApplicationController
 		"User.Update" => "user_update",
 		"User.Update.Avatar" => "user_update_avatar",
 		"User.Update.Password" => "user_update_password",
+		"User.Reset.Password" => "user_reset_password"
 	}
 
 	def call
@@ -518,6 +519,12 @@ class ApiController < ApplicationController
 				re = ApiReturn.new("010")
 				return_response(re)
 			end
+		end
+	end
+
+	def user_reset_password
+		if verify_action_params(['NO', 'Name'])
+			
 		end
 	end
 end
