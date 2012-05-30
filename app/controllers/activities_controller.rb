@@ -3,7 +3,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @menu = 'activities'
-    @activities = Activity.order("id desc")
+    @activities = Activity.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
