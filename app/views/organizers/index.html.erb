@@ -1,7 +1,12 @@
 <% content_for :submenu do %>
   <%= render :partial => "layouts/submenu_organizers" %>
 <% end %>
-
+<script type="text/javascript" src="/javascripts/imgpreview.full.0.22.jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.screenshot').imgPreview();
+  });
+</script>
 <div class="list_1">
   <div class="list_title">
     <div class="list_title_left">所有组织</div>
@@ -22,7 +27,7 @@
         <% @organizers.each do |organizer| %>
         <tr>
           <td><%= organizer.name %></td>
-          <td><%= link_to "Icon", organizer.icon.url %></td>
+          <td><%= link_to "Icon", organizer.icon.url(:medium), { :class => 'screenshot', :target => "_blank" } %></td>
           <td>
             <%= link_to '详情', organizer %>
             <%= link_to '编辑', edit_organizer_path(organizer) %>
