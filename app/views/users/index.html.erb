@@ -1,7 +1,12 @@
 <% content_for :submenu do %>
   <%= render :partial => "layouts/submenu_users" %>
 <% end %>
-
+<script type="text/javascript" src="/javascripts/imgpreview.full.0.22.jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.screenshot').imgPreview();
+  });
+</script>
 <div class="list_1">
   <div class="list_title">
     <div class="list_title_left">所有账号</div>
@@ -34,7 +39,9 @@
           <td><%= user.authentication_token %></td>
           <td><%= user.display_name %></td>
           <td><%= user.confirmed_at %></td>
-          <td><%= link_to "Avatar", user.avatar.url %></td>
+          <td>
+            <%= link_to "Avatar", user.avatar.url, { :class => 'screenshot', :target => "_blank" } %>
+          </td>
           <td>
             <%= link_to '详情', user %>
             <%= link_to '激活', :action => "confirmation", :controller => "users", :token => user.confirmation_token %>

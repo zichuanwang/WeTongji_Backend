@@ -18,7 +18,7 @@
     说明：<%= f.text_field :description, :class => "input_1" %>
   </div>
   <div class="field">
-    图标：<input type="file" name="organizer[icon]" />
+    图标：<input type="file" name="organizer[icon]" />(图标会转换成200*200px分辨率大小.请使用正方形比率.)
   </div>
   <% if !Admin.find_by_role("OrganizerAdmin").nil? %>
   <div class="field">
