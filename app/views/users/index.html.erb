@@ -45,7 +45,7 @@
           <td>
             <%= link_to '详情', user %>
             <%= link_to '激活', :action => "confirmation", :controller => "users", :token => user.confirmation_token %>
-            <%= link_to '重置密码', :action => "reset_password", :controller => "users", :token => user.confirmation_token %>
+            <%= link_to '重新发送', :action => "reconfirm", :controller => "users", :id => user.id %>
           </td>
         </tr>
         <% end %>
