@@ -10,7 +10,12 @@
 <div class="list_1">
   <div class="list_title">
     <div class="list_title_left">所有账号</div>
-    <div class="list_title_right"></div>
+    <div class="list_title_right">
+      <form action="users" method="get">
+        学号:<input type="text" class="input_1" name="no" />
+        <input type="submit" class="btn_2" value="查询" />
+      </form>
+    </div>
   </div>
   <div class="tab_content">
     <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
@@ -20,9 +25,8 @@
                 <th>学号</th>
                 <th>姓名</th>
                 <th>邮箱</th>
-                <th>UID</th>
-                <th>Token</th>
                 <th>显示名</th>
+                <th>创建时间</th>
                 <th>确认时间</th>
                 <th>Avatar</th>
                 <th>操作</th>
@@ -35,10 +39,9 @@
           <td><%= user.no %></td>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
-          <td><%= user.uid %></td>
-          <td><%= user.authentication_token %></td>
           <td><%= user.display_name %></td>
-          <td><%= user.confirmed_at %></td>
+          <td><%= user.created_at.nil? ? "" : user.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          <td><%= user.confirmed_at.nil? ? "" : user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           <td>
             <%= link_to "Avatar", user.avatar.url, { :class => 'screenshot', :target => "_blank" } %>
           </td>
