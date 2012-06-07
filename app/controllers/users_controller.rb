@@ -14,6 +14,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def reconfirm
+    user = User.find(params[:id])
+    if user
+      UserMailer.confirmation(user).deliver
+    end
+    redirect_to :action => "index"
+  end
+
   def confirmation
   	user = User.find_by_confirmation_token(params[:token])
   	if user && user.confirmed_at == nil
