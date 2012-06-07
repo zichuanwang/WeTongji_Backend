@@ -97,6 +97,11 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(password + salt) 
   end
 
+  def send_reset_password_mail
+    self.reset_password_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+    UserMailer.reset_password(self).deliver
+  end
+
   private
   def init_model
     self.uid = new_uid
@@ -117,10 +122,6 @@ class User < ActiveRecord::Base
 
   def send_confirmation
     UserMailer.confirmation(self).deliver
-  end
-
-  def send_reset_password
-    UserMailer.reset_password(self).deliver
   end
 
 end

@@ -1,12 +1,15 @@
 class UsersController < ApplicationController
-	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
+	before_filter :authenticate_admin!, :except => [:confirmation, :welcome, :reset_password, :reset_password_success, :reset_password_from_mail]
   def index
     @users = User.order('id desc')
     if (params[:type] == "unconfirmed")
       @users = @users.where("confirmed_at is null")
     end
-    if (params[:no])
+    unless params[:no].blank?
       @users = @users.where("no = :no", :no => params[:no])
+    end
+    unless params[:name].blank?
+      @users = @users.where("name = :name", :name => params[:name])
     end
     @users = @users.page(params[:page])
     @menu = "users"
@@ -23,6 +26,36 @@ class UsersController < ApplicationController
       UserMailer.confirmation(user).deliver
     end
     redirect_to :action => "index"
+  end
+
+  def send_reset_password_mail
+    user = User.find(params[:id])
+    if user
+      user.send_reset_password_mail
+      user.save
+    end
+    redirect_to :action => "index"
+  end
+
+  def reset_password_from_mail
+    @user = User.find_by_reset_password_token(params[:token])
+    render :layout => "out"
+  end
+
+  def reset_password
+    @user = User.find_by_reset_password_token(params[:token])
+    if params[:password] == params[:password_confirmation] && User.is_password_valid?(params[:password]) && @user
+        @user.password = params[:password]
+        @user.reset_password_token = ''
+        @user.save
+        redirect_to users_reset_password_success_url
+    else
+      redirect_to users_reset_password_from_mail_url(:token => params[:token])
+    end
+  end
+
+  def reset_password_success
+    render :layout => "out"
   end
 
   def confirmation
