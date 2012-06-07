@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
+	before_filter :authenticate_admin!, :except => [:confirmation, :welcome, :reset_password, :reset_password_sucess]
   def index
     @users = User.order('id desc')
     if (params[:type] == "unconfirmed")
@@ -26,6 +26,38 @@ class UsersController < ApplicationController
       UserMailer.confirmation(user).deliver
     end
     redirect_to :action => "index"
+  end
+
+  def send_reset_password_mail
+    user = User.find(params[:id])
+    if user
+      user.send_reset_password_mail
+      user.save
+    end
+    redirect_to :action => "index"
+  end
+
+  def reset_password_from_mail
+    @user = User.find_by_reset_password_token(params[:token])
+    render :layout => "out"
+  end
+
+  def reset_password
+    if params[:password] == params[:password_confirmation] && User.is_password_valid?(params[:password])
+      @user = User.find_by_reset_password_token(params[:token])
+      unless @user
+        @user.password = params[:password]
+        @user.reset_password_token = ''
+        @user.save
+        redirect_to :action => "reset_password_success"
+      end
+    end
+
+    render :layout => "out"
+  end
+
+  def reset_password_success
+    render :layout => "out"
   end
 
   def confirmation
