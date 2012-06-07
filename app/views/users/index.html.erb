@@ -48,8 +48,11 @@
           </td>
           <td>
             <%= link_to '详情', user %>
-            <%= link_to '激活', :action => "confirmation", :controller => "users", :token => user.confirmation_token %>
-            <%= link_to '重新发送', :action => "reconfirm", :controller => "users", :id => user.id %>
+            <% unless user.confirmed_at.nil? %>
+            <%= link_to '激活', {:action => "confirmation", :controller => "users", :token => user.confirmation_token}, confirm: '确认激活?' %>
+            <%= link_to '重新发送', {:action => "reconfirm", :controller => "users", :id => user.id}, confirm: '确认再次发送激活邮件?' %>
+            <% end %>
+            <%= link_to '重置密码', {:action => "send_reset_password_mail", :controller => "users", :id => user.id}, confirm: '确认重置密码?' %>
           </td>
         </tr>
         <% end %>

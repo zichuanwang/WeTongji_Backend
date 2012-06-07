@@ -39,7 +39,7 @@ WetongjiWeb::Application.routes.draw do
   get "users/welcome"
   get "users/reset_password_from_mail"
   post "users/reset_password"
-  get "users/reset_password_sucess"
+  get "users/reset_password_success"
   get "users/reconfirm"
   get "users/send_reset_password_mail"
   resources :users
