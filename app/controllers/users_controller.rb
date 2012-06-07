@@ -5,6 +5,9 @@ class UsersController < ApplicationController
     if (params[:type] == "unconfirmed")
       @users = @users.where("confirmed_at is null")
     end
+    if (params[:no])
+      @users = @users.where("no = :no", :no => params[:no])
+    end
     @users = @users.page(params[:page])
     @menu = "users"
 
