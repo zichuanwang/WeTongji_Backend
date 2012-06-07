@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 	before_filter :authenticate_admin!, :except => [:confirmation, :welcome]
   def index
-    @users = User.order('id desc').page(params[:page])
+    @users = User.order('id desc')
+    if (params[:type] == "unconfirmed")
+      @users = @users.where("confirmed_at is null")
+    end
+    @users = @users.page(params[:page])
     @menu = "users"
 
     respond_to do |format|
