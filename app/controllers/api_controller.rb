@@ -172,6 +172,7 @@ class ApiController < ApplicationController
 		sort = params[:Sort]
 		p = params[:P].nil? ? 1 : params[:P].to_i
 		uid = params[:UID]
+		expire = params[:Expire]
 
 		activities = Activity
 		if uid
@@ -189,7 +190,10 @@ class ApiController < ApplicationController
 			activities = activities.order("begin asc")
 		end
 
-		activities = activities.where("end > :end", :end => Time.now).page(p).per(20)
+		if expire && expire == '1'
+			activities = activities.where("end > :end", :end => Time.now)
+		end
+		activities = activities.page(p).per(20)
 
 		ex = []
 
