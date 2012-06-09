@@ -190,7 +190,7 @@ class ApiController < ApplicationController
 			activities = activities.order("begin asc")
 		end
 
-		if expire && expire == '1'
+		unless expire && expire == '1'
 			activities = activities.where("end > :end", :end => Time.now)
 		end
 		activities = activities.page(p).per(20)
