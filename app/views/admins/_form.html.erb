@@ -1,10 +1,12 @@
 	<%= form_for(@admin) do |f| %>
+		<% if can? :manage, :Admin %>
 	  <div class="field">
 	    邮箱：<%= f.text_field :email, :class => "input_1" %>
 	  </div>
 	  <div class="field">
 	    角色：<%= f.select :role, { "超级管理员" => "SuperAdmin" , "新闻发布账号" => "NewsAdmin", "社团账号" => "OrganizerAdmin" } %>
 	  </div>
+	  <% end %>
 	  <div class="field">
 	    密码：<%= f.password_field :password, :class => "input_1" %>
 	  </div>

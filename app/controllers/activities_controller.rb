@@ -1,9 +1,9 @@
 class ActivitiesController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   def index
     @menu = 'activities'
-    @activities = Activity.order("id desc").page(params[:page])
+    @activities = @activities.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,18 +13,10 @@ class ActivitiesController < ApplicationController
 
   def show
     @menu = 'activities'
-    @activity = Activity.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @activity }
-    end
   end
 
   def new
     @menu = 'activities'
-    @activity = Activity.new
-    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @activity }
@@ -33,12 +25,10 @@ class ActivitiesController < ApplicationController
 
   def edit
     @menu = 'activities'
-    @activity = Activity.find(params[:id])
   end
 
   def create
     @menu = 'activities'
-    @activity = Activity.new(params[:activity])
     #channel = Channel.find(params[:channel_id])
 
     #@activity.channel = channel
@@ -58,7 +48,6 @@ class ActivitiesController < ApplicationController
   # PUT /activities/1.json
   def update
     @menu = 'activities'
-    @activity = Activity.find(params[:id])
 
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
@@ -74,7 +63,6 @@ class ActivitiesController < ApplicationController
   # DELETE /activities/1
   # DELETE /activities/1.json
   def destroy
-    @activity = Activity.find(params[:id])
     @activity.delete
 
     respond_to do |format|
