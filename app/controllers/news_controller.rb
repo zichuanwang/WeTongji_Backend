@@ -2,7 +2,7 @@ class NewsController < ApplicationController
   load_and_authorize_resource
   def index
     @menu = 'news'
-    @news = News.order("id desc").page(params[:page])
+    @news = @news.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,11 +10,8 @@ class NewsController < ApplicationController
     end
   end
 
-  # GET /news/1
-  # GET /news/1.json
   def show
     @menu = 'news'
-    @news = News.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +23,6 @@ class NewsController < ApplicationController
   # GET /news/new.json
   def new
     @menu = 'news'
-    @news = News.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,17 +30,13 @@ class NewsController < ApplicationController
     end
   end
 
-  # GET /news/1/edit
   def edit
     @menu = 'news'
-    @news = News.find(params[:id])
   end
 
-  # POST /news
-  # POST /news.json
+
   def create
     @menu = 'news'
-    @news = News.new(params[:news])
 
     respond_to do |format|
       if @news.save
@@ -57,11 +49,9 @@ class NewsController < ApplicationController
     end
   end
 
-  # PUT /news/1
-  # PUT /news/1.json
+
   def update
     @menu = 'news'
-    @news = News.find(params[:id])
 
     respond_to do |format|
       if @news.update_attributes(params[:news])
@@ -74,10 +64,8 @@ class NewsController < ApplicationController
     end
   end
 
-  # DELETE /news/1
-  # DELETE /news/1.json
+
   def destroy
-    @news = News.find(params[:id])
     @news.destroy
 
     respond_to do |format|

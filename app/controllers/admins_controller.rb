@@ -1,9 +1,9 @@
 class AdminsController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
   def index
     @menu = 'admins'
 
-    @admins = Admin.order("id desc").page(params[:page])
+    @admins = @admins.order("id desc").page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,17 +13,14 @@ class AdminsController < ApplicationController
 
   def edit
     @menu = "admins"
-    @admin = Admin.find(params[:id])
   end
 
   def show
     @menu = 'admins'
-    @admin = Admin.find(params[:id])
   end
 
   def new
     @menu = 'admins'
-    @admin = Admin.new
     
     respond_to do |format|
       format.html # new.html.erb
@@ -33,7 +30,6 @@ class AdminsController < ApplicationController
 
   def create
     @menu = 'admins'
-    @admin = Admin.new(params[:admin])
     respond_to do |format|
       if @admin.save
         format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
@@ -45,8 +41,6 @@ class AdminsController < ApplicationController
 
   def update
     @menu = 'admins'
-    @admin = Admin.find(params[:id])
-
     params[:admin].delete(:password) if params[:admin][:password].blank?
     params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
 

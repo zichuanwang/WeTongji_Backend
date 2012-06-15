@@ -528,7 +528,16 @@ class ApiController < ApplicationController
 
 	def user_reset_password
 		if verify_action_params(['NO', 'Name'])
-			
+	    user = User.find_by_no_and_name(params[:NO], params[:Name])
+	    if user
+	      user.send_reset_password_mail
+	      user.save
+				re = ApiReturn.new("000")
+				return_response(re)
+	    else
+	    	re = ApiReturn.new("009")
+				return_response(re)
+	    end
 		end
 	end
 end

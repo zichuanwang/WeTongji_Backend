@@ -1,4 +1,6 @@
 <ul>
 	<li><%= link_to "所有账户", admins_path %></li>
+	<% if can? :manage, Admin %>
 	<li><%= link_to "创建账户", new_admin_path %></li>
+	<% end %>
 </ul>
