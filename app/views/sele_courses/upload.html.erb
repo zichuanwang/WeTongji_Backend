@@ -1,20 +1,24 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_sele_courses" %>
-<% end %>
-
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">导入选课信息</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-  	<%= form_tag('import', :multipart => true) do -%>
-      <div class="field">
-      文件：<input type="file" name="file" class="input_1" />
+<div class="box">
+    <div class="title">
+        <h5>导入选课信息</h5>
+    </div>
+    <div class="table">
+    <%= form_tag('import', :multipart => true) do -%>
+      <div class="form">
+        <div class="fields">
+          <div class="field field-first">
+            <div class="label">
+              <label>文件</label>
+            </div>
+            <div class="input">
+              <input type="file" name="file" class="small" />
+            </div>
+          </div>
+          <div class="buttons">
+            <input type="submit" name="submit" value="导入" />
+          </div>
+        </div>
       </div>
-      <div class="btn_box">
-        <input type="submit" value="导入" class="btn_2" />
-      </div>
-  	<% end -%>
-  </div>
+    <% end %>
+    </div>
 </div>
