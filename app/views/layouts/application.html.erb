@@ -8,6 +8,7 @@
     <!-- stylesheets -->
     <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css" />
     <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style_full.css" />
     <link id="color" rel="stylesheet" type="text/css" href="/stylesheets/colors/blue.css" />
     <!-- scripts (jquery) -->
     <script src="/javascripts/jquery-1.6.4.min.js" type="text/javascript"></script>
@@ -55,7 +56,7 @@
         </div>
         <!-- quick -->
         <ul id="quick">
-          <%= render "layouts/dashboard_menu" %>
+          <%= render "layouts/menu" %>
         </ul>
         <!-- end quick -->
         <div class="corner tl"></div>
@@ -65,18 +66,7 @@
     <!-- end header -->
     <!-- content -->
     <div id="content">
-      <!-- end content / left -->
-      <div id="left">
-        <div id="menu">
-          <%= yield :submenu %>
-        </div>
-      </div>
-      <!-- end content / left -->
-      <!-- content / right -->
-      <div id="right">
         <%= yield %>
-      </div>
-      <!-- end content / right -->
     </div>
     <!-- end content -->
     <!-- footer -->

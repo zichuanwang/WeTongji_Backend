@@ -1,33 +1,89 @@
-<ul>
-	<li class="<%= @menu == nil ? 'current' : '' %>"><%= link_to "控制台", admin_root_path %></li>
-	<% if can? :manage, Channel %>
-	<li class="<%= @menu == 'channels' ? 'current' : '' %>"><%= link_to "频道", channels_path %></li>
+<% if can? :manage, Channel %>
+<li>
+	<%= link_to channels_path, { :title => "频道" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="频道" /></span><span>频道</span>
 	<% end %>
-	<% if can? :read, Activity %>
-	<li class="<%= @menu == 'activities' ? 'current' : '' %>"><%= link_to "活动", activities_path %></li>
+	<ul>
+		<li><%= link_to "所有频道", channels_path %></li>
+		<li class="last"><%= link_to "创建频道", new_channel_path %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :read, Activity %>
+<li>
+	<%= link_to activities_path, { :title => "活动" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="活动" /></span><span>活动</span>
 	<% end %>
-	<% if can? :manage, Organizer %>
-	<li class="<%= @menu == 'organizers' ? 'current' : '' %>"><%= link_to "组织", organizers_path %></li>
+	<ul>
+		<li><%= link_to "所有活动", activities_path %></li>
+		<li class="last"><%= link_to "创建活动", new_activity_path %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :manage, Organizer %>
+<li>
+	<%= link_to organizers_path, { :title => "活动" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="组织" /></span><span>组织</span>
 	<% end %>
-	<% if can? :manage, News %>		
-	<li class="<%= @menu == 'news' ? 'current' : '' %>"><%= link_to "新闻", news_index_path %></li>
+	<ul>
+		<li><%= link_to "所有组织", organizers_path %></li>
+		<li class="last"><%= link_to "创建组织", new_organizer_path %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :manage, News %>
+<li>
+	<%= link_to news_index_path, { :title => "新闻" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="新闻" /></span><span>新闻</span>
 	<% end %>
-	<% if can? :manage, User %>
-	<li class="<%= @menu == 'users' ? 'current' : '' %>"><%= link_to "用户", users_path %></li>
+	<ul>
+		<li><%= link_to "所有新闻", news_index_path %></li>
+		<li class="last"><%= link_to "创建新闻", new_news_path %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :manage, User %>
+<li>
+	<%= link_to users_path, { :title => "用户" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="用户" /></span><span>用户</span>
 	<% end %>
-	<% if can? :manage, Student %>
-	<li class="<%= @menu == 'students' ? 'current' : '' %>"><%= link_to "学生", students_path %></li>
+	<ul>
+		<li><%= link_to "所有用户", users_path %></li>
+		<li class="last"><%= link_to "未激活用户", users_path(:type => "unconfirmed") %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :manage, Student %>
+<li>
+	<%= link_to students_path, { :title => "学生" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="学生" /></span><span>学生</span>
 	<% end %>
-	<% if can? :manage, Course %>
-	<li class="<%= @menu == 'courses' ? 'current' : '' %>"><%= link_to "课程", courses_path %></li>
+	<ul>
+		<li><%= link_to "所有学生", students_path %></li>
+		<li><%= link_to "导入学生信息", students_upload_path %></li>
+		<li><%= link_to "所有课程", students_path %></li>
+		<li><%= link_to "导入课程信息", students_upload_path %></li>
+		<li><%= link_to "所有选课", sele_courses_path %></li>
+		<li class="last"><%= link_to "导入选课信息", sele_courses_upload_path %></li>
+	</ul>
+</li>
+<% end %>
+
+<% if can? :manage, Admin %>
+<li>
+	<%= link_to admins_path, { :title => "管理员" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="管理员" /></span><span>管理员</span>
 	<% end %>
-	<% if can? :manage, SeleCourse %>
-	<li class="<%= @menu == 'sele_courses' ? 'current' : '' %>"><%= link_to "选课", sele_courses_path %></li>
-	<% end %>
-	<% if can? :manage, Exam %>
-	<li class="<%= @menu == 'exams' ? 'current' : '' %>"><%= link_to "考试", exams_path %></li>
-	<% end %>
-	<% if can? :manage, Admin %>
-	<li class="<%= @menu == 'admins' ? 'current' : '' %>"><%= link_to "账户", admins_path %></li>
-	<% end %>
-</ul>
+	<ul>
+		<% if can? :manage, Admin %>
+		<li><%= link_to "创建管理员", new_admin_path %></li>
+		<% end %>
+		<li class="last"><%= link_to "所有管理员", admins_path %></li>
+	</ul>
+</li>
+<% end %>
