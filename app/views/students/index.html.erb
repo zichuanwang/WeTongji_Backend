@@ -1,51 +1,42 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_students" %>
-<% end %>
-
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">所有学生</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <thead>
-        <tr>
-            <tr>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>学院</th>
-                <th>专业</th>
-                <th>学制</th>
-                <th>性别</th>
-                <th>生日</th>
-                <th>入学年份</th>
-                <th>邮箱</th>
-                <th>操作</th>
-            </tr>
-        </tr>
-      </thead>
-      <tbody>
-        <% @students.each do |student| %>
-        <tr>
-            <td><%= student.no %></td>
-            <td><%= student.name %></td>
-            <td><%= student.department %></td>
-            <td><%= student.major %></td>
-            <td><%= student.plan %></td>
-            <td><%= student.gender %></td>
-            <td><%= student.birthday.strftime("%Y/%m/%d") %></td>
-            <td><%= student.year %></td>
-            <td><%= student.email %></td>
-            <td>
-                <%= link_to '详情', student %>
-                <%= link_to '编辑', edit_student_path(student) %>
-                <%= link_to '删除', student, confirm: '确认删除?', method: :delete %>
-            </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @students %>
-  </div>
+<div class="box">
+    <div class="title">
+        <h5>所有学生</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>学号</th>
+                    <th>姓名</th>
+                    <th>学院</th>
+                    <th>专业</th>
+                    <th>学制</th>
+                    <th>性别</th>
+                    <th>生日</th>
+                    <th>入学年份</th>
+                    <th>邮箱</th>
+                    <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @students.each do |student| %>
+                <tr>
+                    <td><%= student.no %></td>
+                    <td><%= student.name %></td>
+                    <td><%= student.department %></td>
+                    <td><%= student.major %></td>
+                    <td><%= student.plan %></td>
+                    <td><%= student.gender %></td>
+                    <td><%= student.birthday.strftime("%Y/%m/%d") %></td>
+                    <td><%= student.year %></td>
+                    <td><%= student.email %></td>
+                    <td class="last">
+                        <%= link_to '详情', student %>
+                    </td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= paginate @students %>
+    </div>
 </div>

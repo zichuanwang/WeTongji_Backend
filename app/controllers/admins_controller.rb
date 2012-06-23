@@ -4,11 +4,6 @@ class AdminsController < ApplicationController
     @menu = 'admins'
 
     @admins = @admins.order("id desc").page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @admins }
-    end
   end
 
   def edit
@@ -21,11 +16,6 @@ class AdminsController < ApplicationController
 
   def new
     @menu = 'admins'
-    
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @admin }
-    end
   end
 
   def create

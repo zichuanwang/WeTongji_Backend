@@ -1,40 +1,35 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_organizers" %>
-<% end %>
 <script type="text/javascript" src="/javascripts/imgpreview.full.0.22.jquery.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('.screenshot').imgPreview();
   });
 </script>
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">所有组织</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <thead>
-        <tr>
-            <tr>
-                <th>名称</th>
-                <th>Icon</th>
-                <th>操作</th>
-            </tr>
-        </tr>
-      </thead>
-      <tbody>
-        <% @organizers.each do |organizer| %>
-        <tr>
-          <td><%= organizer.name %></td>
-          <td><%= link_to "Icon", organizer.icon.url(:medium), { :class => 'screenshot', :target => "_blank" } %></td>
-          <td>
-            <%= link_to '详情', organizer %>
-            <%= link_to '编辑', edit_organizer_path(organizer) %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+
+<div class="box">
+    <div class="title">
+        <h5>所有组织</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>Icon</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @organizers.each do |organizer| %>
+              <tr>
+                <td><%= organizer.name %></td>
+                <td><%= link_to "Icon", organizer.icon.url(:medium), { :class => 'screenshot', :target => "_blank" } %></td>
+                <td class="last">
+                  <%= link_to '详情', organizer %>
+                  <%= link_to '编辑', edit_organizer_path(organizer) %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
 </div>

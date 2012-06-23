@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  layout :layout_by_resource
 
   rescue_from CanCan::AccessDenied do |exception|
     flash[:error] = exception.message
@@ -11,4 +12,14 @@ class ApplicationController < ActionController::Base
   def current_ability
   	@current_ability ||= Ability.new(current_admin)
 	end
+
+  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "out"
+    else
+      "application"
+    end
+  end
 end

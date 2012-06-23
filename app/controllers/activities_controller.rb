@@ -4,11 +4,6 @@ class ActivitiesController < ApplicationController
   def index
     @menu = 'activities'
     @activities = @activities.order("id desc").page(params[:page])
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @activities }
-    end
   end
 
   def show
@@ -17,10 +12,6 @@ class ActivitiesController < ApplicationController
 
   def new
     @menu = 'activities'
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @activity }
-    end
   end
 
   def edit

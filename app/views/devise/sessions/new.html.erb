@@ -1,21 +1,38 @@
-<div class="content_box">
-	<div class="sign_box">
-		<h2>登陆</h2>
-		<div class="sign_col">
-			<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-			<p>邮箱</p>
-			<label>
-				<%= f.email_field :email, :class => "input_1" %>
-			</label>
-			<p>密码</p>
-			<label>
-				<%= f.password_field :password, :class => "input_1" %>
-			</label>
-			<label>
-				<%= f.submit "登录",:class => "btn_2" %>
-			</label>
-			<% end %>
-		</div>
+<div id="login">
+	<!-- login -->
+	<div class="title">
+		<h5>登录微同济服务端管理系统</h5>
+		<div class="corner tl"></div>
+		<div class="corner tr"></div>
 	</div>
-	<div class="clear"></div>
+	<div class="inner">
+		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+		<div class="form">
+			<!-- fields -->
+			<div class="fields">
+				<div class="field">
+					<div class="label">
+						<label for="username">邮箱:</label>
+					</div>
+					<div class="input">
+						<%= f.email_field :email, :class => "focus", :size => 40 %>
+					</div>
+				</div>
+				<div class="field">
+					<div class="label">
+						<label for="password">密码:</label>
+					</div>
+					<div class="input">
+						<%= f.password_field :password, :class => "focus", :size => 40 %>
+					</div>
+				</div>
+				<div class="buttons">
+					<input type="submit" value="登陆" />
+				</div>
+			</div>
+			<!-- end fields -->
+		</div>
+		<% end %>
+	</div>
+	<!-- end login -->
 </div>

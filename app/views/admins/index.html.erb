@@ -1,44 +1,37 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_admins" %>
-<% end %>
-
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">所有账户</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <thead>
-        <tr>
-            <tr>
-                <th>Email</th>
-                <th>登陆次数</th>
-                <th>角色</th>
-                <th>最后登陆时间</th>
-                <th>最后登陆IP</th>
-                <th>操作</th>
-            </tr>
-        </tr>
-      </thead>
-      <tbody>
-        <% @admins.each do |admin| %>
-        <tr>
-            <td><%= admin.email %></td>
-            <td><%= admin.sign_in_count %></td>
-            <td><%= admin.role %></td>
-            <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-            <td><%= admin.last_sign_in_ip %></td>
-            <td>
-                <% if can? :edit, admin %>
-                <%= link_to '详情', admin %>
-                <%= link_to '编辑', edit_admin_path(admin) %>
-                <% end %>
-            </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @admins %>
-  </div>
+<div class="box">
+    <div class="title">
+        <h5>所有管理员</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>Email</th>
+                  <th>登陆次数</th>
+                  <th>角色</th>
+                  <th>最后登陆时间</th>
+                  <th>最后登陆IP</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @admins.each do |admin| %>
+              <tr>
+                  <td><%= admin.email %></td>
+                  <td><%= admin.sign_in_count %></td>
+                  <td><%= admin.role %></td>
+                  <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                  <td><%= admin.last_sign_in_ip %></td>
+                  <td class="last">
+                      <% if can? :edit, admin %>
+                      <%= link_to '详情', admin %>
+                      <%= link_to '编辑', edit_admin_path(admin) %>
+                      <% end %>
+                  </td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+        <%= paginate @admins %>
+    </div>
 </div>

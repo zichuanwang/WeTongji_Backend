@@ -10,17 +10,35 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    名称：<%= f.text_field :title, :class => "input_1" %>
-  </div>
-  <div class="field">
-    题图：<%= f.file_field :image, :class => "input_1" %>
-  </div>
-  <div class="field">
-    描述：<%= f.text_area :description, :rows => 40, :cols => 100 %>
-  </div>
-  <div class="btn_box">
-    <%= f.submit "保存", :class => "btn_2" %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>名称</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>题图</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :image, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>描述</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :description, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
   </div>
 <% end %>

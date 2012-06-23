@@ -1,39 +1,32 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_courses" %>
-<% end %>
-
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">所有课程</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <thead>
-        <tr>
-            <tr>
-                <th>编号</th>
-                <th>名称</th>
-                <th>教师</th>
-                <th>学分</th>
-                <th>学时</th>
-                <th>类型</th>
-            </tr>
-        </tr>
-      </thead>
-      <tbody>
-        <% @courses.each do |course| %>
-        <tr>
-            <td><%= course.no %></td>
-            <td><%= course.name %></td>
-            <td><%= course.teacher %></td>
-            <td><%= course.point %></td>
-            <td><%= course.hours %></td>
-            <td><%= course.required %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @courses %>
-  </div>
+<div class="box">
+    <div class="title">
+        <h5>所有课程</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>编号</th>
+                  <th>名称</th>
+                  <th>教师</th>
+                  <th>学分</th>
+                  <th>学时</th>
+                  <th class="last">类型</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% @courses.each do |course| %>
+                <tr>
+                  <td><%= course.no %></td>
+                  <td><%= course.name %></td>
+                  <td><%= course.teacher %></td>
+                  <td><%= course.point %></td>
+                  <td><%= course.hours %></td>
+                  <td class="last"><%= course.required %></td>
+                </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= paginate @courses %>
+    </div>
 </div>

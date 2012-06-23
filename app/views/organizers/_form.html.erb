@@ -10,22 +10,38 @@
       </ul>
     </div>
   <% end %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>名称</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :name, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>图标</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :icon, { :size => "40" } %>
+        </div>
+      </div>
+      <% if !Admin.find_by_role("OrganizerAdmin").nil? %>
+      <div class="field">
+        <div class="label">
+          <label>管理员</label>
+        </div>
+        <div class="select">
+          <%= f.select :admin_id, Admin.where("role = 'OrganizerAdmin'").collect{|c|[ c.email, c.id ]} %>
+        </div>
+      </div>
+      <% end %>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
+  </div>
 
-  <div class="field">
-    名称：<%= f.text_field :name, :class => "input_1" %>
-  </div>
-  <div class="field">
-    说明：<%= f.text_field :description, :class => "input_1" %>
-  </div>
-  <div class="field">
-    图标：<input type="file" name="organizer[icon]" />(图标会转换成200*200px分辨率大小.请使用正方形比率.)
-  </div>
-  <% if !Admin.find_by_role("OrganizerAdmin").nil? %>
-  <div class="field">
-    管理员：<%= f.select :admin_id, Admin.where("role = 'OrganizerAdmin'").collect{|c|[ c.email, c.id ]} %>
-  </div>
-  <% end %>
-  <div class="btn_box">
-    <%= f.submit "保存", :class => "btn_2" %>
-  </div>
 <% end %>
