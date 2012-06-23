@@ -1,20 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="box">
+    <div class="title">
+        <h5>查看学生</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>姓名</td>
+            <td class="last"><%= @student.name %></td>
+          </tr>
+          <tr>
+            <td>学号</td>
+            <td class="last"><%= @student.no %></td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td class="last"><%= @student.email %></td>
+          </tr>
+        </table>
+    </div>
+</div>
 
-<p>
-  <b>Name:</b>
-  <%= @student.name %>
-</p>
-
-<p>
-  <b>No:</b>
-  <%= @student.no %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @student.email %>
-</p>
-
-
-<%= link_to 'Edit', edit_student_path(@student) %> |
-<%= link_to 'Back', students_path %>
