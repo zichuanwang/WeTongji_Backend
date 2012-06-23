@@ -1,50 +1,45 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_activities" %>
-<% end %>
-
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">活动详情</div>
-    <div class="list_title_right"></div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <tr>
-        <td>组织</td>
-        <td><%= @activity.organizer.name %></td>
-      </tr>
-      <tr>
-        <td>起止时间</td>
-        <td><%= @activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= @activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
-      </tr>
-      <tr>
-        <td>标题</td>
-        <td><%= @activity.title %></td>
-      </tr>
-      <tr>
-        <td>位置</td>
-        <td><%= @activity.location %></td>
-      </tr>
-      <tr>
-        <td>关注度</td>
-        <td><%= @activity.favorite %></td>
-      </tr>
-      <tr>
-        <td>+1</td>
-        <td><%= @activity.like %></td>
-      </tr>
-      <tr>
-        <td>参与度</td>
-        <td><%= @activity.schedule %></td>
-      </tr>
-      <tr>
-        <td>说明</td>
-        <td><%= @activity.description %></td>
-      </tr>
-      <tr>
-        <td>图片</td>
-        <td><%= image_tag @activity.image.url %></td>
-      </tr>
-    </table>
-  </div>
+<div class="box">
+    <div class="title">
+        <h5>查看活动</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>组织</td>
+            <td class="last"><%= @activity.organizer.name %></td>
+          </tr>
+          <tr>
+            <td>起止时间</td>
+            <td class="last"><%= @activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= @activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @activity.title %></td>
+          </tr>
+          <tr>
+            <td>位置</td>
+            <td class="last"><%= @activity.location %></td>
+          </tr>
+          <tr>
+            <td>关注度</td>
+            <td class="last"><%= @activity.favorite %></td>
+          </tr>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @activity.like %></td>
+          </tr>
+          <tr>
+            <td>位置</td>
+            <td class="last"><%= @activity.schedule %></td>
+          </tr>
+          <tr>
+            <td>关注度</td>
+            <td class="last"><%= @activity.description %></td>
+          </tr>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag @activity.image.url %></td>
+          </tr>
+        </table>
+    </div>
 </div>
