@@ -3,52 +3,86 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>微同济服务器端管理系统</title>
-		<%= stylesheet_link_tag    "application", :media => "all" %>
 		<%= javascript_include_tag "application" %>
 		<%= csrf_meta_tags %>
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" media="screen" />
+    <link id="color" rel="stylesheet" type="text/css" href="/stylesheets/colors/blue.css" />
+    <!-- scripts (jquery) -->
+    <script src="/javascripts/jquery-1.6.4.min.js" type="text/javascript"></script>
+    <!--[if IE]><script language="javascript" type="text/javascript" src="/javascripts/excanvas.min.js"></script><![endif]-->
+    <script src="/javascripts/jquery-ui-1.8.16.custom.min.js" type="text/javascript"></script>
+    <script src="/javascripts/jquery.ui.selectmenu.js" type="text/javascript"></script>
+    <script src="/javascripts/jquery.flot.min.js" type="text/javascript"></script>
+    <script src="/javascripts/tiny_mce/tiny_mce.js" type="text/javascript"></script>
+    <script src="/javascripts/tiny_mce/jquery.tinymce.js" type="text/javascript"></script>
+    <!-- scripts (custom) -->
+    <script src="/javascripts/smooth.js" type="text/javascript"></script>
+    <script src="/javascripts/smooth.menu.js" type="text/javascript"></script>
+    <!--<script src="/javascripts/smooth.chart.js" type="text/javascript"></script>-->
+    <script src="/javascripts/smooth.table.js" type="text/javascript"></script>
+    <script src="/javascripts/smooth.form.js" type="text/javascript"></script>
+    <script src="/javascripts/smooth.dialog.js" type="text/javascript"></script>
+    <script src="/javascripts/smooth.autocomplete.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        style_path = "/stylesheets/colors";
+
+        $("#date-picker").datepicker();
+
+        $("#box-tabs, #box-left-tabs").tabs();
+      });
+    </script>
 	</head>
 	<body>
-		<div id="header">
-  			<div class="logo">LOGO</div>
-  			<div class="header_right">
-  				<a href="#">教程</a>&nbsp;&nbsp;&nbsp;
-  				<a href="#">帮助</a>&nbsp;&nbsp;&nbsp;
-  				<% if admin_signed_in? %>
-  				<%= link_to current_admin.email, edit_admin_path(current_admin) %>
-					<%= link_to "注销", destroy_admin_session_path, :method => :delete %>
-					<% else %>
-					<%= link_to "登陆", new_admin_session_path %>
-		  		<% end %>
-  			</div>
-		</div>
-		<div id="nav">
-			<%= render :partial => "layouts/menu" %>
-		</div>
-		<div class="subnav">
-			<%= yield :submenu %>
-		</div>
-		<div class="box">
-			<%= yield %>
-		</div>
-		<div id="footer">
-  			<div class="groupone">
-	    		<p><font class="gray_color"><strong>关于微同济</strong></font></p>
-	    		<p>关于微同济。关于微同济。关于微同济。关于微同济。关于微同济。关于微同济。关于微同济。关于微同济。关于微同济。</p>
-  			</div>
-  			<div class="grouptwo">
-    			<p><font class="gray_color"><strong>资源</strong></font></p>
-    			<p>
-    				<a href="#">支持与帮助</a><br />
-	      			<a href="#">使用条款</a><br />
-	      			<a href="#">关于我们</a><br />
-	      			<a href="#">联系我们</a><br />
-    			</p>
-  			</div>
-  			<div class="grouthree">
-    			<p><font class="gray_color"><strong>这里是测试啊</strong></font></p>
-    			<p>你可以使用我们的测试系统实验一下...</p>
-    			<div class="btn_1"><a href="#">演示</a></div>
-  			</div>
-		</div>
+		<!-- header -->
+    <div id="header">
+      <!-- logo -->
+      <div id="logo">
+        <h1><a href="/admin" title="野兽派花店管理后台"><img src="/images/logo.png" alt="微同济管理后台" /></a></h1>
+      </div>
+      <!-- end logo -->
+      <!-- user -->
+			<ul id="user">
+				<li class="first"><%= current_admin.email %></li>
+				<li class="highlight last"><%= link_to "注销", destroy_admin_session_path, :method => :delete %></li>
+			</ul>
+      <!-- end user -->
+      <div id="header-inner">
+        <div id="home">
+          <a href="/admin" title="Home"></a>
+        </div>
+        <!-- quick -->
+        <ul id="quick">
+          <%= render "layouts/dashboard_menu" %>
+        </ul>
+        <!-- end quick -->
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+      </div>
+    </div>
+    <!-- end header -->
+    <!-- content -->
+    <div id="content">
+      <!-- end content / left -->
+      <div id="left">
+        <div id="menu">
+          <%= yield :submenu %>
+        </div>
+      </div>
+      <!-- end content / left -->
+      <!-- content / right -->
+      <div id="right">
+        <%= yield %>
+      </div>
+      <!-- end content / right -->
+    </div>
+    <!-- end content -->
+    <!-- footer -->
+    <div id="footer">
+      <p>Copyright &copy; 2012-2013 WETONGJI. All Rights Reserved.</p>
+    </div>
+    <!-- end footert -->
 	</body>
 </html>
