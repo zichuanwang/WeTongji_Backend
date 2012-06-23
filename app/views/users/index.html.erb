@@ -1,63 +1,64 @@
-<% content_for :submenu do %>
-  <%= render :partial => "layouts/submenu_users" %>
-<% end %>
 <script type="text/javascript" src="/javascripts/imgpreview.full.0.22.jquery.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
     $('.screenshot').imgPreview();
   });
 </script>
-<div class="list_1">
-  <div class="list_title">
-    <div class="list_title_left">所有账号</div>
-    <div class="list_title_right">
-      <form action="users" method="get">
-        姓名:<input type="text" class="input_1" name="name" />
-        学号:<input type="text" class="input_1" name="no" />
-        <input type="submit" class="btn_2" value="查询" />
-      </form>
+
+<div class="box">
+    <div class="title">
+        <h5>所有用户</h5>
+        <div class="search">
+          <form action="users" method="get">
+            <div class="input">
+              <label>姓名 </label><input type="text" name="name" />
+            </div>
+            <div class="input">
+              <label> 学号 </label><input type="text" name="no" />
+            </div>
+            <div class="button">
+                <input type="submit" name="submit" value="搜索" />
+            </div>
+          </form>
+        </div>
     </div>
-  </div>
-  <div class="tab_content">
-    <table width="100%" border="1" cellpadding="0" cellspacing="0" class="table1">
-      <thead>
-        <tr>
-            <tr>
-                <th>学号</th>
-                <th>姓名</th>
-                <th>邮箱</th>
-                <th>显示名</th>
-                <th>创建时间</th>
-                <th>确认时间</th>
-                <th>Avatar</th>
-                <th>操作</th>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>学号</th>
+                  <th>姓名</th>
+                  <th>邮箱</th>
+                  <th>显示名</th>
+                  <th>创建时间</th>
+                  <th>确认时间</th>
+                  <th>Avatar</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @users.each do |user| %>
+            <tr class="last">
+              <td><%= user.no %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
+              <td><%= user.display_name %></td>
+              <td><%= user.created_at.nil? ? "" : user.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+              <td><%= user.confirmed_at.nil? ? "" : user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+              <td>
+                <%= link_to "Avatar", user.avatar.url, { :class => 'screenshot', :target => "_blank" } %>
+              </td>
+              <td>
+                <% if user.confirmed_at.nil? %>
+                <%= link_to '激活', {:action => "confirmation", :controller => "users", :token => user.confirmation_token}, confirm: '确认激活?' %>
+                <%= link_to '重新发送', {:action => "reconfirm", :controller => "users", :id => user.id}, confirm: '确认再次发送激活邮件?' %>
+                <% end %>
+                <%= link_to '重置密码', {:action => "send_reset_password_mail", :controller => "users", :id => user.id}, confirm: '确认重置密码?' %>
+              </td>
             </tr>
-        </tr>
-      </thead>
-      <tbody>
-        <% @users.each do |user| %>
-        <tr>
-          <td><%= user.no %></td>
-          <td><%= user.name %></td>
-          <td><%= user.email %></td>
-          <td><%= user.display_name %></td>
-          <td><%= user.created_at.nil? ? "" : user.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          <td><%= user.confirmed_at.nil? ? "" : user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          <td>
-            <%= link_to "Avatar", user.avatar.url, { :class => 'screenshot', :target => "_blank" } %>
-          </td>
-          <td>
-            <%= link_to '详情', user %>
-            <% if user.confirmed_at.nil? %>
-            <%= link_to '激活', {:action => "confirmation", :controller => "users", :token => user.confirmation_token}, confirm: '确认激活?' %>
-            <%= link_to '重新发送', {:action => "reconfirm", :controller => "users", :id => user.id}, confirm: '确认再次发送激活邮件?' %>
             <% end %>
-            <%= link_to '重置密码', {:action => "send_reset_password_mail", :controller => "users", :id => user.id}, confirm: '确认重置密码?' %>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <%= paginate @users %>
-  </div>
+            </tbody>
+        </table>
+        <%= paginate @users %>
+    </div>
 </div>
