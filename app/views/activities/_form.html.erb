@@ -16,36 +16,88 @@
       </ul>
     </div>
   <% end %>
-  <div class="field">
-    开始：<%= f.text_field :begin, :class => "input_1" %>
+
+<div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>开始</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :begin, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>结束</label>
+        </div>
+        <div class="input input-file">
+          <%= f.text_field :end, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input input-file">
+          <%= f.text_field :title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>频道</label>
+        </div>
+        <div class="select">
+          <%= f.select :channel_id, Channel.all.collect{|c|[ c.title, c.id ]} %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>地点</label>
+        </div>
+        <div class="input input-file">
+          <%= f.text_field :location, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>组织</label>
+        </div>
+        <div class="select">
+          <%= f.select :organizer_id, Organizer.accessible_by(current_ability, :read).collect{|c|[ c.name, c.id ]} %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>状态</label>
+        </div>
+        <div class="input input-file">
+          <%= f.text_field :status, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>图片</label>
+        </div>
+        <div class="input input-file">
+          <input type="file" name="activity[image]" size="40" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>说明</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :description, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
   </div>
-  <div class="field">
-    结束：<%= f.text_field :end, :class => "input_1" %>
-  </div>
-  <div class="field">
-    标题：<%= f.text_field :title, :class => "input_1" %>
-  </div>
-  <div class="field">
-    频道：<%= f.select :channel_id, Channel.all.collect{|c|[ c.title, c.id ]} %>
-  </div>
-  <div class="field">
-    地点：<%= f.text_field :location, :class => "input_1" %>
-  </div>
-  <div class="field">
-    组织：<%= f.select :organizer_id, Organizer.accessible_by(current_ability, :read).collect{|c|[ c.name, c.id ]} %>
-  </div>
-  <div class="field">
-    状态：<%= f.text_field :status, :class => "input_1" %>
-  </div>
-  <div class="field">
-    图片：<input type="file" name="activity[image]" class="input_1" />
-  </div>
-  <div class="field">
-    说明：<%= f.text_area :description, :rows => 40, :cols => 100 %>
-  </div>
-  <div class="btn_box">
-    <%= f.submit "保存", :class => "btn_2" %>
-  </div>
+</div>
 <% end %>
 
 <script type="text/javascript">
