@@ -1,19 +1,45 @@
 	<%= form_for(@admin) do |f| %>
-		<% if can? :manage, :Admin %>
-	  <div class="field">
-	    邮箱：<%= f.text_field :email, :class => "input_1" %>
-	  </div>
-	  <div class="field">
-	    角色：<%= f.select :role, { "超级管理员" => "SuperAdmin" , "新闻发布账号" => "NewsAdmin", "社团账号" => "OrganizerAdmin" } %>
-	  </div>
-	  <% end %>
-	  <div class="field">
-	    密码：<%= f.password_field :password, :class => "input_1" %>
-	  </div>
-	  <div class="field">
-	    确认：<%= f.password_field :password_confirmation, :class => "input_1" %>
-	  </div>
-	  <div class="btn_box">
-	    <%= f.submit "保存", :class => "btn_2" %>
-	  </div>
+	<div class="form">
+    <div class="fields">
+    	<% if can? :manage, :Admin %>
+      <div class="field field-first">
+        <div class="label">
+          <label>邮箱</label>
+        </div>
+        <div class="input">
+        	<%= f.text_field :email, :class => "small" %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>角色</label>
+        </div>
+        <div class="select">
+        	<%= f.select :role, { "超级管理员" => "SuperAdmin" , "新闻发布账号" => "NewsAdmin", "社团账号" => "OrganizerAdmin" } %>
+        </div>
+      </div>
+      <% end %>
+      <div class="field">
+        <div class="label">
+          <label>密码</label>
+        </div>
+        <div class="input">
+        	<%= f.password_field :password, :class => "small" %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>确认</label>
+        </div>
+        <div class="input">
+        	<%= f.password_field :password_confirmation, :class => "small" %>
+        </div>
+      </div>
+
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
+  </div>
 	<% end %>
+
