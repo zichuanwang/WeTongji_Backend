@@ -84,7 +84,7 @@ $(document).ready(function () {
 <!-- end box / title -->
 <div class="sales">
     <div class="legend">
-        <h6>用户注册/激活情况</h6>
+        <h6>用户注册/激活情况(前15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
         <ul>
             <li class="monitors">注册</li>
             <li class="memory">激活</li>

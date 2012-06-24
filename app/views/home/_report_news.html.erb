@@ -1,25 +1,25 @@
 <script type="text/javascript">
 $(document).ready(function () {
-    $('#users').css({
+    $('#news').css({
         height: '200px',
         width: 'auto'
     });
 
-    <% all = User.find_by_sql("select count(id) count, date_format(`created_at`,'%y%m%d') sdate from `users` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
-    var register = [
+    <% all = News.find_by_sql("select count(id) count, date_format(`created_at`,'%y%m%d') sdate from `news` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
+    var news = [
     <% all.each do |item| %>
     [<%= item["sdate"] %>,<%= item["count"] %>],
     <% end %>
     ];
-    <% active = User.find_by_sql("select count(id) count, date_format(`confirmed_at`,'%y%m%d') sdate from `users` where `confirmed_at` between adddate(now(),-15) and now() group by sdate") %>
-    var active = [
+    <% active = Activity.find_by_sql("select count(id) count, date_format(`created_at`,'%y%m%d') sdate from `activities` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
+    var activity = [
     <% active.each do |item| %>
     [<%= item["sdate"] %>,<%= item["count"] %>],
     <% end %>
     ];
-    var plot = $.plot($("#users"), [
-		{ label: "注册", data: register },
-		{ label: "激活", data: active }
+    var plot = $.plot($("#news"), [
+		{ label: "新闻", data: news },
+		{ label: "活动", data: activity }
 	], {
 		lines: {
 			show: true
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     var previousPoint = null;
 
-    $("#users").bind("plothover", function (event, pos, item) {
+    $("#news").bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x.toFixed(2));
         $("#y").text(pos.y.toFixed(2));
 
@@ -76,19 +76,20 @@ $(document).ready(function () {
 </script>
 
 <div class="title">
-    <h5>用户注册/激活情况(前15天)</h5>
+    <h5>新闻/活动情况(前15天)</h5>
     <ul class="links">
-        <li><%= link_to "用户", users_path %></li>
+        <li><%= link_to "新闻", news_index_path %></li>
+        <li><%= link_to "活动", activities_path %></li>
     </ul>
 </div>
 <!-- end box / title -->
 <div class="sales">
     <div class="legend">
-        <h6>用户注册/激活情况</h6>
+        <h6>新闻/活动情况(前15天)-合计:新闻<%= News.all.count %>/活动<%= Activity.all.count %></h6>
         <ul>
-            <li class="monitors">注册</li>
-            <li class="memory">激活</li>
+            <li class="monitors">新闻</li>
+            <li class="memory">活动</li>
         </ul>
     </div>
-    <div id="users"></div>
+    <div id="news"></div>
 </div>
