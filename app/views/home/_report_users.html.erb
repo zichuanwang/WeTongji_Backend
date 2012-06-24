@@ -5,16 +5,16 @@ $(document).ready(function () {
         width: 'auto'
     });
 
-    <% all = User.find_by_sql("select count(id) count, date_format(`created_at`,'%y%m%d') sdate from `users` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
+    <% all = User.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `users` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
     var register = [
     <% all.each do |item| %>
-    [<%= item["sdate"] %>,<%= item["count"] %>],
+    [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
     <% end %>
     ];
-    <% active = User.find_by_sql("select count(id) count, date_format(`confirmed_at`,'%y%m%d') sdate from `users` where `confirmed_at` between adddate(now(),-15) and now() group by sdate") %>
+    <% active = User.find_by_sql("select count(id) count, date_format(`confirmed_at`,'%Y%m%d') sdate from `users` where `confirmed_at` between adddate(now(),-15) and now() group by sdate") %>
     var active = [
     <% active.each do |item| %>
-    [<%= item["sdate"] %>,<%= item["count"] %>],
+    [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
     <% end %>
     ];
     var plot = $.plot($("#users"), [
@@ -34,7 +34,11 @@ $(document).ready(function () {
 		},
 		legend: {
 			show: false
-		}
+		},
+        xaxis: {
+            mode: "time",
+            timeformat: "%0m%0d"
+        }
 	});
 
     function showTooltip(x, y, contents) {
@@ -76,7 +80,7 @@ $(document).ready(function () {
 </script>
 
 <div class="title">
-    <h5>用户注册/激活情况(前15天)</h5>
+    <h5>用户注册/激活情况(近15天)</h5>
     <ul class="links">
         <li><%= link_to "用户", users_path %></li>
     </ul>
@@ -84,7 +88,7 @@ $(document).ready(function () {
 <!-- end box / title -->
 <div class="sales">
     <div class="legend">
-        <h6>用户注册/激活情况(前15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
+        <h6>用户注册/激活情况(近15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
         <ul>
             <li class="monitors">注册</li>
             <li class="memory">激活</li>
