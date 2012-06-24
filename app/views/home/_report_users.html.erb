@@ -1,0 +1,94 @@
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#users').css({
+        height: '200px',
+        width: 'auto'
+    });
+
+    <% all = User.find_by_sql("select count(id) count, date_format(`created_at`,'%y%m%d') sdate from `users` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
+    var register = [
+    <% all.each do |item| %>
+    [<%= item["sdate"] %>,<%= item["count"] %>],
+    <% end %>
+    ];
+    <% active = User.find_by_sql("select count(id) count, date_format(`confirmed_at`,'%y%m%d') sdate from `users` where `confirmed_at` between adddate(now(),-15) and now() group by sdate") %>
+    var active = [
+    <% active.each do |item| %>
+    [<%= item["sdate"] %>,<%= item["count"] %>],
+    <% end %>
+    ];
+    var plot = $.plot($("#users"), [
+		{ label: "注册", data: register },
+		{ label: "激活", data: active }
+	], {
+		lines: {
+			show: true
+		},
+		points: {
+			show: true
+		},
+		grid: {
+			backgroundColor: '#fffaff',
+			hoverable: true,
+			clickable: true
+		},
+		legend: {
+			show: false
+		}
+	});
+
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css({
+            position: 'absolute',
+            display: 'none',
+            top: y + -36,
+            left: x + -6,
+            border: '1px solid #fdd',
+            padding: '4px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
+
+    var previousPoint = null;
+
+    $("#users").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+
+        if (item) {
+            if (previousPoint != item.datapoint) {
+                previousPoint = item.datapoint;
+
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);
+
+                showTooltip(item.pageX, item.pageY, Math.round(y) + " " + item.series.label);
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    });
+});
+</script>
+
+<div class="title">
+    <h5>用户注册/激活情况(前15天)</h5>
+    <ul class="links">
+        <li><%= link_to "用户", users_path %></li>
+    </ul>
+</div>
+<!-- end box / title -->
+<div class="sales">
+    <div class="legend">
+        <h6>用户注册/激活情况(前15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
+        <ul>
+            <li class="monitors">注册</li>
+            <li class="memory">激活</li>
+        </ul>
+    </div>
+    <div id="users"></div>
+</div>
