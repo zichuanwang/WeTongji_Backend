@@ -1,3 +1,4 @@
+require 'rsa'
 class ApiController < ApplicationController
 	# need split to some partal files
 	def test
@@ -38,53 +39,53 @@ class ApiController < ApplicationController
 	}
 
 	def call
-		# check params check sum
+	# check params check sum
 		if verify_checksum
-     	# check params exists system require params
-      if verify_sys_params && METHODS[params[:M]]
-      	send METHODS[params[:M]]
-      else
-      	return_response ApiReturn.new("004")
-      end
-    else
-    	return_response ApiReturn.new("001")
-    end
-  end
+	     	# check params exists system require params
+		    if verify_sys_params && METHODS[params[:M]]
+		      	send METHODS[params[:M]]
+		    else
+		      	return_response ApiReturn.new("004")
+		    end
+	    else
+	    	return_response ApiReturn.new("001")
+	    end
+	end
 
-  private
+  	private
 
-  def verify_checksum
-  	h = params[:H]
-		md5_string = request.query_string.split('&').sort.collect do |s|
-  		key, val = s.split('=')
-  		unless key == "H"
-  			key + "=" + val
-  		end
-		end
-  	# md5_string = params.sort.collect do |s|
-  	# 	unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
-  	# 		s[0] + "=" + s[1]
-  	# 	end
-  	# end
-  	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
-  	p md5_string.compact.join("&")
-  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == h
-  end
+	def verify_checksum
+	  	h = params[:H]
+			md5_string = request.query_string.split('&').sort.collect do |s|
+	  		key, val = s.split('=')
+	  		unless key == "H"
+	  			key + "=" + val
+	  		end
+			end
+	  	# md5_string = params.sort.collect do |s|
+	  	# 	unless s[0] == "action" || s[0] == "H" || s[0] == "controller"
+	  	# 		s[0] + "=" + s[1]
+	  	# 	end
+	  	# end
+	  	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
+	  	p md5_string.compact.join("&")
+	  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == h
+	end
 
-  def verify_sys_params
-  	if params[:M] && params[:H] && params[:D] && params[:V]
-  		true
-  	else
-  		false
+  	def verify_sys_params
+	  	if params[:M] && params[:H] && params[:D] && params[:V]
+	  		true
+	  	else
+	  		false
+	  	end
   	end
-  end
 
-  def return_response(api_return)
-  	respond_to do |format|
-  		format.html { render json: api_return }
-  		format.json { render json: api_return }
-  	end
-  end
+	def return_response(api_return)
+	  	respond_to do |format|
+	  		format.html { render json: api_return }
+	  		format.json { render json: api_return }
+	  	end
+	end
 
 	# verify user log
 	def verify_action_params(keys = [])
@@ -109,41 +110,41 @@ class ApiController < ApplicationController
 		end
 	end
 
-  # get all channels
-  def channels
-  	channels = Channel.all
-  	ex = []
-  	channels.each do |channel|
-  		ex << ExChannel.init_from_channel(channel)
+	# get all channels
+	def channels
+	  	channels = Channel.all
+	  	ex = []
+	  	channels.each do |channel|
+	  		ex << ExChannel.init_from_channel(channel)
+	  	end
+	  	re = ApiReturn.new("000")
+	  	re.add_data("Channels", ex)
+	  	return_response(re)
+	end
+
+  	def channel_follow
+  		if verify_action_params(['Id', 'UID'])
+	  		channel = Channel.find(params[:Id])
+	  		if channel
+		  		channel.user_follow(params[:UID])
+		  		channel.save
+		  	end
+		  	re = ApiReturn.new("000")
+		  	return_response(re)
+	  	end
   	end
-  	re = ApiReturn.new("000")
-  	re.add_data("Channels", ex)
-  	return_response(re)
-  end
 
-  def channel_follow
-  	if verify_action_params(['Id', 'UID'])
-	  	channel = Channel.find(params[:Id])
-	  	if channel
-	  		channel.user_follow(params[:UID])
-	  		channel.save
-	  	end
-	  	re = ApiReturn.new("000")
-	  	return_response(re)
-	  end
-  end
-
-  def channel_unfollow
-  	if verify_action_params(['Id', 'UID'])
-	  	channel = Channel.find(params[:Id])
-	  	if channel
-	  		channel.user_unfollow(params[:UID])
-	  		channel.save
-	  	end
-	  	re = ApiReturn.new("000")
-	  	return_response(re)
-	  end
-  end
+  	def channel_unfollow
+	  	if verify_action_params(['Id', 'UID'])
+		  	channel = Channel.find(params[:Id])
+		  	if channel
+		  		channel.user_unfollow(params[:UID])
+		  		channel.save
+		  	end
+		  	re = ApiReturn.new("000")
+		  	return_response(re)
+		end
+  	end
 
 	# activity operate
 	def favorite
