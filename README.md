@@ -1,4 +1,3 @@
-wetongji_webservice
-===================
+微同济服务后端.
 
-web service for wetongji app client
+注意:private key不要外传.
