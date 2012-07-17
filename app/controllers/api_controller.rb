@@ -1,4 +1,4 @@
-require 'rsa'
+#require 'rsa'
 class ApiController < ApplicationController
 	# need split to some partal files
 	def test

@@ -32,14 +32,17 @@ class Ability
             can :manage, News
             can :manage, Admin, :id => admin.id
         when "OrganizerAdmin"
-            can :read, Organizer, :admin_id => admin.id
+            can :manage, Organizer, :admin_id => admin.id
+            cannot :create, Organizer
 
             # can :read, Activity, :organizer => { :admin_id => admin.id }
             # can :create, Activity, :organizer => { :admin_id => admin.id }
             # can :destroy, Activity, :organizer => { :admin_id => admin.id }
             can :manage, Activity, :organizer => { :admin_id => admin.id }
+            can :create, Activity
 
             can :manage, Admin, :id => admin.id
+            cannot :create, Admin
     end
   end
 end

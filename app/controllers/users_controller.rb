@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  authorize_resource
 	before_filter :authenticate_admin!, :except => [:confirmation, :welcome, :reset_password, :reset_password_success, :reset_password_from_mail]
   def index
     @users = User.order('id desc')
