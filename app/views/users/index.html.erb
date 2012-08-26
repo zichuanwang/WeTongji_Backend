@@ -48,7 +48,7 @@
               <td>
                 <%= link_to "Avatar", user.avatar.url, { :class => 'screenshot', :target => "_blank" } %>
               </td>
-              <td>
+              <td class="last">
                 <% if user.confirmed_at.nil? %>
                 <%= link_to '激活', {:action => "confirmation", :controller => "users", :token => user.confirmation_token}, confirm: '确认激活?' %>
                 <%= link_to '重新发送', {:action => "reconfirm", :controller => "users", :id => user.id}, confirm: '确认再次发送激活邮件?' %>
@@ -60,5 +60,12 @@
             </tbody>
         </table>
         <%= paginate @users %>
+        <div class="action">
+          <div class="button">
+            <%= form_tag "/users/reconfirm_all", :method => "get" do %>
+            <input type="submit" name="submit" onclick="return window.confirm('确认给所有未激活用户重新发送激活邮件?');" value="重新发送激活邮件" />
+            <% end %>
+          </div>
+        </div>
     </div>
 </div>
