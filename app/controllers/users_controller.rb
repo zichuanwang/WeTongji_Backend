@@ -23,6 +23,14 @@ class UsersController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def reconfirm_all
+    users = User.where("confirmed_at is null")
+    users.each do |user|
+      UserMailer.confirmation(user).deliver
+    end
+    redirect_to :action => "index"
+  end
+
   def send_reset_password_mail
     user = User.find(params[:id])
     if user
