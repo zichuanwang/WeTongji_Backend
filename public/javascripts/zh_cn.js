@@ -39,11 +39,17 @@ jquery_lang_js.prototype.lang.zh_cn = {
 	'Whether you are the common WEer or the artistic WEer, even the so-called XX WEer, you could finally find your own life style in WeTongji with the best experience mixed with varieties of fun or excitement.':
 	'不管你是普通青年还是文艺青年又或者是XX青年，都能在微同济找到属于你自己的全新校园生活模式，体验大学的种种乐趣和缤纷。',
 	
-	'Is it possible for WeTongji to publish on Android platform?':
-	'WeTongji 会支持Android平台吗？',
+	'How could I join the big family of WeTongji?':
+	'如何成为WeTongji的一员？',
 	
-	'Of course, the version of Android will be released around the beginning of next semester, functioning the same as that on iOS in overall.':
-	'当然会，我们将在下学期初发布Android的版本，功能将与iOS的版本大致保持一致。',
+	'Very simple steps. Just download the file of the following link and email it back to us. That is all!':
+	'非常简单，直接在下方下载我们的申请表，然后发送至我们的邮箱即可申请成为我们的一员。',
+	
+	'The opened positions in WE':
+	'同济大学学生校园信息服务小组招聘岗位',
+	
+	'The application form to be a new member in WE':
+	'同济大学学生校园信息服务小组新成员申请表',
 	
 	'How does WeTongji get the information of users?Is it safe?':
 	'微同济是如何获取用户信息，安全吗？',
