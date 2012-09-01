@@ -1,3 +1,4 @@
+# encoding: utf-8
 class UsersController < ApplicationController
 	before_filter :authenticate_admin!, :except => [:confirmation, :welcome, :reset_password, :reset_password_success, :reset_password_from_mail]
   def index
@@ -21,6 +22,29 @@ class UsersController < ApplicationController
       UserMailer.confirmation(user).deliver
     end
     redirect_to :action => "index"
+  end
+
+  def batch_save
+    case params[:status]
+      when "重新发送激活邮件"
+        unless params[:selected_ids].nil?
+          users = User.where("confirmed_at is null and id in (:ids)", :ids => params[:selected_ids]).order("id desc")
+          users.each do |user|
+            UserMailer.confirmation(user).deliver
+          end
+        end
+      when "批量激活"
+        unless params[:selected_ids].nil?
+          users = User.where("confirmed_at is null and id in (:ids)", :ids => params[:selected_ids]).order("id desc")
+          users.each do |user|
+            user.confirmed_at = Time.now
+            user.save
+            UserMailer.welcome(user).deliver
+          end
+        end
+    end 
+
+    redirect_to users_path
   end
 
   def reconfirm_all
