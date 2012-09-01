@@ -4,7 +4,8 @@ class UserMailer < ActionMailer::Base
 
   def confirmation(user)
   	@user = user
-  	mail(:to => user.email, :subject => "请激活账户.")
+  	#mail(:to => user.email, :subject => "请激活账户.")
+    mail(:to => "test", :subject => "请激活账户.")
   end
   
   def welcome(user)
