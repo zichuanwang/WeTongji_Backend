@@ -47,7 +47,8 @@ WetongjiWeb::Application.configure do
     :user_name            => 'we',
     :password             => 'wetongji2012',
     :authentication       => 'plain',
-    :enable_starttls_auto => false  
+    :enable_starttls_auto => true,
+    :openssl_verify_mode  => 'none' 
   }
 
 
