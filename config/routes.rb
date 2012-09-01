@@ -43,6 +43,7 @@ WetongjiWeb::Application.routes.draw do
   get "users/reconfirm"
   get "users/send_reset_password_mail"
   get "users/reconfirm_all"
+  post "users/batch_save"
   resources :users
 
   post "students/import"

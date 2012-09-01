@@ -2,7 +2,7 @@ require 'csv'
 class Student < ActiveRecord::Base
 	validates_presence_of :name, :no, :email
 	validates_uniqueness_of :no, :email
-	paginates_per 10
+	paginates_per 15
 
 	def self.import(file_path)
 		students = []
