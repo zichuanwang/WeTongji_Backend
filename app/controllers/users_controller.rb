@@ -24,7 +24,7 @@ class UsersController < ApplicationController
   end
 
   def reconfirm_all
-    users = User.where("confirmed_at is null")
+    users = User.where("confirmed_at is null").order("id desc")
     users.each do |user|
       UserMailer.confirmation(user).deliver
     end
