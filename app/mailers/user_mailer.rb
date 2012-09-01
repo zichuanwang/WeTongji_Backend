@@ -1,7 +1,6 @@
 # encoding: utf-8
 class UserMailer < ActionMailer::Base
-  #default :from => "we@tongji.edu.cn"
-  default :from => "wetongji2012@gmail.com"
+  default :from => "we@tongji.edu.cn"
 
   def confirmation(user)
   	@user = user
