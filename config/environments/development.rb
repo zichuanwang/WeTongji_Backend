@@ -41,19 +41,13 @@ WetongjiWeb::Application.configure do
   config.action_mailer.default_url_options = { :host => 'we.tongji.edu.cn' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    # :address              => "smtp.tongji.edu.cn",
-    # :port                 => 25,
-    # :domain               => "tongji.edu.cn",
-    # :user_name            => 'we',
-    # :password             => 'wetongji2012',
-
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => 'gmail.com',
-    :user_name            => 'wetongji2012@gmail.com',
-    :password             => 'wetongji',
+    :address              => "smtp.tongji.edu.cn",
+    :port                 => 25,
+    :domain               => "tongji.edu.cn",
+    :user_name            => 'we',
+    :password             => 'wetongji2012',
     :authentication       => 'plain',
-    :enable_starttls_auto => true  
+    :enable_starttls_auto => false  
   }
 
 
