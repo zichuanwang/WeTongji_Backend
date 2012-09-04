@@ -1,4 +1,7 @@
 WetongjiWeb::Application.routes.draw do
+  get "organizer_registers/agreement"
+  resources :organizer_registers
+
   post "exams/import"
   get "exams/upload"
   resources :exams

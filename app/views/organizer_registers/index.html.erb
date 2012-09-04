@@ -1,0 +1,41 @@
+<script type="text/javascript" src="/javascripts/imgpreview.full.0.22.jquery.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.screenshot').imgPreview();
+  });
+</script>
+
+<div class="box">
+    <div class="title">
+        <h5>所有申请</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>Icon</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @organizer_registers.each do |organizer_register| %>
+              <tr>
+                <td><%= organizer_register.name %></td>
+                <td><%= organizer_register.account %></td>
+                <td><%= organizer_register.person_in_charge %></td>
+                <td><%= organizer_register.job_title %></td>
+                <td><%= organizer_register.cell %></td>
+                <td><%= organizer_register.email %></td>
+                <td><%= organizer_register.address %></td>
+                <td><%= organizer_register.approved_at %></td>
+                <td class="last">
+                  <%= link_to '详情', organizer_register %>
+                  <%= link_to '编辑', organizer_register_path(organizer_register) %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

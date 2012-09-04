@@ -1,0 +1,53 @@
+<%= form_for(@organizer_register) do |f| %>
+  <% if @organizer_register.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organizer_register.errors.count, "error") %> prohibited this organizer_register from being saved:</h2>
+
+      <ul>
+      <% @organizer_register.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :account %><br />
+    <%= f.text_field :account %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :person_in_charge %><br />
+    <%= f.text_field :person_in_charge %>
+  </div>
+  <div class="field">
+    <%= f.label :job_title %><br />
+    <%= f.text_field :job_title %>
+  </div>
+  <div class="field">
+    <%= f.label :cell %><br />
+    <%= f.text_field :cell %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address %>
+  </div>
+  <div class="field">
+    <%= f.label :approved_at %><br />
+    <%= f.check_box :approved_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
