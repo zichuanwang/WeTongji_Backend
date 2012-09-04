@@ -9,7 +9,11 @@ class OrganizerRegistersController < ApplicationController
   end
 
   def new
-    @menu = "organizers"
+    render :layout => "out"
+  end
+
+  def agreement
+    render :layout => "out"
   end
 
   def edit

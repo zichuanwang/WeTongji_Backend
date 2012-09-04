@@ -2,6 +2,7 @@ class CreateOrganizerRegisters < ActiveRecord::Migration
   def change
     create_table :organizer_registers do |t|
       t.string :name
+      t.string :description
       t.string :account
       t.string :password
       t.string :person_in_charge

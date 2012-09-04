@@ -14,7 +14,12 @@
             <thead>
                 <tr>
                   <th>名称</th>
-                  <th>Icon</th>
+                  <th>账户</th>
+                  <th>负责人</th>
+                  <th>职位</th>
+                  <th>手机</th>
+                  <th>邮箱</th>
+                  <th>审批时间</th>
                   <th class="last">操作</th>
                 </tr>
             </thead>
@@ -27,7 +32,6 @@
                 <td><%= organizer_register.job_title %></td>
                 <td><%= organizer_register.cell %></td>
                 <td><%= organizer_register.email %></td>
-                <td><%= organizer_register.address %></td>
                 <td><%= organizer_register.approved_at %></td>
                 <td class="last">
                   <%= link_to '详情', organizer_register %>
