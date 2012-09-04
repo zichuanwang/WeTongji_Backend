@@ -17,7 +17,7 @@ class OrganizerRegistersController < ApplicationController
   end
 
   def form_received
-    render :layout => "out"
+    
   end
 
   def edit
@@ -29,7 +29,7 @@ class OrganizerRegistersController < ApplicationController
 
     respond_to do |format|
       if @organizer_register.save
-        format.html { redirect_to action: "form_received", notice: 'Organizer register was successfully created.' }
+        format.html { redirect_to @organizer_register, notice: 'Organizer register was successfully created.' }
       else
         format.html { render action: "new" }
         render :layout => "out"
