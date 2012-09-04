@@ -1,4 +1,4 @@
-<%= form_for(@organizer_register) do |f| %>
+<%= form_for(@organizer_register, :html => {:multipart => true}) do |f| %>
   <% if @organizer_register.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@organizer_register.errors.count, "error") %> prohibited this organizer_register from being saved:</h2>
@@ -10,44 +10,91 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
+<div class="form">
+  <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>名称</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :name, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>图标</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :icon, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>简介</label>
+        </div>
+        <div class="input">
+          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>登陆账号</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :account, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>登陆密码</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :password, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>负责人</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :person_in_charge, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>职位</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :job_title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>手机</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :cell, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>邮箱</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :email, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>地址</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :address, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="提交" />
+      </div>
   </div>
-  <div class="field">
-    <%= f.label :account %><br />
-    <%= f.text_field :account %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :person_in_charge %><br />
-    <%= f.text_field :person_in_charge %>
-  </div>
-  <div class="field">
-    <%= f.label :job_title %><br />
-    <%= f.text_field :job_title %>
-  </div>
-  <div class="field">
-    <%= f.label :cell %><br />
-    <%= f.text_field :cell %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-  <div class="field">
-    <%= f.label :approved_at %><br />
-    <%= f.check_box :approved_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
 <% end %>
