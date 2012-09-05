@@ -10,7 +10,7 @@ class CreateOrganizerRegisters < ActiveRecord::Migration
       t.string :cell
       t.string :email
       t.string :address
-      t.boolean :approved_at
+      t.datetime :approved_at
       t.string :icon_file_name
       t.string :icon_content_type
       t.integer :icon_file_size
