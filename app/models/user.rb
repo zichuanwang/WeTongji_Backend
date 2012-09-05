@@ -32,11 +32,11 @@ class User < ActiveRecord::Base
         user.year = student.year
         user.plan = student.plan
         user.gender = student.gender
-        user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+        user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
         user
       elsif user.confirmed_at.nil?
         if user.confirmation_token.nil? || user.confirmation_token.blank?
-          user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+          user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
         end
         user
       end
@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
       user.current_sign_in_at = user.last_seen_at
       user.sign_in_count = user.sign_in_count + 1
       user.last_sign_in_ip = ENV["HTTP_X_FORWARDED_FOR"]
-      user.authentication_token = Digest::SHA1.hexdigest(user.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      user.authentication_token = Digest::SHA1.hexdigest(user.uid + Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
       user
     end
   end
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
   def update_password(password_old, password_new)
     if password_new != nil && password_new != '' && self.encrypted_password == User.hash_password(password_old, self.password_salt)
       self.password = password_new
-      self.authentication_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      self.authentication_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
       self.reset_password_token = nil
       self.last_seen_at = Time.now
     end
@@ -102,7 +102,7 @@ class User < ActiveRecord::Base
 
   def send_reset_password_mail
     if self.reset_password_token.nil? || self.reset_password_token.blank?
-      self.reset_password_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      self.reset_password_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
     end
     UserMailer.reset_password(self).deliver
   end
