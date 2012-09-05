@@ -22,7 +22,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>图标</label>
+          <label>图标(PNG格式,文件名不能有中文.)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :icon, { :size => "40" } %>
@@ -93,7 +93,11 @@
         </div>
       </div>
       <div class="buttons">
+        <% unless @organizer_register.approved_at.nil? %>
         <input type="submit" name="submit" value="提交" />
+        <% else %>
+        <input type="submit" name="submit" value="审批通过" />
+        <% end %>
       </div>
   </div>
 </div>

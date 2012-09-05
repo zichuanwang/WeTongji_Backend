@@ -1,50 +1,45 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @organizer_register.name %>
-</p>
-
-<p>
-  <b>Account:</b>
-  <%= @organizer_register.account %>
-</p>
-
-<p>
-  <b>Password:</b>
-  <%= @organizer_register.password %>
-</p>
-
-<p>
-  <b>Person in charge:</b>
-  <%= @organizer_register.person_in_charge %>
-</p>
-
-<p>
-  <b>Job title:</b>
-  <%= @organizer_register.job_title %>
-</p>
-
-<p>
-  <b>Cell:</b>
-  <%= @organizer_register.cell %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @organizer_register.email %>
-</p>
-
-<p>
-  <b>Address:</b>
-  <%= @organizer_register.address %>
-</p>
-
-<p>
-  <b>Approved at:</b>
-  <%= @organizer_register.approved_at %>
-</p>
-
-
-<%= link_to 'Edit', edit_organizer_register_path(@organizer_register) %> |
-<%= link_to 'Back', organizer_registers_path %>
+<div class="box">
+    <div class="title">
+        <h5>查看申请</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>名称</td>
+            <td class="last"><%= @organizer_register.name %></td>
+          </tr>
+          <tr>
+            <td>简介</td>
+            <td class="last"><%= @organizer_register.description %></td>
+          </tr>
+          <tr>
+            <td>头像</td>
+            <td class="last"><%= image_tag @organizer_register.icon.url %></td>
+          </tr>
+          <tr>
+            <td>登陆账号</td>
+            <td class="last"><%= @organizer_register.account %></td>
+          </tr>
+          <tr>
+            <td>负责人</td>
+            <td class="last"><%= @organizer_register.person_in_charge %></td>
+          </tr>
+          <tr>
+            <td>职位</td>
+            <td class="last"><%= @organizer_register.job_title %></td>
+          </tr>
+          <tr>
+            <td>手机</td>
+            <td class="last"><%= @organizer_register.cell %></td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td class="last"><%= @organizer_register.email %></td>
+          </tr>
+          <tr>
+            <td>地址</td>
+            <td class="last"><%= @organizer_register.address %></td>
+          </tr>
+        </table>
+    </div>
+</div>

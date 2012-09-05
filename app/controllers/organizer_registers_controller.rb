@@ -1,15 +1,19 @@
 class OrganizerRegistersController < ApplicationController
+  before_filter :authenticate_admin!, :except => [:new, :agreement, :form_received]
   load_and_authorize_resource
   def index
     @menu = "organizers"
+    @organizer_registers = OrganizerRegister.accessible_by(current_ability).order('id desc').page(params[:page])
   end
 
   def show
     @menu = "organizers"
+    @organizer_register = OrganizerRegister.find(params[:id])
   end
 
   def new
     render :layout => "out"
+    @organizer_register = OrganizerRegister.new
   end
 
   def agreement
@@ -22,10 +26,12 @@ class OrganizerRegistersController < ApplicationController
 
   def edit
     @menu = "organizers"
+    @organizer_register = OrganizerRegister.find(params[:id])
   end
 
   def create
     @menu = "organizers"
+    @organizer_register = OrganizerRegister.new(params[:organizer_register])
 
     respond_to do |format|
       if @organizer_register.save
@@ -38,6 +44,7 @@ class OrganizerRegistersController < ApplicationController
   end
 
   def update
+    @organizer_register = OrganizerRegister.find(params[:id])
     respond_to do |format|
       if @organizer_register.update_attributes(params[:organizer_register])
         format.html { redirect_to @organizer_register, notice: 'Organizer register was successfully updated.' }

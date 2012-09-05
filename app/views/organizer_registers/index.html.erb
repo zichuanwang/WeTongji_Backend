@@ -35,7 +35,9 @@
                 <td><%= organizer_register.approved_at %></td>
                 <td class="last">
                   <%= link_to '详情', organizer_register %>
-                  <%= link_to '编辑', organizer_register_path(organizer_register) %>
+                  <% if organizer_register.approved_at.nil? %>
+                  <%= link_to '审批', edit_organizer_register_path(organizer_register) %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
