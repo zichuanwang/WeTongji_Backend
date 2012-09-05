@@ -5,7 +5,7 @@ class ExActivity
 		model = ExActivity.new
 		model.Id = activity.id
 		model.Image = activity.image == nil ? '' : Rails.configuration.host + activity.image.url
-		model.OrganizerAvatar = activity.organizer.icon == nil ? '' : Rails.configuration.host + activity.organizer.icon.url
+		model.OrganizerAvatar = activity.organizer.icon == nil ? '' : Rails.configuration.host + activity.organizer.icon.url(:medium)
 		model.Begin = activity.begin
 		model.End = activity.end
 		model.Location = activity.location

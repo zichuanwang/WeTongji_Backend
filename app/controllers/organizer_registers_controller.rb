@@ -43,7 +43,7 @@ class OrganizerRegistersController < ApplicationController
       if @organizer_register.update_attributes(params[:organizer_register])
         @organizer_register.approved_at = Time.now
         @organizer_register.save
-        admin = Admin.find_by_email(@organizer_register.email)
+        admin = Admin.find_by_email(@organizer_register.account)
         if admin.nil?
           admin = Admin.create(:email => @organizer_register.account, :password => @organizer_register.password, :role => "OrganizerAdmin", :password_confirmation => @organizer_register.password)
         end
@@ -56,7 +56,7 @@ class OrganizerRegistersController < ApplicationController
           @organizer.admin = admin
           @organizer.save
         end
-        OrganizerRegisterMailer.welcome(@organizer).deliver
+        OrganizerRegisterMailer.welcome(admin).deliver
         format.html { redirect_to @organizer_register, notice: 'Organizer register was successfully updated.' }
       else
         format.html { render action: "edit" }

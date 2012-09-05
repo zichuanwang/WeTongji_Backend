@@ -1,10 +1,10 @@
 class Organizer < ActiveRecord::Base
 	has_many :activities
-	has_one :admin
+	belongs_to :admin
 	validates_uniqueness_of :name
 	validates_presence_of :name
 
-	has_attached_file :icon, :styles => { :medium => "200x200>", :thumb => "100x100>" }
+	has_attached_file :icon, :styles => { :medium => "180x180>", :thumb => "100x100>" }
 
 	# before_save :randomize_file_name
 
