@@ -1,5 +1,5 @@
 class OrganizerRegistersController < ApplicationController
-  before_filter :authenticate_admin!, :except => [:new, :agreement, :form_received]
+  before_filter :authenticate_admin!, :except => [:new, :form_received, :create]
   def index
     @menu = "organizers"
     @organizer_registers = OrganizerRegister.accessible_by(current_ability).order('id desc').page(params[:page])
@@ -12,10 +12,6 @@ class OrganizerRegistersController < ApplicationController
 
   def new
     @organizer_register = OrganizerRegister.new
-    render :layout => "out"
-  end
-
-  def agreement
     render :layout => "out"
   end
 
