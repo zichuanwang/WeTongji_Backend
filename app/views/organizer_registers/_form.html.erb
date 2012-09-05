@@ -14,7 +14,7 @@
   <div class="fields">
       <div class="field field-first">
         <div class="label">
-          <label>名称</label>
+          <label>社团名称</label>
         </div>
         <div class="input">
           <%= f.text_field :name, { :class => "small" } %>
@@ -22,7 +22,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>图标(png,正方形,文件名不能有中文)</label>
+          <label>社团图标(jpeg,正方形,文件名不能有中文)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :icon, { :size => "40" } %>
@@ -30,7 +30,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>简介</label>
+          <label>社团简介</label>
         </div>
         <div class="input">
           <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
@@ -38,7 +38,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>登陆账号(有效的email地址)</label>
+          <label>登录帐号(社团email地址)</label>
         </div>
         <div class="input">
           <%= f.text_field :account, { :class => "small" } %>
@@ -62,7 +62,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>职位</label>
+          <label>负责人职位</label>
         </div>
         <div class="input">
           <%= f.text_field :job_title, { :class => "small" } %>
@@ -70,7 +70,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>手机</label>
+          <label>负责人手机</label>
         </div>
         <div class="input">
           <%= f.text_field :cell, { :class => "small" } %>
@@ -78,7 +78,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>邮箱(有效的email地址)</label>
+          <label>负责人邮箱(有效的email地址)</label>
         </div>
         <div class="input">
           <%= f.text_field :email, { :class => "small" } %>
@@ -86,7 +86,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>地址</label>
+          <label>负责人住址</label>
         </div>
         <div class="input">
           <%= f.text_field :address, { :class => "large" } %>
