@@ -1,6 +1,5 @@
 class OrganizerRegistersController < ApplicationController
   before_filter :authenticate_admin!, :except => [:new, :agreement, :form_received]
-  load_and_authorize_resource
   def index
     @menu = "organizers"
     @organizer_registers = OrganizerRegister.accessible_by(current_ability).order('id desc').page(params[:page])
@@ -12,8 +11,8 @@ class OrganizerRegistersController < ApplicationController
   end
 
   def new
-    render :layout => "out"
     @organizer_register = OrganizerRegister.new
+    render :layout => "out"
   end
 
   def agreement
@@ -38,7 +37,6 @@ class OrganizerRegistersController < ApplicationController
         format.html { redirect_to action: "form_received", notice: 'Organizer register was successfully created.' }
       else
         format.html { render action: "new", layout: "out" }
-        
       end
     end
   end

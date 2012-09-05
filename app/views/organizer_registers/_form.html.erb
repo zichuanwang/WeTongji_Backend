@@ -22,7 +22,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>图标(PNG格式,文件名不能有中文.)</label>
+          <label>图标(png,正方形,文件名不能有中文)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :icon, { :size => "40" } %>
@@ -38,7 +38,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>登陆账号</label>
+          <label>登陆账号(有效的email地址)</label>
         </div>
         <div class="input">
           <%= f.text_field :account, { :class => "small" } %>
@@ -78,7 +78,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>邮箱</label>
+          <label>邮箱(有效的email地址)</label>
         </div>
         <div class="input">
           <%= f.text_field :email, { :class => "small" } %>
@@ -93,10 +93,12 @@
         </div>
       </div>
       <div class="buttons">
-        <% unless @organizer_register.approved_at.nil? %>
-        <input type="submit" name="submit" value="提交" />
+        <% if @organizer_register.id.nil? %>
+          <div class="highlight">
+            <input type="submit" value="我已阅读并且理解协议内容" />
+          </div>
         <% else %>
-        <input type="submit" name="submit" value="审批通过" />
+          <input type="submit" name="submit" value="审批通过" />
         <% end %>
       </div>
   </div>
