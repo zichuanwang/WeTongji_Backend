@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     @user = User.find_by_reset_password_token(params[:token])
     if params[:password] == params[:password_confirmation] && User.is_password_valid?(params[:password]) && @user
         @user.password = params[:password]
-        @user.reset_password_token = ''
+        @user.reset_password_token = nil
         @user.save
         redirect_to users_reset_password_success_url
     else
@@ -91,6 +91,7 @@ class UsersController < ApplicationController
   	user = User.find_by_confirmation_token(params[:token])
   	if user && user.confirmed_at == nil
   		user.confirmed_at = Time.now
+      user.confirmation_token = nil
   		user.save
   		UserMailer.welcome(user).deliver
   		redirect_to :action => "welcome"
