@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
     student = Student.find_by_no_and_name(no, name)
     if student
       user = User.find_by_no(no)
-      if user == nil
+      if user.nil?
         user = User.new
         user.email = student.email
         user.no = student.no
@@ -34,8 +34,10 @@ class User < ActiveRecord::Base
         user.gender = student.gender
         user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
         user
-      elsif user.confirmed_at == nil
-        user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      elsif user.confirmed_at.nil?
+        if user.confirmation_token.nil? || user.confirmation_token.blank?
+          user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+        end
         user
       end
     end
@@ -74,6 +76,7 @@ class User < ActiveRecord::Base
     if password_new != nil && password_new != '' && self.encrypted_password == User.hash_password(password_old, self.password_salt)
       self.password = password_new
       self.authentication_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+      self.reset_password_token = nil
       self.last_seen_at = Time.now
     end
   end
@@ -98,7 +101,9 @@ class User < ActiveRecord::Base
   end
 
   def send_reset_password_mail
-    self.reset_password_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+    if self.reset_password_token.nil? || self.reset_password_token.blank?
+      self.reset_password_token = Digest::SHA1.hexdigest(self.uid + Time.now.strftime("%Y%m%d%H%M%S") + rand.to_s)
+    end
     UserMailer.reset_password(self).deliver
   end
 
