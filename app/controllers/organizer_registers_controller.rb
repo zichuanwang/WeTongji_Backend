@@ -47,6 +47,16 @@ class OrganizerRegistersController < ApplicationController
     @organizer_register = OrganizerRegister.find(params[:id])
     respond_to do |format|
       if @organizer_register.update_attributes(params[:organizer_register])
+        @organizer_register.approved_at = Time.now
+        admin = Admin.create(:email => @organizer_register.account, :password => @organizer_register.password, :role => "OrganizerAdmin", :password_confirmation => @organizer_register.password)
+        @organizer = Organizer.new
+        @organizer.name = @organizer_register.name
+        @organizer.description = @organizer_register.description
+        @organizer.icon = @organizer_register.icon
+        @organizer.admin = admin
+        @organizer.save
+        OrganizerRegisterMailer.welcome(@organizer).deliver
+        @organizer_register.save
         format.html { redirect_to @organizer_register, notice: 'Organizer register was successfully updated.' }
       else
         format.html { render action: "edit" }

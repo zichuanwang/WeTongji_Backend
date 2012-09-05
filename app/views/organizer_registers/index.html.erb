@@ -32,7 +32,7 @@
                 <td><%= organizer_register.job_title %></td>
                 <td><%= organizer_register.cell %></td>
                 <td><%= organizer_register.email %></td>
-                <td><%= organizer_register.approved_at %></td>
+                <td><%= organizer_register.approved_at.nil? ? "" : organizer_register.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                 <td class="last">
                   <%= link_to '详情', organizer_register %>
                   <% if organizer_register.approved_at.nil? %>
