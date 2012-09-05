@@ -1,0 +1,40 @@
+<div class="box">
+    <div class="title">
+        <h5>所有申请</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>名称</th>
+                  <th>账户</th>
+                  <th>负责人</th>
+                  <th>职位</th>
+                  <th>手机</th>
+                  <th>邮箱</th>
+                  <th>审批时间</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @organizer_registers.each do |organizer_register| %>
+              <tr>
+                <td><%= organizer_register.name %></td>
+                <td><%= organizer_register.account %></td>
+                <td><%= organizer_register.person_in_charge %></td>
+                <td><%= organizer_register.job_title %></td>
+                <td><%= organizer_register.cell %></td>
+                <td><%= organizer_register.email %></td>
+                <td><%= organizer_register.approved_at.nil? ? "" : organizer_register.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                <td class="last">
+                  <%= link_to '详情', organizer_register %>
+                  <% if organizer_register.approved_at.nil? %>
+                  <%= link_to '审批', edit_organizer_register_path(organizer_register) %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

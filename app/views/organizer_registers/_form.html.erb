@@ -1,0 +1,106 @@
+<%= form_for(@organizer_register, :html => {:multipart => true}) do |f| %>
+  <% if @organizer_register.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@organizer_register.errors.count, "error") %> prohibited this organizer_register from being saved:</h2>
+
+      <ul>
+      <% @organizer_register.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="form">
+  <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>名称</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :name, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>图标(png,正方形,文件名不能有中文)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :icon, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>简介</label>
+        </div>
+        <div class="input">
+          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>登陆账号(有效的email地址)</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :account, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>登陆密码</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :password, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>负责人</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :person_in_charge, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>职位</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :job_title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>手机</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :cell, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>邮箱(有效的email地址)</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :email, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>地址</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :address, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="buttons">
+        <% if @organizer_register.id.nil? %>
+          <div class="highlight">
+            <input type="submit" value="我已阅读并且理解协议内容" />
+          </div>
+        <% else %>
+          <input type="submit" value="审批通过" />
+        <% end %>
+      </div>
+  </div>
+</div>
+<% end %>

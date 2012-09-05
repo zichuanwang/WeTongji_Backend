@@ -1,0 +1,45 @@
+<div class="box">
+    <div class="title">
+        <h5>查看申请</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>名称</td>
+            <td class="last"><%= @organizer_register.name %></td>
+          </tr>
+          <tr>
+            <td>简介</td>
+            <td class="last"><%= @organizer_register.description %></td>
+          </tr>
+          <tr>
+            <td>头像</td>
+            <td class="last"><%= image_tag @organizer_register.icon.url(:medium) %></td>
+          </tr>
+          <tr>
+            <td>登陆账号</td>
+            <td class="last"><%= @organizer_register.account %></td>
+          </tr>
+          <tr>
+            <td>负责人</td>
+            <td class="last"><%= @organizer_register.person_in_charge %></td>
+          </tr>
+          <tr>
+            <td>职位</td>
+            <td class="last"><%= @organizer_register.job_title %></td>
+          </tr>
+          <tr>
+            <td>手机</td>
+            <td class="last"><%= @organizer_register.cell %></td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td class="last"><%= @organizer_register.email %></td>
+          </tr>
+          <tr>
+            <td>地址</td>
+            <td class="last"><%= @organizer_register.address %></td>
+          </tr>
+        </table>
+    </div>
+</div>
