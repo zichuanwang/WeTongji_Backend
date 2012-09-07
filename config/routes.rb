@@ -1,4 +1,5 @@
 WetongjiWeb::Application.routes.draw do
+  post "sensitives/batch_save"
   resources :sensitives
 
   get "organizer_registers/form_received"

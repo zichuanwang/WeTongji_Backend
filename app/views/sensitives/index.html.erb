@@ -1,23 +1,24 @@
-<h1>Listing sensitives</h1>
-
-<table>
-  <tr>
-    <th>Word</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @sensitives.each do |sensitive| %>
-  <tr>
-    <td><%= sensitive.word %></td>
-    <td><%= link_to 'Show', sensitive %></td>
-    <td><%= link_to 'Edit', edit_sensitive_path(sensitive) %></td>
-    <td><%= link_to 'Destroy', sensitive, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Sensitive', new_sensitive_path %>
+<div class="box">
+    <div class="title">
+      <h5>所有敏感词</h5>
+    </div>
+    <div class="table">
+      <%= form_tag(:action => "sensitives_batch_save") do |f| %>
+      <div class="form">
+        <div class="fields">
+          <div class="field field-first">
+            <div class="label label-textarea">
+              <label>内容</label>
+            </div>
+            <div class="textarea">
+              <textarea name="words" rows=8 cols=50 ><%= @words %></textarea>
+            </div>
+          </div>
+          <div class="buttons">
+            <input type="submit" name="submit" value="保存" />
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+</div>
