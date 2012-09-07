@@ -19,7 +19,7 @@ class NewsController < ApplicationController
 
   def create
     @menu = 'news'
-
+    @news.check
     respond_to do |format|
       if @news.save
         format.html { redirect_to :action => "index", notice: 'News was successfully created.' }
@@ -31,9 +31,10 @@ class NewsController < ApplicationController
 
   def update
     @menu = 'news'
-
     respond_to do |format|
       if @news.update_attributes(params[:news])
+        @news.check
+        @news.save
         format.html { redirect_to :action => "index", notice: 'News was successfully updated.' }
       else
         format.html { render action: "edit" }
