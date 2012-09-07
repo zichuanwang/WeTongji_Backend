@@ -21,6 +21,7 @@ WetongjiWeb::Application.routes.draw do
 
   resources :upload_files
 
+  post "news/approve"
   resources :news
 
   resources :events
@@ -30,6 +31,7 @@ WetongjiWeb::Application.routes.draw do
   devise_for :admins
   resources :admins
 
+  post "activities/approve"
   resources :activities
 
   resources :channels

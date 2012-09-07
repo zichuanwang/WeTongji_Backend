@@ -18,33 +18,37 @@ class ActivitiesController < ApplicationController
     @menu = 'activities'
   end
 
+  def approve
+    @activity = Activity.find_by_id(params[:id])
+    authorize! :approve, @activity
+    @activity.visiable = true
+    @activity.is_pending = false
+    @activity.pending_reason = ""
+    @activity.save
+    redirect_to :action => "index"
+  end
+
   def create
     @menu = 'activities'
-    #channel = Channel.find(params[:channel_id])
-
-    #@activity.channel = channel
     @activity.check
     respond_to do |format|
       if @activity.save
         format.html { redirect_to :action => "index", notice: 'Activity was successfully created.' }
-        format.json { render json: @activity, status: :created, location: @activity }
       else
         format.html { render action: "new" }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def update
     @menu = 'activities'
-    @activity.check
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
+        @activity.check
+        @activity.save
         format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @activity.errors, status: :unprocessable_entity }
       end
     end
   end

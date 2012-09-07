@@ -14,7 +14,7 @@
             </thead>
             <tbody>
               <% @news.each do |item| %>
-              <tr>
+              <tr class="<%= item.is_pending ? "selected" : "" %>">
                   <td><%= item.title %></td>
                   <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td><%= item.read %></td>

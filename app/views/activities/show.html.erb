@@ -51,5 +51,14 @@
           </tr>
           <% end %>
         </table>
+        <% if @activity.is_pending && (can? :approve, @activity) %>
+        <%= form_tag(activities_approve_path(:id => @activity.id), :method => "post") do %>
+        <div class="action">
+          <div class="button">
+            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
+          </div>
+        </div>
+        <% end %>
+        <% end %>
     </div>
 </div>

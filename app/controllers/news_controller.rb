@@ -17,6 +17,16 @@ class NewsController < ApplicationController
     @menu = 'news'
   end
 
+  def approve
+    @news = News.find_by_id(params[:id])
+    authorize! :approve, @news
+    @news.visiable = true
+    @news.is_pending = false
+    @news.pending_reason = ""
+    @news.save
+    redirect_to :action => "index"
+  end
+
   def create
     @menu = 'news'
     @news.check
