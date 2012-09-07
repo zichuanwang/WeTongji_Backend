@@ -18,7 +18,7 @@
             </thead>
             <tbody>
             <% @activities.each do |activity| %>
-              <tr>
+              <tr class="<%= activity.is_pending ? "selected" : "" %>">
                 <td><%= activity.organizer.name %></td>
                 <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
                 <td><%= activity.title %></td>

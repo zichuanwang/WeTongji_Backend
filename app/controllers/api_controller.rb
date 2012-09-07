@@ -39,7 +39,7 @@ class ApiController < ApplicationController
 	}
 
 	def call
-	# check params check sum
+		# check params check sum
 		if verify_checksum
 	     	# check params exists system require params
 		    if verify_sys_params && METHODS[params[:M]]
@@ -175,7 +175,7 @@ class ApiController < ApplicationController
 		uid = params[:UID]
 		expire = params[:Expire]
 
-		activities = Activity
+		activities = Activity.where("visiable = true")
 		if uid
 			user = User.find_by_uid(uid)
 			if user
@@ -350,7 +350,7 @@ class ApiController < ApplicationController
 		sort = params[:Sort]
 		p = params[:P].nil? ? 1 : params[:P].to_i
 
-		news = News
+		news = News.where("visiable = true")
 		if sort
 			news = news.order(sort)
 		else
@@ -373,7 +373,7 @@ class ApiController < ApplicationController
 		if verify_action_params(['Id'])
 			news = News.find(params[:Id])
 			ex = nil
-			if news
+			if news && news.visiable
 				news.read = news.read + 1
 				news.save
 				ex = ExNews.init_from_news(news)

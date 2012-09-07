@@ -28,7 +28,26 @@
             <td>图片</td>
             <td class="last"><%= image_tag @news.image.url %></td>
           </tr>
+          <tr>
+            <td>是否可见</td>
+            <td class="last"><%= @news.visiable ? "可见" : "不可见" %></td>
+          </tr>
+          <% if @news.is_pending %>
+          <tr>
+            <td>原因</td>
+            <td class="last">需要审核,原因:<%= @news.pending_reason %></td>
+          </tr>
+          <% end %>
         </table>
+        <% if @news.is_pending && (can? :approve, @news) %>
+        <%= form_tag(news_approve_path(:id => @news.id), :method => "post") do %>
+        <div class="action">
+          <div class="button">
+            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
+          </div>
+        </div>
+        <% end %>
+        <% end %>
     </div>
 </div>
 

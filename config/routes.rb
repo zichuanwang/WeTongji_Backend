@@ -1,4 +1,7 @@
 WetongjiWeb::Application.routes.draw do
+  post "sensitives/batch_save"
+  resources :sensitives
+
   get "organizer_registers/form_received"
   resources :organizer_registers
 
@@ -18,6 +21,7 @@ WetongjiWeb::Application.routes.draw do
 
   resources :upload_files
 
+  post "news/approve"
   resources :news
 
   resources :events
@@ -27,6 +31,7 @@ WetongjiWeb::Application.routes.draw do
   devise_for :admins
   resources :admins
 
+  post "activities/approve"
   resources :activities
 
   resources :channels

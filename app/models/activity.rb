@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Activity < ActiveRecord::Base
 	belongs_to :channel
 	belongs_to :organizer
@@ -99,10 +100,19 @@ class Activity < ActiveRecord::Base
 		!self.users_schedules.exists?(user)
 	end
 
+	def check
+		self.is_pending = Sensitive.check("#{self.title} #{self.description}")
+		self.visiable = !self.is_pending
+		if self.is_pending
+			self.pending_reason = "含有不合适内容.等待管理员审核."
+		end
+	end
+
 	private
 	def init_model
 		self.favorite = 0
 		self.like = 0
 		self.schedule = 0
 	end
+
 end

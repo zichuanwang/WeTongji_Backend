@@ -1,0 +1,2 @@
+module SensitivesHelper
+end

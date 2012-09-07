@@ -30,7 +30,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>社团简介</label>
+          <label>社团简介(200个汉字以内)</label>
         </div>
         <div class="input">
           <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
@@ -44,6 +44,7 @@
           <%= f.text_field :account, { :class => "small" } %>
         </div>
       </div>
+      <% if @organizer_register.id.nil? %>
       <div class="field">
         <div class="label">
           <label>登录密码</label>
@@ -52,6 +53,7 @@
           <%= f.text_field :password, { :class => "small" } %>
         </div>
       </div>
+      <% end %>
       <div class="field">
         <div class="label">
           <label>负责人</label>

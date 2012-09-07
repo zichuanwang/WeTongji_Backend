@@ -17,9 +17,19 @@ class NewsController < ApplicationController
     @menu = 'news'
   end
 
+  def approve
+    @news = News.find_by_id(params[:id])
+    authorize! :approve, @news
+    @news.visiable = true
+    @news.is_pending = false
+    @news.pending_reason = ""
+    @news.save
+    redirect_to :action => "index"
+  end
+
   def create
     @menu = 'news'
-
+    @news.check
     respond_to do |format|
       if @news.save
         format.html { redirect_to :action => "index", notice: 'News was successfully created.' }
@@ -31,9 +41,10 @@ class NewsController < ApplicationController
 
   def update
     @menu = 'news'
-
     respond_to do |format|
       if @news.update_attributes(params[:news])
+        @news.check
+        @news.save
         format.html { redirect_to :action => "index", notice: 'News was successfully updated.' }
       else
         format.html { render action: "edit" }

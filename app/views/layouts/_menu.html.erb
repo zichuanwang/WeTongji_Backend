@@ -28,9 +28,11 @@
 	<span class="icon"><img src="/images/icons/application_double.png" alt="组织" /></span><span>组织</span>
 	<% end %>
 	<ul>
+		<% if can? :manage, OrganizerRegister %>
+		<li><%= link_to "所有申请", organizer_registers_path %></li>
+		<% end %>
 		<li><%= link_to "所有组织", organizers_path %></li>
-		<li><%= link_to "创建组织", new_organizer_path %></li>
-		<li class="last"><%= link_to "所有申请", organizer_registers_path %></li>
+		<li class="last"><%= link_to "创建组织", new_organizer_path %></li>
 	</ul>
 </li>
 <% end %>
@@ -84,7 +86,8 @@
 		<% if can? :manage, Admin %>
 		<li><%= link_to "创建管理员", new_admin_path %></li>
 		<% end %>
-		<li class="last"><%= link_to "所有管理员", admins_path %></li>
+		<li><%= link_to "所有管理员", admins_path %></li>
+		<li class="last"><%= link_to "敏感词列表", sensitives_path %></li>
 	</ul>
 </li>
 <% end %>
