@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :sensitives
+
   get "organizer_registers/form_received"
   resources :organizer_registers
 
