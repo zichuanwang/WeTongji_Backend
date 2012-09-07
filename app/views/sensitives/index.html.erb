@@ -3,12 +3,12 @@
       <h5>所有敏感词</h5>
     </div>
     <div class="table">
-      <%= form_tag(:action => "sensitives_batch_save") do |f| %>
+      <%= form_tag(sensitives_batch_save_path) do |f| %>
       <div class="form">
         <div class="fields">
           <div class="field field-first">
             <div class="label label-textarea">
-              <label>内容</label>
+              <label>敏感词(空格分割)</label>
             </div>
             <div class="textarea">
               <textarea name="words" rows=8 cols=50 ><%= @words %></textarea>

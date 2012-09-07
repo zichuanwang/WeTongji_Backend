@@ -9,7 +9,7 @@ class SensitivesController < ApplicationController
     @menu = 'admins'
     @words = params[:words]
     all_words = @words.squeeze(" ").split(/ |,|-/)
-    Sensitive.delete_all("word not in (:word)", :word => all_words)
+    Sensitive.delete_all(["word not in (?)", all_words])
     all_words.each do |item|
       if Sensitive.find_by_word(item).nil?
         Sensitive.create(:word => item)
