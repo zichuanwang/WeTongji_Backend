@@ -45,7 +45,7 @@ WetongjiWeb::Application.configure do
     :port                 => 25,
     :domain               => "tongji.edu.cn",
     :user_name            => 'we',
-    :password             => 'wetongji2012',
+    :password             => 'wetongjinew',
     :authentication       => 'plain',
     :enable_starttls_auto => true
     #:openssl_verify_mode  => 'none'
