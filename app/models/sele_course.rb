@@ -18,10 +18,12 @@ class SeleCourse < ActiveRecord::Base
   		s.section_start = row[5]
   		s.section_end = row[6]
   		s.location = row[7]
+  		s.begin = row[8]
+  		s.end = row[9]
   		courses << s
 		end
 
-  	courses
-  end
+  		courses
+  	end
 
 end
