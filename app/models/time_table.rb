@@ -2,7 +2,7 @@
 class TimeTable
 	def self.get_by_user(user)
 		instance = []
-		courses = SeleCourse.where("student_no = :no", :no => user.no)
+		courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
 		
 		courses.each do |course|
 			i = CourseInstance.new

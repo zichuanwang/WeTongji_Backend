@@ -12,7 +12,8 @@
                   <th>周</th>
                   <th>天</th>
                   <th>跨度（节）</th>
-                  <th class="last">地点</th>
+                  <th>地点</th>
+                  <th class="last">开始和结束</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +25,8 @@
                   <td><%= sele_course.week_type %></td>
                   <td><%= sele_course.week_day %></td>
                   <td><%= sele_course.section_start %>～<%= sele_course.section_end %></td>
-                  <td class="last"><%= sele_course.location %></td>
+                  <td><%= sele_course.location %></td>
+                  <td class="last"><%= sele_course.begin.strftime("%Y/%m/%d") %>～<%= sele_course.end.strftime("%Y/%m/%d") %></td>
               </tr>
               <% end %>
             </tbody>
