@@ -1,7 +1,7 @@
 class OrganizersController < ApplicationController
   load_and_authorize_resource
   def index
-    @organizers = @organizers.order("id desc")
+    @organizers = @organizers.order("id desc").page(params[:page])
     @menu = "organizers"
   end
 
