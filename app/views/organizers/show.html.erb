@@ -16,6 +16,65 @@
             <td>头像</td>
             <td class="last"><%= image_tag @organizer.icon.url(:medium) %></td>
           </tr>
+          <tr>
+            <td>活动总数</td>
+            <td class="last"><%= @organizer.activities.length %></td>
+          </tr>
+          <tr>
+            <td>好评总数</td>
+            <td class="last"><%= @organizer.activities.sum(:favorite) %></td>
+          </tr>
+          <tr>
+            <td>收藏总数</td>
+            <td class="last"><%= @organizer.activities.sum(:like) %></td>
+          </tr>
+          <tr>
+            <td>加入日程总数</td>
+            <td class="last"><%= @organizer.activities.sum(:schedule) %></td>
+          </tr>
+        </table>
+    </div>
+</div>
+<div class="box">
+    <div class="title">
+        <h5>所有活动</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>组织</th>
+                    <th>起止时间</th>
+                    <th>标题</th>
+                    <th>位置</th>
+                    <th>关注度</th>
+                    <th>+1</th>
+                    <th>参与度</th>
+                    <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @organizer.activities.order("id desc").each do |activity| %>
+              <tr class="<%= activity.is_pending ? "selected" : "" %>">
+                <td><%= activity.organizer.name %></td>
+                <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                <td><%= activity.title %></td>
+                <td><%= activity.location %></td>
+                <td><%= activity.favorite %></td>
+                <td><%= activity.like %></td>
+                <td><%= activity.schedule %></td>
+                <td class="last">
+                    <%= link_to '详情', activity %>
+                    <% if can? :edit, activity %>
+                    <%= link_to '编辑', edit_activity_path(activity) %>
+                    <% end %>
+                    <% if can? :delete, activity %>
+                    <%= link_to '删除', activity, confirm: '确认删除?', method: :delete %>
+                    <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
         </table>
     </div>
 </div>
