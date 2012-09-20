@@ -5,6 +5,7 @@ class Organizer < ActiveRecord::Base
 	validates_presence_of :name
 
 	has_attached_file :icon, :styles => { :medium => "180x180>", :thumb => "100x100>" }
+	paginates_per 15
 
 	# before_save :randomize_file_name
 
