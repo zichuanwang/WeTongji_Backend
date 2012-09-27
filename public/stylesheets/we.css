@@ -476,9 +476,10 @@ transition: box-shadow 0.15s ease-out;
 }
 
 
-.download .android a{position: absolute;right: 20px;top: 70px;width: 170px; height: 49px;
+.download .android a{position: absolute;right: 140px;top: 0px;width: 106px; height: 173px;
 	background: url(../images/android-download-btn.png) no-repeat;background-position: 0 0;}
-.download .direct a{position: absolute;right: 10px;top: 124px;width: 188px; background-position: 0 0;}
+.download .direct a{position: absolute;right: 10px;top: 0px;width: 106px; height:  232px;
+	background-position: 0 0;}
 .info{clear: right; float: right; margin: 23px 0 0; width: 445px; color: #fafafa; text-shadow: 0 1px 2px rgba(0,0,0,.8);}
 .info a{color: #fafafa;}
 .info a:hover{text-shadow:0 0 20px rgba(255,255,255,.2); text-decoration: none;}
