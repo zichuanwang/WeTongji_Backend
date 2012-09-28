@@ -537,8 +537,8 @@ transition: opacity 0.15s ease-out;
 .copright{font-size: 11px;}
 
 .lang_en .main .container{ height: 100%; background: #000 url(../images/header_backgroundEn.jpg) top center no-repeat; width: 100%;}
-.lang_en .download .direct a{width: 188px; display: block; height: 147px; text-indent: -9999px; background: url(../images/app-store-btnEn.png) no-repeat;background-position: 0 0px;}
-.lang_en .download .android a{position: absolute;right: 20px;top: 70px;width: 170px; height: 49px;
+.lang_en .download .direct a{width: 188px; display: block; right: 10px;top: 0px;width: 106px; height:  232px; text-indent: -9999px; background: url(../images/app-store-btnEn.png) no-repeat;background-position: 0 0px;}
+.lang_en .download .android a{position: absolute;right: 140px;top: 0px;width: 106px; height: 173px;
 	background: url(../images/android-download-btnEn.png) no-repeat;background-position: 0 0;}
 .lang_en .description{font-size: 40px;}
 
