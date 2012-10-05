@@ -19,7 +19,7 @@
               <tr>
                   <td><%= admin.email %></td>
                   <td><%= admin.sign_in_count %></td>
-                  <td><%= admin.role %></td>
+                  <td><%= role_name(admin.role) %></td>
                   <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td><%= admin.last_sign_in_ip %></td>
                   <td class="last">

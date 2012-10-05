@@ -32,6 +32,8 @@ class Ability
             can :manage, News
             can :manage, Admin, :id => admin.id
             cannot :approve, News
+        when "FunctionAdmin"
+            
         when "OrganizerAdmin"
             can :manage, Organizer, :admin_id => admin.id
             cannot :create, Organizer

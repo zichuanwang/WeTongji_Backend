@@ -79,14 +79,14 @@
 
 <% if can? :manage, Admin %>
 <li>
-	<%= link_to admins_path, { :title => "管理员" } do %>
-	<span class="icon"><img src="/images/icons/application_double.png" alt="管理员" /></span><span>管理员</span>
+	<%= link_to admins_path, { :title => "账号" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="账号" /></span><span>账号</span>
 	<% end %>
 	<ul>
 		<% if can? :manage, Admin %>
-		<li><%= link_to "创建管理员", new_admin_path %></li>
+		<li><%= link_to "创建账号", new_admin_path %></li>
 		<% end %>
-		<li><%= link_to "所有管理员", admins_path %></li>
+		<li><%= link_to "所有账号", admins_path %></li>
 		<li class="last"><%= link_to "敏感词列表", sensitives_path %></li>
 	</ul>
 </li>
