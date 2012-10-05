@@ -22,7 +22,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>社团图标(jpeg,正方形,文件名不能有中文)</label>
+          <label>图标(jpeg,正方形,文件名不能有中文)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :icon, { :size => "40" } %>
@@ -30,7 +30,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>社团简介(200个汉字以内)</label>
+          <label>简介(200个汉字以内)</label>
         </div>
         <div class="input">
           <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
@@ -56,10 +56,18 @@
       <% end %>
       <div class="field">
         <div class="label">
-          <label>负责人</label>
+          <label>负责人姓名</label>
         </div>
         <div class="input">
           <%= f.text_field :person_in_charge, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>负责人学号</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :no, { :class => "small" } %>
         </div>
       </div>
       <div class="field">
