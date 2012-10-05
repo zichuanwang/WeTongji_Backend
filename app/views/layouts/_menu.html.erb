@@ -49,13 +49,13 @@
 </li>
 <% end %>
 
-<% if can? :info, Informations %>
+<% if can? :info, Information %>
 <li>
-	<%= link_to informations_path, { :title => "资讯" } do %>
+	<%= link_to information_path, { :title => "资讯" } do %>
 	<span class="icon"><img src="/images/icons/application_double.png" alt="资讯" /></span><span>资讯</span>
 	<% end %>
 	<ul>
-		<li><%= link_to "所有资讯", informations_path %></li>
+		<li><%= link_to "所有资讯", information_index_path %></li>
 		<li class="last"><%= link_to "创建资讯", new_information_path %></li>
 	</ul>
 </li>

@@ -1,6 +1,5 @@
 class InformationController < ApplicationController
-  # GET /information
-  # GET /information.json
+  load_and_authorize_resource
   def index
     @information = Information.all
 
