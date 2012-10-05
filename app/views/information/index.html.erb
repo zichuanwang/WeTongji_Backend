@@ -1,0 +1,35 @@
+<h1>Listing information</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Context</th>
+    <th>Read</th>
+    <th>Category</th>
+    <th>Is pending</th>
+    <th>Visiable</th>
+    <th>Pending reason</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @information.each do |information| %>
+  <tr>
+    <td><%= information.title %></td>
+    <td><%= information.context %></td>
+    <td><%= information.read %></td>
+    <td><%= information.category %></td>
+    <td><%= information.is_pending %></td>
+    <td><%= information.visiable %></td>
+    <td><%= information.pending_reason %></td>
+    <td><%= link_to 'Show', information %></td>
+    <td><%= link_to 'Edit', edit_information_path(information) %></td>
+    <td><%= link_to 'Destroy', information, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Information', new_information_path %>

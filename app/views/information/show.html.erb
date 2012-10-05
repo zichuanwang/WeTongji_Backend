@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @information.title %>
+</p>
+
+<p>
+  <b>Context:</b>
+  <%= @information.context %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @information.read %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @information.category %>
+</p>
+
+<p>
+  <b>Is pending:</b>
+  <%= @information.is_pending %>
+</p>
+
+<p>
+  <b>Visiable:</b>
+  <%= @information.visiable %>
+</p>
+
+<p>
+  <b>Pending reason:</b>
+  <%= @information.pending_reason %>
+</p>
+
+
+<%= link_to 'Edit', edit_information_path(@information) %> |
+<%= link_to 'Back', information_index_path %>

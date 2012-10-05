@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :information
+
   post "sensitives/batch_save"
   resources :sensitives
 
