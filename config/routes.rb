@@ -1,4 +1,5 @@
 WetongjiWeb::Application.routes.draw do
+  post "information/approve"
   resources :information
 
   post "sensitives/batch_save"
