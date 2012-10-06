@@ -40,9 +40,7 @@
 		<span class="icon"><img src="/images/icons/application_double.png" alt="设置" /></span><span>设置</span>
 	</a>
 	<ul>
-		<% if can? :manage, Admin %>
 		<li><%= link_to "创建账号", new_admin_path %></li>
-		<% end %>
 		<li><%= link_to "所有账号", admins_path %></li>
 		<li><%= link_to "创建版本更新", new_version_path %></li>
 		<li><%= link_to "所有版本更新", versions_path %></li>
@@ -52,6 +50,8 @@
 		<li><%= link_to "导入课程信息", courses_upload_path %></li>
 		<li><%= link_to "所有选课", sele_courses_path %></li>
 		<li><%= link_to "导入选课信息", sele_courses_upload_path %></li>
+		<li><%= link_to "创建频道", new_channel_path %></li>
+		<li><%= link_to "所有频道", channels_path %></li>
 		<li class="last"><%= link_to "敏感词列表", sensitives_path %></li>
 	</ul>
 </li>
@@ -68,18 +68,6 @@
 		<% end %>
 		<li><%= link_to "所有组织", organizers_path %></li>
 		<li class="last"><%= link_to "创建组织", new_organizer_path %></li>
-	</ul>
-</li>
-<% end %>
-
-<% if can? :manage, Channel %>
-<li>
-	<%= link_to channels_path, { :title => "频道" } do %>
-	<span class="icon"><img src="/images/icons/application_double.png" alt="频道" /></span><span>频道</span>
-	<% end %>
-	<ul>
-		<li><%= link_to "所有频道", channels_path %></li>
-		<li class="last"><%= link_to "创建频道", new_channel_path %></li>
 	</ul>
 </li>
 <% end %>
