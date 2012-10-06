@@ -5,8 +5,8 @@ class CreateInformation < ActiveRecord::Migration
       t.text :context
       t.integer :read
       t.string :category
-      t.boolean :is_pending
-      t.boolean :visiable
+      t.boolean :is_pending, :default => false
+      t.boolean :visiable, :default => true
       t.string :pending_reason
       t.string :image_file_name
       t.string :image_content_type
