@@ -10,4 +10,8 @@ module AdminsHelper
 	def role_name(role)
 		ROLES[role]
 	end
+
+	def roles
+		ROLES
+	end
 end

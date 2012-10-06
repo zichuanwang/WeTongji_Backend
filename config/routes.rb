@@ -34,6 +34,7 @@ WetongjiWeb::Application.routes.draw do
   resources :organizers
 
   devise_for :admins
+  get "admins/select_role"
   resources :admins
 
   post "activities/approve"

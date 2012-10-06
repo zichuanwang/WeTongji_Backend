@@ -14,6 +14,7 @@
             <thead>
                 <tr>
                   <th>名称</th>
+                  <th>管理员</th>
                   <th>Icon</th>
                   <th>活动</th>
                   <th>好评</th>
@@ -26,6 +27,7 @@
             <% @organizers.each do |organizer| %>
               <tr>
                 <td><%= organizer.name %></td>
+                <td><%= organizer.admin.nil? ? "未指定管理员" : organizer.admin.email %></td>
                 <td><%= link_to "Icon", organizer.icon.url(:medium), { :class => 'screenshot', :target => "_blank" } %></td>
                 <td><%= organizer.activities.length %></td>
                 <td><%= organizer.activities.sum(:favorite) %></td>

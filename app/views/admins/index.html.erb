@@ -19,13 +19,22 @@
               <tr>
                   <td><%= admin.email %></td>
                   <td><%= admin.sign_in_count %></td>
-                  <td><%= role_name(admin.role) %></td>
+                  <td>
+                    <%= role_name(admin.role) %>
+                    <% if role_name(admin.role) == "组织管理员" %>
+                    (<%= admin.organizer.nil? ? "未指定组织" : admin.organizer.name %>)
+                    <% end %>
+                  </td>
                   <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td><%= admin.last_sign_in_ip %></td>
                   <td class="last">
                       <% if can? :edit, admin %>
                       <%= link_to '详情', admin %>
                       <%= link_to '编辑', edit_admin_path(admin) %>
+                      <% if can? :manage, Admin %>
+                      <%= link_to '删除', edit_admin_path(admin) %>
+                      <%= link_to '停用/启用', edit_admin_path(admin) %>
+                      <% end %>
                       <% end %>
                   </td>
               </tr>
