@@ -1,40 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="box">
+    <div class="title">
+        <h5>查看资讯</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @information.title %></td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td class="last"><%= @information.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>类别</td>
+            <td class="last"><%= @information.category %></td>
+          </tr>
+          <tr>
+            <td>阅读次数</td>
+            <td class="last"><%= @information.read %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td class="last"><%= @information.context %></td>
+          </tr>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag @information.image.url %></td>
+          </tr>
+          <tr>
+            <td>是否可见</td>
+            <td class="last"><%= @information.visiable ? "可见" : "不可见" %></td>
+          </tr>
+          <% if @information.is_pending %>
+          <tr>
+            <td>原因</td>
+            <td class="last">需要审核,原因:<%= @information.pending_reason %></td>
+          </tr>
+          <% end %>
+        </table>
+        <% if @information.is_pending && (can? :approve, @information) %>
+        <%= form_tag(information_approve_path(:id => @information.id), :method => "post") do %>
+        <div class="action">
+          <div class="button">
+            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @information.title %>
-</p>
-
-<p>
-  <b>Context:</b>
-  <%= @information.context %>
-</p>
-
-<p>
-  <b>Read:</b>
-  <%= @information.read %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <%= @information.category %>
-</p>
-
-<p>
-  <b>Is pending:</b>
-  <%= @information.is_pending %>
-</p>
-
-<p>
-  <b>Visiable:</b>
-  <%= @information.visiable %>
-</p>
-
-<p>
-  <b>Pending reason:</b>
-  <%= @information.pending_reason %>
-</p>
-
-
-<%= link_to 'Edit', edit_information_path(@information) %> |
-<%= link_to 'Back', information_index_path %>

@@ -1,43 +1,32 @@
 class InformationController < ApplicationController
   load_and_authorize_resource
   def index
-    @information = Information.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @information }
-    end
+    @menu = 'information'
+    @information = @information.order("id desc").page(params[:page])
   end
 
-  # GET /information/1
-  # GET /information/1.json
   def show
-    @information = Information.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @information }
-    end
+    @menu = 'information'
   end
 
-  # GET /information/new
-  # GET /information/new.json
   def new
-    @information = Information.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @information }
-    end
+    @menu = 'information'
   end
 
-  # GET /information/1/edit
   def edit
-    @information = Information.find(params[:id])
+    @menu = 'information'
   end
 
-  # POST /information
-  # POST /information.json
+  def approve
+    @information = information.find_by_id(params[:id])
+    authorize! :approve, @information
+    @information.visiable = true
+    @information.is_pending = false
+    @information.pending_reason = ""
+    @information.save
+    redirect_to :action => "index"
+  end
+
   def create
     @information = Information.new(params[:information])
 
