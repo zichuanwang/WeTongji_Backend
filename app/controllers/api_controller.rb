@@ -6,6 +6,8 @@ class ApiController < ApplicationController
 	end
 
 	METHODS = {
+		"System.Version" => "version",
+
 		"Channels.Get" => "channels",
 		"Channel.Fovorite" => "channel_favorite",
 		"Channel.UnFavorite" => "channel_unfavorite",
@@ -595,5 +597,16 @@ class ApiController < ApplicationController
 				return_response(re)
 	    end
 		end
+	end
+
+	def version
+		version = Version.where("current = :current", :current => params[:D]).first
+		ex = nil
+		if version
+			ex = ExVersion.init_from_version(version)
+		end
+		re = ApiReturn.new("000")
+		re.add_data("Version", ex)
+		return_response(re)
 	end
 end
