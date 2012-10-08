@@ -11,23 +11,26 @@ class TranDataToAdmin < ActiveRecord::Migration
   		item.admin.icon = item.icon
   		item.admin.role = "CommonAdmin"
 		item.admin.save
-  		reg = OrganizerRegister.find_by_name(item.name)
-  		unless reg.nil?
-  			item.admin.name = reg.person_in_charge
-  			item.admin.title = reg.job_title
-  			item.admin.phone = reg.cell
-  			item.admin.address = reg.address
-  			item.admin.student_no = reg.no
-  		end
-
-  		item.admin.save
   	end
+
   	Organizer.all.each do |item|
   		item.activities.each do |act|
   			act.admin = item.admin
   			act.save
   		end
   	end
+
+	OrganizerRegister.all.each do |item|
+		admin = Admin.find_by_email(item.account)
+		unless admin.nil?
+			admin.name = item.person_in_charge
+			admin.title = item.job_title
+			admin.phone = item.cell
+			admin.address = item.address
+			admin.student_no = item.no
+			admin.save
+		end
+	end
   end
 
   def down
