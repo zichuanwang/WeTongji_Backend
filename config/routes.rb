@@ -33,7 +33,7 @@ WetongjiWeb::Application.routes.draw do
 
   resources :organizers
 
-  devise_for :admins
+  devise_for :admins, :controllers => { :registrations => "registrations" }
   get "admins/select_role"
   get "admins/form_received"
   get "admins/register"

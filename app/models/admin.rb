@@ -15,4 +15,8 @@ class Admin < ActiveRecord::Base
 	validates_uniqueness_of :name, :student_no, :display, :phone
 	validates_length_of :description, :within => 0..200
 	validates_attachment_presence :icon
+
+	def approve
+		self.approved_at = Time.now
+	end
 end
