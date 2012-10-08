@@ -3,14 +3,14 @@ class TranDataToAdmin < ActiveRecord::Migration
   	Organizer.all.each do |item|
   		item.admin.display = item.name
   		item.admin.name = item.name
-  		item.admin.address = "waiting for input"
-  		item.admin.title = "waiting for input"
-  		item.admin.phone = "waiting for input"
-  		item.admin.student_no = "waiting for input"
+  		item.admin.address = item.name + "waiting for input"
+  		item.admin.title = item.name + "waiting for input"
+  		item.admin.phone = item.name + "waiting for input"
+  		item.admin.student_no = item.name + "waiting for input"
   		item.admin.description = item.description
   		item.admin.icon = item.icon
   		item.admin.role = "CommonAdmin"
-
+		item.admin.save
   		reg = OrganizerRegister.find_by_name(item.name)
   		unless reg.nil?
   			item.admin.name = reg.person_in_charge

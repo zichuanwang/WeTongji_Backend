@@ -13,7 +13,7 @@ class Admin < ActiveRecord::Base
   	has_many :information
   	has_many :activities
 
-	validates_presence_of :name, :student_no, :display, :address, :phone
+	validates_presence_of :name, :student_no, :display, :address, :phone#, :description
 	validates_uniqueness_of :name, :student_no, :display, :phone
 	validates_length_of :description, :within => 0..200
 	#validates_attachment_presence :icon
