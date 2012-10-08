@@ -10,15 +10,55 @@
           </tr>
           <tr>
             <td>角色</td>
-            <td class="last"><%= @admin.role %></td>
+            <td class="last"><%= role_name @admin.role %></td>
           </tr>
           <tr>
             <td>创建时间</td>
             <td class="last"><%= @admin.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
+            <td>确认时间</td>
+            <td class="last"><%= @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>审批时间</td>
+            <td class="last"><%= @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
             <td>登陆次数</td>
             <td class="last"><%= @admin.sign_in_count %></td>
+          </tr>
+          <tr>
+            <td>名称</td>
+            <td class="last"><%= @admin.display %></td>
+          </tr>
+          <tr>
+            <td>简介</td>
+            <td class="last"><%= @admin.description %></td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td class="last"><%= @admin.name %></td>
+          </tr>
+          <tr>
+            <td>学号</td>
+            <td class="last"><%= @admin.student_no %></td>
+          </tr>
+          <tr>
+            <td>职位</td>
+            <td class="last"><%= @admin.title %></td>
+          </tr>
+          <tr>
+            <td>手机</td>
+            <td class="last"><%= @admin.phone %></td>
+          </tr>
+          <tr>
+            <td>地址</td>
+            <td class="last"><%= @admin.address %></td>
+          </tr>
+          <tr>
+            <td>图标</td>
+            <td class="last"><%= image_tag @admin.icon.url(:medium) %></td>
           </tr>
         </table>
     </div>
