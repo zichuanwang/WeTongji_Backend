@@ -18,11 +18,11 @@
           </tr>
           <tr>
             <td>确认时间</td>
-            <td class="last"><%= @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td class="last"><%= @admin.confirmed_at.nil? ? "" : @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
             <td>审批时间</td>
-            <td class="last"><%= @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td class="last"><%= @admin.approved_at.nil? ? "" : @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
             <td>登陆次数</td>

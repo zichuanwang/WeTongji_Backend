@@ -2,6 +2,11 @@ class TranDataToAdmin < ActiveRecord::Migration
   def up
   	Organizer.all.each do |item|
   		item.admin.display = item.name
+  		item.admin.name = item.name
+  		item.admin.address = "waiting for input"
+  		item.admin.title = "waiting for input"
+  		item.admin.phone = "waiting for input"
+  		item.admin.student_no = "waiting for input"
   		item.admin.description = item.description
   		item.admin.icon = item.icon
   		item.admin.role = "CommonAdmin"
