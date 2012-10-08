@@ -18,10 +18,6 @@ class AdminsController < ApplicationController
     @menu = 'admins'
   end
 
-  def select_role
-    @menu = 'admins'
-  end
-
   def create
     @menu = 'admins'
     respond_to do |format|

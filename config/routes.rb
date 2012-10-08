@@ -35,6 +35,8 @@ WetongjiWeb::Application.routes.draw do
 
   devise_for :admins
   get "admins/select_role"
+  get "admins/form_received"
+  get "admins/register"
   resources :admins
 
   post "activities/approve"
