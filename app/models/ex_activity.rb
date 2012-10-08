@@ -5,13 +5,13 @@ class ExActivity
 		model = ExActivity.new
 		model.Id = activity.id
 		model.Image = activity.image == nil ? '' : Rails.configuration.host + activity.image.url
-		model.OrganizerAvatar = activity.organizer.icon == nil ? '' : Rails.configuration.host + activity.organizer.icon.url(:medium)
 		model.Begin = activity.begin
 		model.End = activity.end
 		model.Location = activity.location
 		model.Title = activity.title
 		model.Favorite = activity.favorite
-		model.Organizer = activity.organizer.name
+		model.Organizer = activity.admin.display
+		model.OrganizerAvatar = activity.admin.icon == nil ? '' : Rails.configuration.host + activity.admin.icon.url(:medium)
 		model.Channel_Id = activity.channel.id
 		model.Status = activity.status
 		model.Description = activity.description
