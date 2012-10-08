@@ -31,7 +31,7 @@
 	          <label>账号名称</label>
 	        </div>
 	        <div class="input">
-	          <%= f.text_field :name, { :class => "small" } %>
+	          <%= f.text_field :display, { :class => "small" } %>
 	        </div>
 	      </div>
 	      <div class="field">
@@ -48,6 +48,14 @@
 	        </div>
 	        <div class="input">
 	          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>姓名</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :name, { :class => "small" } %>
 	        </div>
 	      </div>
 	      <div class="field">
