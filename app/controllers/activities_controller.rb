@@ -2,20 +2,16 @@ class ActivitiesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @menu = 'activities'
     @activities = @activities.order("id desc").page(params[:page])
   end
 
   def show
-    @menu = 'activities'
   end
 
   def new
-    @menu = 'activities'
   end
 
   def edit
-    @menu = 'activities'
   end
 
   def approve
@@ -29,7 +25,7 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @menu = 'activities'
+    @activity.admin = current_admin
     @activity.check
     respond_to do |format|
       if @activity.save
@@ -41,7 +37,6 @@ class ActivitiesController < ApplicationController
   end
 
   def update
-    @menu = 'activities'
     respond_to do |format|
       if @activity.update_attributes(params[:activity])
         @activity.check

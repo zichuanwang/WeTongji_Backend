@@ -2,8 +2,6 @@ class AdminsController < ApplicationController
   before_filter :authenticate_admin!, :except => [:form_received]
   load_and_authorize_resource
   def index
-    @menu = 'admins'
-
     @admins = @admins.order("id desc").page(params[:page])
   end
 
@@ -21,7 +19,6 @@ class AdminsController < ApplicationController
   end
 
   def create
-    @menu = 'admins'
     respond_to do |format|
       if @admin.save
         format.html { redirect_to @admin, notice: 'Admin was successfully created.' }
@@ -32,7 +29,6 @@ class AdminsController < ApplicationController
   end
 
   def update
-    @menu = 'admins'
     params[:admin].delete(:password) if params[:admin][:password].blank?
     params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
 

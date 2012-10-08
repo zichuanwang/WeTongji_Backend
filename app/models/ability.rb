@@ -35,7 +35,7 @@ class Ability
             cannot :approve, News
             can :manage, Information
             cannot :approve, Information
-            can :manage, Activity, :organizer => { :admin_id => admin.id }
+            can :manage, Activity, :admin => { :admin_id => admin.id }
             can :create, Activity
             cannot :approve, Activity
     end

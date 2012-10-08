@@ -9,7 +9,9 @@ class Admin < ActiveRecord::Base
   	attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :title, :display, :phone, 
   					:description, :name, :address, :student_no, :icon
 	has_attached_file :icon, :styles => { :medium => "180x180>" }
-  	has_one :organizer
+  	has_many :news
+  	has_many :information
+  	has_many :activities
 
 	validates_presence_of :name, :student_no, :display, :address, :phone, :description
 	validates_uniqueness_of :name, :student_no, :display, :phone

@@ -1,20 +1,16 @@
 class NewsController < ApplicationController
   load_and_authorize_resource
   def index
-    @menu = 'news'
     @news = @news.order("id desc").page(params[:page])
   end
 
   def show
-    @menu = 'news'
   end
 
   def new
-    @menu = 'news'
   end
 
   def edit
-    @menu = 'news'
   end
 
   def approve
@@ -28,7 +24,7 @@ class NewsController < ApplicationController
   end
 
   def create
-    @menu = 'news'
+    @news.admin = current_admin
     @news.check
     respond_to do |format|
       if @news.save
