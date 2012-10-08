@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  before_filter :authenticate_admin!, :except => [:new, :form_received, :create]
   load_and_authorize_resource
   def index
     @menu = 'admins'
@@ -15,7 +16,12 @@ class AdminsController < ApplicationController
   end
 
   def new
-    @menu = 'admins'
+    @admin = Admin.new
+    render :layout => "out"
+  end
+
+  def form_received
+    
   end
 
   def create

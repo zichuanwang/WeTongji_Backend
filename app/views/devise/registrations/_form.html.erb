@@ -1,0 +1,92 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true}) do |f| %>
+	<%= devise_error_messages! %>
+	<div class="form">
+	  <div class="fields">
+	      <div class="field field-first">
+	        <div class="label">
+	          <label>登录帐号</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :email, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>登录密码</label>
+	        </div>
+	        <div class="input">
+	          <%= f.password_field :password, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>密码确认</label>
+	        </div>
+	        <div class="input">
+	          <%= f.password_field :password_confirmation, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>账号名称</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :name, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>图标(jpeg,正方形,文件名不能有中文)</label>
+	        </div>
+	        <div class="input input-file">
+	          <%= f.file_field :icon, { :size => "40" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>简介(200个汉字以内)</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>学号</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :student_no, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>职位</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :title, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>手机</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :phone, { :class => "small" } %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>住址</label>
+	        </div>
+	        <div class="input">
+	          <%= f.text_field :address, { :class => "large" } %>
+	        </div>
+	      </div>
+	      <div class="buttons">
+	          <div class="highlight">
+	            <input type="submit" value="我已阅读并且理解协议内容" />
+	          </div>
+	      </div>
+	  </div>
+	</div>
+<% end %>
