@@ -61,14 +61,6 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>组织</label>
-        </div>
-        <div class="select">
-          <%= f.select :organizer_id, Organizer.accessible_by(current_ability, :read).collect{|c|[ c.name, c.id ]} %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
           <label>状态</label>
         </div>
         <div class="input input-file">

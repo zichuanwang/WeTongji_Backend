@@ -1,4 +1,9 @@
 WetongjiWeb::Application.routes.draw do
+  resources :versions
+
+  post "information/approve"
+  resources :information
+
   post "sensitives/batch_save"
   resources :sensitives
 
@@ -28,7 +33,10 @@ WetongjiWeb::Application.routes.draw do
 
   resources :organizers
 
-  devise_for :admins
+  devise_for :admins, :controllers => { :registrations => "registrations" }
+  get "admins/select_role"
+  get "admins/form_received"
+  get "admins/register"
   resources :admins
 
   post "activities/approve"

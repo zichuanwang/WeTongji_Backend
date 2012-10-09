@@ -3,6 +3,40 @@
         <h5>创建管理员</h5>
     </div>
     <div class="table">
-    <%= render 'form' %>
+	<%= form_for(@admin) do |f| %>
+	<div class="form">
+	    <div class="fields">
+	      <div class="field field-first">
+	        <div class="label">
+	          <label>邮箱</label>
+	        </div>
+	        <div class="input">
+	        	<%= f.text_field :email, :class => "small" %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>密码</label>
+	        </div>
+	        <div class="input">
+	        	<%= f.password_field :password, :class => "small" %>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
+	          <label>确认</label>
+	        </div>
+	        <div class="input">
+	        	<%= f.password_field :password_confirmation, :class => "small" %>
+	        </div>
+	      </div>
+
+	      <div class="buttons">
+	        <input type="submit" name="submit" value="保存" />
+	      </div>
+	    </div>
+  	</div>
+	<% end %>
+
     </div>
 </div>

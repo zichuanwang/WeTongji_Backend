@@ -1,7 +1,6 @@
 	<%= form_for(@admin) do |f| %>
 	<div class="form">
     <div class="fields">
-    	<% if can? :manage, :Admin %>
       <div class="field field-first">
         <div class="label">
           <label>邮箱</label>
@@ -15,10 +14,9 @@
           <label>角色</label>
         </div>
         <div class="select">
-        	<%= f.select :role, { "超级管理员" => "SuperAdmin" , "新闻发布账号" => "NewsAdmin", "社团账号" => "OrganizerAdmin" } %>
+        	<%= f.select :role, { "超级管理员" => "SuperAdmin", "普通管理员" => "CommonAdmin" } %>
         </div>
       </div>
-      <% end %>
       <div class="field">
         <div class="label">
           <label>密码</label>
@@ -35,9 +33,81 @@
         	<%= f.password_field :password_confirmation, :class => "small" %>
         </div>
       </div>
-
+      <div class="field field-first">
+        <div class="label">
+          <label>名称</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :display, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>图标(jpeg,正方形,文件名不能有中文)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :icon, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>简介(200个汉字以内)</label>
+        </div>
+        <div class="input">
+          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>姓名</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :name, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>学号</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :student_no, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>职位</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>电话</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :phone, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>住址</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :address, { :class => "large" } %>
+        </div>
+      </div>
       <div class="buttons">
         <input type="submit" name="submit" value="保存" />
+        <% if @admin.approved_at.nil? %>
+        <input type="submit" name="submit" value="审批" />
+        <% else %>
+        <% if @admin.locked_at.nil? %>
+        <input type="submit" name="submit" value="禁用" />
+        <% else %>
+        <input type="submit" name="submit" value="启用" />
+        <% end %>
+        <% end %>
       </div>
     </div>
   </div>

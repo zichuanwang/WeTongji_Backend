@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  context: MyText
+  read: 1
+  category: MyString
+  is_pending: false
+  visiable: false
+  pending_reason: MyString
+
+two:
+  title: MyString
+  context: MyText
+  read: 1
+  category: MyString
+  is_pending: false
+  visiable: false
+  pending_reason: MyString

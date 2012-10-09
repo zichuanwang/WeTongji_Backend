@@ -28,22 +28,16 @@ class Ability
     case admin.role
         when "SuperAdmin"
             can :manage, :all
-        when "NewsAdmin"
-            can :manage, News
-            can :manage, Admin, :id => admin.id
-            cannot :approve, News
-        when "OrganizerAdmin"
-            can :manage, Organizer, :admin_id => admin.id
-            cannot :create, Organizer
-
-            # can :read, Activity, :organizer => { :admin_id => admin.id }
-            # can :create, Activity, :organizer => { :admin_id => admin.id }
-            # can :destroy, Activity, :organizer => { :admin_id => admin.id }
-            can :manage, Activity, :organizer => { :admin_id => admin.id }
-            can :create, Activity
-
-            can :manage, Admin, :id => admin.id
+        when "CommonAdmin"
             cannot :create, Admin
+            can :manage, News, :admin => { :id => admin.id }
+            can :create, News
+            cannot :approve, News
+            can :manage, Information, :admin => { :id => admin.id }
+            can :create, Information
+            cannot :approve, Information
+            can :manage, Activity, :admin => { :id => admin.id }
+            can :create, Activity
             cannot :approve, Activity
     end
   end

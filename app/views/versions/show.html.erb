@@ -1,0 +1,21 @@
+<div class="box">
+    <div class="title">
+        <h5>查看版本</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>当前版本</td>
+            <td class="last"><%= @version.current %></td>
+          </tr>
+          <tr>
+            <td>最新版本</td>
+            <td class="last"><%= @version.latest %></td>
+          </tr>
+          <tr>
+            <td>App路径</td>
+            <td class="last"><%= @version.url %></td>
+          </tr>
+        </table>
+    </div>
+</div>

@@ -10,16 +10,159 @@
           </tr>
           <tr>
             <td>角色</td>
-            <td class="last"><%= @admin.role %></td>
+            <td class="last"><%= role_name @admin.role %></td>
           </tr>
           <tr>
             <td>创建时间</td>
             <td class="last"><%= @admin.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
+            <td>确认时间</td>
+            <td class="last"><%= @admin.confirmed_at.nil? ? "" : @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>审批时间</td>
+            <td class="last"><%= @admin.approved_at.nil? ? "" : @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
             <td>登陆次数</td>
             <td class="last"><%= @admin.sign_in_count %></td>
           </tr>
+          <tr>
+            <td>名称</td>
+            <td class="last"><%= @admin.display %></td>
+          </tr>
+          <tr>
+            <td>简介</td>
+            <td class="last"><%= @admin.description %></td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td class="last"><%= @admin.name %></td>
+          </tr>
+          <tr>
+            <td>学号</td>
+            <td class="last"><%= @admin.student_no %></td>
+          </tr>
+          <tr>
+            <td>职位</td>
+            <td class="last"><%= @admin.title %></td>
+          </tr>
+          <tr>
+            <td>手机</td>
+            <td class="last"><%= @admin.phone %></td>
+          </tr>
+          <tr>
+            <td>地址</td>
+            <td class="last"><%= @admin.address %></td>
+          </tr>
+          <tr>
+            <td>图标</td>
+            <td class="last"><%= image_tag @admin.icon.url(:medium) %></td>
+          </tr>
+        </table>
+    </div>
+</div>
+<div class="box">
+    <div class="title">
+        <h5>所有活动</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                    <th>起止时间</th>
+                    <th>标题</th>
+                    <th>位置</th>
+                    <th>关注度</th>
+                    <th>+1</th>
+                    <th>参与度</th>
+                    <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @admin.activities.order("id desc").each do |activity| %>
+              <tr class="<%= activity.is_pending ? "selected" : "" %>">
+                <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                <td><%= activity.title %></td>
+                <td><%= activity.location %></td>
+                <td><%= activity.favorite %></td>
+                <td><%= activity.like %></td>
+                <td><%= activity.schedule %></td>
+                <td class="last">
+                    <%= link_to '详情', activity %>
+                    <% if can? :edit, activity %>
+                    <%= link_to '编辑', edit_activity_path(activity) %>
+                    <% end %>
+                    <% if can? :delete, activity %>
+                    <%= link_to '删除', activity, confirm: '确认删除?', method: :delete %>
+                    <% end %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="box">
+    <div class="title">
+        <h5>所有新闻</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>发布时间</th>
+                  <th>阅读次数</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @admin.news.each do |item| %>
+              <tr class="<%= item.is_pending ? "selected" : "" %>">
+                  <td><%= item.title %></td>
+                  <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                  <td><%= item.read %></td>
+                  <td class="last">
+                      <%= link_to '详情', item %>
+                      <%= link_to '编辑', edit_news_path(item) %>
+                      <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
+                  </td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="box">
+    <div class="title">
+        <h5>所有资讯</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>发布时间</th>
+                  <th>阅读次数</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @admin.information.each do |item| %>
+              <tr class="<%= item.is_pending ? "selected" : "" %>">
+                  <td><%= item.title %></td>
+                  <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                  <td><%= item.read %></td>
+                  <td class="last">
+                      <%= link_to '详情', item %>
+                      <%= link_to '编辑', edit_news_path(item) %>
+                      <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
+                  </td>
+              </tr>
+              <% end %>
+            </tbody>
         </table>
     </div>
 </div>

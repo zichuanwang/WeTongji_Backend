@@ -1,0 +1,27 @@
+<div class="box">
+    <div class="title">
+        <h5>选择角色</h5>
+    </div>
+    <div class="table">
+    	<%= form_tag '/admins/new', :method => "get" do %>
+		<div class="form">
+			<div class="fields">
+			  <div class="field field-first">
+			    <div class="label">
+			      <label>角色</label>
+			    </div>
+				<div class="radios">
+					<% roles.each do |item| %>
+        			<input type="radio" name="role" value="<%= item[0] %>" />
+        			<label><%= item[1] %></label>
+					<% end %>
+				</div>
+			  </div>
+			  <div class="buttons">
+			    <input type="submit" value="选择角色" />
+			  </div>
+			</div>
+  		</div>
+		<% end %>
+    </div>
+</div>
