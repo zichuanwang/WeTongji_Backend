@@ -3,7 +3,7 @@ class Admin < ActiveRecord::Base
   	# :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable, :registerable, :recoverable, 
   	devise :database_authenticatable,
          :rememberable, :trackable, :validatable, :lockable,
-         :registerable, :confirmable
+         :registerable#, :confirmable
 
   	# Setup accessible (or protected) attributes for your model
   	attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :title, :display, :phone, 
@@ -17,6 +17,8 @@ class Admin < ActiveRecord::Base
 	validates_uniqueness_of :name, :student_no, :display, :phone
 	validates_length_of :description, :within => 0..200
 	#validates_attachment_presence :icon
+
+	before_create :lock
 
 	def approve
 		self.approved_at = Time.now

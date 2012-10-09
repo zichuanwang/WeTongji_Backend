@@ -29,13 +29,14 @@ class Ability
         when "SuperAdmin"
             can :manage, :all
         when "CommonAdmin"
-            can :manage, Admin, :id => admin.id
             cannot :create, Admin
-            can :manage, News
+            can :manage, News, :admin => { :id => admin.id }
+            can :create, News
             cannot :approve, News
-            can :manage, Information
+            can :manage, Information, :admin => { :id => admin.id }
+            can :create, Information
             cannot :approve, Information
-            can :manage, Activity, :admin => { :admin_id => admin.id }
+            can :manage, Activity, :admin => { :id => admin.id }
             can :create, Activity
             cannot :approve, Activity
     end
