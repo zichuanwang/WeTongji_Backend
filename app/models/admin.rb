@@ -21,4 +21,14 @@ class Admin < ActiveRecord::Base
 	def approve
 		self.approved_at = Time.now
 	end
+
+	def unlock
+    	self.failed_attempts = 0
+    	self.unlock_token = ""
+    	self.locked_at = nil
+	end
+
+	def lock
+    	self.locked_at = Time.now
+	end
 end

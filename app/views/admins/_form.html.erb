@@ -98,7 +98,15 @@
         </div>
       </div>
       <div class="buttons">
-        <input type="submit" name="submit" value="保存" />
+        <input type="submit" name="type" value="保存" />
+        <% if @admin.locked_at.nil? %>
+        <input type="submit" name="type" value="禁用" />
+        <% else %>
+        <input type="submit" name="type" value="启用" />
+        <% end %>
+        <% if @admin.approved_at.nil? %>
+        <input type="submit" name="type" value="审批" />
+        <% end %>
       </div>
     </div>
   </div>
