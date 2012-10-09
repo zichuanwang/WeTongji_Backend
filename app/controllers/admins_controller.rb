@@ -2,6 +2,9 @@ class AdminsController < ApplicationController
   before_filter :authenticate_admin!, :except => [:form_received]
   load_and_authorize_resource
   def index
+    unless params[:keywords].blank?
+      @admins = @admins.where("display like :keywords", :keywords =>  "%#{params[:keywords]}%")
+    end
     @admins = @admins.order("id desc").page(params[:page])
   end
 
