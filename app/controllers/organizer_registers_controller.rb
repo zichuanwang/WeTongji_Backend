@@ -1,5 +1,5 @@
 class OrganizerRegistersController < ApplicationController
-  before_filter :authenticate_admin!, :except => [:new, :form_received, :create]
+  before_filter :authenticate_admin!
   def index
     @menu = "organizers"
     @organizer_registers = OrganizerRegister.accessible_by(current_ability).order('id desc').page(params[:page])
