@@ -41,6 +41,15 @@
                   <td class="last">
                     <%= link_to '详情', admin %>
                     <%= link_to '编辑', edit_admin_path(admin) %>
+                    <% if admin.approved_at.nil? %>
+                    <%= link_to '审批', admins_approve_path(:id => admin.id), confirm: '确认审批?', method: :post %>
+                    <% else %>
+                    <% if admin.locked_at.nil? %>
+                    <%= link_to '禁用', admins_lock_path(:id => admin.id), confirm: '确认禁用?', method: :post %>
+                    <% else %>
+                    <%= link_to '启用', admins_unlock_path(:id => admin.id), confirm: '确认启用?', method: :post %>
+                    <% end %>
+                    <% end %>
                   </td>
               </tr>
               <% end %>

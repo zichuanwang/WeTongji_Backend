@@ -46,7 +46,7 @@
       <!-- end logo -->
       <!-- user -->
 			<ul id="user">
-				<li class="first"><%= link_to current_admin.email, edit_admin_path(current_admin) %></li>
+				<li class="first"><%= link_to current_admin.email, admin_path(current_admin) %></li>
         <li><a href="mailto:wetongji2012@gmail.com?subject=微同济反馈">反馈</a></li>
 				<li class="highlight last"><%= link_to "注销", destroy_admin_session_path, :method => :delete %></li>
 			</ul>

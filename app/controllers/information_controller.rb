@@ -14,7 +14,7 @@ class InformationController < ApplicationController
   end
 
   def approve
-    @information = information.find_by_id(params[:id])
+    @information = Information.find_by_id(params[:id])
     authorize! :approve, @information
     @information.visiable = true
     @information.is_pending = false
