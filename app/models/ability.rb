@@ -30,6 +30,8 @@ class Ability
             can :manage, :all
         when "CommonAdmin"
             cannot :create, Admin
+            can :update, admin
+            can :read, admin
             can :manage, News, :admin => { :id => admin.id }
             can :create, News
             cannot :approve, News

@@ -36,14 +36,6 @@ class AdminsController < ApplicationController
     params[:admin].delete(:password) if params[:admin][:password].blank?
     params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
 
-    case params[:submit]
-      when "启用"
-        @admin.unlock
-      when "禁用"
-        @admin.lock
-      when "审批"
-        @admin.approve
-    end
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }
@@ -51,6 +43,24 @@ class AdminsController < ApplicationController
         format.html { render action: "edit" }
       end
     end
+  end
+
+  def approve
+    @admin.approve
+    @admin.save
+    redirect_to admins_url
+  end
+
+  def lock
+    @admin.lock
+    @admin.save
+    redirect_to admins_url
+  end
+
+  def unlock
+    @admin.unlock
+    @admin.save
+    redirect_to admins_url
   end
 
 end
