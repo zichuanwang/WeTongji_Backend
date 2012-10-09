@@ -27,7 +27,6 @@ class TranDataToAdmin < ActiveRecord::Migration
 			admin.title = item.job_title
 			admin.phone = item.cell
 			admin.address = item.address
-			admin.student_no = item.no
 			admin.save
 		end
 	end
