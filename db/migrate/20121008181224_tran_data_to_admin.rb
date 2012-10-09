@@ -30,6 +30,8 @@ class TranDataToAdmin < ActiveRecord::Migration
 			admin.save
 		end
 	end
+
+	News.update_all(:admin_id => 2)
   end
 
   def down
