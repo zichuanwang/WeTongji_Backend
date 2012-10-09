@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AdminsController < ApplicationController
   before_filter :authenticate_admin!, :except => [:form_received]
   load_and_authorize_resource
@@ -35,6 +36,14 @@ class AdminsController < ApplicationController
     params[:admin].delete(:password) if params[:admin][:password].blank?
     params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
 
+    case params[:submit]
+      when "启用"
+        @admin.unlock
+      when "禁用"
+        @admin.lock
+      when "审批"
+        @admin.approve
+    end
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
         format.html { redirect_to @admin, notice: 'Admin was successfully updated.' }

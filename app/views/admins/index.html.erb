@@ -29,7 +29,7 @@
             </thead>
             <tbody>
               <% @admins.each do |admin| %>
-              <tr>
+              <tr class="<%= admin.locked_at.nil? ? "" : "selected" %>">
                   <td><%= admin.email %></td>
                   <td><%= admin.name %></td>
                   <td><%= admin.student_no %></td>
@@ -41,8 +41,6 @@
                   <td class="last">
                     <%= link_to '详情', admin %>
                     <%= link_to '编辑', edit_admin_path(admin) %>
-                    <%= link_to '停用/启用', edit_admin_path(admin) %>
-                    <%= link_to '审批', edit_admin_path(admin) %>
                   </td>
               </tr>
               <% end %>
