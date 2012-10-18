@@ -16,6 +16,12 @@ class UsersController < ApplicationController
     @menu = "users"
   end
 
+  def show
+    @user = User.find(params[:id])
+    @student = Student.find_by_no(@user.no)
+    @sele_courses = SeleCourse.where(:student_no => @user.no).order("id desc")
+  end
+
   def reconfirm
     user = User.find(params[:id])
     if user

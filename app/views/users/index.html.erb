@@ -43,7 +43,7 @@
             <tbody>
             <% @users.each do |user| %>
             <tr class="last">
-              <td><%= user.no %></td>
+              <td><%= link_to user.no, user_path(user) %></td>
               <td><%= user.name %></td>
               <td><%= user.email %></td>
               <td><%= user.display_name %></td>

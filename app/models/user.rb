@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates_presence_of :no
   validates_uniqueness_of :no
 
-  paginates_per 15
+  paginates_per 20
 
   before_create :init_model
   after_create :send_confirmation
