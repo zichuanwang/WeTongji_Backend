@@ -36,7 +36,7 @@
           </tr>
           <tr>
             <td>确认时间</td>
-            <td class="last"><%= @user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+            <td class="last"><%= @user.confirmed_at.nil? ? : "" : @user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
             <td>头像</td>
