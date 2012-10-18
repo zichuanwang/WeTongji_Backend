@@ -1,0 +1,149 @@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#box-tabs").tabs();
+    });
+</script>
+<div id="box-tabs" class="box">
+    <div class="title">
+        <h5>查看用户</h5>
+        <ul class="links">
+            <li><a href="#box-details">用户信息</a></li>
+            <li><a href="#box-student">学生信息</a></li>
+            <li><a href="#box-courses">选课信息</a></li>
+        </ul>
+    </div>
+    <div id="box-details" class="table">
+        <table>
+          <tr>
+            <td>学号</td>
+            <td class="last"><%= @user.no %></td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td class="last"><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td class="last"><%= @user.email %></td>
+          </tr>
+          <tr>
+            <td>显示名</td>
+            <td class="last"><%= @user.display_name %></td>
+          </tr>
+          <tr>
+            <td>创建时间</td>
+            <td class="last"><%= @user.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>确认时间</td>
+            <td class="last"><%= @user.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>头像</td>
+            <td class="last"><%= image_tag @user.avatar.url %></td>
+          </tr>
+          <tr>
+            <td>专业</td>
+            <td class="last"><%= @user.major %></td>
+          </tr>
+          <tr>
+            <td>学位</td>
+            <td class="last"><%= @user.degree %></td>
+          </tr>
+          <tr>
+            <td>院系</td>
+            <td class="last"><%= @user.department %></td>
+          </tr>
+          <tr>
+            <td>生日</td>
+            <td class="last"><%= @user.birthday.strftime("%Y/%m/%d") %></td>
+          </tr>
+          <tr>
+            <td>入学年份</td>
+            <td class="last"><%= @user.year %></td>
+          </tr>
+          <tr>
+            <td>学制</td>
+            <td class="last"><%= @user.plan %></td>
+          </tr>
+          <tr>
+            <td>性别</td>
+            <td class="last"><%= @user.gender %></td>
+          </tr>
+        </table>
+    </div>
+    <div id="box-student" class="table">
+        <table>
+          <tr>
+            <td>学号</td>
+            <td class="last"><%= @student.no %></td>
+          </tr>
+          <tr>
+            <td>姓名</td>
+            <td class="last"><%= @student.name %></td>
+          </tr>
+          <tr>
+            <td>邮箱</td>
+            <td class="last"><%= @student.email %></td>
+          </tr>
+          <tr>
+            <td>专业</td>
+            <td class="last"><%= @student.major %></td>
+          </tr>
+          <tr>
+            <td>学位</td>
+            <td class="last"><%= @student.degree %></td>
+          </tr>
+          <tr>
+            <td>院系</td>
+            <td class="last"><%= @student.department %></td>
+          </tr>
+          <tr>
+            <td>生日</td>
+            <td class="last"><%= @student.birthday.strftime("%Y/%m/%d") %></td>
+          </tr>
+          <tr>
+            <td>入学年份</td>
+            <td class="last"><%= @student.year %></td>
+          </tr>
+          <tr>
+            <td>学制</td>
+            <td class="last"><%= @student.plan %></td>
+          </tr>
+          <tr>
+            <td>性别</td>
+            <td class="last"><%= @student.gender %></td>
+          </tr>
+        </table>
+    </div>
+    <div id="box-courses" class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>学号</th>
+                  <th>课号</th>
+                  <th>教师</th>
+                  <th>周</th>
+                  <th>天</th>
+                  <th>跨度（节）</th>
+                  <th>地点</th>
+                  <th class="last">开始和结束</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @sele_courses.each do |sele_course| %>
+              <tr>
+                  <td><%= sele_course.student_no %></td>
+                  <td><%= sele_course.course_no %></td>
+                  <td><%= sele_course.teacher %></td>
+                  <td><%= sele_course.week_type %></td>
+                  <td><%= sele_course.week_day %></td>
+                  <td><%= sele_course.section_start %>～<%= sele_course.section_end %></td>
+                  <td><%= sele_course.location %></td>
+                  <td class="last"><%= sele_course.begin.strftime("%Y/%m/%d") %>～<%= sele_course.end.strftime("%Y/%m/%d") %></td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>
