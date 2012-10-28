@@ -64,7 +64,9 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-    @admin.destroy
+    if @admin.can_destroy
+      @admin.destroy
+    end
     redirect_to admins_url
   end
 
