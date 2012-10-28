@@ -1,7 +1,7 @@
 # encoding: utf-8
 class AdminsController < ApplicationController
   before_filter :authenticate_admin!, :except => [:form_received]
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:form_received]
   def index
     unless params[:keywords].blank?
       @admins = @admins.where("display like :keywords", :keywords =>  "%#{params[:keywords]}%")
@@ -60,6 +60,13 @@ class AdminsController < ApplicationController
   def unlock
     @admin.unlock
     @admin.save
+    redirect_to admins_url
+  end
+
+  def destroy
+    if @admin.can_destroy
+      @admin.destroy
+    end
     redirect_to admins_url
   end
 
