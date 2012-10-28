@@ -36,6 +36,7 @@ WetongjiWeb::Application.routes.draw do
   post "admins/approve"
   post "admins/lock"
   post "admins/unlock"
+  get "admins/form_received"
   devise_for :admins, :controllers => { :registrations => "registrations" }
   resources :admins
 
