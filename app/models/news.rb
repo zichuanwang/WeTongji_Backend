@@ -1,6 +1,6 @@
 # encoding: utf-8
 class News < ActiveRecord::Base
-	belongs_to :admin
+	belongs_to :admin, :counter_cache => true
 	paginates_per 20
 	validates_presence_of :title, :context, :category, :image
 

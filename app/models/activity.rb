@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Activity < ActiveRecord::Base
 	belongs_to :channel
-	belongs_to :admin
+	belongs_to :admin, :counter_cache => true
 	belongs_to :organizer
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "activities_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "activities_users_likes"

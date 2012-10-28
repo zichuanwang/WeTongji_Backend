@@ -22,6 +22,7 @@
                   <th>角色</th>
                   <th>显示名</th>
                   <th>登陆</th>
+                  <th>新闻/活动/咨询</th>
                   <th>审核时间</th>
                   <th>最后登陆</th>
                   <th class="last">操作</th>
@@ -36,6 +37,7 @@
                   <td><%= role_name(admin.role) %></td>
                   <td><%= admin.display %></td>
                   <td><%= admin.sign_in_count %></td>
+                  <td><%= admin.news.size %>/<%= admin.activities.size %>/<%= admin.information.size %></td>
                   <td><%= admin.approved_at.nil? ? "" : admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td class="last">
