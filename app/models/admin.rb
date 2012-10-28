@@ -9,6 +9,8 @@ class Admin < ActiveRecord::Base
 	attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :title, :display, :phone, 
 					:description, :name, :address, :student_no, :icon
 	has_attached_file :icon, :styles => { :medium => "180x180>" }
+  validates_attachment :icon, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+
   has_many :news
   has_many :information
   has_many :activities
@@ -16,7 +18,6 @@ class Admin < ActiveRecord::Base
 	validates_presence_of :name, :student_no, :display, :address, :phone#, :description
 	validates_uniqueness_of :name, :student_no, :display, :phone
 	validates_length_of :description, :within => 0..200
-	#validates_attachment_presence :icon
 
 	before_create :lock
 
