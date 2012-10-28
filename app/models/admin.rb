@@ -35,7 +35,7 @@ class Admin < ActiveRecord::Base
 	end
 
   def can_destroy
-    self.news.size == 0 && self.information.size == 0 && self.activities.size == 0
+    self.news.size == 0 && self.information.size == 0 && self.activities.size == 0 && self.role != "SuperAdmin"
   end
 
 end
