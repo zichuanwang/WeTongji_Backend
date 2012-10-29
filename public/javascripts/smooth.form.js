@@ -70,14 +70,15 @@ $(document).ready(function () {
     $(".date").datepicker({
         showOn: 'both',
         buttonImage: '/images/ui/calendar.png',
+        dateFormat: 'yy-mm-dd',
         buttonImageOnly: true
     });
 
     /* select styling */
     $("select").selectmenu({
         style: 'dropdown',
-        width: 200,
-        menuWidth: 200,
+        //width: 200,
+        //menuWidth: 200,
         icons: [
 		    { find: '.locked', icon: 'ui-icon-locked' },
 		    { find: '.unlocked', icon: 'ui-icon-unlocked' },

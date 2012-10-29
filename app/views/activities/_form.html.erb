@@ -18,7 +18,7 @@
           <label>日期</label>
         </div>
         <div class="input">
-          <%= f.text_field :day, { :class => "date" } %>
+          <input type="text" id="activity_day" name="date[:day]" class="date" value="<%= get_day(@activity) %>" />
         </div>
       </div>
       <div class="field">
@@ -26,10 +26,26 @@
           <label>时间</label>
         </div>
         <div class="select">
-          <%= f.select :begin_hour, (8..21).each {|c|[ c ]} %>点
-          <%= f.select :begin_minute, (0..60).each {|c|[ c ]} %>分~
-          <%= f.select :begin_hour, (8..21).each {|c|[ c ]} %>点
-          <%= f.select :begin_minute, (0..60).each {|c|[ c ]} %>分
+          <select name="date[:begin_hour]">
+            <% (8..21).each do |item| %>
+            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
+            <% end %>
+          </select>点
+          <select name="date[:begin_minute]">
+            <% 0.step(55,5).each do |item| %>
+            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
+            <% end %>
+          </select>分--
+          <select name="date[:end_hour]">
+            <% (8..21).each do |item| %>
+            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
+            <% end %>
+          </select>点
+          <select name="date[:end_minute]">
+            <% 0.step(55,5).each do |item| %>
+            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
+            <% end %>
+          </select>分
         </div>
       </div>
       <div class="field">
@@ -88,14 +104,3 @@
   </div>
 </div>
 <% end %>
-
-<script type="text/javascript">
-  $('#activity_day').datepicker({
-      //timeFormat: 'hh:mm:ss',
-      dateFormat: 'yy-mm-dd',
-  });
-  $('#activity_end').datepicker({
-      //timeFormat: 'hh:mm:ss',
-      dateFormat: 'yy-mm-dd',
-  });
-</script>
