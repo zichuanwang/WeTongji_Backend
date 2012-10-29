@@ -1,9 +1,3 @@
-<link rel="stylesheet" href="/stylesheets/jquery-ui-timepicker-addon.css" type="text/css"/>
-<link rel="stylesheet" href="/stylesheets/jquery-ui-1.8.20.custom.css" type="text/css"/>
-<script type="text/javascript" src="/javascripts/jquery-ui-1.8.20.custom.min.js"></script>
-<script type="text/javascript" src="/javascripts/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/javascripts/jquery-ui-timepicker-zh-CN.js"></script>
-
 <%= form_for(@activity, :html => {:multipart => true}) do |f| %>
   <% if @activity.errors.any? %>
     <div id="error_explanation">
@@ -21,18 +15,19 @@
     <div class="fields">
       <div class="field field-first">
         <div class="label">
-          <label>开始</label>
+          <label>日期</label>
         </div>
         <div class="input">
-          <%= f.text_field :begin, { :class => "small" } %>
+          <input type="text" id="activity_day" name="date[day]" class="date" value="<%= get_day(@activity) %>" />
         </div>
       </div>
       <div class="field">
         <div class="label">
-          <label>结束</label>
+          <label>时间</label>
         </div>
-        <div class="input">
-          <%= f.text_field :end, { :class => "small" } %>
+        <div class="input input-file">
+          <input type="text" name="date[begin_time]" size="12" value="<%= get_begin_time(@activity) %>" />至
+          <input type="text" name="date[end_time]" size="12" value="<%= get_end_time(@activity) %>" />格式(08:30)
         </div>
       </div>
       <div class="field">
@@ -40,7 +35,7 @@
           <label>标题</label>
         </div>
         <div class="input input-file">
-          <%= f.text_field :title, { :class => "small" } %>
+          <%= f.text_field :title, { :class => "large" } %>
         </div>
       </div>
       <div class="field">
@@ -91,14 +86,3 @@
   </div>
 </div>
 <% end %>
-
-<script type="text/javascript">
-  $('#activity_begin').datetimepicker({
-      timeFormat: 'hh:mm:ss',
-      dateFormat: 'yy-mm-dd',
-  });
-  $('#activity_end').datetimepicker({
-      timeFormat: 'hh:mm:ss',
-      dateFormat: 'yy-mm-dd',
-  });
-</script>
