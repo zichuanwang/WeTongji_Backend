@@ -37,7 +37,9 @@ WetongjiWeb::Application.routes.draw do
   post "admins/lock"
   post "admins/unlock"
   get "admins/form_received"
-  devise_for :admins, :controllers => { :registrations => "registrations" }
+  devise_for :admins, :controllers => { :registrations => "registrations" } do
+    get "/admins/sign_out" => "devise/sessions#destroy", :as => :destroy_admin_session
+  end
   resources :admins
 
   post "activities/approve"
