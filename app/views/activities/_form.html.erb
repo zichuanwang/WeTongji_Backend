@@ -18,25 +18,18 @@
           <label>日期</label>
         </div>
         <div class="input">
-          日期:<%= f.text_field :day, { :size => "15" } %>
+          <%= f.text_field :day, { :class => "date" } %>
         </div>
       </div>
       <div class="field">
         <div class="label">
-          <label>开始时间</label>
+          <label>时间</label>
         </div>
         <div class="select">
           <%= f.select :begin_hour, (8..21).each {|c|[ c ]} %>点
-          <%= f.select :begin_minute, (8..21).each {|c|[ c ]} %>分
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>结束时间</label>
-        </div>
-        <div class="select">
+          <%= f.select :begin_minute, (0..60).each {|c|[ c ]} %>分~
           <%= f.select :begin_hour, (8..21).each {|c|[ c ]} %>点
-          <%= f.select :begin_minute, (8..21).each {|c|[ c ]} %>分
+          <%= f.select :begin_minute, (0..60).each {|c|[ c ]} %>分
         </div>
       </div>
       <div class="field">

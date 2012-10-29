@@ -15,26 +15,6 @@ class Activity < ActiveRecord::Base
 
 	before_create :init_model
 
-	def day
-		
-	end
-
-	def begin_minute
-		
-	end
-
-	def begin_hour
-		
-	end
-
-	def end_hour
-		
-	end
-
-	def end_minute
-		
-	end
-
 	def delete
 		self.users_favorites.clear
 		self.users_likes.clear
