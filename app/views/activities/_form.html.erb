@@ -18,7 +18,7 @@
           <label>日期</label>
         </div>
         <div class="input">
-          <input type="text" id="activity_day" name="date[:day]" class="date" value="<%= get_day(@activity) %>" />
+          <input type="text" id="activity_day" name="date[day]" class="date" value="<%= get_day(@activity) %>" />
         </div>
       </div>
       <div class="field">
@@ -26,22 +26,19 @@
           <label>时间</label>
         </div>
         <div class="select">
-          <select name="date[:begin_hour]">
+          <select name="date[begin_hour]">
             <% (8..21).each do |item| %>
             <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
             <% end %>
-          </select>点
-          <select name="date[:begin_minute]">
+          </select>点<select name="date[begin_minute]">
             <% 0.step(55,5).each do |item| %>
             <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
             <% end %>
-          </select>分--
-          <select name="date[:end_hour]">
+          </select>分--<select name="date[end_hour]">
             <% (8..21).each do |item| %>
             <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
             <% end %>
-          </select>点
-          <select name="date[:end_minute]">
+          </select>点<select name="date[end_minute]">
             <% 0.step(55,5).each do |item| %>
             <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
             <% end %>
@@ -53,7 +50,7 @@
           <label>标题</label>
         </div>
         <div class="input input-file">
-          <%= f.text_field :title, { :class => "small" } %>
+          <%= f.text_field :title, { :class => "large" } %>
         </div>
       </div>
       <div class="field">

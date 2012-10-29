@@ -27,33 +27,34 @@ class ActivitiesController < ApplicationController
   def create
     @activity.admin = current_admin
     @activity.check
-    respond_to do |format|
-      if @activity.save
-        format.html { redirect_to :action => "index", notice: 'Activity was successfully created.' }
-      else
-        format.html { render action: "new" }
-      end
+    set_time
+    if @activity.save
+      redirect_to :action => "index", notice: 'Activity was successfully created.'
+    else
+      render action: "new" 
     end
   end
 
   def update
-    respond_to do |format|
-      if @activity.update_attributes(params[:activity])
-        @activity.check
-        @activity.save
-        format.html { redirect_to @activity, notice: 'Activity was successfully updated.' }
-      else
-        format.html { render action: "edit" }
-      end
+    set_time
+    if @activity.update_attributes(params[:activity])
+      @activity.check
+      @activity.save
+      redirect_to @activity, notice: 'Activity was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
   def destroy
     @activity.delete
+    redirect_to activities_url
+  end
 
-    respond_to do |format|
-      format.html { redirect_to activities_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def set_time
+    @activity.begin = Time.parse("#{params[:date][:day]} #{params[:date][:begin_hour]}:#{params[:date][:begin_minute]}:00")
+    @activity.end = Time.parse("#{params[:date][:day]} #{params[:date][:end_hour]}:#{params[:date][:end_minute]}:00")
   end
 end
