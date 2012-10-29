@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     /* select styling */
     $("select").selectmenu({
-        style: 'dropdown',
+        //style: 'dropdown',
         //width: 200,
         //menuWidth: 200,
         icons: [

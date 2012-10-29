@@ -28,4 +28,16 @@ module ActivitiesHelper
 			return activity.end.strftime("%M")
 		end
 	end
+
+	def get_begin_time(activity)
+		unless activity.begin.nil?
+			return activity.begin.strftime("%H:%M")
+		end
+	end
+
+	def get_end_time(activity)
+		unless activity.end.nil?
+			return activity.end.strftime("%H:%M")
+		end
+	end
 end

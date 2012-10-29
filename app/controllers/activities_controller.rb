@@ -54,7 +54,7 @@ class ActivitiesController < ApplicationController
   private
 
   def set_time
-    @activity.begin = Time.parse("#{params[:date][:day]} #{params[:date][:begin_hour]}:#{params[:date][:begin_minute]}:00")
-    @activity.end = Time.parse("#{params[:date][:day]} #{params[:date][:end_hour]}:#{params[:date][:end_minute]}:00")
+    @activity.begin = Time.parse("#{params[:date][:day]} #{params[:date][:begin_time]}:00")
+    @activity.end = Time.parse("#{params[:date][:day]} #{params[:date][:end_time]}:00")
   end
 end

@@ -25,24 +25,9 @@
         <div class="label">
           <label>时间</label>
         </div>
-        <div class="select">
-          <select name="date[begin_hour]">
-            <% (8..21).each do |item| %>
-            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
-            <% end %>
-          </select>点<select name="date[begin_minute]">
-            <% 0.step(55,5).each do |item| %>
-            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_begin_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
-            <% end %>
-          </select>分--<select name="date[end_hour]">
-            <% (8..21).each do |item| %>
-            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_hour(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
-            <% end %>
-          </select>点<select name="date[end_minute]">
-            <% 0.step(55,5).each do |item| %>
-            <option value="<%= '%02.0f' % item %>" <%= '%02.0f' % item == get_end_minute(@activity) ? 'selected' : '' %>><%= '%02.0f' % item %></option>
-            <% end %>
-          </select>分
+        <div class="input input-file">
+          <input type="text" name="date[begin_time]" size="12" value="<%= get_begin_time(@activity) %>" />至
+          <input type="text" name="date[end_time]" size="12" value="<%= get_end_time(@activity) %>" />格式(08:30)
         </div>
       </div>
       <div class="field">
@@ -74,7 +59,7 @@
           <label>状态</label>
         </div>
         <div class="input input-file">
-          <%= f.text_field :status, { :class => "small" } %><%= f.text_field :status, { :class => "small" } %>
+          <%= f.text_field :status, { :class => "small" } %>
         </div>
       </div>
       <div class="field">
