@@ -1,5 +1,7 @@
 class ExActivity
-	attr_accessor :Id, :Begin, :End, :Title, :Location, :Image, :Favorite, :Organizer, :OrganizerAvatar, :Channel_Id, :Status, :Description, :Like, :Schedule, :CanFavorite, :CanLike, :CanSchedule
+	attr_accessor :Id, :Begin, :End, :Title, :Location, :Image, :Favorite, :Organizer, 
+				  :OrganizerAvatar, :Channel_Id, :Status, :Description, :Like, :Schedule, 
+				  :CanFavorite, :CanLike, :CanSchedule, :CreatedAt
 
 	def self.init_from_activity(activity, user = nil)
 		model = ExActivity.new
@@ -20,6 +22,7 @@ class ExActivity
 		model.CanFavorite = true
 		model.CanSchedule = true
 		model.CanLike = true
+		model.CreatedAt = activity.created_at
 		
 		if user
 			model.CanFavorite = activity.can_favorite(user)
