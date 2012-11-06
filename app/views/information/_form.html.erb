@@ -22,6 +22,14 @@
       </div>
       <div class="field">
         <div class="label">
+          <label>来源</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :source, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
           <label>类别</label>
         </div>
         <div class="select">
@@ -34,6 +42,14 @@
         </div>
         <div class="input input-file">
           <%= f.file_field :image, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>摘要</label>
+        </div>
+        <div class="input">
+          <%= f.text_area :summary, :rows => 8, :cols => 50 %>
         </div>
       </div>
       <div class="field">
