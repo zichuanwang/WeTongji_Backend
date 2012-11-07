@@ -6,6 +6,7 @@ module Api
 		include Api::NewsHelper
 		include Api::UsersHelper
 		include Api::UserProfileHelper
+		include Api::SystemProfileHelper
 		include Api::InformationHelper
 	end
 end

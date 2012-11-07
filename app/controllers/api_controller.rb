@@ -1,7 +1,7 @@
 #require 'rsa'
 class ApiController < ApplicationController
 	include Api::V1Helper
-	# need split to some partal files
+
 	def test
 		return_response ApiReturn.new("000")
 	end
@@ -57,21 +57,6 @@ class ApiController < ApplicationController
 	    else
 	    	return_response ApiReturn.new("001")
 	    end
-	end
-
-  	private
-
-	def verify_checksum
-	  	h = params[:H]
-		md5_string = request.query_string.split('&').sort.collect do |s|
-	  		key, val = s.split('=')
-	  		unless key == "H"
-	  			key + "=" + val
-	  		end
-		end
-	  	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
-	  	p md5_string.compact.join("&")
-	  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == h
 	end
 
 end

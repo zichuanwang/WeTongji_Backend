@@ -37,5 +37,18 @@ module Api
 				return nil
 			end
 		end
+
+		def verify_checksum
+		  	h = params[:H]
+			md5_string = request.query_string.split('&').sort.collect do |s|
+		  		key, val = s.split('=')
+		  		unless key == "H"
+		  			key + "=" + val
+		  		end
+			end
+		  	p Digest::MD5.hexdigest(md5_string.compact.join("&"))
+		  	p md5_string.compact.join("&")
+		  	Digest::MD5.hexdigest(md5_string.compact.join("&")) == h
+		end
 	end
 end
