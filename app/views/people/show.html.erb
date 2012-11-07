@@ -1,45 +1,53 @@
-<p id="notice"><%= notice %></p>
+<div class="box">
+    <div class="title">
+        <h5>查看济人</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @person.title %></td>
+          </tr>
+          <tr>
+            <td>来源</td>
+            <td class="last"><%= @person.source %></td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td class="last"><%= @person.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>类别</td>
+            <td class="last"><%= @person.category %></td>
+          </tr>
+          <tr>
+            <td>阅读次数</td>
+            <td class="last"><%= @person.read %></td>
+          </tr>
+          <tr>
+            <td>收藏次数</td>
+            <td class="last"><%= @person.favorite %></td>
+          </tr>
+          <tr>
+            <td>喜欢次数</td>
+            <td class="last"><%= @person.like %></td>
+          </tr>
+          <tr>
+            <td>摘要</td>
+            <td class="last"><%= @person.summary %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td class="last"><%= @person.context %></td>
+          </tr>
+          <% @person.person_images.each do |image| %>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag image.file.url(:medium) %></td>
+          </tr>
+          <% end %>
 
-<p>
-  <b>Name:</b>
-  <%= @person.name %>
-</p>
+        </table>
+    </div>
+</div>
 
-<p>
-  <b>Job title:</b>
-  <%= @person.job_title %>
-</p>
-
-<p>
-  <b>Words:</b>
-  <%= @person.words %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @person.title %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @person.description %>
-</p>
-
-<p>
-  <b>Read:</b>
-  <%= @person.read %>
-</p>
-
-<p>
-  <b>Like:</b>
-  <%= @person.like %>
-</p>
-
-<p>
-  <b>Favorite:</b>
-  <%= @person.favorite %>
-</p>
-
-
-<%= link_to 'Edit', edit_person_path(@person) %> |
-<%= link_to 'Back', people_path %>

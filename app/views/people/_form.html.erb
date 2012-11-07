@@ -1,4 +1,4 @@
-<%= form_for(@person) do |f| %>
+<%= form_for(@person, :html => { :multipart => true }) do |f| %>
   <% if @person.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@person.errors.count, "error") %> prohibited this person from being saved:</h2>
@@ -10,40 +10,75 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :job_title %><br />
-    <%= f.text_field :job_title %>
-  </div>
-  <div class="field">
-    <%= f.label :words %><br />
-    <%= f.text_field :words %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :read %><br />
-    <%= f.number_field :read %>
-  </div>
-  <div class="field">
-    <%= f.label :like %><br />
-    <%= f.number_field :like %>
-  </div>
-  <div class="field">
-    <%= f.label :favorite %><br />
-    <%= f.number_field :favorite %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>姓名</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :name, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>职务</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :job_title, { :class => "small" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>声音</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :words, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <% 1.upto(3).each do |i| %>
+      <div class="field">
+        <div class="label">
+          <label>图片(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <input type="file" name="images[]" />
+        </div>
+      </div>
+      <% end %>
+      <% unless @person.person_images.empty? %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>已上传图片</label>
+        </div>
+        <div class="checkboxes">
+          <% @person.person_images.each do |image| %>
+          <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
+          <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
+          <label>删除</label>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>内容</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :description, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
   </div>
 <% end %>
