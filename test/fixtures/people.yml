@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  job_title: MyString
+  words: MyString
+  title: MyString
+  description: MyText
+  read: 1
+  like: 1
+  favorite: 1
+
+two:
+  name: MyString
+  job_title: MyString
+  words: MyString
+  title: MyString
+  description: MyText
+  read: 1
+  like: 1
+  favorite: 1

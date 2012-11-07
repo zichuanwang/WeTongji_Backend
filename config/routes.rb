@@ -1,4 +1,6 @@
 WetongjiWeb::Application.routes.draw do
+  resources :people
+
   resources :versions
 
   post "information/approve"
