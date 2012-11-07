@@ -53,7 +53,7 @@
         </div>
         <div class="checkboxes">
           <% @information.information_images.each do |image| %>
-          <%= link_to (image_tag image.file.url(:icon)), image.file.url, :target => "_blank"  %>
+          <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
           <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
           <label>删除</label>
           <% end %>

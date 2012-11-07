@@ -43,7 +43,7 @@
           <% @information.information_images.each do |image| %>
           <tr>
             <td>图片</td>
-            <td class="last"><%= image_tag image.file.url %></td>
+            <td class="last"><%= image_tag image.file.url(:medium) %></td>
           </tr>
           <% end %>
           <tr>
