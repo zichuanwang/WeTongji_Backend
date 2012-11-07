@@ -34,6 +34,18 @@
 </li>
 <% end %>
 
+<% if can? :manage, Person %>
+<li>
+	<%= link_to people_path, { :title => "济人" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="济人" /></span><span>济人</span>
+	<% end %>
+	<ul>
+		<li><%= link_to "所有济人", people_path %></li>
+		<li class="last"><%= link_to "创建济人", new_person_path %></li>
+	</ul>
+</li>
+<% end %>
+
 <% if can? :manage, User %>
 <li>
 	<%= link_to users_path, { :title => "用户" } do %>
