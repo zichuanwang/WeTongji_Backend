@@ -15,20 +15,26 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(params[:person])
+    if params[:images]
+      params[:images].each do |image|
+        unless image['title'].blank? || image['file'].nil?
+          img = PersonImage.new
+          img.file = image['file']
+          img.title = image['title']
+          @person.person_images << img
+        end
+      end
+    end
 
     respond_to do |format|
       if @person.save
         format.html { redirect_to @person, notice: 'Person was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /people/1
-  # PUT /people/1.json
   def update
     @person = Person.find(params[:id])
 

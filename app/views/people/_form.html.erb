@@ -47,10 +47,18 @@
       <% 1.upto(3).each do |i| %>
       <div class="field">
         <div class="label">
+          <label>图片标题</label>
+        </div>
+        <div class="input">
+          <input type="text" name="images[][title]" class="small" />
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
           <label>图片(300K以内,jpeg格式)</label>
         </div>
         <div class="input input-file">
-          <input type="file" name="images[]" />
+          <input type="file" name="images[][file]" />
         </div>
       </div>
       <% end %>

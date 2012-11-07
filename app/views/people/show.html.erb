@@ -5,20 +5,24 @@
     <div class="table">
         <table>
           <tr>
+            <td>姓名</td>
+            <td class="last"><%= @person.name %></td>
+          </tr>
+          <tr>
+            <td>职务</td>
+            <td class="last"><%= @person.job_title %></td>
+          </tr>
+          <tr>
             <td>标题</td>
             <td class="last"><%= @person.title %></td>
           </tr>
           <tr>
-            <td>来源</td>
-            <td class="last"><%= @person.source %></td>
+            <td>声音</td>
+            <td class="last"><%= @person.words %></td>
           </tr>
           <tr>
             <td>发布时间</td>
             <td class="last"><%= @person.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>类别</td>
-            <td class="last"><%= @person.category %></td>
           </tr>
           <tr>
             <td>阅读次数</td>
@@ -33,20 +37,18 @@
             <td class="last"><%= @person.like %></td>
           </tr>
           <tr>
-            <td>摘要</td>
-            <td class="last"><%= @person.summary %></td>
-          </tr>
-          <tr>
-            <td>内容</td>
-            <td class="last"><%= @person.context %></td>
+            <td>说明</td>
+            <td class="last"><%= @person.description %></td>
           </tr>
           <% @person.person_images.each do |image| %>
           <tr>
             <td>图片</td>
-            <td class="last"><%= image_tag image.file.url(:medium) %></td>
+            <td class="last">
+              <%= image.title %><br />
+              <%= image_tag image.file.url(:medium) %>
+            </td>
           </tr>
           <% end %>
-
         </table>
     </div>
 </div>
