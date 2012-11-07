@@ -36,28 +36,37 @@ class PeopleController < ApplicationController
   end
 
   def update
-    @person = Person.find(params[:id])
+    if params[:images]
+      params[:images].each do |image|
+        unless image['title'].blank? || image['file'].nil?
+          img = PersonImage.new
+          img.file = image['file']
+          img.title = image['title']
+          @person.person_images << img
+        end
+      end
+    end
 
+    if params[:delete_images]
+      params[:delete_images].each do |image|
+        img = PersonImage.find(image)
+        @person.person_images.delete(img)
+      end
+    end
     respond_to do |format|
       if @person.update_attributes(params[:person])
         format.html { redirect_to @person, notice: 'Person was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @person.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /people/1
-  # DELETE /people/1.json
   def destroy
-    @person = Person.find(params[:id])
     @person.destroy
 
     respond_to do |format|
       format.html { redirect_to people_url }
-      format.json { head :no_content }
     end
   end
 end

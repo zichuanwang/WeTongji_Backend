@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-	attr_accessible :description, :name, :read, :title, :job_title, :words, :like, :favorite
+	validates_presence_of :description, :name, :read, :title, :job_title, :words
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "people_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "people_users_likes"
