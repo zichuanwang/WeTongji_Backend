@@ -27,6 +27,14 @@ class InformationController < ApplicationController
     @information.admin = current_admin
     @information.check
 
+    if params[:images]
+      params[:images].each do |image|
+        img = InformationImage.new
+        img.file = image
+        @information.information_images << img
+      end
+    end
+
     respond_to do |format|
       if @information.save
         format.html { redirect_to @information, notice: 'Information was successfully created.' }
@@ -39,6 +47,20 @@ class InformationController < ApplicationController
 
   def update
 
+    if params[:images]
+      params[:images].each do |image|
+        img = InformationImage.new
+        img.file = image
+        @information.information_images << img
+      end
+    end
+
+    if params[:delete_images]
+      params[:delete_images].each do |image|
+        img = InformationImage.find(image)
+        @information.information_images.delete(img)
+      end
+    end
     respond_to do |format|
       if @information.update_attributes(params[:information])
         @information.check

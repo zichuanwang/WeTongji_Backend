@@ -9,6 +9,10 @@
             <td class="last"><%= @information.title %></td>
           </tr>
           <tr>
+            <td>来源</td>
+            <td class="last"><%= @information.source %></td>
+          </tr>
+          <tr>
             <td>发布时间</td>
             <td class="last"><%= @information.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
@@ -21,13 +25,27 @@
             <td class="last"><%= @information.read %></td>
           </tr>
           <tr>
+            <td>收藏次数</td>
+            <td class="last"><%= @information.favorite %></td>
+          </tr>
+          <tr>
+            <td>喜欢次数</td>
+            <td class="last"><%= @information.like %></td>
+          </tr>
+          <tr>
+            <td>摘要</td>
+            <td class="last"><%= @information.summary %></td>
+          </tr>
+          <tr>
             <td>内容</td>
             <td class="last"><%= @information.context %></td>
           </tr>
+          <% @information.information_images.each do |image| %>
           <tr>
             <td>图片</td>
-            <td class="last"><%= image_tag @information.image.url %></td>
+            <td class="last"><%= image_tag image.file.url %></td>
           </tr>
+          <% end %>
           <tr>
             <td>是否可见</td>
             <td class="last"><%= @information.visiable ? "可见" : "不可见" %></td>
