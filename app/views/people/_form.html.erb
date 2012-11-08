@@ -22,6 +22,14 @@
       </div>
       <div class="field">
         <div class="label">
+          <label>编号</label>
+        </div>
+        <div class="select">
+          <%= f.select :no, [Time.now.strftime("%Y%U").to_i + 1, Time.now.strftime("%Y%U").to_i + 2, Time.now.strftime("%Y%U").to_i + 3]  %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
           <label>职务</label>
         </div>
         <div class="input">
@@ -42,6 +50,14 @@
         </div>
         <div class="input">
           <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>照片(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :avatar, { :size => "40" } %>
         </div>
       </div>
       <% 1.upto(3).each do |i| %>

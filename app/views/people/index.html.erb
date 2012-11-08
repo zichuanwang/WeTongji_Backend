@@ -6,6 +6,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>编号</th>
                     <th>姓名</th>
                     <th>职务</th>
                     <th>标题</th>
@@ -16,6 +17,7 @@
             <tbody>
                 <% @people.each do |person| %>
                 <tr>
+                    <td><%= person.no %></td>
                     <td><%= person.name %></td>
                     <td><%= person.job_title %></td>
                     <td><%= person.title %></td>
