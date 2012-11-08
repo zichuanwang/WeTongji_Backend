@@ -16,6 +16,13 @@ class ExInformation
 		model.Like = information.like
 		model.CanFavorite = true
 		model.CanLike = true
+		model.Images = []
+
+		information.information_images.each do |image|
+			unless image.nil?
+				model.Images << Rails.configuration.host + image.file.url
+			end
+		end
 		
 		if user
 			model.CanFavorite = information.can_favorite(user)

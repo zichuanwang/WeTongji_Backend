@@ -72,12 +72,10 @@ class Information < ActiveRecord::Base
 		!self.users_likes.exists?(user)
 	end
 
-	def can_schedule(user)
-		!self.users_schedules.exists?(user)
-	end
-
 	private
 	def init_model
 		self.read = 1
+		self.favorite = 0
+		self.like = 0
 	end
 end
