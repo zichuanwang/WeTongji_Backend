@@ -22,16 +22,11 @@ class ApiController < ApplicationController
 		"Activity.UnSchedule" => "activity_unschedule",
 
 		"Favorite.Get" => "favorite",
-
 		"Schedule.Get" => "schedule",
 
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
 		"News.Read" => "news_read",
-
-		"Information.GetList" => "information_getlist",
-		"Information.Get" => "information_get",
-		"Information.Read" => "information_read",
 
 		"TimeTable.Get" => "timetable",
 
@@ -42,7 +37,15 @@ class ApiController < ApplicationController
 		"User.Update" => "user_update",
 		"User.Update.Avatar" => "user_update_avatar",
 		"User.Update.Password" => "user_update_password",
-		"User.Reset.Password" => "user_reset_password"
+		"User.Reset.Password" => "user_reset_password",
+
+		"Information.GetList" => "information_getlist",
+		"Information.Get" => "information_get",
+		"Information.Read" => "information_read",
+		"Information.Favorite" => "information_favorite",
+		"Information.UnFavorite" => "information_unfavorite",
+		"Information.Like" => "information_like",
+		"Information.UnLike" => "information_unlike"
 	}
 
 	def call
