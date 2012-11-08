@@ -50,5 +50,32 @@ module Api
 				return_response(re)
 			end
 		end
+
+		def information_favorite
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					information = Information.find(params[:Id])
+					if information
+						information.user_favorite(user)
+						information.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
+		end
+
+		def information_unfavorite
+			
+		end
+
+		def information_like
+			
+		end
+
+		def information_unlike
+			
+		end
 	end
 end
