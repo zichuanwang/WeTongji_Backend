@@ -8,5 +8,6 @@ module Api
 		include Api::UserProfileHelper
 		include Api::SystemProfileHelper
 		include Api::InformationHelper
+		include Api::PeopleHelper
 	end
 end

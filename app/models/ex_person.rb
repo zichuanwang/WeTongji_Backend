@@ -1,25 +1,32 @@
 class ExPerson
-	attr_accessor :ID, :Name, :JobTitle, :Words, :Title, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Title, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images
 
-	def self.init_from_person(person)
+	def self.init_from_person(person, user = nil)
 		model = ExPerson.new
-		# model.UID = user.uid
-		# model.DisplayName = user.display_name
-		# model.Avatar = user.avatar == nil ? '' : Rails.configuration.host + user.avatar.url
-		# model.Phone = user.phone
-		# model.Email = user.email
-		# model.Name = user.name
-		# model.NO = user.no
-		# model.Major = user.major
-		# model.NativePlace = user.native_place
-		# model.Degree = user.degree
-		# model.Gender = user.gender
-		# model.Year = user.year
-		# model.Birthday = user.birthday
-		# model.Plan = user.plan
-		# model.SinaWeibo = user.sina_weibo
-		# model.QQ = user.qq
-		# model.Department = user.department
+		model.Id = person.id
+		model.Title = person.title
+		model.Description = person.description
+		model.Read = person.read
+		model.Words = person.words
+		model.JobTitle = person.job_title
+		model.Favorite = person.favorite
+		model.Like = person.like
+		model.CanFavorite = true
+		model.CanLike = true
+		model.Images = Hash.new
+
+		person.person_images.each do |image|
+			unless image.nil?
+				model.Images[Rails.configuration.host + image.file.url] = image.title
+			end
+		end
+		
+		if user
+			model.CanFavorite = person.can_favorite(user)
+			model.CanSchedule = person.can_schedule(user)
+			model.CanLike = person.can_like(user)
+		end
+
 		model
 	end
 end
