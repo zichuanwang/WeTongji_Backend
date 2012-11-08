@@ -7,7 +7,6 @@ class Information < ActiveRecord::Base
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "information_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "information_users_likes"
-	has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "information_users_schedules"
 
 	before_create :init_model
 
