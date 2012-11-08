@@ -29,8 +29,6 @@ module Api
 				information = Information.find(params[:Id])
 				ex = nil
 				if information && information.visiable
-					information.read = information.read + 1
-					information.save
 					ex = ExInformation.init_from_information(information)
 				end
 				re = ApiReturn.new("000")
@@ -67,15 +65,49 @@ module Api
 		end
 
 		def information_unfavorite
-			
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					information = Information.find(params[:Id])
+					if information
+						information.user_unfavorite(user)
+						information.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
 		end
 
-		def information_like
-			
+		def	information_like
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					information = Information.find(params[:Id])
+					if information
+						information.user_like(user)
+						information.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
 		end
 
-		def information_unlike
-			
+		def	information_unlike
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					information = Information.find(params[:Id])
+					if information
+						information.user_unlike(user)
+						information.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
 		end
+
 	end
 end
