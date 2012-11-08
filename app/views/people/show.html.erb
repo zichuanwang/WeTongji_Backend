@@ -9,8 +9,18 @@
             <td class="last"><%= @person.name %></td>
           </tr>
           <tr>
+            <td>编号</td>
+            <td class="last"><%= @person.no %></td>
+          </tr>
+          <tr>
             <td>职务</td>
             <td class="last"><%= @person.job_title %></td>
+          </tr>
+          <tr>
+            <td>照片</td>
+            <td class="last">
+              <%= image_tag @person.avatar.url(:medium) %>
+            </td>
           </tr>
           <tr>
             <td>标题</td>

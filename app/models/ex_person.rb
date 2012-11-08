@@ -1,5 +1,5 @@
 class ExPerson
-	attr_accessor :Id, :Name, :JobTitle, :Words, :Title, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Title, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images, :NO, :Avatar
 
 	def self.init_from_person(person, user = nil)
 		model = ExPerson.new
@@ -14,6 +14,8 @@ class ExPerson
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Images = Hash.new
+		model.Avatar = person.avatar == nil ? '' : Rails.configuration.host + person.avatar.url
+		model.NO = person.no
 
 		person.person_images.each do |image|
 			unless image.nil?
