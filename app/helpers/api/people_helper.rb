@@ -24,17 +24,86 @@ module Api
 		end
 
 		def person_getlatest
-			if verify_action_params(['Id'])
-				person = Person.find(params[:Id])
-				ex = nil
-				if person
-					person.read = person.read + 1
-					person.save
-					ex = ExPerson.init_from_person(person)
+			person = Person.order('id desc').first
+			ex = nil
+			if person
+				ex = ExPerson.init_from_person(person)
+			end
+			re = ApiReturn.new("000")
+			re.add_data("Person", ex)
+			return_response(re)
+		end
+
+		def person_read
+			person = Person.order('id desc').first
+			ex = nil
+			if person
+				person.read = person.read + 1
+				person.save
+				ex = ExPerson.init_from_person(person)
+			end
+			re = ApiReturn.new("000")
+			re.add_data("Person", ex)
+			return_response(re)
+		end
+
+		def person_favorite
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					person = Person.find(params[:Id])
+					if person
+						person.user_favorite(user)
+						person.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
 				end
-				re = ApiReturn.new("000")
-				re.add_data("Person", ex)
-				return_response(re)
+			end
+		end
+
+		def person_unfavorite
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					person = Person.find(params[:Id])
+					if person
+						person.user_unfavorite(user)
+						person.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
+		end
+
+		def	person_like
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					person = Person.find(params[:Id])
+					if person
+						person.user_like(user)
+						person.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
+		end
+
+		def	person_unlike
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					person = Person.find(params[:Id])
+					if person
+						person.user_unlike(user)
+						person.save
+					end
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
 			end
 		end
 	end

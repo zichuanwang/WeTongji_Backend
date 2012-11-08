@@ -48,7 +48,12 @@ class ApiController < ApplicationController
 		"Information.UnLike" => "information_unlike",
 
 		"People.Get" => "people",
-		"Person.GetLatest" => "person_getlatest"
+		"Person.GetLatest" => "person_getlatest",
+		"Person.Read" => "person_read",
+		"Person.Favorite" => "person_favorite",
+		"Person.UnFavorite" => "person_unfavorite",
+		"Person.Like" => "person_like",
+		"Person.UnLike" => "person_unlike"
 	}
 
 	def call
