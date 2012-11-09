@@ -13,12 +13,20 @@
             <td class="last"><%= @information.source %></td>
           </tr>
           <tr>
+            <td>题图</td>
+            <td class="last"><%= image_tag @information.image.url(:medium) %></td>
+          </tr>
+          <tr>
             <td>发布时间</td>
             <td class="last"><%= @information.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
             <td>类别</td>
             <td class="last"><%= @information.category %></td>
+          </tr>
+          <tr>
+            <td>联系人</td>
+            <td class="last"><%= @information.contact %></td>
           </tr>
           <tr>
             <td>阅读次数</td>
@@ -39,6 +47,14 @@
           <tr>
             <td>内容</td>
             <td class="last"><%= @information.context %></td>
+          </tr>
+          <tr>
+            <td>来源</td>
+            <td class="last"><%= @information.addition %></td>
+          </tr>
+          <tr>
+            <td>位置</td>
+            <td class="last"><%= @information.location %></td>
           </tr>
           <% @information.information_images.each do |image| %>
           <tr>

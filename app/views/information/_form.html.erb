@@ -25,7 +25,7 @@
           <label>题图(300K以内,jpeg格式)</label>
         </div>
         <div class="input input-file">
-          <input type="file" name="image" />
+          <%= f.file_field :image, { :class => "small" } %>
         </div>
       </div>
       <div class="field">
