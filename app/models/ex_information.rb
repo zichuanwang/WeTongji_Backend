@@ -1,6 +1,6 @@
 class ExInformation
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar
 
 	def self.init_from_information(information, user = nil)
 		model = ExInformation.new
@@ -16,6 +16,9 @@ class ExInformation
 		model.Like = information.like
 		model.CanFavorite = true
 		model.CanLike = true
+		model.Image = information.image == nil ? '' : Rails.configuration.host + information.image.url
+		model.Organizer = information.admin.display
+		model.OrganizerAvatar = information.admin.icon == nil ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 		model.Images = []
 
 		information.information_images.each do |image|
