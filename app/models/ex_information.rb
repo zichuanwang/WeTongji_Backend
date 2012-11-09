@@ -1,6 +1,6 @@
 class ExInformation
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location
 
 	def self.init_from_information(information, user = nil)
 		model = ExInformation.new
@@ -9,6 +9,9 @@ class ExInformation
 		model.Context = information.context
 		model.Source = information.source
 		model.Summary = information.summary
+		model.Contact = information.contact
+		model.Addition = information.addition
+		model.Location = information.location
 		model.Read = information.read
 		model.CreatedAt = information.created_at
 		model.Category = information.category
