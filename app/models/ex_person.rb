@@ -4,6 +4,7 @@ class ExPerson
 	def self.init_from_person(person, user = nil)
 		model = ExPerson.new
 		model.Id = person.id
+		model.Name = person.name
 		model.Title = person.title
 		model.Description = person.description
 		model.Read = person.read
