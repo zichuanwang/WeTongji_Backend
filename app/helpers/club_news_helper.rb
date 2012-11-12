@@ -1,0 +1,2 @@
+module ClubNewsHelper
+end

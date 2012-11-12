@@ -1,0 +1,43 @@
+<h1>Listing arounds</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Source</th>
+    <th>Summary</th>
+    <th>Context</th>
+    <th>Read</th>
+    <th>Like</th>
+    <th>Favorite</th>
+    <th>Admin</th>
+    <th>Location</th>
+    <th>Contact</th>
+    <th>Ticket service</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @arounds.each do |around| %>
+  <tr>
+    <td><%= around.title %></td>
+    <td><%= around.source %></td>
+    <td><%= around.summary %></td>
+    <td><%= around.context %></td>
+    <td><%= around.read %></td>
+    <td><%= around.like %></td>
+    <td><%= around.favorite %></td>
+    <td><%= around.admin_id %></td>
+    <td><%= around.location %></td>
+    <td><%= around.contact %></td>
+    <td><%= around.ticket_service %></td>
+    <td><%= link_to 'Show', around %></td>
+    <td><%= link_to 'Edit', edit_around_path(around) %></td>
+    <td><%= link_to 'Destroy', around, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Around', new_around_path %>

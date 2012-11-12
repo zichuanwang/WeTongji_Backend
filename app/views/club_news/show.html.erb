@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @club_news.title %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @club_news.source %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @club_news.summary %>
+</p>
+
+<p>
+  <b>Context:</b>
+  <%= @club_news.context %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @club_news.read %>
+</p>
+
+<p>
+  <b>Like:</b>
+  <%= @club_news.like %>
+</p>
+
+<p>
+  <b>Favorite:</b>
+  <%= @club_news.favorite %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%= @club_news.admin_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_club_news_path(@club_news) %> |
+<%= link_to 'Back', club_news_index_path %>

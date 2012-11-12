@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @school_news.title %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @school_news.source %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @school_news.summary %>
+</p>
+
+<p>
+  <b>Context:</b>
+  <%= @school_news.context %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @school_news.read %>
+</p>
+
+<p>
+  <b>Like:</b>
+  <%= @school_news.like %>
+</p>
+
+<p>
+  <b>Favorite:</b>
+  <%= @school_news.favorite %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%= @school_news.admin_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_school_news_path(@school_news) %> |
+<%= link_to 'Back', school_news_index_path %>

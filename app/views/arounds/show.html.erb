@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @around.title %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @around.source %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @around.summary %>
+</p>
+
+<p>
+  <b>Context:</b>
+  <%= @around.context %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @around.read %>
+</p>
+
+<p>
+  <b>Like:</b>
+  <%= @around.like %>
+</p>
+
+<p>
+  <b>Favorite:</b>
+  <%= @around.favorite %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%= @around.admin_id %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @around.location %>
+</p>
+
+<p>
+  <b>Contact:</b>
+  <%= @around.contact %>
+</p>
+
+<p>
+  <b>Ticket service:</b>
+  <%= @around.ticket_service %>
+</p>
+
+
+<%= link_to 'Edit', edit_around_path(@around) %> |
+<%= link_to 'Back', arounds_path %>

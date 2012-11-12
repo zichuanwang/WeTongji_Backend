@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @for_staff.title %>
+</p>
+
+<p>
+  <b>Source:</b>
+  <%= @for_staff.source %>
+</p>
+
+<p>
+  <b>Summary:</b>
+  <%= @for_staff.summary %>
+</p>
+
+<p>
+  <b>Context:</b>
+  <%= @for_staff.context %>
+</p>
+
+<p>
+  <b>Read:</b>
+  <%= @for_staff.read %>
+</p>
+
+<p>
+  <b>Like:</b>
+  <%= @for_staff.like %>
+</p>
+
+<p>
+  <b>Favorite:</b>
+  <%= @for_staff.favorite %>
+</p>
+
+<p>
+  <b>Admin:</b>
+  <%= @for_staff.admin_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_for_staff_path(@for_staff) %> |
+<%= link_to 'Back', for_staffs_path %>

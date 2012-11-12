@@ -1,4 +1,12 @@
 WetongjiWeb::Application.routes.draw do
+  resources :school_news
+
+  resources :for_staffs
+
+  resources :arounds
+
+  resources :club_news
+
   resources :people
 
   resources :versions
