@@ -9,7 +9,7 @@ class Activity < ActiveRecord::Base
 
 	validates_presence_of :title, :begin, :end, :location, :description
 	paginates_per 20
-	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+	validates_attachment :image, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
