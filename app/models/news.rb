@@ -3,7 +3,7 @@ class News < ActiveRecord::Base
 	belongs_to :admin, :counter_cache => true
 	paginates_per 20
 	validates_presence_of :title, :context, :category
-	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+	validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
