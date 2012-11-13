@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ForStaff < ActiveRecord::Base
 	belongs_to :admin
 	has_many :for_staff_images
