@@ -1,43 +1,37 @@
-<h1>Listing arounds</h1>
+<div class="box">
+    <div class="title">
+        <h5>所有周边推荐</h5>
+    </div>
+    <div class="table">
+        <table>
+            <thead>
+                <tr>
+                  <th>标题</th>
+                  <th>发布时间</th>
+                  <th>阅读次数</th>
+                  <th>账号</th>
+                  <th class="last">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+              <% @arounds.each do |item| %>
+              <tr class="<%= item.is_pending ? "selected" : "" %>">
+                  <td><%= item.title %></td>
+                  <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+                  <td><%= item.read %></td>
+                  <td>
+                      <%= item.admin.display.blank? ? item.admin.email : item.admin.display %>
+                  </td>
+                  <td class="last">
+                      <%= link_to '详情', item %>
+                      <%= link_to '编辑', edit_for_staff_path(item) %>
+                      <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
+                  </td>
+              </tr>
+              <% end %>
+            </tbody>
+        </table>
+        <%= paginate @arounds %>
+    </div>
+</div>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Source</th>
-    <th>Summary</th>
-    <th>Context</th>
-    <th>Read</th>
-    <th>Like</th>
-    <th>Favorite</th>
-    <th>Admin</th>
-    <th>Location</th>
-    <th>Contact</th>
-    <th>Ticket service</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @arounds.each do |around| %>
-  <tr>
-    <td><%= around.title %></td>
-    <td><%= around.source %></td>
-    <td><%= around.summary %></td>
-    <td><%= around.context %></td>
-    <td><%= around.read %></td>
-    <td><%= around.like %></td>
-    <td><%= around.favorite %></td>
-    <td><%= around.admin_id %></td>
-    <td><%= around.location %></td>
-    <td><%= around.contact %></td>
-    <td><%= around.ticket_service %></td>
-    <td><%= link_to 'Show', around %></td>
-    <td><%= link_to 'Edit', edit_around_path(around) %></td>
-    <td><%= link_to 'Destroy', around, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Around', new_around_path %>

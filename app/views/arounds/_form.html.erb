@@ -1,4 +1,4 @@
-<%= form_for(@around) do |f| %>
+<%= form_for(@around, :html => { :multipart => true }) do |f| %>
   <% if @around.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@around.errors.count, "error") %> prohibited this around from being saved:</h2>
@@ -10,52 +10,99 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :source %><br />
-    <%= f.text_field :source %>
-  </div>
-  <div class="field">
-    <%= f.label :summary %><br />
-    <%= f.text_field :summary %>
-  </div>
-  <div class="field">
-    <%= f.label :context %><br />
-    <%= f.text_field :context %>
-  </div>
-  <div class="field">
-    <%= f.label :read %><br />
-    <%= f.number_field :read %>
-  </div>
-  <div class="field">
-    <%= f.label :like %><br />
-    <%= f.number_field :like %>
-  </div>
-  <div class="field">
-    <%= f.label :favorite %><br />
-    <%= f.number_field :favorite %>
-  </div>
-  <div class="field">
-    <%= f.label :admin_id %><br />
-    <%= f.number_field :admin_id %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
-    <%= f.label :contact %><br />
-    <%= f.text_field :contact %>
-  </div>
-  <div class="field">
-    <%= f.label :ticket_service %><br />
-    <%= f.text_field :ticket_service %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>来源</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :source, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>题图(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :image, { :class => "small" } %>
+        </div>
+      </div>
+      <% 1.upto(3).each do |i| %>
+      <div class="field">
+        <div class="label">
+          <label>图片(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <input type="file" name="images[]" />
+        </div>
+      </div>
+      <% end %>
+      <% unless @around.around_images.empty? %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>已上传图片</label>
+        </div>
+        <div class="checkboxes">
+          <% @around.around_images.each do |image| %>
+          <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
+          <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
+          <label>删除</label>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <div class="field">
+        <div class="label">
+          <label>摘要</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :summary, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>内容</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :context, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>位置</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :location, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>联系方式</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :contact, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>票务信息</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :ticket_service, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
   </div>
 <% end %>
