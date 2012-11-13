@@ -1,10 +1,14 @@
 WetongjiWeb::Application.routes.draw do
+  post "school_news/approve"
   resources :school_news
 
+  post "for_staff/approve"
   resources :for_staffs
 
+  post "around/approve"
   resources :arounds
 
+  post "club_news/approve"
   resources :club_news
 
   resources :people

@@ -1,15 +1,12 @@
 # encoding: utf-8
 class SchoolNews < ActiveRecord::Base
 	belongs_to :admin
-	has_many :schoolnews_images
+	has_many :school_news_images
 	paginates_per 20
 	validates_presence_of :title, :context, :category
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "school_news_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "school_news_users_likes"
-
-	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
-	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
 	before_create :init_model
 
