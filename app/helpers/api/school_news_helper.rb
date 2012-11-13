@@ -1,61 +1,61 @@
 module Api
 	module SchoolNewsHelper
-		def schoolnews_getlist
+		def school_news_getlist
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			information = Information.where("visiable = true")
+			school_news = SchoolNews.where("visiable = true")
 			if sort
-				information = information.order(sort)
+				school_news = school_news.order(sort)
 			else
-				information = information.order("id desc")
+				school_news = school_news.order("id desc")
 			end
 
-			information = information.page(p).per(20)
+			school_news = school_news.page(p).per(20)
 
 			ex = []
-			information.each do |n|
-				ex << ExInformation.init_from_information(n)
+			school_news.each do |n|
+				ex << ExSchoolNews.init_from_school_news(n)
 			end
 			re = ApiReturn.new("000")
-			re.add_data("NextPager", (p < information.num_pages ? p + 1 : 0))
-			re.add_data("Information", ex)
+			re.add_data("NextPager", (p < school_news.num_pages ? p + 1 : 0))
+			re.add_data("SchoolNews", ex)
 			return_response(re)
 		end
 
-		def schoolnews_get
+		def school_news_get
 			if verify_action_params(['Id'])
-				information = Information.find(params[:Id])
+				school_news = SchoolNews.find(params[:Id])
 				ex = nil
-				if information && information.visiable
-					ex = ExInformation.init_from_information(information)
+				if school_news && school_news.visiable
+					ex = ExSchoolNews.init_from_school_news(school_news)
 				end
 				re = ApiReturn.new("000")
-				re.add_data("Information", ex)
+				re.add_data("SchoolNews", ex)
 				return_response(re)
 			end
 		end
 
-		def schoolnews_read
+		def school_news_read
 			if verify_action_params(['Id'])
-				information = Information.find(params[:Id])
-				if information
-					information.read = information.read + 1
-					information.save
+				school_news = SchoolNews.find(params[:Id])
+				if school_news
+					school_news.read = school_news.read + 1
+					school_news.save
 				end
 				re = ApiReturn.new("000")
 				return_response(re)
 			end
 		end
 
-		def schoolnews_favorite
+		def school_news_favorite
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					information = Information.find(params[:Id])
-					if information
-						information.user_favorite(user)
-						information.save
+					school_news = SchoolNews.find(params[:Id])
+					if school_news
+						school_news.user_favorite(user)
+						school_news.save
 					end
 					re = ApiReturn.new("000")
 					return_response(re)
@@ -63,14 +63,14 @@ module Api
 			end
 		end
 
-		def schoolnews_unfavorite
+		def school_news_unfavorite
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					information = Information.find(params[:Id])
-					if information
-						information.user_unfavorite(user)
-						information.save
+					school_news = SchoolNews.find(params[:Id])
+					if school_news
+						school_news.user_unfavorite(user)
+						school_news.save
 					end
 					re = ApiReturn.new("000")
 					return_response(re)
@@ -78,14 +78,14 @@ module Api
 			end
 		end
 
-		def	schoolnews_like
+		def	school_news_like
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					information = Information.find(params[:Id])
-					if information
-						information.user_like(user)
-						information.save
+					school_news = SchoolNews.find(params[:Id])
+					if school_news
+						school_news.user_like(user)
+						school_news.save
 					end
 					re = ApiReturn.new("000")
 					return_response(re)
@@ -93,14 +93,14 @@ module Api
 			end
 		end
 
-		def	schoolnews_unlike
+		def	school_news_unlike
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					information = Information.find(params[:Id])
-					if information
-						information.user_unlike(user)
-						information.save
+					school_news = SchoolNews.find(params[:Id])
+					if school_news
+						school_news.user_unlike(user)
+						school_news.save
 					end
 					re = ApiReturn.new("000")
 					return_response(re)
