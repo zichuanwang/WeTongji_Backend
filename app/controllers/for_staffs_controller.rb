@@ -1,83 +1,81 @@
 class ForStaffsController < ApplicationController
-  # GET /for_staffs
-  # GET /for_staffs.json
+  load_and_authorize_resource
   def index
-    @for_staffs = ForStaff.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @for_staffs }
-    end
+    @for_staffs = @for_staffs.order("id desc").page(params[:page])
   end
 
-  # GET /for_staffs/1
-  # GET /for_staffs/1.json
   def show
-    @for_staff = ForStaff.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @for_staff }
-    end
   end
 
-  # GET /for_staffs/new
-  # GET /for_staffs/new.json
   def new
-    @for_staff = ForStaff.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @for_staff }
-    end
   end
 
-  # GET /for_staffs/1/edit
   def edit
-    @for_staff = ForStaff.find(params[:id])
   end
 
-  # POST /for_staffs
-  # POST /for_staffs.json
+  def approve
+    @for_staff = ForStaff.find_by_id(params[:id])
+    authorize! :approve, @for_staff
+    @for_staff.visiable = true
+    @for_staff.is_pending = false
+    @for_staff.pending_reason = ""
+    @for_staff.save
+    redirect_to :action => "index"
+  end
+
   def create
-    @for_staff = ForStaff.new(params[:for_staff])
+    @for_staff.admin = current_admin
+    @for_staff.check
+
+    if params[:images]
+      params[:images].each do |image|
+        img = ForStaffImage.new
+        img.file = image
+        @for_staff.for_staff_images << img
+      end
+    end
 
     respond_to do |format|
       if @for_staff.save
-        format.html { redirect_to @for_staff, notice: 'For staff was successfully created.' }
-        format.json { render json: @for_staff, status: :created, location: @for_staff }
+        format.html { redirect_to @for_staff, notice: 'For Staff was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @for_staff.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /for_staffs/1
-  # PUT /for_staffs/1.json
   def update
-    @for_staff = ForStaff.find(params[:id])
+    if params[:images]
+      params[:images].each do |image|
+        img = ForStaffImage.new
+        img.file = image
+        @for_staff.for_staff_images << img
+      end
+    end
 
+    if params[:delete_images]
+      params[:delete_images].each do |image|
+        img = ForStaffImage.find(image)
+        @for_staff.for_staff_images.delete(img)
+      end
+    end
+    
     respond_to do |format|
       if @for_staff.update_attributes(params[:for_staff])
-        format.html { redirect_to @for_staff, notice: 'For staff was successfully updated.' }
-        format.json { head :no_content }
+        @for_staff.check
+        @for_staff.save
+        format.html { redirect_to @for_staff, notice: 'For Staff was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @for_staff.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /for_staffs/1
-  # DELETE /for_staffs/1.json
   def destroy
-    @for_staff = ForStaff.find(params[:id])
     @for_staff.destroy
 
     respond_to do |format|
-      format.html { redirect_to for_staffs_url }
-      format.json { head :no_content }
+      format.html { redirect_to :action => "index" }
     end
   end
 end

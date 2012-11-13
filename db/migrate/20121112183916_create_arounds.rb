@@ -33,7 +33,7 @@ class CreateArounds < ActiveRecord::Migration
         t.integer :around_id
     end
 
-    create_table :arounds_images do |t|
+    create_table :around_images do |t|
       t.integer :around_id
       t.string :file_file_name
       t.string :file_content_type

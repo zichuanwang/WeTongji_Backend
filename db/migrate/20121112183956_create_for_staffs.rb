@@ -26,7 +26,7 @@ class CreateForStaffs < ActiveRecord::Migration
         t.integer :for_staff_id
     end
 
-    create_table :for_staffs_images do |t|
+    create_table :for_staff_images do |t|
       t.integer :for_staff_id
       t.string :file_file_name
       t.string :file_content_type
