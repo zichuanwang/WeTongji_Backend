@@ -9,5 +9,9 @@ module Api
 		include Api::SystemProfileHelper
 		include Api::InformationHelper
 		include Api::PeopleHelper
+		include Api::SchoolNewsHelper
+		include Api::ClubNewsHelper
+		include Api::AroundsHelper
+		include Api::ForStaffsHelper
 	end
 end

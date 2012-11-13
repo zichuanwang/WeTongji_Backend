@@ -34,6 +34,18 @@
 </li>
 <% end %>
 
+<% if can? :manage, SchoolNews %>
+<li>
+	<%= link_to school_news_index_path, { :title => "校园新闻" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="校园新闻" /></span><span>校园新闻</span>
+	<% end %>
+	<ul>
+		<li><%= link_to "所有校园新闻", school_news_index_path %></li>
+		<li class="last"><%= link_to "创建校园新闻", new_school_news_path %></li>
+	</ul>
+</li>
+<% end %>
+
 <% if can? :manage, Person %>
 <li>
 	<%= link_to people_path, { :title => "济人" } do %>

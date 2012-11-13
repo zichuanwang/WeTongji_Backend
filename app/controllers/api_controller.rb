@@ -53,7 +53,39 @@ class ApiController < ApplicationController
 		"Person.Favorite" => "person_favorite",
 		"Person.UnFavorite" => "person_unfavorite",
 		"Person.Like" => "person_like",
-		"Person.UnLike" => "person_unlike"
+		"Person.UnLike" => "person_unlike",
+
+		"SchoolNews.GetList" => "school_news_getlist",
+		"SchoolNews.Get" => "school_news_get",
+		"SchoolNews.Read" => "school_news_read",
+		"SchoolNews.Favorite" => "school_news_favorite",
+		"SchoolNews.UnFavorite" => "school_news_unfavorite",
+		"SchoolNews.Like" => "school_news_like",
+		"SchoolNews.UnLike" => "school_news_unlike",
+
+		"ClubNews.GetList" => "club_news_getlist",
+		"ClubNews.Get" => "club_news_get",
+		"ClubNews.Read" => "club_news_read",
+		"ClubNews.Favorite" => "club_news_favorite",
+		"ClubNews.UnFavorite" => "club_news_unfavorite",
+		"ClubNews.Like" => "club_news_like",
+		"ClubNews.UnLike" => "club_news_unlike",
+
+		"Arounds.Get" => "arounds_get",
+		"Around.Get" => "around_get",
+		"Around.Read" => "around_read",
+		"Around.Favorite" => "around_favorite",
+		"Around.UnFavorite" => "around_unfavorite",
+		"Around.Like" => "around_like",
+		"Around.UnLike" => "around_unlike",
+
+		"ForStaffs.Get" => "for_staffs_get",
+		"ForStaff.Get" => "for_staff_get",
+		"ForStaff.Read" => "for_staff_read",
+		"ForStaff.Favorite" => "for_staff_favorite",
+		"ForStaff.UnFavorite" => "for_staff_unfavorite",
+		"ForStaff.Like" => "for_staff_like",
+		"ForStaff.UnLike" => "for_staff_unlike"
 	}
 
 	def call
