@@ -1,83 +1,81 @@
 class ClubNewsController < ApplicationController
-  # GET /club_news
-  # GET /club_news.json
+  load_and_authorize_resource
   def index
-    @club_news = ClubNews.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @club_news }
-    end
+    @club_news = @club_news.order("id desc").page(params[:page])
   end
 
-  # GET /club_news/1
-  # GET /club_news/1.json
   def show
-    @club_news = ClubNews.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @club_news }
-    end
   end
 
-  # GET /club_news/new
-  # GET /club_news/new.json
   def new
-    @club_news = ClubNews.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @club_news }
-    end
   end
 
-  # GET /club_news/1/edit
   def edit
-    @club_news = ClubNews.find(params[:id])
   end
 
-  # POST /club_news
-  # POST /club_news.json
+  def approve
+    @club_news = ClubNews.find_by_id(params[:id])
+    authorize! :approve, @club_news
+    @club_news.visiable = true
+    @club_news.is_pending = false
+    @club_news.pending_reason = ""
+    @club_news.save
+    redirect_to :action => "index"
+  end
+
   def create
-    @club_news = ClubNews.new(params[:club_news])
+    @club_news.admin = current_admin
+    @club_news.check
+
+    if params[:images]
+      params[:images].each do |image|
+        img = ClubNewsImage.new
+        img.file = image
+        @club_news.club_news_images << img
+      end
+    end
 
     respond_to do |format|
       if @club_news.save
-        format.html { redirect_to @club_news, notice: 'Club news was successfully created.' }
-        format.json { render json: @club_news, status: :created, location: @club_news }
+        format.html { redirect_to @club_news, notice: 'Club News was successfully created.' }
       else
         format.html { render action: "new" }
-        format.json { render json: @club_news.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PUT /club_news/1
-  # PUT /club_news/1.json
   def update
-    @club_news = ClubNews.find(params[:id])
+    if params[:images]
+      params[:images].each do |image|
+        img = clubNewsImage.new
+        img.file = image
+        @club_news.club_news_images << img
+      end
+    end
 
+    if params[:delete_images]
+      params[:delete_images].each do |image|
+        img = clubNewsImage.find(image)
+        @club_news.club_news_images.delete(img)
+      end
+    end
+    
     respond_to do |format|
       if @club_news.update_attributes(params[:club_news])
-        format.html { redirect_to @club_news, notice: 'Club news was successfully updated.' }
-        format.json { head :no_content }
+        @club_news.check
+        @club_news.save
+        format.html { redirect_to @club_news, notice: 'club News was successfully updated.' }
       else
         format.html { render action: "edit" }
-        format.json { render json: @club_news.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /club_news/1
-  # DELETE /club_news/1.json
   def destroy
-    @club_news = ClubNews.find(params[:id])
     @club_news.destroy
 
     respond_to do |format|
       format.html { redirect_to club_news_index_url }
-      format.json { head :no_content }
     end
   end
 end
