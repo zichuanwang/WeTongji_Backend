@@ -1,0 +1,84 @@
+<div class="box">
+    <div class="title">
+        <h5>查看资讯</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @around.title %></td>
+          </tr>
+          <tr>
+            <td>来源</td>
+            <td class="last"><%= @around.source %></td>
+          </tr>
+          <tr>
+            <td>题图</td>
+            <td class="last"><%= image_tag @around.image.url(:medium) %></td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td class="last"><%= @around.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>阅读次数</td>
+            <td class="last"><%= @around.read %></td>
+          </tr>
+          <tr>
+            <td>收藏次数</td>
+            <td class="last"><%= @around.favorite %></td>
+          </tr>
+          <tr>
+            <td>喜欢次数</td>
+            <td class="last"><%= @around.like %></td>
+          </tr>
+          <tr>
+            <td>摘要</td>
+            <td class="last"><%= @around.summary %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td class="last"><%= @around.context %></td>
+          </tr>
+          <tr>
+            <td>票务信息</td>
+            <td class="last"><%= @around.ticket_service %></td>
+          </tr>
+          <tr>
+            <td>联系方式</td>
+            <td class="last"><%= @around.contact %></td>
+          </tr>
+          <tr>
+            <td>位置</td>
+            <td class="last"><%= @around.location %></td>
+          </tr>
+
+          <% @around.around_images.each do |image| %>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag image.file.url(:medium) %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>是否可见</td>
+            <td class="last"><%= @around.visiable ? "可见" : "不可见" %></td>
+          </tr>
+          <% if @around.is_pending %>
+          <tr>
+            <td>原因</td>
+            <td class="last">需要审核,原因:<%= @around.pending_reason %></td>
+          </tr>
+          <% end %>
+        </table>
+        <% if @around.is_pending && (can? :approve, @around) %>
+        <%= form_tag(around_approve_path(:id => @around.id), :method => "post") do %>
+        <div class="action">
+          <div class="button">
+            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
+

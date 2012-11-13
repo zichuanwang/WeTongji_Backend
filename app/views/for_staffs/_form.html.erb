@@ -1,0 +1,76 @@
+<%= form_for(@for_staff, :html => { :multipart => true }) do |f| %>
+  <% if @for_staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@for_staff.errors.count, "error") %> prohibited this for staff from being saved:</h2>
+
+      <ul>
+      <% @for_staff.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>来源</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :source, { :class => "large" } %>
+        </div>
+      </div>
+      <% 1.upto(3).each do |i| %>
+      <div class="field">
+        <div class="label">
+          <label>图片(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <input type="file" name="images[]" />
+        </div>
+      </div>
+      <% end %>
+      <% unless @for_staff.for_staff_images.empty? %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>已上传图片</label>
+        </div>
+        <div class="checkboxes">
+          <% @for_staff.for_staff_images.each do |image| %>
+          <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
+          <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
+          <label>删除</label>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <div class="field">
+        <div class="label">
+          <label>摘要</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :summary, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>内容</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :context, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
+  </div>
+<% end %>

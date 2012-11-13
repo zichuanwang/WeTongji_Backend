@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  source: MyString
+  summary: MyString
+  context: MyString
+  read: 1
+  like: 1
+  favorite: 1
+  admin_id: 1
+  location: MyString
+  contact: MyString
+  ticket_service: MyString
+
+two:
+  title: MyString
+  source: MyString
+  summary: MyString
+  context: MyString
+  read: 1
+  like: 1
+  favorite: 1
+  admin_id: 1
+  location: MyString
+  contact: MyString
+  ticket_service: MyString

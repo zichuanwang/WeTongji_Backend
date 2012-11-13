@@ -1,0 +1,108 @@
+<%= form_for(@around, :html => { :multipart => true }) do |f| %>
+  <% if @around.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@around.errors.count, "error") %> prohibited this around from being saved:</h2>
+
+      <ul>
+      <% @around.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>来源</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :source, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>题图(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :image, { :class => "small" } %>
+        </div>
+      </div>
+      <% 1.upto(3).each do |i| %>
+      <div class="field">
+        <div class="label">
+          <label>图片(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <input type="file" name="images[]" />
+        </div>
+      </div>
+      <% end %>
+      <% unless @around.around_images.empty? %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>已上传图片</label>
+        </div>
+        <div class="checkboxes">
+          <% @around.around_images.each do |image| %>
+          <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
+          <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
+          <label>删除</label>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+      <div class="field">
+        <div class="label">
+          <label>摘要</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :summary, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label label-textarea">
+          <label>内容</label>
+        </div>
+        <div class="textarea">
+          <%= f.text_area :context, :rows => 8, :cols => 50 %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>位置</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :location, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>联系方式</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :contact, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>票务信息</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :ticket_service, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
+  </div>
+<% end %>
