@@ -1,45 +1,67 @@
-<p id="notice"><%= notice %></p>
+<div class="box">
+    <div class="title">
+        <h5>查看资讯</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @school_news.title %></td>
+          </tr>
+          <tr>
+            <td>来源</td>
+            <td class="last"><%= @school_news.source %></td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td class="last"><%= @school_news.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>阅读次数</td>
+            <td class="last"><%= @school_news.read %></td>
+          </tr>
+          <tr>
+            <td>收藏次数</td>
+            <td class="last"><%= @school_news.favorite %></td>
+          </tr>
+          <tr>
+            <td>喜欢次数</td>
+            <td class="last"><%= @school_news.like %></td>
+          </tr>
+          <tr>
+            <td>摘要</td>
+            <td class="last"><%= @school_news.summary %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td class="last"><%= @school_news.context %></td>
+          </tr>
+          <% @school_news.school_news_images.each do |image| %>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag image.file.url(:medium) %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <td>是否可见</td>
+            <td class="last"><%= @school_news.visiable ? "可见" : "不可见" %></td>
+          </tr>
+          <% if @school_news.is_pending %>
+          <tr>
+            <td>原因</td>
+            <td class="last">需要审核,原因:<%= @school_news.pending_reason %></td>
+          </tr>
+          <% end %>
+        </table>
+        <% if @school_news.is_pending && (can? :approve, @school_news) %>
+        <%= form_tag(school_news_approve_path(:id => @school_news.id), :method => "post") do %>
+        <div class="action">
+          <div class="button">
+            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
+          </div>
+        </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @school_news.title %>
-</p>
-
-<p>
-  <b>Source:</b>
-  <%= @school_news.source %>
-</p>
-
-<p>
-  <b>Summary:</b>
-  <%= @school_news.summary %>
-</p>
-
-<p>
-  <b>Context:</b>
-  <%= @school_news.context %>
-</p>
-
-<p>
-  <b>Read:</b>
-  <%= @school_news.read %>
-</p>
-
-<p>
-  <b>Like:</b>
-  <%= @school_news.like %>
-</p>
-
-<p>
-  <b>Favorite:</b>
-  <%= @school_news.favorite %>
-</p>
-
-<p>
-  <b>Admin:</b>
-  <%= @school_news.admin_id %>
-</p>
-
-
-<%= link_to 'Edit', edit_school_news_path(@school_news) %> |
-<%= link_to 'Back', school_news_index_path %>

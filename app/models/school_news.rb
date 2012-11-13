@@ -3,7 +3,7 @@ class SchoolNews < ActiveRecord::Base
 	belongs_to :admin
 	has_many :school_news_images
 	paginates_per 20
-	validates_presence_of :title, :context, :category
+	validates_presence_of :title, :context, :summary
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "school_news_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "school_news_users_likes"
