@@ -11,7 +11,6 @@ class ExClubNews
 		model.Summary = club_news.summary
 		model.Read = club_news.read
 		model.CreatedAt = club_news.created_at
-		model.Category = club_news.category
 		model.Favorite = club_news.favorite
 		model.Like = club_news.like
 		model.CanFavorite = true

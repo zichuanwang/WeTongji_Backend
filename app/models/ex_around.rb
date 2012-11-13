@@ -1,5 +1,5 @@
 class ExAround
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite,
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
 				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location
 
 	def self.init_from_around(around, user = nil)
@@ -14,7 +14,6 @@ class ExAround
 		model.Location = around.location
 		model.Read = around.read
 		model.CreatedAt = around.created_at
-		model.Category = around.category
 		model.Favorite = around.favorite
 		model.Like = around.like
 		model.CanFavorite = true

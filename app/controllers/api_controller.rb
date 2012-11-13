@@ -98,7 +98,7 @@ class ApiController < ApplicationController
 		      	return_response ApiReturn.new("004")
 		    end
 	    else
-	     	return_response ApiReturn.new("001")
+	    	return_response ApiReturn.new("001")
 	    end
 	end
 

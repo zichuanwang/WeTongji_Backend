@@ -11,7 +11,6 @@ class ExSchoolNews
 		model.Summary = school_news.summary
 		model.Read = school_news.read
 		model.CreatedAt = school_news.created_at
-		model.Category = school_news.category
 		model.Favorite = school_news.favorite
 		model.Like = school_news.like
 		model.CanFavorite = true

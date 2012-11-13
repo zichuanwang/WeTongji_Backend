@@ -15,7 +15,7 @@ module Api
 
 			ex = []
 			club_news.each do |n|
-				ex << ExclubNews.init_from_club_news(n)
+				ex << ExClubNews.init_from_club_news(n)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("NextPager", (p < club_news.num_pages ? p + 1 : 0))

@@ -11,7 +11,6 @@ class ExForStaff
 		model.Summary = for_staff.summary
 		model.Read = for_staff.read
 		model.CreatedAt = for_staff.created_at
-		model.Category = for_staff.category
 		model.Favorite = for_staff.favorite
 		model.Like = for_staff.like
 		model.CanFavorite = true
