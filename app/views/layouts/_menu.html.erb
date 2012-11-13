@@ -28,8 +28,6 @@
 	<span class="icon"><img src="/images/icons/application_double.png" alt="资讯" /></span><span>资讯</span>
 	</a>
 	<ul>
-		<li><%= link_to "所有资讯", information_index_path %></li>
-		<li class="last"><%= link_to "创建资讯", new_information_path %></li>
 		<% if can? :manage, SchoolNews %>
 		<li><%= link_to "所有校园新闻", school_news_index_path %></li>
 		<li class="last"><%= link_to "创建校园新闻", new_school_news_path %></li>
