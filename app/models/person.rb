@@ -1,6 +1,6 @@
 class Person < ActiveRecord::Base
-	validates_presence_of :description, :name, :title, :job_title, :words, :no
-	validates_uniqueness_of :no
+	validates_presence_of :description, :name, :title, :job_title, :words, :no, :student_no
+	validates_uniqueness_of :no, :student_no
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "people_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "people_users_likes"
