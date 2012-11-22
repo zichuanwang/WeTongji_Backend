@@ -28,6 +28,16 @@
           <%= f.text_field :source, { :class => "large" } %>
         </div>
       </div>
+      <% unless @around.id.nil? %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>已上传题图</label>
+        </div>
+        <div class="checkboxes">
+          <%= image_tag @around.image.url(:thumb) %>
+        </div>
+      </div>
+      <% end %>
       <div class="field">
         <div class="label">
           <label>题图(300K以内,jpeg格式)</label>
@@ -62,7 +72,7 @@
       <% end %>
       <div class="field">
         <div class="label">
-          <label>摘要</label>
+          <label>标签(用空格分割多个标签)</label>
         </div>
         <div class="input">
           <%= f.text_field :summary, { :class => "large" } %>

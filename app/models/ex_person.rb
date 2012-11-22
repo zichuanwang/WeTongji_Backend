@@ -1,11 +1,10 @@
 class ExPerson
-	attr_accessor :Id, :Name, :JobTitle, :Words, :Title, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images, :NO, :Avatar, :StudentNO
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images, :NO, :Avatar, :StudentNO
 
 	def self.init_from_person(person, user = nil)
 		model = ExPerson.new
 		model.Id = person.id
 		model.Name = person.name
-		model.Title = person.title
 		model.Description = person.description
 		model.Read = person.read
 		model.Words = person.words
