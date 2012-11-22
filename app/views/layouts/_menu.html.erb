@@ -22,7 +22,7 @@
 </li>
 <% end %>
 
-<% if can? :manage, Information %>
+<% if (can?(:manage, SchoolNews) || can?(:manage, ClubNews) || can?(:manage, ForStaff) || can?(:manage, Around)) %>
 <li>
 	<a href="#" title="资讯">
 	<span class="icon"><img src="/images/icons/application_double.png" alt="资讯" /></span><span>资讯</span>
