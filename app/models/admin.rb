@@ -14,12 +14,17 @@ class Admin < ActiveRecord::Base
   has_many :news
   has_many :information
   has_many :activities
+  has_many :permissions
 
 	validates_presence_of :name, :student_no, :display, :address, :phone#, :description
 	validates_uniqueness_of :name, :student_no, :display, :phone
 	validates_length_of :description, :within => 0..200
 
 	before_create :lock
+
+  def has_permission(flag)
+    !self.permissions.find_by_flag(flag).nil?
+  end
 
 	def approve
 		self.approved_at = Time.now

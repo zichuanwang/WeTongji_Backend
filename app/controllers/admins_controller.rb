@@ -35,6 +35,10 @@ class AdminsController < ApplicationController
   def update
     params[:admin].delete(:password) if params[:admin][:password].blank?
     params[:admin].delete(:password_confirmation) if params[:admin][:password].blank? and params[:admin][:password_confirmation].blank?
+    @admin.permissions.clear
+    params[:permissions].each do |item|
+      @admin.permissions << Permission.new(:flag => item)
+    end
 
     respond_to do |format|
       if @admin.update_attributes(params[:admin])
