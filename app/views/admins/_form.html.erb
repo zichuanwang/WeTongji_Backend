@@ -97,6 +97,19 @@
           <%= f.text_field :address, { :class => "large" } %>
         </div>
       </div>
+      <% if can? :manage, Admin %>
+      <div class="field">
+        <div class="label label-checkbox">
+          <label>权限</label>
+        </div>
+        <div class="checkboxes">
+          <input type="checkbox" name="permissions[]" value="SchoolNews" <%= @admin.has_permission("SchoolNews") ? "checked" : "" %> /><label>管理校园新闻</label>
+          <input type="checkbox" name="permissions[]" value="ClubNews" <%= @admin.has_permission("ClubNews") ? "checked" : "" %> /><label>管理团队通告</label>
+          <input type="checkbox" name="permissions[]" value="ForStaff" <%= @admin.has_permission("ForStaff") ? "checked" : "" %> /><label>管理校务信息</label>
+          <input type="checkbox" name="permissions[]" value="Around" <%= @admin.has_permission("Around") ? "checked" : "" %> /><label>管理周边推荐</label>
+        </div>
+      </div>
+      <% end %>
       <div class="buttons">
         <input type="submit" name="submit" value="保存" />
       </div>

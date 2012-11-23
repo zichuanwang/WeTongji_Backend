@@ -32,15 +32,30 @@ class Ability
             cannot :create, Admin
             can :update, admin
             can :read, admin
+
             can :manage, News, :admin => { :id => admin.id }
             can :create, News
             cannot :approve, News
-            can :manage, Information, :admin => { :id => admin.id }
-            can :create, Information
-            cannot :approve, Information
+
             can :manage, Activity, :admin => { :id => admin.id }
             can :create, Activity
             cannot :approve, Activity
+
+            can :manage, SchoolNews if admin.has_permission("SchoolNews")
+            can :create, SchoolNews
+            cannot :approve, SchoolNews
+
+            can :manage, ClubNews if admin.has_permission("ClubNews")
+            can :create, ClubNews
+            cannot :approve, ClubNews
+
+            can :manage, ForStaff if admin.has_permission("ForStaff")
+            can :create, ForStaff
+            cannot :approve, ForStaff
+
+            can :manage, Around if admin.has_permission("Around")
+            can :create, Around
+            cannot :approve, Around
     end
   end
 end

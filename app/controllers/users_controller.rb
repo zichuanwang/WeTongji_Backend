@@ -50,7 +50,7 @@ class UsersController < ApplicationController
         end
     end 
 
-    redirect_to users_path
+    redirect_to request.referrer
   end
 
   def reconfirm_all
