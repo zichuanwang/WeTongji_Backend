@@ -3,7 +3,11 @@ class ForStaff < ActiveRecord::Base
 	belongs_to :admin
 	has_many :for_staff_images
 	paginates_per 20
-	validates_presence_of :title, :context, :summary, :source
+	validates_presence_of :context
+
+	validates :title, :length => { :maximum => 30 }, :presence => true
+	validates :summary, :length => { :maximum => 30 }, :presence => true
+	validates :source, :length => { :maximum => 30 }, :presence => true
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "for_staffs_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "for_staffs_users_likes"

@@ -1,3 +1,23 @@
+<script type="text/javascript">
+$(document).ready(function () {
+  $('#around_has_ticket_0').click(function(){ tickect_div_slide(); });
+  $('#around_has_ticket_1').click(function(){ tickect_div_slide(); });
+  tickect_div_slide();
+});
+
+function tickect_div_slide(){
+  if($('#around_has_ticket_1').attr('checked') == "checked"){
+    $('#location_div').show();
+    $('#contact_div').show();
+    $('#ticket_service_div').show();
+  }else{
+    $('#location_div').hide();
+    $('#contact_div').hide();
+    $('#ticket_service_div').hide();
+  }
+}
+
+</script>
 <%= form_for(@around, :html => { :multipart => true }) do |f| %>
   <% if @around.errors.any? %>
     <div id="error_explanation">
@@ -88,13 +108,24 @@
       </div>
       <div class="field">
         <div class="label">
+          <label>是否有票</label>
+        </div>
+        <div class="radios">
+          <input type="radio" id="around_has_ticket_0" name="around[has_ticket]" <%= @around.has_ticket ? "" : "checked" %> value="false" />
+          <label>无票</label>
+          <input type="radio" id="around_has_ticket_1" name="around[has_ticket]" <%= @around.has_ticket ? "checked" : "" %> value="true" />
+          <label>有票</label>
+        </div>
+      </div>
+      <div id="location_div" class="field">
+        <div class="label">
           <label>位置</label>
         </div>
         <div class="input">
           <%= f.text_field :location, { :class => "large" } %>
         </div>
       </div>
-      <div class="field">
+      <div id="contact_div" class="field">
         <div class="label">
           <label>联系方式</label>
         </div>
@@ -102,7 +133,7 @@
           <%= f.text_field :contact, { :class => "large" } %>
         </div>
       </div>
-      <div class="field">
+      <div id="ticket_service_div" class="field">
         <div class="label">
           <label>票务信息</label>
         </div>

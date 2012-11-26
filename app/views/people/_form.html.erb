@@ -54,7 +54,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>照片(300K以内,jpeg格式)</label>
+          <label>头像(300K以内,jpeg格式)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :avatar, { :size => "40" } %>
@@ -63,7 +63,7 @@
       <% 1.upto(3).each do |i| %>
       <div class="field">
         <div class="label">
-          <label>图片标题</label>
+          <label>图片标题<%= i.to_s %></label>
         </div>
         <div class="input">
           <input type="text" name="images[][title]" class="small" />
@@ -71,7 +71,7 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>图片(300K以内,jpeg格式)</label>
+          <label>图片<%= i.to_s %>(300K以内,jpeg格式)</label>
         </div>
         <div class="input input-file">
           <input type="file" name="images[][file]" />
@@ -81,13 +81,13 @@
       <% unless @person.person_images.empty? %>
       <div class="field">
         <div class="label label-checkbox">
-          <label>已上传图片</label>
+          <label>已上传图片(勾选删除)</label>
         </div>
         <div class="checkboxes">
           <% @person.person_images.each do |image| %>
           <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
           <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
-          <label>删除</label>
+          <label><%= image.title %></label>
           <% end %>
         </div>
       </div>

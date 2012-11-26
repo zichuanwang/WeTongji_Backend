@@ -28,6 +28,7 @@ class Ability
     case admin.role
         when "SuperAdmin"
             can :manage, :all
+            
         when "CommonAdmin"
             cannot :create, Admin
             can :update, admin
