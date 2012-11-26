@@ -8,10 +8,15 @@ class Around < ActiveRecord::Base
 	validates_attachment :image, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
+	validates :ticket_service, :presence => true, :if => Proc.new { |a| a.has_ticket }
+	validates :contact, :presence => true, :if => Proc.new { |a| a.has_ticket }
+	validates :location, :presence => true, :if => Proc.new { |a| a.has_ticket }
+
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "arounds_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "arounds_users_likes"
 
 	before_create :init_model
+	before_save :set_ticket
 
 	def check
 		self.is_pending = Sensitive.check("#{self.title} #{self.context} #{self.source}")
@@ -79,6 +84,14 @@ class Around < ActiveRecord::Base
 		self.read = 1
 		self.favorite = 0
 		self.like = 0
+	end
+
+	def set_ticket
+		unless self.has_ticket
+			self.contact = nil
+			self.ticket_service = nil
+			self.location = nil
+		end
 	end
 end
 
