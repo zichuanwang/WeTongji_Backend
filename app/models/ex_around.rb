@@ -1,6 +1,6 @@
 class ExAround
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location, :HasTicket
 
 	def self.init_from_around(around, user = nil)
 		model = ExAround.new
@@ -16,6 +16,7 @@ class ExAround
 		model.CreatedAt = around.created_at
 		model.Favorite = around.favorite
 		model.Like = around.like
+		model.HasTicket = around.has_ticket
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Image = around.image == nil ? '' : Rails.configuration.host + around.image.url
