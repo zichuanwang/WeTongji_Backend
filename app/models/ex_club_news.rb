@@ -1,5 +1,5 @@
 class ExClubNews
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Read, :Like, :Favorite,
 				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar
 
 	def self.init_from_club_news(club_news, user = nil)
@@ -7,8 +7,6 @@ class ExClubNews
 		model.Id = club_news.id
 		model.Title = club_news.title
 		model.Context = club_news.context
-		model.Source = club_news.source
-		model.Summary = club_news.summary
 		model.Read = club_news.read
 		model.CreatedAt = club_news.created_at
 		model.Favorite = club_news.favorite

@@ -3,7 +3,9 @@ class ClubNews < ActiveRecord::Base
 	belongs_to :admin
 	has_many :club_news_images
 	paginates_per 20
-	validates_presence_of :title, :context, :summary, :source
+	validates_presence_of :context
+
+	validates :title, :length => { :maximum => 30 }, :presence => true
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "club_news_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "club_news_users_likes"
@@ -11,7 +13,7 @@ class ClubNews < ActiveRecord::Base
 	before_create :init_model
 
 	def check
-		self.is_pending = Sensitive.check("#{self.title} #{self.context} #{self.source}")
+		self.is_pending = Sensitive.check("#{self.title} #{self.context}")
 		self.visiable = !self.is_pending
 		if self.is_pending
 			self.pending_reason = "含有不合适内容.等待管理员审核."

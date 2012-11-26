@@ -7,7 +7,7 @@ class Around < ActiveRecord::Base
 
 	validates_presence_of :context
 
-	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+	validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 	
 
 	validates :ticket_service, :presence => true, :if => Proc.new { |a| a.has_ticket }
