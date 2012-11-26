@@ -3,14 +3,20 @@ class Around < ActiveRecord::Base
 	belongs_to :admin
 	has_many :around_images
 	paginates_per 20
-	validates_presence_of :title, :context, :summary, :source
-
-	validates_attachment :image, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+	validates_presence_of :context
+
+	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+	
 
 	validates :ticket_service, :presence => true, :if => Proc.new { |a| a.has_ticket }
 	validates :contact, :presence => true, :if => Proc.new { |a| a.has_ticket }
 	validates :location, :presence => true, :if => Proc.new { |a| a.has_ticket }
+
+	validates :title, :length => { :maximum => 30 }, :presence => true
+	validates :summary, :length => { :maximum => 30 }, :presence => true
+	validates :source, :length => { :maximum => 30 }, :presence => true
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "arounds_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "arounds_users_likes"
