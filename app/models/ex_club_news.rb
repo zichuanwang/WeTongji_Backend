@@ -6,7 +6,7 @@ class ExClubNews
 		model = ExClubNews.new
 		model.Id = club_news.id
 		model.Title = club_news.title
-		model.Context = club_news.context
+		model.Context = club_news.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Read = club_news.read
 		model.CreatedAt = club_news.created_at
 		model.Favorite = club_news.favorite

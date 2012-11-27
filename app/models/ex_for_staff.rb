@@ -6,7 +6,7 @@ class ExForStaff
 		model = ExForStaff.new
 		model.Id = for_staff.id
 		model.Title = for_staff.title
-		model.Context = for_staff.context
+		model.Context = for_staff.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Source = for_staff.source
 		model.Summary = for_staff.summary
 		model.Read = for_staff.read

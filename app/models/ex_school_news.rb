@@ -6,7 +6,7 @@ class ExSchoolNews
 		model = ExSchoolNews.new
 		model.Id = school_news.id
 		model.Title = school_news.title
-		model.Context = school_news.context
+		model.Context = school_news.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Source = school_news.source
 		model.Summary = school_news.summary
 		model.Read = school_news.read
