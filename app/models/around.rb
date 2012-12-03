@@ -9,10 +9,7 @@ class Around < ActiveRecord::Base
 
 	validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 	
-
 	validates :ticket_service, :presence => true, :if => Proc.new { |a| a.has_ticket }
-	validates :contact, :presence => true, :if => Proc.new { |a| a.has_ticket }
-	validates :location, :presence => true, :if => Proc.new { |a| a.has_ticket }
 
 	validates :title, :length => { :maximum => 30 }, :presence => true
 	validates :summary, :length => { :maximum => 30 }, :presence => true
@@ -94,9 +91,7 @@ class Around < ActiveRecord::Base
 
 	def set_ticket
 		unless self.has_ticket
-			self.contact = nil
 			self.ticket_service = nil
-			self.location = nil
 		end
 	end
 end
