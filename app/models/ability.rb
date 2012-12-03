@@ -57,6 +57,10 @@ class Ability
             can :manage, Around if admin.has_permission("Around")
             can :create, Around
             cannot :approve, Around
+
+            can :manage, Person if admin.has_permission("Person")
+            can :create, Person
+            cannot :approve, Person
     end
   end
 end
