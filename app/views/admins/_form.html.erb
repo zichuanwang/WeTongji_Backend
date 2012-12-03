@@ -108,6 +108,7 @@
           <input type="checkbox" name="permissions[]" value="ClubNews" <%= @admin.has_permission("ClubNews") ? "checked" : "" %> /><label>管理团队通告</label>
           <input type="checkbox" name="permissions[]" value="ForStaff" <%= @admin.has_permission("ForStaff") ? "checked" : "" %> /><label>管理校务信息</label>
           <input type="checkbox" name="permissions[]" value="Around" <%= @admin.has_permission("Around") ? "checked" : "" %> /><label>管理周边推荐</label>
+          <input type="checkbox" name="permissions[]" value="Person" <%= @admin.has_permission("Person") ? "checked" : "" %> /><label>管理每周人物</label>
         </div>
       </div>
       <% end %>
