@@ -6,7 +6,7 @@ class ExAround
 		model = ExAround.new
 		model.Id = around.id
 		model.Title = around.title
-		model.Context = around.context
+		model.Context = around.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Source = around.source
 		model.Summary = around.summary
 		model.Contact = around.contact

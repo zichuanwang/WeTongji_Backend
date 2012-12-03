@@ -6,7 +6,7 @@ class ExInformation
 		model = ExInformation.new
 		model.Id = information.id
 		model.Title = information.title
-		model.Context = information.context
+		model.Context = information.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Source = information.source
 		model.Summary = information.summary
 		model.Contact = information.contact

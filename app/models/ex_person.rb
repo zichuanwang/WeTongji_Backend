@@ -5,7 +5,7 @@ class ExPerson
 		model = ExPerson.new
 		model.Id = person.id
 		model.Name = person.name
-		model.Description = person.description
+		model.Description = person.description.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
 		model.Read = person.read
 		model.Words = person.words
 		model.JobTitle = person.job_title
