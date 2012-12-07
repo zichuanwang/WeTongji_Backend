@@ -14,9 +14,71 @@ module Api
 					activities.each do |activity|
 						ex << ExActivity.init_from_activity(activity, user)
 					end
+
 					re = ApiReturn.new("000")
 					re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
 					re.add_data("Activities", ex)
+
+					#people
+					people = user.favorite_people
+					p = params[:P].nil? ? 1 : params[:P].to_i
+
+					people = people.page(p).per(20)
+
+					ex = []
+					people.each do |person|
+						ex << ExPerson.init_from_person(person, user)
+					end
+					re.add_data("People", ex)
+
+					#school news
+					school_news = user.favorite_school_news
+					p = params[:P].nil? ? 1 : params[:P].to_i
+
+					school_news = school_news.page(p).per(20)
+
+					ex = []
+					school_news.each do |school|
+						ex << ExSchoolNews.init_from_school_news(school, user)
+					end
+					re.add_data("SchoolNews", ex)
+
+					#club news
+					club_news = user.favorite_club_news
+					p = params[:P].nil? ? 1 : params[:P].to_i
+
+					club_news = club_news.page(p).per(20)
+
+					ex = []
+					club_news.each do |club|
+						ex << ExClubNews.init_from_club_news(club, user)
+					end
+					re.add_data("ClubNews", ex)
+
+					#around
+					arounds = user.favorite_arounds
+					p = params[:P].nil? ? 1 : params[:P].to_i
+
+					arounds = arounds.page(p).per(20)
+
+					ex = []
+					arounds.each do |around|
+						ex << ExAround.init_from_around(around, user)
+					end
+					re.add_data("Arounds", ex)
+
+					#for staff
+					for_staffs = user.favorite_for_staffs
+					p = params[:P].nil? ? 1 : params[:P].to_i
+
+					for_staffs = for_staffs.page(p).per(20)
+
+					ex = []
+					for_staffs.each do |for_staff|
+						ex << ExForStaff.init_from_for_staff(for_staff, user)
+					end
+					re.add_data("for_staffs", ex)
+
 					return_response(re)
 				end
 			end
