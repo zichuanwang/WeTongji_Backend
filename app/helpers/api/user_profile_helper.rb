@@ -77,7 +77,7 @@ module Api
 					for_staffs.each do |for_staff|
 						ex << ExForStaff.init_from_for_staff(for_staff, user)
 					end
-					re.add_data("for_staffs", ex)
+					re.add_data("ForStaffs", ex)
 
 					return_response(re)
 				end

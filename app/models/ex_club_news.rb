@@ -25,7 +25,6 @@ class ExClubNews
 		
 		if user
 			model.CanFavorite = club_news.can_favorite(user)
-			model.CanSchedule = club_news.can_schedule(user)
 			model.CanLike = club_news.can_like(user)
 		end
 
