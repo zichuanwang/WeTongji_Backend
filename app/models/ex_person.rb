@@ -26,7 +26,6 @@ class ExPerson
 		
 		if user
 			model.CanFavorite = person.can_favorite(user)
-			model.CanSchedule = person.can_schedule(user)
 			model.CanLike = person.can_like(user)
 		end
 

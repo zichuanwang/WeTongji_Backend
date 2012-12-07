@@ -27,7 +27,6 @@ class ExSchoolNews
 		
 		if user
 			model.CanFavorite = school_news.can_favorite(user)
-			model.CanSchedule = school_news.can_schedule(user)
 			model.CanLike = school_news.can_like(user)
 		end
 

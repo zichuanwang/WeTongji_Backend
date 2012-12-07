@@ -32,7 +32,6 @@ class ExAround
 		
 		if user
 			model.CanFavorite = around.can_favorite(user)
-			model.CanSchedule = around.can_schedule(user)
 			model.CanLike = around.can_like(user)
 		end
 

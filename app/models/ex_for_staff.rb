@@ -27,7 +27,6 @@ class ExForStaff
 		
 		if user
 			model.CanFavorite = for_staff.can_favorite(user)
-			model.CanSchedule = for_staff.can_schedule(user)
 			model.CanLike = for_staff.can_like(user)
 		end
 

@@ -32,7 +32,6 @@ class ExInformation
 		
 		if user
 			model.CanFavorite = information.can_favorite(user)
-			model.CanSchedule = information.can_schedule(user)
 			model.CanLike = information.can_like(user)
 		end
 
