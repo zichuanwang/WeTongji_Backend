@@ -47,7 +47,7 @@ class ClubNewsController < ApplicationController
   def update
     if params[:images]
       params[:images].each do |image|
-        img = clubNewsImage.new
+        img = ClubNewsImage.new
         img.file = image
         @club_news.club_news_images << img
       end
@@ -55,7 +55,7 @@ class ClubNewsController < ApplicationController
 
     if params[:delete_images]
       params[:delete_images].each do |image|
-        img = clubNewsImage.find(image)
+        img = ClubNewsImage.find(image)
         @club_news.club_news_images.delete(img)
       end
     end

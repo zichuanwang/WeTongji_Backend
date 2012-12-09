@@ -46,8 +46,10 @@ class Ability
             can :create, SchoolNews
             cannot :approve, SchoolNews
 
-            can :manage, ClubNews if admin.has_permission("ClubNews")
-            can :create, ClubNews
+            can :manage, ClubNews, :admin => { :id => admin.id } if admin.has_permission("ClubNews")
+            #can :read, ClubNews, :admin => { :id => admin.id }
+            can :update, ClubNews, :admin => { :id => admin.id }
+            can :create, ClubNews,:admin => { :id => admin.id }
             cannot :approve, ClubNews
 
             can :manage, ForStaff if admin.has_permission("ForStaff")
