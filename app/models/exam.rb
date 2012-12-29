@@ -2,13 +2,13 @@
 require 'csv'
 class Exam < ActiveRecord::Base
   validates_presence_of :course_no, :student_no, :location, :begin, :end
-  paginates_per 10
+  paginates_per 20
   
   def self.import(file_path)
     exams = []
 
     csv_text = File.read(file_path)
-    csv = CSV.parse(csv_text, :headers => true)
+    csv = CSV.parse(csv_text, :headers => false)
     csv.each do |row|
       s = Exam.new
       s.student_no = row[0]
