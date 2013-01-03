@@ -1,6 +1,7 @@
 class ExUser
 	attr_accessor :UID, :NO, :Name, :DisplayName, :Avatar, :Phone, :Email, :Major, 
-								:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department
+								:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
+								:Room, :RoomNO
 
 	def self.init_from_user(user)
 		model = ExUser.new
@@ -21,6 +22,8 @@ class ExUser
 		model.SinaWeibo = user.sina_weibo
 		model.QQ = user.qq
 		model.Department = user.department
+		model.Room = user.room
+		model.RoomNO = user.room_no
 		model
 	end
 
@@ -30,6 +33,8 @@ class ExUser
 		user.qq = json["User"]["QQ"] == nil ? user.qq : json["User"]["QQ"]
 		user.phone = json["User"]["Phone"] == nil ? user.phone : json["User"]["Phone"]
 		user.sina_weibo = json["User"]["SinaWeibo"] == nil ? user.sina_weibo : json["User"]["SinaWeibo"]
+		user.room = json["User"]["Room"] == nil ? user.sina_weibo : json["User"]["Room"]
+		user.room_no = json["User"]["RoomNO"] == nil ? user.sina_weibo : json["User"]["RoomNO"]
 		user
 	end
 end
