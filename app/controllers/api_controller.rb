@@ -41,6 +41,7 @@ class ApiController < ApplicationController
 
 		"User.Find" => "user_find",
 		"User.Update.Profile" => "user_update_profile",
+		"User.Profile" => "profile",
 
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",
