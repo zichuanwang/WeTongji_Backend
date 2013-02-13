@@ -145,5 +145,22 @@ module Api
 		    end
 			end
 		end
+
+		def user_find
+			if verify_action_params(['NO', 'Name'])
+				user = verify_user_authentication
+				if user
+					re = ApiReturn.new("000")
+					u = User.find(params[:NO], params[:Name])
+					if u
+						ex = ExUser.init_from_user(u)
+						re.add_data("User", ex)
+					else
+						re.add_data("User", nil)
+					end
+					return_response(re)
+				end
+			end
+		end
 	end
 end
