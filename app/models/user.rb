@@ -19,6 +19,9 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_people, :class_name => "Person", :join_table => "people_users_favorites", :order => "id desc"
   has_one :user_profile
 
+  has_many :sent_invites, :class_name => "FriendInvite", :foreign_key => "from"
+  has_many :received_invites, :class_name => "FriendInvite", :foreign_key => "to"
+
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
     if student
