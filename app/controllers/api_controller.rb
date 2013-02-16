@@ -43,6 +43,13 @@ class ApiController < ApplicationController
 		"User.Update.Profile" => "user_update_profile",
 		"User.Profile" => "profile",
 
+		"Friend.Invite" => "friend_invite",
+		"Friend.Invite.Accept" => "friend_invite_accept",
+		"Friend.Invite.Reject" => "friend_invite_reject",
+		"Friends.Get" => "friends",
+		"Friend.Remove" => "friend_remove",
+		"Friend.Invites.Get" => "friend_invites",
+
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",
 		"Information.Read" => "information_read",
