@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
 
   has_many :sent_invites, :class_name => "FriendInvite", :foreign_key => "from"
   has_many :received_invites, :class_name => "FriendInvite", :foreign_key => "to"
+  has_many :friends
 
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
