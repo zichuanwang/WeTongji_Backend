@@ -128,5 +128,39 @@ module Api
 				end
 			end
 		end
+
+		def user_update_profile
+			if verify_action_params(['U', 'S', 'UserProfile'])
+				user = verify_user_authentication
+				if user
+					unless user.user_profile
+						user.user_profile = UserProfile.new
+						user.save
+					end
+					ExUserProfile.update_json_to_user_profile(JSON.parse(params[:UserProfile]), user.user_profile)
+					user.save
+					ex = ExUserProfile.init_from_user_profile(user.user_profile.reload)
+					re = ApiReturn.new("000")
+					re.add_data("UserProfile", ex)
+					return_response(re)
+				end
+			end
+		end
+
+		def profile
+			if verify_action_params(['U', 'S'])
+				user = verify_user_authentication
+				if user
+					unless user.user_profile
+						user.user_profile = UserProfile.new
+						user.save
+					end
+					ex = ExUserProfile.init_from_user_profile(user.user_profile.reload)
+					re = ApiReturn.new("000")
+					re.add_data("UserProfile", ex)
+					return_response(re)
+				end
+			end
+		end
 	end
 end

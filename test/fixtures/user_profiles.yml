@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  can_be_found: false
+  allow_add_friend: false
+  public_schedule: false
+  public_schedule_to_all: false
+  public_information: false
+  public_information_to_all: false
+
+two:
+  user_id: 1
+  can_be_found: false
+  allow_add_friend: false
+  public_schedule: false
+  public_schedule_to_all: false
+  public_information: false
+  public_information_to_all: false
