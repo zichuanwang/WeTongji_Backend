@@ -1,10 +1,10 @@
 module Api
 	module FriendsHelper
 		def friend_invite
-			if verify_action_params(['U', 'S', 'No'])
+			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					invite = FriendInvite.invite(user, params[:No])
+					invite = FriendInvite.invite(user, params[:Id])
 					if invite
 						invite.save
 						re = ApiReturn.new("000")
