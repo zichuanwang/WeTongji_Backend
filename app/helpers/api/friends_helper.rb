@@ -22,20 +22,12 @@ module Api
 				user = verify_user_authentication
 				if user
 					friend_invite = FriendInvite.find(params[:Id])
+					
 					if friend_invite
-
+						friend_invite.accept
+						re = ApiReturn.new("000")
 					else
-						
-					end
-					other_user = User.find_by_no(params[:No])
-					unless other_user
 						re = ApiReturn.new("012")
-					else
-						if other_user.user_profile && other_user.user_profile.allow_add_friend == true
-							re = ApiReturn.new("000")
-						else
-							re = ApiReturn.new("015")
-						end
 					end
 					
 					return_response(re)
@@ -44,7 +36,21 @@ module Api
 		end
 
 		def friend_invite_reject
-			
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					friend_invite = FriendInvite.find(params[:Id])
+					
+					if friend_invite
+						friend_invite.reject
+						re = ApiReturn.new("000")
+					else
+						re = ApiReturn.new("012")
+					end
+					
+					return_response(re)
+				end
+			end
 		end
 
 		def friends
