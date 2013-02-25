@@ -54,36 +54,44 @@ module Api
 		end
 
 		def friends
-			
-		end
-
-		def friend_remove
-			# if verify_action_params(['U', 'S', 'Id'])
-			# 	user = verify_user_authentication
-			# 	if user
-					
-			# 	end
-			# end
-		end
-
-		def friend_invites
 			if verify_action_params(['U', 'S'])
 				user = verify_user_authentication
 				if user
 					ex = []
-					user.received_invites.each do |item|
-						ex << ExFriendInvite.init_from_friend_invite(item)
+					user.friends.each do |item|
+						ex << ExFriend.init_from_friend(item)
 					end
 					re = ApiReturn.new("000")
-					re.add_data("FriendInvites", ex)
+					re.add_data("Friends", ex)
 					return_response(re)
 				end
 			end
 		end
-			# 	"Friend.Invite" => "friend_invite",
-			# "Friend.Invite.Accept" => "friend_invite_accept",
-			# "Friend.Invite.Reject" => "friend_invite_reject",
-			# "Friends.Get" => "friends",
-			# "Friend.Remove" => "friend_remove",
+
+		def friend_remove
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					ex = []
+					user.friends.each do |item|
+						ex << ExFriend.init_from_friend(item)
+					end
+					re = ApiReturn.new("000")
+					re.add_data("Friends", ex)
+					return_response(re)
+				end
+			end
+		end
+
+		def friend_invites
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					Friend.break(user.id, params[:Id])
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
+		end
 	end
 end
