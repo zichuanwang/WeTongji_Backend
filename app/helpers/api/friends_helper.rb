@@ -26,19 +26,19 @@ module Api
 		end
 
 		def friend_invites
-			# if verify_action_params(['U', 'S'])
-			# 	user = verify_user_authentication
-			# 	if user
-			# 		ex = []
-			# 		user.received_invites.each do |item|
-			# 			ex << ExFriendInvite.init_from_friend_invite(item)
-			# 		end
-			# 		ex = ExUserProfile.init_from_user_profile(user.user_profile.reload)
-			# 		re = ApiReturn.new("000")
-			# 		re.add_data("FriendInvites", ex)
-			# 		return_response(re)
-			# 	end
-			# end
+			if verify_action_params(['U', 'S'])
+				user = verify_user_authentication
+				if user
+					ex = []
+					user.received_invites.each do |item|
+						ex << ExFriendInvite.init_from_friend_invite(item)
+					end
+					ex = ExUserProfile.init_from_user_profile(user.user_profile.reload)
+					re = ApiReturn.new("000")
+					re.add_data("FriendInvites", ex)
+					return_response(re)
+				end
+			end
 		end
 			# 	"Friend.Invite" => "friend_invite",
 			# "Friend.Invite.Accept" => "friend_invite_accept",
