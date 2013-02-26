@@ -12,10 +12,10 @@ csv.each_with_index do |row, index|
 	s.course_no = row[1]
 	s.teacher = row[2]
 	s.week_type = row[3]
-	s.week_day = row[6]
-	s.section_start = row[7]
-	s.section_end = row[8]
-	s.location = row[9]
+	s.week_day = row[4]
+	s.section_start = row[5]
+	s.section_end = row[6]
+	s.location = row[7]
 	s.begin = '2012-02-25'
 	s.end = '2013-07-08'
   p "import no:#{index} row!"
