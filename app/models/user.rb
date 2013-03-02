@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_many :received_invites, :class_name => "FriendInvite", :foreign_key => "to"
   has_many :friends
 
+  has_many :events, :order => "id desc"
+
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
     if student
