@@ -76,7 +76,11 @@ class User < ActiveRecord::Base
   end
 
   def self.find_with_no_and_name(no, name)
-    User.joins(:user_profile).where(:user_profiles => {:can_be_found => true}, :no => no, :name => name).first
+    user = User.find_by_no_and_name(no, name)
+    unless user.user_profile.nil? && user.user_profile.can_be_found == false
+      return nil
+    end
+    return user
   end
 
   def logoff(uid, authentication_token)
