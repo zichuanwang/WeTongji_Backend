@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
 
   def self.find_with_no_and_name(no, name)
     user = User.find_by_no_and_name(no, name)
-    unless user.user_profile.nil? && user.user_profile.can_be_found == false
+    unless user.nil? && user.user_profile.nil? && user.user_profile.can_be_found == false
       return nil
     end
     return user
