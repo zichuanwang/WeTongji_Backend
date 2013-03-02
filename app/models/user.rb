@@ -77,10 +77,19 @@ class User < ActiveRecord::Base
 
   def self.find_with_no_and_name(no, name)
     user = User.find_by_no_and_name(no, name)
-    unless user.nil? && user.user_profile.nil? && user.user_profile.can_be_found == false
+    if !user.nil?
+      if user.user_profile.nil?
+        return user
+      else
+        if user.user_profile.can_be_found == false
+          return nil
+        else
+          return user
+        end
+      end
+    else
       return nil
     end
-    return user
   end
 
   def logoff(uid, authentication_token)
