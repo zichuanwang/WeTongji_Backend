@@ -28,11 +28,30 @@ class Schedule
 	end
 
 	def self.get_courses_by_user(user, begin_at, end_at)
+		sele_course_instances = []
 		#got take effect sele course first
 		sele_courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
 
 		#generate sele course instance by day
-		
+		sele_courses.each do |sele|
+			i = SeleCourseInstance.new
+			i.no = sele.course_no
+			i.location = sele.location
+			i.section_start = sele.section_start
+			i.section_end = sele.section_end
+
+			c = Course.find_by_no(sele.course_no)
+			if c
+				i.hours = c.hours
+				i.point = c.point
+				i.required = c.required
+				i.name = c.name
+			end
+
+			sele_course_instances << i
+		end
+
+		sele_course_instances
 	end
 	
 end
