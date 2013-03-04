@@ -26,5 +26,13 @@ class Schedule
 	def self.get_activities_by_user(user, begin_at, end_at)
 		user.schedule_activities.where("begin >= :begin && end <= :end", :begin => begin_at, :end => end_at)
 	end
+
+	def self.get_courses_by_user(user, begin_at, end_at)
+		#got take effect sele course first
+		sele_courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
+
+		#generate sele course instance by day
+		
+	end
 	
 end
