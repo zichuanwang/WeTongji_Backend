@@ -101,9 +101,16 @@ module Api
 						ex << ExExam.init_from_exam_instance(exam)
 					end
 
+					courses = Schedule.get_courses_by_user(user, params[:Begin], params[:End])
+					ci = []
+					courses.each do |course|
+						ci << ExSeleCourseInstance.init_from_sele_course_instance(course)
+					end
+
 					re = ApiReturn.new("000")
 					re.add_data("Activities", ac)
 					re.add_data("Exams", ex)
+					re.add_data("CourseInstances", ci)
 					return_response(re)
 				end
 			end
@@ -117,7 +124,7 @@ module Api
 					courses = TimeTable.get_by_user(user)
 					ex = []
 					courses.each do |c|
-						ex << ExCourse.init_from_course_instance(c)
+						ex << ExSeleCourse.init_from_sele_course(c)
 					end
 					re = ApiReturn.new("000")
 					re.add_data("Courses", ex)

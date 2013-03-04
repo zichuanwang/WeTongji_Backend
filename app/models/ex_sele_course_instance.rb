@@ -1,8 +1,8 @@
-class ExCourse
-	attr_accessor :NO, :Name, :Teacher, :Hours, :Location, :WeekType, :WeekDay, :SectionStart, :SectionEnd, :Point, :Required
+class ExSeleCourseInstance
+	attr_accessor :NO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, :Point, :Required
 
-	def self.init_from_course_instance(instance)
-		model = ExCourse.new
+	def self.init_from_sele_course_instance(instance)
+		model = ExSeleCourseInstance.new
 
 		model.NO = instance.no
 		model.Teacher = instance.teacher
@@ -10,8 +10,6 @@ class ExCourse
 		model.Location = instance.location
 		model.Hours = instance.hours
 		model.Point = instance.point
-		model.WeekDay = instance.week_day
-		model.WeekType = instance.week_type
 		model.SectionStart = instance.section_start
 		model.SectionEnd = instance.section_end
 		model.Required = instance.required
