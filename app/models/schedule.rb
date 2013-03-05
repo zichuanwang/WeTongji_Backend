@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Schedule
 	def self.get_exams_by_user(user, begin_at, end_at)
 		instance = []
@@ -32,23 +33,58 @@ class Schedule
 		#got take effect sele course first
 		sele_courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
 
-		#generate sele course instance by day
-		sele_courses.each do |sele|
-			i = SeleCourseInstance.new
-			i.no = sele.course_no
-			i.location = sele.location
-			i.section_start = sele.section_start
-			i.section_end = sele.section_end
-
-			c = Course.find_by_no(sele.course_no)
-			if c
-				i.hours = c.hours
-				i.point = c.point
-				i.required = c.required
-				i.name = c.name
+		#fetch days and search sele course at that day
+		day = begin_at
+		while day <= end_at
+			#get day in week
+			week_day = ''
+			case day.strftime("%w")
+			when "0"
+				week_day = "星期日"
+			when "1"
+				week_day = "星期一"
+			when "2"
+				week_day = "星期二"
+			when "3"
+				week_day = "星期三"
+			when "4"
+				week_day = "星期四"
+			when "5"
+				week_day = "星期五"
+			when "6"
+				week_day = "星期六"
 			end
 
-			sele_course_instances << i
+			#get week type
+			week_type = '单'
+			if day.strftime("%U").to_i % 2 == 0
+				week_type = '双'
+			end
+
+			#get sele course at that day
+			sele_courses = SeleCourse.where("student_no = :no and :now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
+				:no => user.no, :now => Time.now, :week_day => week_day, :week_type => week_type)
+
+			#generate sele course instance by day
+			sele_courses.each do |sele|
+				i = SeleCourseInstance.new
+				i.no = sele.course_no
+				i.location = sele.location
+				i.section_start = sele.section_start
+				i.section_end = sele.section_end
+
+				c = Course.find_by_no(sele.course_no)
+				if c
+					i.hours = c.hours
+					i.point = c.point
+					i.required = c.required
+					i.name = c.name
+				end
+
+				sele_course_instances << i
+			end
+
+			day = day + 1
 		end
 
 		sele_course_instances
