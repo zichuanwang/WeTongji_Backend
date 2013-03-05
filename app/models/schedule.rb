@@ -34,8 +34,8 @@ class Schedule
 		sele_courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
 
 		#fetch days and search sele course at that day
-		day = begin_at
-		while day <= end_at
+		day = begin_at.to_datetime
+		while day <= end_at.to_datetime
 			#get day in week
 			week_day = ''
 			case day.strftime("%w")
@@ -72,6 +72,8 @@ class Schedule
 				i.location = sele.location
 				i.section_start = sele.section_start
 				i.section_end = sele.section_end
+				i.teacher = sele.teacher
+				i.day = day
 
 				c = Course.find_by_no(sele.course_no)
 				if c
