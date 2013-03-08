@@ -84,11 +84,16 @@ module Api
 		end
 
 		def friend_invites
-			if verify_action_params(['U', 'S', 'Id'])
+			if verify_action_params(['U', 'S'])
 				user = verify_user_authentication
 				if user
-					Friend.break(user.id, params[:Id])
+					#Friend.break(user.id, params[:Id])
+					ex = []
+					user.received_invites.each do |item|
+						ex << ExFriendInvite.init_from_friend_invite(item)
+					end
 					re = ApiReturn.new("000")
+					re.add_data("FriendInvites", ex)
 					return_response(re)
 				end
 			end
