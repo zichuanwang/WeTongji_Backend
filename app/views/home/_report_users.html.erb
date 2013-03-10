@@ -12,7 +12,8 @@ $(document).ready(function () {
     [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
     <% end %>
     ];
-    var plot = $.plot($("#placeholder"), [
+
+    var plot = $.plot($("#placeholder_users"), [
 		{ label: "注册", data: register },
 		{ label: "激活", data: active }
 	], {
@@ -28,7 +29,7 @@ $(document).ready(function () {
 			clickable: true
 		},
 		legend: {
-			show: false
+			show: true
 		},
         xaxis: {
             mode: "time",
@@ -51,7 +52,7 @@ $(document).ready(function () {
 
     var previousPoint = null;
 
-    $("#placeholder").bind("plothover", function (event, pos, item) {
+    $("#placeholder_users").bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x.toFixed(2));
         $("#y").text(pos.y.toFixed(2));
 
@@ -84,10 +85,6 @@ $(document).ready(function () {
 <div class="sales">
     <div class="legend">
         <h6>用户注册/激活情况(近15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
-        <ul>
-            <li class="monitors">注册</li>
-            <li class="memory">激活</li>
-        </ul>
     </div>
-    <div id="placeholder" style="height:200px; width:auto;"></div>
+    <div id="placeholder_users" style="width:auto; height:200px;"></div>
 </div>
