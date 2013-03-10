@@ -104,7 +104,7 @@ class ApiController < ApplicationController
 		if verify_checksum
 	    	#check params exists system require params
 		    if verify_sys_params && METHODS[params[:M]]
-		    	ApiLog.create(:m => params[:M], :s => params[:S], :v => params[:V], :d => params[:D])
+		    	ApiLog.create(:m => params[:M], :u => params[:U], :v => params[:V], :d => params[:D])
 		       	send METHODS[params[:M]]
 		    else
 		      	return_response ApiReturn.new("004")
