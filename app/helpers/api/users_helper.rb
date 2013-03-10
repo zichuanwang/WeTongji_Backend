@@ -1,13 +1,19 @@
+include SecureHelper
+
 module Api
 	module UsersHelper
 		def user_active
 			if verify_action_params(['NO', 'Name', 'Password'])
-				if User.is_password_valid?(params[:Password])
+				psw = params[:Password]
+				if params[:V] = "2.0"
+					psw = Decrypt(params[:Password])
+				end
+				if User.is_password_valid?(psw)
 					student = Student.find_by_no(params[:NO])
 					if student
 						student = Student.find_by_no_and_name(params[:NO], params[:Name])
 						if student
-							user = User.active_user_from_student(params[:NO], params[:Name], params[:Password])
+							user = User.active_user_from_student(params[:NO], params[:Name], psw)
 							if user
 								user.save
 								re = ApiReturn.new("000")
@@ -33,7 +39,11 @@ module Api
 
 		def user_logon
 			if verify_action_params(['NO', 'Password'])
-				user = User.authentication(params[:NO], params[:Password])
+				psw = params[:Password]
+				if params[:V] = "2.0"
+					psw = Decrypt(params[:Password])
+				end
+				user = User.authentication(params[:NO], psw)
 				if user
 					user.save
 					ex = ExUser.init_from_user(user.reload)
@@ -113,10 +123,18 @@ module Api
 
 		def user_update_password
 			if verify_action_params(['U', 'S', 'Old', 'New'])
-				if User.is_password_valid?(params[:New])
+				psw_old = params[:Old]
+				if params[:V] = "2.0"
+					psw_old = Decrypt(params[:Old])
+				end
+				psw_new = params[:New]
+				if params[:V] = "2.0"
+					psw_new = Decrypt(params[:New])
+				end
+				if User.is_password_valid?(psw_new)
 					user = verify_user_authentication
 					if user
-						user.update_password(params[:Old], params[:New])
+						user.update_password(psw_old, psw_new)
 						user.save
 						ex = ExUser.init_from_user(user.reload)
 						re = ApiReturn.new("000")
