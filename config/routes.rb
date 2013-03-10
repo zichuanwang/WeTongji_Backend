@@ -1,4 +1,7 @@
 WetongjiWeb::Application.routes.draw do
+  resources :api_logs
+
+
   post "school_news/approve"
   resources :school_news
 
