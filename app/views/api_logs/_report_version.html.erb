@@ -1,20 +1,25 @@
 <script type="text/javascript">
 $(document).ready(function () {
-    <% all = User.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `users` where `created_at` between adddate(now(),-15) and now() group by sdate") %>
+    $('#users').css({
+        height: '200px',
+        width: 'auto'
+    });
+
+    <% all = ApiLog.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `api_logs` where `created_at` between adddate(now(),-15) and now() and u is not null group by sdate") %>
     var register = [
     <% all.each do |item| %>
     [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
     <% end %>
     ];
-    <% active = User.find_by_sql("select count(id) count, date_format(`confirmed_at`,'%Y%m%d') sdate from `users` where `confirmed_at` between adddate(now(),-15) and now() group by sdate") %>
+    <% active = ApiLog.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `api_logs` where `created_at` between adddate(now(),-15) and now() and u is null group by sdate") %>
     var active = [
     <% active.each do |item| %>
     [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
     <% end %>
     ];
-    var plot = $.plot($("#placeholder"), [
-		{ label: "注册", data: register },
-		{ label: "激活", data: active }
+    var plot = $.plot($("#users"), [
+		{ label: "登陆", data: register },
+		{ label: "未登陆", data: active }
 	], {
 		lines: {
 			show: true
@@ -51,7 +56,7 @@ $(document).ready(function () {
 
     var previousPoint = null;
 
-    $("#placeholder").bind("plothover", function (event, pos, item) {
+    $("#users").bind("plothover", function (event, pos, item) {
         $("#x").text(pos.x.toFixed(2));
         $("#y").text(pos.y.toFixed(2));
 
@@ -75,19 +80,16 @@ $(document).ready(function () {
 </script>
 
 <div class="title">
-    <h5>用户注册/激活情况(近15天)</h5>
-    <ul class="links">
-        <li><%= link_to "用户", users_path %></li>
-    </ul>
+    <h5>设备(近15天)</h5>
 </div>
 <!-- end box / title -->
 <div class="sales">
     <div class="legend">
-        <h6>用户注册/激活情况(近15天)-合计:注册<%= User.all.count %>/激活<%= User.where("confirmed_at is not null").count %>/未激活<%= User.where("confirmed_at is null").count %></h6>
+        <h6>设备(近15天)</h6>
         <ul>
-            <li class="monitors">注册</li>
-            <li class="memory">激活</li>
+            <li class="monitors">登陆</li>
+            <li class="memory">未登陆</li>
         </ul>
     </div>
-    <div id="placeholder" style="height:200px; width:auto;"></div>
+    <div id="users"></div>
 </div>

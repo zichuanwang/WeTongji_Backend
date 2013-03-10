@@ -1,29 +1,15 @@
-<h1>Listing api_logs</h1>
+<div class="box">
+  <%= render "report_time" %>
+</div>
 
-<table>
-  <tr>
-    <th>V</th>
-    <th>D</th>
-    <th>M</th>
-    <th>U</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="box">
+  <%= render "report_device" %>
+</div>
 
-<% @api_logs.each do |api_log| %>
-  <tr>
-    <td><%= api_log.v %></td>
-    <td><%= api_log.d %></td>
-    <td><%= api_log.m %></td>
-    <td><%= api_log.u %></td>
-    <td><%= link_to 'Show', api_log %></td>
-    <td><%= link_to 'Edit', edit_api_log_path(api_log) %></td>
-    <td><%= link_to 'Destroy', api_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+<div class="box">
+  <%= render "report_version" %>
+</div>
 
-<br />
-
-<%= link_to 'New Api log', new_api_log_path %>
+<div class="box">
+  <%= render "report_method" %>
+</div>
