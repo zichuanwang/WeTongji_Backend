@@ -13,8 +13,23 @@ file_private = File.new("#{Rails.root}/config/keys/#{key_name}_private.pem", "w"
 file_private.puts sys_key.to_pem
 file_private.close
 
-cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/#wetongji_root_ca.cer"))
+cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/wetongji_root_ca.cer"))
+cert.sign(sys_key, OpenSSL::Digest::SHA1.new)
+file_public_der = File.new("#{Rails.root}/config/keys/#{key_name}_public.der", "wb")
+file_public_der.puts cert.to_der
 
+
+#test
+in_msg = "HAHAHAHAHAHAHTEST"
+key_pub = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/config/keys/#{key_name}_public.pem"))
+out_msg = key_pub.public_encrypt(in_msg)
+p in_msg
+p out_msg
+
+key_pri = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/config/keys/#{key_name}_private.pem"))
+
+key_pri.private_decrypt(out_msg)
+p key_pri.private_decrypt(out_msg)
 
 # # Create key
 # key1 = OpenSSL::PKey::RSA.new(2048)
