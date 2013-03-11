@@ -13,6 +13,8 @@ file_private = File.new("#{Rails.root}/config/keys/#{key_name}_private.pem", "w"
 file_private.puts sys_key.to_pem
 file_private.close
 
+#cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/#wetongji_root_ca.pem"))
+
 
 # # Create key
 # key1 = OpenSSL::PKey::RSA.new(2048)
