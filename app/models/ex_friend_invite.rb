@@ -8,7 +8,7 @@ class ExFriendInvite
 		model.FromName = friend_invite.from_name
 		model.To = friend_invite.to
 		model.ToName = friend_invite.to_name
-		model.SendAt = friend_invite.created_at
+		model.SentAt = friend_invite.created_at
 		model.AcceptedAt = friend_invite.accepted_at
 		model.RejectedAt = friend_invite.rejected_at
 		model
