@@ -45,6 +45,9 @@ class User < ActiveRecord::Base
         user.plan = student.plan
         user.gender = student.gender
         user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
+        profile = UserProfile.new
+        profile.init_default_setting
+        user.user_profile = profile
         user
       elsif user.confirmed_at.nil?
         if user.confirmation_token.nil? || user.confirmation_token.blank?
@@ -79,16 +82,8 @@ class User < ActiveRecord::Base
 
   def self.find_with_no_and_name(no, name)
     user = User.find_by_no_and_name(no, name)
-    if !user.nil?
-      if user.user_profile.nil?
-        return user
-      else
-        if user.user_profile.can_be_found == false
-          return nil
-        else
-          return user
-        end
-      end
+    if !user.nil? && !user.user_profile.nil? && user.user_profile.can_be_found == true
+      return user
     else
       return nil
     end

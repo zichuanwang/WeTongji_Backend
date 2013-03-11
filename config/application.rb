@@ -61,6 +61,6 @@ module WetongjiWeb
     config.data_of_school_year_start = "2013-02-25T00:00:00+08:00"
     config.week_of_school_year = 19
     config.week_of_school_year_in_course = 17
-    config.rsa_private_key = "#{config.root}/config/keys/20130310212430_private.pem"
+    config.rsa_private_key = "#{config.root}/config/keys/private.pem"
   end
 end
