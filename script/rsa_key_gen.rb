@@ -1,7 +1,7 @@
 # encoding: utf-8
 require 'openssl'
 
-sys_key = OpenSSL::PKey::RSA::generate(1024)
+sys_key = OpenSSL::PKey::RSA::generate(2048)
 
 cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/wetongji_root_ca.cer"))
 cert.sign(sys_key, OpenSSL::Digest::SHA1.new)
