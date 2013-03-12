@@ -3,33 +3,36 @@ require 'openssl'
 
 sys_key = OpenSSL::PKey::RSA::generate(1024)
 
-key_name = Time.now.strftime("%Y%m%d%H%M%S")
+cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/wetongji_root_ca.cer"))
+cert.sign(sys_key, OpenSSL::Digest::SHA1.new)
 
-file_public = File.new("#{Rails.root}/config/keys/#{key_name}_public.pem", "w")
-file_public.puts sys_key.public_key
-file_public.close
+key_name = Time.now.strftime("%Y%m%d%H%M%S")
 
 file_private = File.new("#{Rails.root}/config/keys/#{key_name}_private.pem", "w")
 file_private.puts sys_key.to_pem
 file_private.close
 
-cert = OpenSSL::X509::Certificate.new(File.read("#{Rails.root}/config/keys/wetongji_root_ca.cer"))
-cert.sign(sys_key, OpenSSL::Digest::SHA1.new)
+file_public = File.new("#{Rails.root}/config/keys/#{key_name}_public.pem", "w")
+file_public.puts sys_key.public_key.to_pem
+file_public.close
+
+file_public_txt = File.new("#{Rails.root}/config/keys/#{key_name}_public.key", "w")
+file_public_txt.puts sys_key.public_key.to_text
+file_public_txt.close
+
+file_private_txt = File.new("#{Rails.root}/config/keys/#{key_name}_private.key", "w")
+file_private_txt.puts sys_key.to_text
+file_private_txt.close
+
 file_public_der = File.new("#{Rails.root}/config/keys/#{key_name}_public.der", "wb")
 file_public_der.puts cert.to_der
 
+file_public_sign_pem = File.new("#{Rails.root}/config/keys/#{key_name}_public_sign.pem", "w")
+file_public_sign_pem.puts cert.to_pem
 
-#test
-in_msg = "HAHAHAHAHAHAHTEST"
-key_pub = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/config/keys/#{key_name}_public.pem"))
-out_msg = key_pub.public_encrypt(in_msg)
-p in_msg
-p out_msg
+file_public_sign_txt = File.new("#{Rails.root}/config/keys/#{key_name}_public_sign.key", "w")
+file_public_sign_txt.puts cert.to_text
 
-key_pri = OpenSSL::PKey::RSA.new(File.read("#{Rails.root}/config/keys/#{key_name}_private.pem"))
-
-key_pri.private_decrypt(out_msg)
-p key_pri.private_decrypt(out_msg)
 
 # # Create key
 # key1 = OpenSSL::PKey::RSA.new(2048)
