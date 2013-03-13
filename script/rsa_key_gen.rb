@@ -26,12 +26,15 @@ file_private_txt.close
 
 file_public_der = File.new("#{Rails.root}/config/keys/#{key_name}_public.der", "wb")
 file_public_der.puts cert.to_der
+file_public_der.close
 
 file_public_sign_pem = File.new("#{Rails.root}/config/keys/#{key_name}_public_sign.pem", "w")
 file_public_sign_pem.puts cert.to_pem
+file_public_sign_pem.close
 
 file_public_sign_txt = File.new("#{Rails.root}/config/keys/#{key_name}_public_sign.key", "w")
 file_public_sign_txt.puts cert.to_text
+file_public_sign_txt.close
 
 
 # # Create key
