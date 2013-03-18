@@ -1,0 +1,95 @@
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#users').css({
+        height: '200px',
+        width: 'auto'
+    });
+
+    <% all = ApiLog.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `api_logs` where `created_at` between adddate(now(),-15) and now() and u is not null group by sdate") %>
+    var register = [
+    <% all.each do |item| %>
+    [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
+    <% end %>
+    ];
+    <% active = ApiLog.find_by_sql("select count(id) count, date_format(`created_at`,'%Y%m%d') sdate from `api_logs` where `created_at` between adddate(now(),-15) and now() and u is null group by sdate") %>
+    var active = [
+    <% active.each do |item| %>
+    [<%= Time.parse(item["sdate"]).to_i * 1000 + 28800000 %>,<%= item["count"] %>],
+    <% end %>
+    ];
+    var plot = $.plot($("#users"), [
+		{ label: "登陆", data: register },
+		{ label: "未登陆", data: active }
+	], {
+		lines: {
+			show: true
+		},
+		points: {
+			show: true
+		},
+		grid: {
+			backgroundColor: '#fffaff',
+			hoverable: true,
+			clickable: true
+		},
+		legend: {
+			show: false
+		},
+        xaxis: {
+            mode: "time",
+            timeformat: "%0m%0d"
+        }
+	});
+
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css({
+            position: 'absolute',
+            display: 'none',
+            top: y + -36,
+            left: x + -6,
+            border: '1px solid #fdd',
+            padding: '4px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
+
+    var previousPoint = null;
+
+    $("#users").bind("plothover", function (event, pos, item) {
+        $("#x").text(pos.x.toFixed(2));
+        $("#y").text(pos.y.toFixed(2));
+
+        if (item) {
+            if (previousPoint != item.datapoint) {
+                previousPoint = item.datapoint;
+
+                $("#tooltip").remove();
+                var x = item.datapoint[0].toFixed(2),
+                    y = item.datapoint[1].toFixed(2);
+
+                showTooltip(item.pageX, item.pageY, Math.round(y) + " " + item.series.label);
+            }
+        }
+        else {
+            $("#tooltip").remove();
+            previousPoint = null;
+        }
+    });
+});
+</script>
+
+<div class="title">
+    <h5>API调用情况(近15天)</h5>
+</div>
+<!-- end box / title -->
+<div class="sales">
+    <div class="legend">
+        <h6>API调用情况(近15天)-合计:登陆<%= ApiLog.where("u is not null").count %>/未登陆<%= ApiLog.where("u is null").count %>/所有<%= ApiLog.all.count %></h6>
+        <ul>
+            <li class="monitors">登陆</li>
+            <li class="memory">未登陆</li>
+        </ul>
+    </div>
+    <div id="users"></div>
+</div>

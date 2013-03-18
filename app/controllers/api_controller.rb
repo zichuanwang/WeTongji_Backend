@@ -39,6 +39,17 @@ class ApiController < ApplicationController
 		"User.Update.Password" => "user_update_password",
 		"User.Reset.Password" => "user_reset_password",
 
+		"User.Find" => "user_find",
+		"User.Update.Profile" => "user_update_profile",
+		"User.Profile" => "profile",
+
+		"Friend.Invite" => "friend_invite",
+		"Friend.Invite.Accept" => "friend_invite_accept",
+		"Friend.Invite.Reject" => "friend_invite_reject",
+		"Friends.Get" => "friends",
+		"Friend.Remove" => "friend_remove",
+		"Friend.Invites.Get" => "friend_invites",
+
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",
 		"Information.Read" => "information_read",
@@ -89,16 +100,12 @@ class ApiController < ApplicationController
 	}
 
 	def call
-		#check params check sum
-		if verify_checksum
-	    	#check params exists system require params
-		    if verify_sys_params && METHODS[params[:M]]
-		       	send METHODS[params[:M]]
-		    else
-		      	return_response ApiReturn.new("004")
-		    end
+	    #check params exists system require params
+	    if verify_sys_params && METHODS[params[:M]]
+	    	ApiLog.create(:m => params[:M], :u => params[:U], :v => params[:V], :d => params[:D])
+	       	send METHODS[params[:M]]
 	    else
-	    	return_response ApiReturn.new("001")
+	      	return_response ApiReturn.new("004")
 	    end
 	end
 

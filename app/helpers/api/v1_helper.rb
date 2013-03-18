@@ -13,5 +13,6 @@ module Api
 		include Api::ClubNewsHelper
 		include Api::AroundsHelper
 		include Api::ForStaffsHelper
+		include Api::FriendsHelper
 	end
 end

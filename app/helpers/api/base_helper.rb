@@ -1,7 +1,7 @@
 module Api
 	module BaseHelper
 	  	def verify_sys_params
-		  	if params[:M] && params[:H] && params[:D] && params[:V]
+		  	if params[:M] && params[:D] && params[:V]
 		  		true
 		  	else
 		  		false

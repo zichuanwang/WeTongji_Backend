@@ -16,7 +16,14 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_club_news, :class_name => "ClubNews", :join_table => "club_news_users_favorites", :order => "id desc"
   has_and_belongs_to_many :favorite_for_staffs, :class_name => "ForStaff", :join_table => "for_staffs_users_favorites", :order => "id desc"
   has_and_belongs_to_many :favorite_school_news, :class_name => "SchoolNews", :join_table => "school_news_users_favorites", :order => "id desc"
-  has_and_belongs_to_many :favorite_people, :class_name => "Person", :join_table => "people_users_favorites", :order => "id desc" 
+  has_and_belongs_to_many :favorite_people, :class_name => "Person", :join_table => "people_users_favorites", :order => "id desc"
+  has_one :user_profile
+
+  has_many :sent_invites, :class_name => "FriendInvite", :foreign_key => "from"
+  has_many :received_invites, :class_name => "FriendInvite", :foreign_key => "to"
+  has_many :friends
+
+  #has_many :events, :order => "id desc"
 
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)
@@ -38,6 +45,9 @@ class User < ActiveRecord::Base
         user.plan = student.plan
         user.gender = student.gender
         user.confirmation_token = Digest::SHA1.hexdigest(Time.now.strftime("%Y%m%d%H%M%S%L") + rand.to_s)
+        profile = UserProfile.new
+        profile.init_default_setting
+        user.user_profile = profile
         user
       elsif user.confirmed_at.nil?
         if user.confirmation_token.nil? || user.confirmation_token.blank?
@@ -67,6 +77,15 @@ class User < ActiveRecord::Base
       user
     else
       nil
+    end
+  end
+
+  def self.find_with_no_and_name(no, name)
+    user = User.find_by_no_and_name(no, name)
+    if !user.nil? && !user.user_profile.nil? && user.user_profile.can_be_found == true
+      return user
+    else
+      return nil
     end
   end
 

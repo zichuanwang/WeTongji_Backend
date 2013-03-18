@@ -24,6 +24,6 @@ class SeleCourse < ActiveRecord::Base
 		end
 
   		courses
-  	end
+  end
 
 end
