@@ -118,11 +118,11 @@ module Api
 		def user_update_password
 			if verify_action_params(['U', 'S', 'Old', 'New'])
 				psw_old = params[:Old]
-				if params[:V] == "2.0"
+				if params[:V] == "3.0"
 					psw_old = Decrypt(params[:Old])
 				end
 				psw_new = params[:New]
-				if params[:V] == "2.0"
+				if params[:V] == "3.0"
 					psw_new = Decrypt(params[:New])
 				end
 				if User.is_password_valid?(psw_new)
