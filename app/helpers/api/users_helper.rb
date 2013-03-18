@@ -4,10 +4,7 @@ module Api
 	module UsersHelper
 		def user_active
 			if verify_action_params(['NO', 'Name', 'Password'])
-				psw = params[:Password]
-				if params[:V] == "2.0"
-					psw = Decrypt(params[:Password])
-				end
+				psw = get_password
 				if User.is_password_valid?(psw)
 					student = Student.find_by_no(params[:NO])
 					if student
@@ -39,10 +36,7 @@ module Api
 
 		def user_logon
 			if verify_action_params(['NO', 'Password'])
-				psw = params[:Password]
-				if params[:V] == "2.0"
-					psw = Decrypt(params[:Password])
-				end
+				psw = get_password
 				user = User.authentication(params[:NO], psw)
 				if user
 					user.save

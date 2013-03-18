@@ -49,7 +49,7 @@ class Ability
             can :manage, ClubNews, :admin => { :id => admin.id } if admin.has_permission("ClubNews")
             #can :read, ClubNews, :admin => { :id => admin.id }
             can :update, ClubNews, :admin => { :id => admin.id }
-            can :create, ClubNews,:admin => { :id => admin.id }
+            can :create, ClubNews
             cannot :approve, ClubNews
 
             can :manage, ForStaff if admin.has_permission("ForStaff")
