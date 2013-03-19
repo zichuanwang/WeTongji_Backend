@@ -10,7 +10,7 @@ module SecureHelper
 
 	def get_password
 		psw = params[:Password]
-		if params[:V] == "2.0"
+		if params[:V] == "3.0"
 			psw = Decrypt(params[:Password])
 		end
 		psw
