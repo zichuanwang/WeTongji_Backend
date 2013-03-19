@@ -17,7 +17,7 @@ csv.each_with_index do |row, index|
 	s.section_start = row[5]
 	s.section_end = row[6]
 	s.location = row[7]
-	s.begin = '2012-02-25'
+	s.begin = '2013-02-25'
 	s.end = '2013-07-08'
   p "import no:#{index} row!"
 	s.save
