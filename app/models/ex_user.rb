@@ -1,7 +1,7 @@
 class ExUser
 	attr_accessor :UID, :NO, :Name, :DisplayName, :Avatar, :Phone, :Email, :Major, 
 								:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
-								:Room, :RoomNO
+								:Room, :RoomNO, :Type
 
 	def self.init_from_user(user)
 		model = ExUser.new
@@ -24,6 +24,7 @@ class ExUser
 		model.Department = user.department
 		model.Room = user.room
 		model.RoomNO = user.room_no
+		model.Type = user.type
 		model
 	end
 
