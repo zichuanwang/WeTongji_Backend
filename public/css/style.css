@@ -25,24 +25,6 @@ Version:1.0
    微软雅黑Bold
    
    ========================================================================== */
-
-@font-face{
-	font-family:"微软雅黑";
-	src:url("../font/aa848030-89ab-4492-950e-1a0f98105a53.eot?iefix") format("eot");
-}
-@font-face{
-	font-family:"微软雅黑";
-	src:url("../font/aa848030-89ab-4492-950e-1a0f98105a53.eot?iefix");
-	src:url("../font/126d6674-0988-4da7-b649-78150fd2af1e.woff") format("woff"),url("../font/e0107836-fd05-406d-abcd-3fdcb8cb6154.ttf") format("truetype"),url("../font/58fc798b-98f9-4485-8d2b-7b93a71ee2a6.svg#58fc798b-98f9-4485-8d2b-7b93a71ee2a6") format("svg");
-}
-@font-face{
-	font-family:"微软雅黑Bold";
-	src:url("../font/aa2b97c2-2feb-47a4-9e84-fd95d2d74b1e.eot?iefix") format("eot");
-}
-@font-face{
-	font-family:"微软雅黑Bold";
-	src:url("../font/aa2b97c2-2feb-47a4-9e84-fd95d2d74b1e.eot?iefix");
-	src:url("../font/96135565-f62c-46f7-9580-e90a76d025af.woff") format("woff"),url("../font/f09e9f95-f316-44e9-a1fa-0f93ddcedea1.ttf") format("truetype"),url("../font/5ed905e5-0261-433b-bf39-4e1c441fc648.svg#5ed905e5-0261-433b-bf39-4e1c441fc648") format("svg");
 }
 @font-face{
 	font-family: "微软雅黑";
@@ -65,10 +47,10 @@ audio:not([controls]) { display:none; }
 
 html { font-size:100%; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
 body { margin:0; font-size:16px; line-height:1.3; }
-html, button, input, select, textarea { font-family:arial, sans-serif; color:#fff; }
+html, button, input, select, textarea { font-family: 'Wendy One',arial, sans-serif; color:#fff; }
 
 ::-moz-selection { background:#ffcf11; color:#000; text-shadow:none; }
-::selection { background:#ffcf11; color:#000; text-shadow:none; }
+::selection { background:#348bca; color:#ffffff; text-shadow:none; }
 
 a { color:#ffcf11; outline:none; text-decoration:none; }
 a:hover,
@@ -151,11 +133,11 @@ textarea { }
 
 h1, h2, h3, h4, h5, h6 {
 	margin:0; padding:0;
-	font-family:'微软雅黑Bold'; font-style:normal; font-weight:normal; line-height:1;
+	font-family:'微软雅黑'; font-style:normal; font-weight:normal; line-height:1;
 }
 
 img {
-	max-width:100%;
+	max-width: 100%;
 }
 
 
@@ -233,7 +215,7 @@ img {
 #nav-main a {
 	display:table-cell; padding:0 12px; vertical-align:middle;
 	background:#000; cursor:pointer;
-	color:#9d9d9d; font:16px/1 '微软雅黑'; text-align:center;
+	color:#9d9d9d; font:16px/1;font-family:'微软雅黑','Wendy One', sans-serif; text-align:center;
 }
 #nav-main a b {
 	display:block;
@@ -248,13 +230,10 @@ img {
 	transition:0.5s all ease;
 }
 #nav-main a:hover,
-#nav-main a:focus,
 #nav-main .current a {
 	color:#fff;
 }
-#nav-main a:hover b,
-#nav-main a:focus b,
-#nav-main .current a b {
+#nav-main .current a b{
 	color:#ffcf11;
 }
 #nav-main .highlight a {
@@ -262,7 +241,7 @@ img {
 	color:#000; font-size:13px; letter-spacing:0.005em; line-height:1.4;
 }
 #nav-main .highlight a b {
-	color:#000; font:18px/1 '微软雅黑Bold'; letter-spacing:0;
+	color:#000; font:18px/1 '微软雅黑'; letter-spacing:0;
 }
 #nav-main .highlight a:hover,
 #nav-main .highlight a:focus {
@@ -444,14 +423,14 @@ img {
 
 #site-loader {
 	overflow:hidden; position:absolute; top:0; left:0; width:100%; height:100%;
-	background:#ffcf11; z-index:999;
+	background:#21b6de; z-index:999;
 }
 #site-loader .image {
 	margin:-60px 60px 20px -100px; position:absolute; top:50%; left:50%; width:220px;
 }
 #site-loader .label {
 	margin:15px 0 0 -143px; position:absolute; top:50%; left:50%; width:286px;
-	color:#000; font:16px/1 '微软雅黑'; text-align:center;
+	color:#000; font:16px/1; font-family:'微软雅黑'; text-align:center;
 }
 #qLoverlay {
 	display:none;
@@ -564,7 +543,7 @@ img {
    ========================================================================== */
 
 #page-home .description {
-	margin:-360px 0 0; position:absolute; top:50%; left:5%; width:520px; height:550px;
+	margin:-360px 0 0; position:absolute; top:50%; left:5%; width:550px; height:550px;
 	text-align:center;
 }
 #page-home .icon {
@@ -599,7 +578,7 @@ a:focus .app-store {
 	top:-5px;
 }
 a .google-play {
-	display:block; margin:10px auto 0; position:relative; top:0; width:385px;
+	display:block; margin:10px auto 0; position:relative; top:0; width:415px;
 	-moz-transition:0.2s all ease;
 	-ms-transition:0.2s all ease;
 	-o-transition:0.2s all ease;
@@ -678,7 +657,7 @@ a:focus .google-play {
 	background:url('../img/background-blue.jpg');
 }
 #page-news .description {
-	margin:-65px 0 0 -225px; position:absolute; top:20%; left:50%; width:450px;
+	margin:-65px 0px 0px -310px; position:absolute; top:20%; left:50%; width:520px;
 	text-align:left;
 }
 #page-news h2 {
@@ -695,7 +674,7 @@ a:focus .google-play {
 }
 #page-news .description img {
 	height:360px;
-	margin:50px 0 0 0;
+	margin:35px 0 0 0;
 }
 #page-news .description .column {
 	padding: -360px 400px 0 0;
@@ -720,7 +699,9 @@ a:focus .google-play {
 #page-news .app-store {
 	display:none;
 }
-
+#page-news img {
+	padding: 0px 0px 15px 0px;
+}
 
 
 /* =============================================================================
@@ -774,7 +755,7 @@ a:focus .google-play {
 
 .page-text {
 	z-index:990;
-	color:#fff; font-size:13px;
+	color:#fff; font-size:18px;
 }
 .page-text .page-background {
 	width:100%; height:100%; max-width:999em;
@@ -1033,10 +1014,10 @@ a:focus .google-play {
 		font-weight:normal;
 	}
 	#nav-mobile .language {
-		display:block; margin:0 auto; padding:0 0 15px; width:74px;
+		display:block; margin:0 auto; padding:0 0 15px; width:78px;
 	}
 	#nav-mobile .language a {
-		float:left; padding:2px 0; width:35px;
+		float:left; padding:2px 0; width:40px;
 		border-width:1px;
 	}
 	#nav-mobile .language .current a {
@@ -1060,7 +1041,7 @@ a:focus .google-play {
 		margin:0 0 10px;
 	}
 	#page-home h1 img {
-		width:100%;
+		
 	}
 	#page-home h2 {
 		font-size:20px;
@@ -1220,7 +1201,7 @@ a:focus .google-play {
 	.page-text .back-link {
 		display:block; float:left; margin:15px 0; padding:8px 15px;
 		border:1px solid #000;
-		color:#000; font:18px/1 '微软雅黑'; 
+		color:#000; font:18px/1;font-family:'微软雅黑'; 
 	}
 	.page-text .page-background {
 		display:none;
