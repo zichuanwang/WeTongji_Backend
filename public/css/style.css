@@ -110,11 +110,6 @@ html, body {
 	overflow:hidden; position:relative; width:100%; height:100%;
 }
 
-#awwwards {
-	position:absolute; top:8%; right:0; width:10%; max-width:70px;
-	z-index:16;
-}
-
 
 /* =============================================================================
    GENERAL: =Forms
@@ -136,7 +131,7 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:'微软雅黑'; font-style:normal; font-weight:normal; line-height:1;
 }
 
-img {
+#page-home img {
 	max-width: 100%;
 }
 
@@ -230,10 +225,13 @@ img {
 	transition:0.5s all ease;
 }
 #nav-main a:hover,
-#nav-main .current a {
+#nav-main a:focus,
+#nav-main .current a{
 	color:#fff;
 }
-#nav-main .current a b{
+#nav-main a:hover b,
+#nav-main a:focus b,
+#nav-main .current a b {
 	color:#ffcf11;
 }
 #nav-main .highlight a {
@@ -657,7 +655,7 @@ a:focus .google-play {
 	background:url('../img/background-blue.jpg');
 }
 #page-news .description {
-	margin:-65px 0px 0px -310px; position:absolute; top:20%; left:50%; width:520px;
+	margin:-65px 0px 0px -310px; position:absolute; top:20%; left:50%; width:720px;
 	text-align:left;
 }
 #page-news h2 {
@@ -674,7 +672,6 @@ a:focus .google-play {
 }
 #page-news .description img {
 	height:360px;
-	margin:35px 0 0 0;
 }
 #page-news .description .column {
 	padding: -360px 400px 0 0;
@@ -698,9 +695,6 @@ a:focus .google-play {
 }
 #page-news .app-store {
 	display:none;
-}
-#page-news img {
-	padding: 0px 0px 15px 0px;
 }
 
 
