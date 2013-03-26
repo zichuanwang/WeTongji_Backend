@@ -58,6 +58,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.register_user_as_employee(no, name, password)
+    
+  end
+
+  def self.register_user_as_alumnus(no, name, password)
+    
+  end
+
   def self.authentication(no, password)
     user = User.where("no = :no and confirmed_at is not null", :no => no).first
     if user && user.encrypted_password == User.hash_password(password, user.password_salt)
