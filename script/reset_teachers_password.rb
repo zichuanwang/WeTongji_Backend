@@ -4,5 +4,5 @@ User.where("last_seen_at is null and user_type = '职工'").each_with_index do |
   item.password = ps
   item.save
   UserMailer.new_password(item, ps).deliver
-  p "import no:#{index} row!"
+  p "import no:#{index} row! password is #{ps}"
 end

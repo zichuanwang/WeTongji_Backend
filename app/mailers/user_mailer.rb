@@ -25,6 +25,7 @@ class UserMailer < ActionMailer::Base
   
   def new_password(user, password)
     @user = user
+    @password = password
     mail(:to => user.email, :subject => '您的新密码.')
   end
 
