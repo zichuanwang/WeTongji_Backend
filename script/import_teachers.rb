@@ -7,7 +7,7 @@ p "#{Rails.root}/public/imports/teachers.csv"
 csv_text = File.read("#{Rails.root}/public/imports/teachers.csv")
 csv = CSV.parse(csv_text, :headers => true)
 csv.each_with_index do |row, index|
-	p = rand(7).to_s
+	p = rand(1000000..9999999).to_s
 	u = User.new
 	u.no = row[0]
 	u.name = row[1]
