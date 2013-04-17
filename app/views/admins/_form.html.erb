@@ -9,6 +9,7 @@
         	<%= f.text_field :email, :class => "small" %>
         </div>
       </div>
+      <% if can?(:manage, Admin) %>
       <div class="field">
         <div class="label">
           <label>角色</label>
@@ -17,6 +18,7 @@
         	<%= f.select :role, { "普通管理员" => "CommonAdmin", "超级管理员" => "SuperAdmin" } %>
         </div>
       </div>
+      <% end %>
       <div class="field">
         <div class="label">
           <label>密码</label>
