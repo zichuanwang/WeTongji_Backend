@@ -1,5 +1,6 @@
 # encoding: utf-8
 class Information < ActiveRecord::Base
+	has_one :information_external
 	belongs_to :admin, :counter_cache => true
 	has_many :information_images
 	paginates_per 20
@@ -7,9 +8,6 @@ class Information < ActiveRecord::Base
 
 	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "information_users_favorites"
 	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "information_users_likes"
-
-	validates_attachment :image, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
-	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
 	before_create :init_model
 

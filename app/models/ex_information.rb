@@ -1,17 +1,19 @@
 class ExInformation
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite, :Tags,
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location, :HasTicket, :TicketService
 
 	def self.init_from_information(information, user = nil)
 		model = ExInformation.new
 		model.Id = information.id
 		model.Title = information.title
-		model.Context = information.context.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
-		model.Source = information.source
-		model.Summary = information.summary
-		model.Contact = information.contact
-		model.Addition = information.addition
-		model.Location = information.location
+		model.Context = information.context
+		model.Source = information.information_external.source
+		model.Summary = information.information_external.summary
+		model.Contact = information.information_external.contact
+		model.Location = information.information_external.location
+		model.HasTicket = information.information_external.has_ticket
+		model.TicketService = information.information_external.ticket_service
+		model.Tags = information.information_external.tags
 		model.Read = information.read
 		model.CreatedAt = information.created_at
 		model.Category = information.category
@@ -19,7 +21,7 @@ class ExInformation
 		model.Like = information.like
 		model.CanFavorite = true
 		model.CanLike = true
-		model.Image = information.image == nil ? '' : Rails.configuration.host + information.image.url
+		model.Image = information.information_external.image == nil ? '' : Rails.configuration.host + information.information_external.image.url
 		model.Organizer = information.admin.display
 		model.OrganizerAvatar = information.admin.icon == nil ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 		model.Images = []
