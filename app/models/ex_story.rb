@@ -1,5 +1,5 @@
 class ExStory
-	attr_accessor :Id, :Title, :Image, :Body, :CommentsCount
+	attr_accessor :Id, :Title, :Image, :Body, :CommentsCount, :PublishedAt
 	def self.init_from_story(story)
 		model = ExStory.new
 		model.Id = story.id
