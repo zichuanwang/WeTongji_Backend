@@ -23,6 +23,19 @@ module Api
 			return_response(re)
 		end
 
+		def person_get
+			person = Person.find(params[:Id])
+			ex = nil
+			if person
+				person.read = person.read + 1
+				person.save
+				ex = ExPerson.init_from_person(person)
+			end
+			re = ApiReturn.new("000")
+			re.add_data("Person", ex)
+			return_response(re)
+		end
+
 		def person_getlatest
 			person = Person.order('id desc').first
 			ex = nil
