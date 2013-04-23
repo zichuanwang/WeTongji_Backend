@@ -1,0 +1,2 @@
+class ExStory
+end

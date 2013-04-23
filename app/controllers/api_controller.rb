@@ -65,6 +65,7 @@ class ApiController < ApplicationController
 		"Person.UnFavorite" => "person_unfavorite",
 		"Person.Like" => "person_like",
 		"Person.UnLike" => "person_unlike",
+		"Person.Get" => "person_get",
 
 		"SchoolNews.GetList" => "school_news_getlist",
 		"SchoolNews.Get" => "school_news_get",
@@ -96,7 +97,12 @@ class ApiController < ApplicationController
 		"ForStaff.Favorite" => "for_staff_favorite",
 		"ForStaff.UnFavorite" => "for_staff_unfavorite",
 		"ForStaff.Like" => "for_staff_like",
-		"ForStaff.UnLike" => "for_staff_unlike"
+		"ForStaff.UnLike" => "for_staff_unlike",
+
+		"Billboard.Get" => "billboard",
+		"Billboard.Story.Add" => "story_add",
+		"Billboard.Story.Comment" => "comment_add",
+		"Billboard.Story.Get" => "story_get"
 	}
 
 	def call
