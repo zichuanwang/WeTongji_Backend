@@ -1,10 +1,11 @@
+# encoding: utf-8
 module Api
 	module AroundsHelper
 		def arounds_get
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			arounds = Around.where("visiable = true")
+			arounds = Information.where("category = '周边推荐' and visiable = true")
 			if sort
 				arounds = arounds.order(sort)
 			else

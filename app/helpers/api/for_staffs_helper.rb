@@ -1,10 +1,11 @@
+# encoding: utf-8
 module Api
 	module ForStaffsHelper
 		def for_staffs_get
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			for_staffs = ForStaff.where("visiable = true")
+			for_staffs = Information.where("category = '校务信息' and visiable = true")
 			if sort
 				for_staffs = for_staffs.order(sort)
 			else

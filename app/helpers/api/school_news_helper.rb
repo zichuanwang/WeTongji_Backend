@@ -1,10 +1,11 @@
+# encoding: utf-8
 module Api
 	module SchoolNewsHelper
 		def school_news_getlist
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			school_news = SchoolNews.where("visiable = true")
+			school_news = Information.where("category = '校园新闻' and visiable = true")
 			if sort
 				school_news = school_news.order(sort)
 			else
