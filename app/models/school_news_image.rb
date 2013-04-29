@@ -1,3 +1,4 @@
+#expired
 class SchoolNewsImage < ActiveRecord::Base
 	belongs_to :school_news
 	validates_attachment :file, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }

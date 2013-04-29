@@ -19,7 +19,7 @@ class ExSchoolNews
 		model.OrganizerAvatar = school_news.admin.icon == nil ? '' : Rails.configuration.host + school_news.admin.icon.url(:medium)
 		model.Images = []
 
-		school_news.school_news_images.each do |image|
+		school_news.information_images.each do |image|
 			unless image.nil?
 				model.Images << Rails.configuration.host + image.file.url
 			end

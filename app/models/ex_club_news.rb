@@ -17,7 +17,7 @@ class ExClubNews
 		model.OrganizerAvatar = club_news.admin.icon == nil ? '' : Rails.configuration.host + club_news.admin.icon.url(:medium)
 		model.Images = []
 
-		club_news.club_news_images.each do |image|
+		club_news.information_images.each do |image|
 			unless image.nil?
 				model.Images << Rails.configuration.host + image.file.url
 			end

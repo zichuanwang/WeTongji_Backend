@@ -1,7 +1,8 @@
+# encoding: utf-8
 class ClubNewsController < ApplicationController
   load_and_authorize_resource
   def index
-    @club_news = @club_news.order("id desc").page(params[:page])
+    @club_news = @club_news.where("category = '社团通告'").order("id desc").page(params[:page])
   end
 
   def show
@@ -25,13 +26,14 @@ class ClubNewsController < ApplicationController
 
   def create
     @club_news.admin = current_admin
+    @club_news.category = "社团通告"
     @club_news.check
 
     if params[:images]
       params[:images].each do |image|
-        img = ClubNewsImage.new
+        img = InformationImage.new
         img.file = image
-        @club_news.club_news_images << img
+        @club_news.information_images << img
       end
     end
 
@@ -47,16 +49,16 @@ class ClubNewsController < ApplicationController
   def update
     if params[:images]
       params[:images].each do |image|
-        img = ClubNewsImage.new
+        img = InformationImage.new
         img.file = image
-        @club_news.club_news_images << img
+        @club_news.information_images << img
       end
     end
 
     if params[:delete_images]
       params[:delete_images].each do |image|
-        img = ClubNewsImage.find(image)
-        @club_news.club_news_images.delete(img)
+        img = InformationImage.find(image)
+        @club_news.information_images.delete(img)
       end
     end
     

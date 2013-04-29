@@ -1,7 +1,8 @@
+# encoding: utf-8
 class AroundsController < ApplicationController
   load_and_authorize_resource
   def index
-    @arounds = @arounds.order("id desc").page(params[:page])
+    @arounds = @arounds.where("category = '周边推荐'").order("id desc").page(params[:page])
   end
 
   def show
@@ -25,13 +26,14 @@ class AroundsController < ApplicationController
 
   def create
     @around.admin = current_admin
+    @around.category = "周边推荐"
     @around.check
 
     if params[:images]
       params[:images].each do |image|
-        img = AroundImage.new
+        img = InformationImage.new
         img.file = image
-        @around.around_images << img
+        @around.information_images << img
       end
     end
 
@@ -47,16 +49,16 @@ class AroundsController < ApplicationController
   def update
     if params[:images]
       params[:images].each do |image|
-        img = AroundImage.new
+        img = InformationImage.new
         img.file = image
-        @around.around_images << img
+        @around.information_images << img
       end
     end
 
     if params[:delete_images]
       params[:delete_images].each do |image|
-        img = AroundImage.find(image)
-        @around.around_images.delete(img)
+        img = InformationImage.find(image)
+        @around.information_images.delete(img)
       end
     end
     

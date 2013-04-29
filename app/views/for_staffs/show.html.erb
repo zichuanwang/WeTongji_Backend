@@ -36,7 +36,7 @@
             <td>内容</td>
             <td class="last"><%= @for_staff.context %></td>
           </tr>
-          <% @for_staff.for_staff_images.each do |image| %>
+          <% @for_staff.information_images.each do |image| %>
           <tr>
             <td>图片</td>
             <td class="last"><%= image_tag image.file.url(:medium) %></td>

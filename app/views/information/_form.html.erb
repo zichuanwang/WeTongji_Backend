@@ -22,22 +22,6 @@
       </div>
       <div class="field">
         <div class="label">
-          <label>题图(300K以内,jpeg格式)</label>
-        </div>
-        <div class="input input-file">
-          <%= f.file_field :image, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>来源</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :source, { :class => "large" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
           <label>类别</label>
         </div>
         <div class="select">
@@ -69,43 +53,11 @@
       </div>
       <% end %>
       <div class="field">
-        <div class="label">
-          <label>位置</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :location, { :class => "large" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>联系方式</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :contact, { :class => "large" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>摘要</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :summary, { :class => "large" } %>
-        </div>
-      </div>
-      <div class="field">
         <div class="label label-textarea">
           <label>内容</label>
         </div>
         <div class="textarea">
           <%= f.text_area :context, :rows => 8, :cols => 50 %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>附加信息</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :addition, { :class => "large" } %>
         </div>
       </div>
       <div class="buttons">

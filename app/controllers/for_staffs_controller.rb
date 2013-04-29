@@ -1,7 +1,8 @@
+# encoding: utf-8
 class ForStaffsController < ApplicationController
   load_and_authorize_resource
   def index
-    @for_staffs = @for_staffs.order("id desc").page(params[:page])
+    @for_staffs = @for_staffs.where("category = '校务信息'").order("id desc").page(params[:page])
   end
 
   def show
@@ -25,13 +26,14 @@ class ForStaffsController < ApplicationController
 
   def create
     @for_staff.admin = current_admin
+    @for_staff.category = "校务信息"
     @for_staff.check
 
     if params[:images]
       params[:images].each do |image|
-        img = ForStaffImage.new
+        img = InformationImage.new
         img.file = image
-        @for_staff.for_staff_images << img
+        @for_staff.information_images << img
       end
     end
 
@@ -47,16 +49,16 @@ class ForStaffsController < ApplicationController
   def update
     if params[:images]
       params[:images].each do |image|
-        img = ForStaffImage.new
+        img = InformationImage.new
         img.file = image
-        @for_staff.for_staff_images << img
+        @for_staff.information_images << img
       end
     end
 
     if params[:delete_images]
       params[:delete_images].each do |image|
-        img = ForStaffImage.find(image)
-        @for_staff.for_staff_images.delete(img)
+        img = InformationImage.find(image)
+        @for_staff.information_images.delete(img)
       end
     end
     

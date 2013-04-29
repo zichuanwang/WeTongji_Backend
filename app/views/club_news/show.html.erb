@@ -28,7 +28,7 @@
             <td>内容</td>
             <td class="last"><%= @club_news.context %></td>
           </tr>
-          <% @club_news.club_news_images.each do |image| %>
+          <% @club_news.information_images.each do |image| %>
           <tr>
             <td>图片</td>
             <td class="last"><%= image_tag image.file.url(:medium) %></td>

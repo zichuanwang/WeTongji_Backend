@@ -38,13 +38,13 @@
         </div>
       </div>
       <% end %>
-      <% unless @for_staff.for_staff_images.empty? %>
+      <% unless @for_staff.information_images.empty? %>
       <div class="field">
         <div class="label label-checkbox">
           <label>已上传图片</label>
         </div>
         <div class="checkboxes">
-          <% @for_staff.for_staff_images.each do |image| %>
+          <% @for_staff.information_images.each do |image| %>
           <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
           <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
           <label>删除</label>

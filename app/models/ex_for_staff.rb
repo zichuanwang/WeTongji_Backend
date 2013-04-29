@@ -19,7 +19,7 @@ class ExForStaff
 		model.OrganizerAvatar = for_staff.admin.icon == nil ? '' : Rails.configuration.host + for_staff.admin.icon.url(:medium)
 		model.Images = []
 
-		for_staff.for_staff_images.each do |image|
+		for_staff.information_images.each do |image|
 			unless image.nil?
 				model.Images << Rails.configuration.host + image.file.url
 			end

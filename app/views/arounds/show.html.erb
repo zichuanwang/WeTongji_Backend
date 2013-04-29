@@ -13,10 +13,6 @@
             <td class="last"><%= @around.source %></td>
           </tr>
           <tr>
-            <td>题图</td>
-            <td class="last"><%= image_tag @around.image.url(:medium) %></td>
-          </tr>
-          <tr>
             <td>发布时间</td>
             <td class="last"><%= @around.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
@@ -53,7 +49,7 @@
             <td class="last"><%= @around.location %></td>
           </tr>
 
-          <% @around.around_images.each do |image| %>
+          <% @around.information_images.each do |image| %>
           <tr>
             <td>图片</td>
             <td class="last"><%= image_tag image.file.url(:medium) %></td>

@@ -44,24 +44,6 @@ function tickect_div_slide(){
           <%= f.text_field :source, { :class => "large" } %>
         </div>
       </div>
-      <% unless @around.id.nil? %>
-      <div class="field">
-        <div class="label label-checkbox">
-          <label>已上传题图</label>
-        </div>
-        <div class="checkboxes">
-          <%= image_tag @around.image.url(:thumb) %>
-        </div>
-      </div>
-      <% end %>
-      <div class="field">
-        <div class="label">
-          <label>题图(300K以内,jpeg格式)</label>
-        </div>
-        <div class="input input-file">
-          <%= f.file_field :image, { :class => "small" } %>
-        </div>
-      </div>
       <% 1.upto(3).each do |i| %>
       <div class="field">
         <div class="label">
@@ -72,13 +54,13 @@ function tickect_div_slide(){
         </div>
       </div>
       <% end %>
-      <% unless @around.around_images.empty? %>
+      <% unless @around.information_images.empty? %>
       <div class="field">
         <div class="label label-checkbox">
           <label>已上传图片</label>
         </div>
         <div class="checkboxes">
-          <% @around.around_images.each do |image| %>
+          <% @around.information_images.each do |image| %>
           <%= link_to (image_tag image.file.url(:thumb)), image.file.url, :target => "_blank"  %>
           <input type="checkbox" name="delete_images[]" value="<%= image.id %>" />
           <label>删除</label>
