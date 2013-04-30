@@ -5,7 +5,7 @@ module Api
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			club_news = Information.where("category = '社团通告' and visiable = true")
+			club_news = ClubNews.where("category = '社团通告' and visiable = true")
 			if sort
 				club_news = club_news.order(sort)
 			else

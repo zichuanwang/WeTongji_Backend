@@ -5,7 +5,7 @@ module Api
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			for_staffs = Information.where("category = '校务信息' and visiable = true")
+			for_staffs = ForStaff.where("category = '校务信息' and visiable = true")
 			if sort
 				for_staffs = for_staffs.order(sort)
 			else

@@ -5,7 +5,7 @@ module Api
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
-			arounds = Information.where("category = '周边推荐' and visiable = true")
+			arounds = Around.where("category = '周边推荐' and visiable = true")
 			if sort
 				arounds = arounds.order(sort)
 			else
