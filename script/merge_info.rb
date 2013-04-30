@@ -73,7 +73,7 @@ ClubNewsTmp.all.each do |item|
 	i.created_at = item.created_at
 	i.updated_at = item.updated_at
 
-	item.around_images.each do |img|
+	item.club_news_images.each do |img|
 		im = InformationImage.new
 		im.file = img.file
 		i.information_images << im
@@ -118,9 +118,8 @@ ForStaffTmp.all.each do |item|
 
 	i.information_external.summary = item.summary
 	i.information_external.source = item.source
-	i.information_external.contact = item.contact
 
-	item.around_images.each do |img|
+	item.for_staff_images.each do |img|
 		im = InformationImage.new
 		im.file = img.file
 		i.information_images << im
@@ -165,9 +164,8 @@ SchoolNewsTmp.all.each do |item|
 
 	i.information_external.summary = item.summary
 	i.information_external.source = item.source
-	i.information_external.contact = item.contact
 
-	item.around_images.each do |img|
+	item.school_news_images.each do |img|
 		im = InformationImage.new
 		im.file = img.file
 		i.information_images << im
