@@ -5,12 +5,18 @@ module Api
 		def information_getlist
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
+			category_ids = params[:Category_Ids]
 
 			information = Information.where("visiable = true")
 			if sort
 				information = information.order(sort)
 			else
 				information = information.order("id desc")
+			end
+
+			if category_ids
+				hash = { "1" => "校园新闻", "2" => "团体通告", "3" => "周边推荐", "4" => "校务信息" }
+				information = information.where(:category => category_ids.split(',').collect{ |x| hash[x] })
 			end
 
 			information = information.page(p).per(20)
