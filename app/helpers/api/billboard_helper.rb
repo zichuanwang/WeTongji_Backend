@@ -69,14 +69,40 @@ module Api
 					ex = nil
 					ex_c = []
 					if story && story.visiable
+						coms = story.story_comments.where("visiable = true").order("id desc").page(1).per(5)
+
 						ex = ExStory.init_from_story(story)
-						story.story_comments.each do |item|
+						coms.each do |item|
 							ex_c << ExStoryComment.init_from_story_comment(item)
 						end
 					end
 					re = ApiReturn.new("000")
 					re.add_data("Story", ex)
 					re.add_data("StoryComments", ex_c)
+					re.add_data("NextPager", (1 < coms.num_pages ? 2 : 0))
+					return_response(re)
+				end
+			end
+		end
+
+		def comments_get
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					story = Story.find(params[:Id])
+					ex_c = []
+					if story && story.visiable
+						p = params[:P].nil? ? 1 : params[:P].to_i
+
+						coms = story.story_comments.where("visiable = true").order("id desc").page(p).per(5)
+
+						coms.each do |item|
+							ex_c << ExStoryComment.init_from_story_comment(item)
+						end
+					end
+					re = ApiReturn.new("000")
+					re.add_data("StoryComments", ex_c)
+					re.add_data("NextPager", (p < coms.num_pages ? p + 1 : 0))
 					return_response(re)
 				end
 			end
