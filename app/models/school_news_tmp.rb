@@ -2,7 +2,7 @@
 class SchoolNewsTmp < ActiveRecord::Base
 	self.table_name = "school_news"
 	belongs_to :admin
-	has_many :school_news_images
+	has_many :school_news_images, :foreign_key => "school_news_id"
 	paginates_per 20
 	validates_presence_of :context
 
@@ -10,8 +10,8 @@ class SchoolNewsTmp < ActiveRecord::Base
 	validates :summary, :length => { :maximum => 30 }, :presence => true
 	validates :source, :length => { :maximum => 30 }, :presence => true
 
-	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "school_news_users_favorites"
-	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "school_news_users_likes"
+	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "school_news_users_favorites", :foreign_key => "school_news_id"
+	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "school_news_users_likes", :foreign_key => "school_news_id"
 
 	before_create :init_model
 

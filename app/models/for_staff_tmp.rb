@@ -2,7 +2,7 @@
 class ForStaffTmp < ActiveRecord::Base
 	self.table_name = "for_staffs"
 	belongs_to :admin
-	has_many :for_staff_images, :foreign_key => "around_id"
+	has_many :for_staff_images, :foreign_key => "for_staff_id"
 	paginates_per 20
 	validates_presence_of :context
 
@@ -10,8 +10,8 @@ class ForStaffTmp < ActiveRecord::Base
 	validates :summary, :length => { :maximum => 30 }, :presence => true
 	validates :source, :length => { :maximum => 30 }, :presence => true
 
-	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "for_staffs_users_favorites", :foreign_key => "around_id"
-	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "for_staffs_users_likes", :foreign_key => "around_id"
+	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "for_staffs_users_favorites", :foreign_key => "for_staff_id"
+	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "for_staffs_users_likes", :foreign_key => "for_staff_id"
 
 	before_create :init_model
 
