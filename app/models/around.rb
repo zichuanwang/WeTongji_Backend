@@ -34,20 +34,6 @@ class Around < Information
 		self.information_external.summary = sum
 	end
 
-	def tags
-		if self.information_external.nil?
-			self.information_external = InformationExternal.new
-		end
-		self.information_external.tags
-	end
-
-	def tags=(t)
-		if self.information_external.nil?
-			self.information_external = InformationExternal.new
-		end
-		self.information_external.tags = t
-	end
-
 	def has_ticket
 		if self.information_external.nil?
 			self.information_external = InformationExternal.new

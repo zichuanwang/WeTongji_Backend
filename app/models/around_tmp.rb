@@ -2,9 +2,9 @@
 class AroundTmp < ActiveRecord::Base
 	self.table_name = "arounds"
 	belongs_to :admin
-	has_many :around_images
+	has_many :around_images, :foreign_key => "around_id"
 	paginates_per 20
-	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+	has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :path => ':rails_root/public/system/arounds/:attachment/:id_partition/:style/:filename'
 
 	validates_presence_of :context
 
@@ -16,8 +16,8 @@ class AroundTmp < ActiveRecord::Base
 	validates :summary, :length => { :maximum => 30 }, :presence => true
 	validates :source, :length => { :maximum => 30 }, :presence => true
 
-	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "arounds_users_favorites"
-	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "arounds_users_likes"
+	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "arounds_users_favorites", :foreign_key => "around_id"
+	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "arounds_users_likes", :foreign_key => "around_id"
 
 	before_create :init_model
 	before_save :set_ticket
