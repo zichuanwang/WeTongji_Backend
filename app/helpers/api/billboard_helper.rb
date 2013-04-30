@@ -28,6 +28,7 @@ module Api
 					story.title = params[:Title]
 					story.body = params[:Body]
 					story.image = params[:Image]
+					story.is_anonymous = params[:Anonymous]
 					story.user = user
 					story.check
 					story.save
@@ -47,6 +48,7 @@ module Api
 					if story && story.visiable
 						comment = StoryComment.new
 						comment.body = params[:Body]
+						comment.is_anonymous = params[:Anonymous]
 						comment.user = user
 						comment.story = story
 						comment.check

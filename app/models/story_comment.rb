@@ -1,6 +1,6 @@
 # encoding: utf-8
 class StoryComment < ActiveRecord::Base
-	attr_accessible :body, :user_id, :is_pending, :visiable, :pending_reason
+	attr_accessible :body, :user_id, :is_pending, :visiable, :pending_reason, :is_anonymous
 	belongs_to :user
 	belongs_to :story, :counter_cache => true
 
