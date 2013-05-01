@@ -1,6 +1,8 @@
 class Banner < ActiveRecord::Base
-  	attr_accessible :title, :url, :read
-  	has_attached_file :image
+  	attr_accessible :title, :url, :read, :image
+
+  	validates_presence_of :title, :url
+
 	paginates_per 20
 
 	validates_attachment :image, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }

@@ -1,15 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="box">
+    <div class="title">
+        <h5>查看推荐</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @banner.title %></td>
+          </tr>
+          <tr>
+            <td>发布时间</td>
+            <td class="last"><%= @banner.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>网址</td>
+            <td class="last"><%= @banner.url %></td>
+          </tr>
+          <tr>
+            <td>阅读次数</td>
+            <td class="last"><%= @banner.read %></td>
+          </tr>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag @banner.image.url %></td>
+          </tr>
+        </table>
+    </div>
+</div>
 
-<p>
-  <b>Title:</b>
-  <%= @banner.title %>
-</p>
-
-<p>
-  <b>Url:</b>
-  <%= @banner.url %>
-</p>
-
-
-<%= link_to 'Edit', edit_banner_path(@banner) %> |
-<%= link_to 'Back', banners_path %>

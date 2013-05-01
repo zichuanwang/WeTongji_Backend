@@ -10,16 +10,35 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :url %><br />
-    <%= f.text_field :url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form">
+    <div class="fields">
+      <div class="field field-first">
+        <div class="label">
+          <label>标题</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :title, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>网址</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :url, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>题图(300K以内,jpeg格式)</label>
+        </div>
+        <div class="input input-file">
+          <%= f.file_field :image, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="buttons">
+        <input type="submit" name="submit" value="保存" />
+      </div>
+    </div>
   </div>
 <% end %>
