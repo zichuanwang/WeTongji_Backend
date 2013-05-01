@@ -15,5 +15,6 @@ module Api
 		include Api::ForStaffsHelper
 		include Api::FriendsHelper
 		include Api::BillboardHelper
+		include Api::BannersHelper
 	end
 end

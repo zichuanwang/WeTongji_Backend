@@ -1,4 +1,7 @@
 WetongjiWeb::Application.routes.draw do
+  resources :banners
+
+
   resources :api_logs
 
 

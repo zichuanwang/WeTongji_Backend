@@ -103,7 +103,10 @@ class ApiController < ApplicationController
 		"Billboard.Story.Add" => "story_add",
 		"Billboard.Story.Comment" => "comment_add",
 		"Billboard.Story.Get" => "story_get",
-		"Billboard.Story.Comments.Get" => "comments_get"
+		"Billboard.Story.Comments.Get" => "comments_get",
+
+		"Banners.Get" => "banners_get",
+		"Banner.Read" => "banner_read"
 	}
 
 	def call
