@@ -2,7 +2,7 @@
 module Api
 	module BannersHelper
 		def banners_get
-			banners = Banner.order("id desc").limit(3)
+			banners = Banner.order("id desc").limit(4)
 
 			ex = []
 			banners.each do |n|

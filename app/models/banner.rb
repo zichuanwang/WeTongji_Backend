@@ -1,5 +1,5 @@
 class Banner < ActiveRecord::Base
-  	attr_accessible :title, :url, :read, :image
+  	attr_accessible :title, :url, :read, :image, :bgcolor
 
   	validates_presence_of :title, :url
 

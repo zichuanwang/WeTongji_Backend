@@ -1,7 +1,7 @@
-class ExStoryComment
+class ExComment
 	attr_accessor :Id, :Body, :PublishedAt, :UserName
-	def self.init_from_story_comment(comment)
-		model = ExStoryComment.new
+	def self.init_from_comment(comment)
+		model = ExComment.new
 		model.Id = comment.id
 		model.Body = comment.body
 		model.PublishedAt = comment.created_at

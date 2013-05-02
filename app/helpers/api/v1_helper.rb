@@ -16,5 +16,7 @@ module Api
 		include Api::FriendsHelper
 		include Api::BillboardHelper
 		include Api::BannersHelper
+		include Api::HomeHelper
+		include Api::CommentsHelper
 	end
 end

@@ -1,8 +1,7 @@
-# encoding: utf-8
-class StoryComment < ActiveRecord::Base
-	attr_accessible :body, :user_id, :is_pending, :visiable, :pending_reason, :is_anonymous
-	belongs_to :user
-	belongs_to :story, :counter_cache => true
+class Comment < ActiveRecord::Base
+  	attr_accessible :body, :is_anonymous, :is_pending, :out_id, :out_model_name, :pending_reason, :user_id, :visiable
+
+  	belongs_to :user
 	paginates_per 20
 
 	def check

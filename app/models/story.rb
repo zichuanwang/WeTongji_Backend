@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Story < ActiveRecord::Base
 	attr_accessible :body, :title, :user_id, :is_pending, :visiable, :pending_reason, :is_anonymous
-	has_many :story_comments, :conditions => { :visiable => true }
+	has_many :comments, :conditions => { :out_model_name => "story", :visiable => true }
 	belongs_to :user
 	has_attached_file :image
 	paginates_per 20
