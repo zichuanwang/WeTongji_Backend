@@ -69,7 +69,7 @@ module Api
 					ex = nil
 					ex_c = []
 					if story && story.visiable
-						coms = story.story_comments.where("visiable = true").order("id desc").page(1).per(5)
+						coms = story.story_comments.where("visiable = true").order("id desc").page(1).per(20)
 
 						ex = ExStory.init_from_story(story)
 						coms.each do |item|
@@ -94,7 +94,7 @@ module Api
 					if story && story.visiable
 						p = params[:P].nil? ? 1 : params[:P].to_i
 
-						coms = story.story_comments.where("visiable = true").order("id desc").page(p).per(5)
+						coms = story.story_comments.where("visiable = true").order("id desc").page(p).per(20)
 
 						coms.each do |item|
 							ex_c << ExStoryComment.init_from_story_comment(item)
