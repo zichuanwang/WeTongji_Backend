@@ -6,7 +6,7 @@ module Api
 				if user
 					p = params[:P].nil? ? 1 : params[:P].to_i
 
-					items = Story.where("visiable = true").order("id desc").page(p).per(5)
+					items = Story.where("visiable = true").order("id desc").page(p).per(12)
 
 					ex = []
 					items.each do |n|
