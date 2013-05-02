@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Comment < ActiveRecord::Base
   	attr_accessible :body, :is_anonymous, :is_pending, :out_id, :out_model_name, :pending_reason, :user_id, :visiable
 

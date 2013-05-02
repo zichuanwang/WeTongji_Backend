@@ -23,13 +23,12 @@ module Api
 				user = verify_user_authentication
 				if user
 					ex_c = []
-						p = params[:P].nil? ? 1 : params[:P].to_i
+					p = params[:P].nil? ? 1 : params[:P].to_i
 
-						coms = Comment.where("visiable = true and out_model_name => :model and out_id = :id", :model => params[:Model]).order("id desc").page(p).per(5)
+					coms = Comment.where("visiable = true and out_model_name => :model and out_id = :id", :model => params[:Model], :id => params[:Id]).order("id desc").page(p).per(5)
 
-						coms.each do |item|
-							ex_c << ExComment.init_from_comment(item)
-						end
+					coms.each do |item|
+						ex_c << ExComment.init_from_comment(item)
 					end
 					re = ApiReturn.new("000")
 					re.add_data("Comments", ex_c)

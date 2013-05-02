@@ -4,10 +4,10 @@ class CreateComments < ActiveRecord::Migration
       t.integer :out_id
       t.string :out_model_name
       t.string :body
-      t.boolean :is_anonymous
+      t.boolean :is_anonymous, :default => false
       t.integer :user_id
-      t.boolean :visiable
-      t.boolean :is_pending
+      t.boolean :visiable, :default => true
+      t.boolean :is_pending, :default => false
       t.string :pending_reason
 
       t.timestamps
