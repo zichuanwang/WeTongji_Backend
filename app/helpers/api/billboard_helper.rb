@@ -6,7 +6,7 @@ module Api
 				if user
 					p = params[:P].nil? ? 1 : params[:P].to_i
 
-					items = Story.where("visiable = true").order("id desc").page(p).per(5)
+					items = Story.where("visiable = true").order("id desc").page(p).per(12)
 
 					ex = []
 					items.each do |n|
@@ -48,8 +48,7 @@ module Api
 					ex = nil
 					ex_c = []
 					if story && story.visiable
-						coms = story.comments.where("visiable = true").order("id desc").page(1).per(5)
-
+						coms = story.comments.where("visiable = true").order("id desc").page(1).per(20)
 						ex = ExStory.init_from_story(story)
 						coms.each do |item|
 							ex_c << ExComment.init_from_comment(item)
