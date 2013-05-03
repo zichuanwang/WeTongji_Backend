@@ -7,12 +7,16 @@ class ExInformation
 		model.Id = information.id
 		model.Title = information.title
 		model.Context = information.context
-		model.Source = information.information_external.source
-		model.Summary = information.information_external.summary
-		model.Contact = information.information_external.contact
-		model.Location = information.information_external.location
-		model.HasTicket = information.information_external.has_ticket
-		model.TicketService = information.information_external.ticket_service
+
+		unless information.information_external.nil?
+			model.Source = information.information_external.source
+			model.Summary = information.information_external.summary
+			model.Contact = information.information_external.contact
+			model.Location = information.information_external.location
+			model.HasTicket = information.information_external.has_ticket
+			model.TicketService = information.information_external.ticket_service	
+		end
+
 		model.Read = information.read
 		model.CreatedAt = information.created_at
 		model.Category = information.category
