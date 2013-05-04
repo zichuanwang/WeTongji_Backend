@@ -110,6 +110,11 @@ html, body {
 	overflow:hidden; position:relative; width:100%; height:100%;
 }
 
+#awwwards {
+	position:absolute; top:8%; right:0; width:10%; max-width:70px;
+	z-index:16;
+}
+
 
 /* =============================================================================
    GENERAL: =Forms
@@ -131,8 +136,8 @@ h1, h2, h3, h4, h5, h6 {
 	font-family:'微软雅黑'; font-style:normal; font-weight:normal; line-height:1;
 }
 
-#page-home img {
-	max-width: 100%;
+img {
+
 }
 
 
@@ -225,13 +230,10 @@ h1, h2, h3, h4, h5, h6 {
 	transition:0.5s all ease;
 }
 #nav-main a:hover,
-#nav-main a:focus,
-#nav-main .current a{
+#nav-main .current a {
 	color:#fff;
 }
-#nav-main a:hover b,
-#nav-main a:focus b,
-#nav-main .current a b {
+#nav-main .current a b{
 	color:#ffcf11;
 }
 #nav-main .highlight a {
@@ -587,6 +589,18 @@ a:hover .google-play,
 a:focus .google-play {
 	top:-5px;
 }
+a .windows-phone {
+	display:block; margin:10px auto 0; position:relative; top:0; width:229px;
+	-moz-transition:0.2s all ease;
+	-ms-transition:0.2s all ease;
+	-o-transition:0.2s all ease;
+	-webkit-transition:0.2s all ease;
+	transition:0.2s all ease;
+}
+a:hover .windows-phone,
+a:focus .windows-phone {
+	top:-5px;
+}
 
 .qr-code {
 	display:block; margin:10px auto 0; position:relative; top:0;
@@ -655,7 +669,7 @@ a:focus .google-play {
 	background:url('../img/background-blue.jpg');
 }
 #page-news .description {
-	margin:-65px 0px 0px -310px; position:absolute; top:20%; left:50%; width:720px;
+	margin:-100px 0px 0px -310px; position:absolute; top:20%; left:50%; width:720px;
 	text-align:left;
 }
 #page-news h2 {
@@ -672,6 +686,7 @@ a:focus .google-play {
 }
 #page-news .description img {
 	height:360px;
+	margin:10px 0 0 0;
 }
 #page-news .description .column {
 	padding: -360px 400px 0 0;
@@ -787,7 +802,7 @@ a:focus .google-play {
 }
 
 .touch .page-text .iscroll {
-	margin:0 auto; position:relative; width:100%; max-width:660px; height:100%;
+	margin:0 auto; position:relative; width:100%; max-width:450px; height:100%;
 }
 .touch .page-text .back-link {
 	display:block; float:left; margin:15px 0; padding:8px 15px;
@@ -798,7 +813,7 @@ a:focus .google-play {
 	display:none;
 }
 .touch .page-text {
-	background:#21b6de;
+	background:#ffcf11;
 }
 .touch .page-text .page-content {
 	margin:0; padding:0 15px; overflow:visible; position:absolute; top:0; left:0; width:auto; height:auto;
@@ -991,7 +1006,7 @@ a:focus .google-play {
 		margin:0 auto; position:relative !important; width:82%; max-width:350px;
 	}
 	#nav-mobile .image {
-		display:block; margin:0 auto; padding:30px 0 15px;
+		display:block; margin:0 auto; padding:30px 0 15px; width:82.8%;
 	}
 	#nav-mobile ul {
 		padding:0 0 20px;
@@ -1008,10 +1023,10 @@ a:focus .google-play {
 		font-weight:normal;
 	}
 	#nav-mobile .language {
-		display:block; margin:0 auto; padding:0 0 15px; width:140px;
+		display:block; margin:0 auto; padding:0 0 15px; width:78px;
 	}
 	#nav-mobile .language a {
-		float:left; padding:2px 0; width:60px;
+		float:left; padding:2px 0; width:40px;
 		border-width:1px;
 	}
 	#nav-mobile .language .current a {
@@ -1035,7 +1050,7 @@ a:focus .google-play {
 		margin:0 0 10px;
 	}
 	#page-home h1 img {
-		
+		width:100%;
 	}
 	#page-home h2 {
 		font-size:20px;
@@ -1201,7 +1216,7 @@ a:focus .google-play {
 		display:none;
 	}
 	.page-text {
-		background:#3DCBEE;
+		background:#ffcf11;
 	}
 	.page-text .page-content {
 		margin:0; padding:0 15px; overflow:visible; position:absolute; top:0; left:0; width:auto !important; height:auto;
