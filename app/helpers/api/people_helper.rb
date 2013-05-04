@@ -1,6 +1,7 @@
 module Api
 	module PeopleHelper
 		def people
+			user = get_current_user
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 
@@ -15,7 +16,7 @@ module Api
 
 			ex = []
 			people.each do |n|
-				ex << ExPerson.init_from_person(n)
+				ex << ExPerson.init_from_person(n, user)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("NextPager", (p < people.num_pages ? p + 1 : 0))
@@ -29,7 +30,7 @@ module Api
 			if person
 				person.read = person.read + 1
 				person.save
-				ex = ExPerson.init_from_person(person)
+				ex = ExPerson.init_from_person(person, get_current_user)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("Person", ex)
@@ -40,7 +41,7 @@ module Api
 			person = Person.order('id desc').first
 			ex = nil
 			if person
-				ex = ExPerson.init_from_person(person)
+				ex = ExPerson.init_from_person(person, get_current_user)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("Person", ex)
@@ -53,7 +54,7 @@ module Api
 			if person
 				person.read = person.read + 1
 				person.save
-				ex = ExPerson.init_from_person(person)
+				ex = ExPerson.init_from_person(person, get_current_user)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("Person", ex)
