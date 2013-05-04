@@ -38,6 +38,13 @@ module Api
 			end
 		end
 
+		def get_current_user
+			if params[:U] && params[:S]
+				return User.get_authentication_user(params[:U], params[:S])
+			end
+			return nil
+		end
+
 		def verify_checksum
 		  	h = params[:H]
 			md5_string = request.query_string.split('&').sort.collect do |s|

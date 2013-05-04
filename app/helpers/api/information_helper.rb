@@ -3,6 +3,7 @@ module Api
 	module InformationHelper
 		# information
 		def information_getlist
+			user = get_current_user
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 			category_ids = params[:Category_Ids]
@@ -15,7 +16,7 @@ module Api
 			end
 
 			if category_ids
-				hash = { "1" => "校园新闻", "2" => "团体通告", "3" => "周边推荐", "4" => "校务信息" }
+				hash = { "1" => "校园新闻", "2" => "社团通告", "3" => "周边推荐", "4" => "校务信息" }
 				information = information.where(:category => category_ids.split(',').collect{ |x| hash[x] })
 			end
 
@@ -23,7 +24,7 @@ module Api
 
 			ex = []
 			information.each do |n|
-				ex << ExInformation.init_from_information(n)
+				ex << ExInformation.init_from_information(n, user)
 			end
 			re = ApiReturn.new("000")
 			re.add_data("NextPager", (p < information.num_pages ? p + 1 : 0))
@@ -36,7 +37,7 @@ module Api
 				information = Information.find(params[:Id])
 				ex = nil
 				if information && information.visiable
-					ex = ExInformation.init_from_information(information)
+					ex = ExInformation.init_from_information(information, get_current_user)
 				end
 				re = ApiReturn.new("000")
 				re.add_data("Information", ex)

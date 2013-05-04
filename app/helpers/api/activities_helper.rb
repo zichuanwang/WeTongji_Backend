@@ -30,7 +30,7 @@ module Api
 
 			ex = []
 
-			user = User.get_authentication_user(params[:U], params[:S])
+			user = get_current_user
 
 			activities.each do |activity|
 				ex << ExActivity.init_from_activity(activity, user)
