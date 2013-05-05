@@ -137,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 img {
-
+	max-width: 100%;
 }
 
 
@@ -450,7 +450,7 @@ img {
 	color:#000;
 }
 #page-filters h1 {
-	font-size:64px;
+	font-size:63px;
 }
 #page-filters strong {
 	text-transform:uppercase;
@@ -543,17 +543,17 @@ img {
    ========================================================================== */
 
 #page-home .description {
-	margin:-360px 0 0; position:absolute; top:50%; left:5%; width:550px; height:550px;
+	margin:-260px 0 0; position:absolute; top:50%; left:8%; width:550px; height:550px;
 	text-align:center;
 }
 #page-home .icon {
-	margin:0 0 40px; width:82px;
+	margin:0 0 10px; width:82px;
 }
 #page-home .titleEn{
 	width:150px;
 }
 #page-home h1 {
-	margin:0 0 20px;
+	margin:0 0 10px;
 }
 #page-home h2 {
 	font:30px/1 '微软雅黑';
@@ -562,11 +562,11 @@ img {
 	display:block; margin:25px auto; width:17px;
 }
 #page-home p {
-	margin:30px auto; width:470px;
+	margin:15px auto; width:470px;
 	text-shadow:0 1px 0 #000;
 }
 a .app-store {
-	display:block; margin:10px auto 0; position:relative; top:0; width:229px;
+	display:block; margin:10px auto 0; position:relative; top:0; width:170px;
 	-moz-transition:0.2s all ease;
 	-ms-transition:0.2s all ease;
 	-o-transition:0.2s all ease;
@@ -578,7 +578,7 @@ a:focus .app-store {
 	top:-5px;
 }
 a .google-play {
-	display:block; margin:10px auto 0; position:relative; top:0; width:415px;
+	display:block; margin:10px auto 0; position:relative; top:0; width:236px;
 	-moz-transition:0.2s all ease;
 	-ms-transition:0.2s all ease;
 	-o-transition:0.2s all ease;
@@ -590,7 +590,7 @@ a:focus .google-play {
 	top:-5px;
 }
 a .windows-phone {
-	display:block; margin:10px auto 0; position:relative; top:0; width:229px;
+	display:block; margin:10px auto 0; position:relative; top:0; width:170px;
 	-moz-transition:0.2s all ease;
 	-ms-transition:0.2s all ease;
 	-o-transition:0.2s all ease;
@@ -669,7 +669,7 @@ a:focus .windows-phone {
 	background:url('../img/background-blue.jpg');
 }
 #page-news .description {
-	margin:-100px 0px 0px -310px; position:absolute; top:20%; left:50%; width:720px;
+	margin:-100px 0px 0px -360px; position:absolute; top:20%; left:50%; width:720px;
 	text-align:left;
 }
 #page-news h2 {
@@ -685,11 +685,10 @@ a:focus .windows-phone {
 	float:left; margin:0 4% 0 0; width:27.8%
 }
 #page-news .description img {
-	height:360px;
 	margin:10px 0 0 0;
 }
 #page-news .description .column {
-	padding: -360px 400px 0 0;
+	padding: 0px 0 0 0;
  }
 #news-description .review {
 	margin:0 0 10%;
@@ -732,6 +731,7 @@ a:focus .windows-phone {
 #page-share li {
 	margin:0; padding:0;
 	list-style:none;
+	font-family:微软雅黑;
 }
 #page-share li:before {
 	content:'• ';
@@ -909,7 +909,7 @@ a:focus .windows-phone {
 }
 @media only screen and (max-width:1500px) {
 	#page-news .description {
-		margin:-65px 0 0 -175px; top:15%; width:350px;
+		margin:-65px 0 0 -340px; top:15%; width:600px;
 	}
 	#news-description {
 		margin:-140px 0 0 -450px; width:900px; height:350px;
@@ -1023,11 +1023,12 @@ a:focus .windows-phone {
 		font-weight:normal;
 	}
 	#nav-mobile .language {
-		display:block; margin:0 auto; padding:0 0 15px; width:78px;
+		display:block; margin:0 auto; padding:0 0 15px; width:110px;
 	}
 	#nav-mobile .language a {
-		float:left; padding:2px 0; width:40px;
+		float:left; padding:2px 0; 
 		border-width:1px;
+		width: 50px;
 	}
 	#nav-mobile .language .current a {
 		background:#000;
@@ -1050,7 +1051,7 @@ a:focus .windows-phone {
 		margin:0 0 10px;
 	}
 	#page-home h1 img {
-		width:100%;
+		
 	}
 	#page-home h2 {
 		font-size:20px;
@@ -1260,6 +1261,7 @@ a:focus .windows-phone {
 	}
 	#nav-mobile .image {
 		padding:0 0 25px;
+		width: 142px;
 	}
 	#nav-mobile a {
 		font-size:24px;
@@ -1271,9 +1273,12 @@ a:focus .windows-phone {
 		margin:0 auto; max-width:350px;
 	}
 	
-	a .app-store {
+	a .app-store,
+	a .google-play,
+	a .windows-phone {
 		margin-top:30px; width:250px;
 	}
+	
 	
 	#awwwards {
 		top:2%; width:60px; 
