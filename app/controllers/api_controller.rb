@@ -109,7 +109,9 @@ class ApiController < ApplicationController
 		"Banners.Get" => "banners_get",
 		"Banner.Read" => "banner_read",
 
-		"Home" => "home"
+		"Home" => "home",
+		"Search" => "search"
+
 	}
 
 	def call

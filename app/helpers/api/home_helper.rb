@@ -22,7 +22,7 @@ module Api
 			person = Person.order('id desc').first
 			ex_person = nil
 			if person
-				ex = ExPerson.init_from_person(person, user)
+				ex_person = ExPerson.init_from_person(person, user)
 			end
 
 			# activity

@@ -18,5 +18,6 @@ module Api
 		include Api::BannersHelper
 		include Api::HomeHelper
 		include Api::CommentsHelper
+		include Api::SearchHelper
 	end
 end
