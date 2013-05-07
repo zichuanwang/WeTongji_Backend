@@ -32,11 +32,17 @@ module Api
 				ex_activities << ExActivity.init_from_activity(a, user)
 			end
 
+			# account
+			account_new = Admin.order('id desc').where("sign_in_count > 0 and role = 'CommonAdmin'").first
+			account_pop = Admin.order('information_count desc').where("sign_in_count > 0 and role = 'CommonAdmin'").first
+
 			re = ApiReturn.new("000")
 			re.add_data("Banners", ex_banners)
 			re.add_data("Information", ex_information)
 			re.add_data("Person", ex_person)
 			re.add_data("Activities", ex_activities)
+			re.add_data("AccountPopulor", ExAccount.init_from_account(account_pop, user))
+			re.add_data("AccountNewest", ExAccount.init_from_account(account_new, user))
 			return_response(re)
 		end
 	end
