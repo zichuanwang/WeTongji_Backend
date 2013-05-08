@@ -26,7 +26,7 @@
 	<!-- Fixed top -->
 	<div id="top">
 		<div class="fixed">
-			<a href="index.html" title="" class="logo"><img src="/img/logo.png" alt="" /></a>
+			<a href="/" title="" class="logo"><img src="/img/logo.png" alt="" /></a>
 			<ul class="top-menu">
 				<li class="dropdown">
 					<a class="login-top" data-toggle="dropdown"></a>
@@ -42,13 +42,7 @@
 	<%= yield %>
 
 	<!-- Footer -->
-	<div id="footer">
-		<div class="copyrights">&copy;  微同济.</div>
-		<ul class="footer-links">
-			<li><a href="" title=""><i class="icon-cogs"></i>联系管理员</a></li>
-			<li><a href="" title=""><i class="icon-screenshot"></i>报告问题</a></li>
-		</ul>
-	</div>
+	<%= render "layouts/footer" %>
 	<!-- /footer -->
 
 </body>

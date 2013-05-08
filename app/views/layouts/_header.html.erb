@@ -1,0 +1,21 @@
+<div id="top">
+	<div class="fixed">
+		<a href="/dashboard" title="" class="logo"><img src="/img/logo.png" alt="" /></a>
+		<ul class="top-menu">
+			<li><a class="fullview"></a></li>
+			<li><a class="showmenu"></a></li>
+			<li><a href="#" title="" class="messages"><i class="new-message"></i></a></li>
+			<li class="dropdown">
+				<a class="user-menu" data-toggle="dropdown"><img src="/img/userpic.png" alt="" /><span><%= current_admin.name %> <b class="caret"></b></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="<%= admin_path(current_admin) %>" title="个人信息"><i class="icon-user"></i>个人信息</a></li>
+					<li>
+						<%= link_to destroy_admin_session_path, :method => :delete do %>
+						<i class="icon-remove"></i>注销
+						<% end %>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
