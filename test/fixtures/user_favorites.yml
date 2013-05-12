@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  out_id: 1
+  out_model_name: MyString
+  user_id: 1
+
+two:
+  out_id: 1
+  out_model_name: MyString
+  user_id: 1

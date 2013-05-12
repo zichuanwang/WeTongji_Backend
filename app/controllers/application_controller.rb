@@ -19,8 +19,8 @@ class ApplicationController < ActionController::Base
     if devise_controller?
       "out"
     else
-      #"application"
-      "new_schema"
+      "application"
+      #"new_schema"
     end
   end
 end
