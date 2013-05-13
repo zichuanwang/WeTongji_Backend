@@ -10,13 +10,19 @@ class User < ActiveRecord::Base
 
   before_create :init_model
   after_create :send_confirmation
-  has_and_belongs_to_many :favorite_activities, :class_name => "Activity", :join_table => "activities_users_favorites", :order => "begin asc"
+
   has_and_belongs_to_many :schedule_activities, :class_name => "Activity", :join_table => "activities_users_schedules", :order => "begin asc"
+
+  has_and_belongs_to_many :favorite_activities, :class_name => "Activity", :join_table => "user_favorites", :order => "begin asc", :conditions => { :out_model_name => 'Activity' }
+  has_and_belongs_to_many :favorite_information, :class_name => "Information", :join_table => "user_favorites", :order => "id desc", :conditions => { :out_model_name => 'Information' }
+  has_and_belongs_to_many :favorite_people, :class_name => "Person", :join_table => "user_favorites", :order => "id desc", :conditions => { :out_model_name => 'Person' }
+  
   has_and_belongs_to_many :favorite_arounds, :class_name => "Around", :join_table => "arounds_users_favorites", :order => "id desc"
   has_and_belongs_to_many :favorite_club_news, :class_name => "ClubNews", :join_table => "club_news_users_favorites", :order => "id desc"
   has_and_belongs_to_many :favorite_for_staffs, :class_name => "ForStaff", :join_table => "for_staffs_users_favorites", :order => "id desc"
   has_and_belongs_to_many :favorite_school_news, :class_name => "SchoolNews", :join_table => "school_news_users_favorites", :order => "id desc"
-  has_and_belongs_to_many :favorite_people, :class_name => "Person", :join_table => "people_users_favorites", :order => "id desc"
+  
+  
   has_one :user_profile
 
   has_many :sent_invites, :class_name => "FriendInvite", :foreign_key => "from"

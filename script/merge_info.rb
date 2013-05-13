@@ -1,5 +1,6 @@
 # encoding: utf-8
 # merge info 4 tables to one
+# run at 3.0 deploy
 # around
 AroundTmp.all.each do |item|
 	p "transfer around #{item.id}"

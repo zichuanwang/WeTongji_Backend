@@ -14,16 +14,20 @@ class ApiController < ApplicationController
 		"Channel.UnFavorite" => "channel_unfavorite",
 
 		"Activities.Get" => "activities",
+
+		# delete at 2.0 api support end
 		"Activity.Favorite" => "activity_favorite",
 		"Activity.UnFavorite" => "activity_unfavorite",
 		"Activity.Like" => "activity_like",
 		"Activity.UnLike" => "activity_unlike",
+
 		"Activity.Schedule" => "activity_schedule",
 		"Activity.UnSchedule" => "activity_unschedule",
 
 		"Favorite.Get" => "favorite",
 		"Schedule.Get" => "schedule",
 
+		# delete at 2.0 api support end
 		"News.GetList" => "news_getlist",
 		"News.Get" => "news_get",
 		"News.Read" => "news_read",
@@ -53,6 +57,8 @@ class ApiController < ApplicationController
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",
 		"Information.Read" => "information_read",
+
+		# delete at 2.0 api support end
 		"Information.Favorite" => "information_favorite",
 		"Information.UnFavorite" => "information_unfavorite",
 		"Information.Like" => "information_like",
@@ -61,12 +67,16 @@ class ApiController < ApplicationController
 		"People.Get" => "people",
 		"Person.GetLatest" => "person_getlatest",
 		"Person.Read" => "person_read",
+
+		# delete at 2.0 api support end
 		"Person.Favorite" => "person_favorite",
 		"Person.UnFavorite" => "person_unfavorite",
 		"Person.Like" => "person_like",
 		"Person.UnLike" => "person_unlike",
+		
 		"Person.Get" => "person_get",
 
+		# delete at 2.0 api support end
 		"SchoolNews.GetList" => "school_news_getlist",
 		"SchoolNews.Get" => "school_news_get",
 		"SchoolNews.Read" => "school_news_read",
@@ -75,6 +85,7 @@ class ApiController < ApplicationController
 		"SchoolNews.Like" => "school_news_like",
 		"SchoolNews.UnLike" => "school_news_unlike",
 
+		# delete at 2.0 api support end
 		"ClubNews.GetList" => "club_news_getlist",
 		"ClubNews.Get" => "club_news_get",
 		"ClubNews.Read" => "club_news_read",
@@ -83,6 +94,7 @@ class ApiController < ApplicationController
 		"ClubNews.Like" => "club_news_like",
 		"ClubNews.UnLike" => "club_news_unlike",
 
+		# delete at 2.0 api support end
 		"Arounds.Get" => "arounds_get",
 		"Around.Get" => "around_get",
 		"Around.Read" => "around_read",
@@ -91,6 +103,7 @@ class ApiController < ApplicationController
 		"Around.Like" => "around_like",
 		"Around.UnLike" => "around_unlike",
 
+		# delete at 2.0 api support end
 		"ForStaffs.Get" => "for_staffs_get",
 		"ForStaff.Get" => "for_staff_get",
 		"ForStaff.Read" => "for_staff_read",
@@ -105,6 +118,11 @@ class ApiController < ApplicationController
 
 		"Comment.Add" => "comment_add",
 		"Comments.Get" => "comments_get",
+
+		"User.Like" => "user_like",
+		"User.UnLike" => "user_unlike",
+		"User.Favorite" => "user_favorite",
+		"User.UnFavorite" => "user_unfavorite",
 
 		"Banners.Get" => "banners_get",
 		"Banner.Read" => "banner_read",

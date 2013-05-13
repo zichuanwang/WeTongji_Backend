@@ -19,5 +19,7 @@ module Api
 		include Api::HomeHelper
 		include Api::CommentsHelper
 		include Api::SearchHelper
+		include Api::UserLikesHelper
+		include Api::UserFavoritesHelper
 	end
 end
