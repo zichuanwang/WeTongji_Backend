@@ -1,6 +1,27 @@
 module Api
 	module UserProfileHelper
 		
+		def like_history
+			if verify_action_params(['U', 'S'])
+				user = verify_user_authentication
+				if user
+					list = user.user_likes
+					p = params[:P].nil? ? 1 : params[:P].to_i
+					list = list.page(p).per(20)
+					ex = []
+					list.each do |l|
+						ex << ExLike.init_from_like(l)
+					end
+
+					re = ApiReturn.new("000")
+					re.add_data("NextPager", (p < list.num_pages ? p + 1 : 0))
+					re.add_data("Like", ex)
+
+					return_response(re)
+				end
+			end
+		end
+
 		def favorite
 			if verify_action_params(['U', 'S'])
 				user = verify_user_authentication

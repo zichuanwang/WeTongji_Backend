@@ -20,6 +20,5 @@ module Api
 		include Api::CommentsHelper
 		include Api::SearchHelper
 		include Api::UserLikesHelper
-		include Api::UserFavoritesHelper
 	end
 end

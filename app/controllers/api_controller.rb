@@ -119,10 +119,9 @@ class ApiController < ApplicationController
 		"Comment.Add" => "comment_add",
 		"Comments.Get" => "comments_get",
 
-		"User.Like" => "user_like",
-		"User.UnLike" => "user_unlike",
-		"User.Favorite" => "user_favorite",
-		"User.UnFavorite" => "user_unfavorite",
+		"Like.Add" => "like_add",
+		"Like.Remove" => "like_remove",
+		"Like.List" => "like_list",
 
 		"Banners.Get" => "banners_get",
 		"Banner.Read" => "banner_read",

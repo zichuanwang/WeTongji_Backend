@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_school_news, :class_name => "SchoolNews", :join_table => "school_news_users_favorites", :order => "id desc"
   
   has_and_belongs_to_many :favorite_information, :class_name => "Information", :join_table => "user_favorites", :order => "id desc", :association_foreign_key => "out_id", :conditions => "user_favorites.out_model_name = 'Information'"
+  has_many :user_likes
 
   has_one :user_profile
 
