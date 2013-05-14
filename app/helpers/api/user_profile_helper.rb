@@ -79,6 +79,15 @@ module Api
 					end
 					re.add_data("ForStaffs", ex)
 
+					information = user.favorite_information
+					p = params[:P].nil? ? 1 : params[:P].to_i
+					information = information.page(p).per(20)
+					ex = []
+					information.each do |info|
+						ex << ExInformation.init_from_information(info, user)
+					end
+					re.add_data("Information", ex)
+
 					return_response(re)
 				end
 			end

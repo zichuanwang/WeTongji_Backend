@@ -4,8 +4,8 @@ class Activity < ActiveRecord::Base
 	belongs_to :admin, :counter_cache => true
 	belongs_to :organizer
 
-	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "user_favorites", :foreign_key => "out_id", :conditions => { :out_model_name => 'Activity' }
-	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "user_likes", :foreign_key => "out_id", :conditions => { :out_model_name => 'Activity' }
+	has_and_belongs_to_many :users_favorites, :class_name => "User", :join_table => "user_favorites", :foreign_key => "out_id", :conditions => "user_favorites.out_model_name = 'Activity'"
+	has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "user_likes", :foreign_key => "out_id", :conditions => "user_likes.out_model_name = 'Activity'"
 
 	has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "activities_users_schedules"
 
