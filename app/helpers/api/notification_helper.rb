@@ -25,7 +25,7 @@ module Api
 				user = verify_user_authentication
 				if user
 
-					noti = user.notifications.first("id = :id", :id => params[:Id])
+					noti = user.notifications.where("id = :id", :id => params[:Id]).first
 					if noti
 						noti.unread = false
 						noti.save

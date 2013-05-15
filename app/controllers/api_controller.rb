@@ -129,7 +129,7 @@ class ApiController < ApplicationController
 		"Search" => "search",
 
 		"Notifications.Get" => "notifications",
-		"Notification.Read" => "notification_get"
+		"Notification.Read" => "notification_read"
 
 	}
 
