@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
   has_many :friends
 
   has_many :stories, :conditions => { :visiable => true }
+  has_many :notifications
 
   #has_many :events, :order => "id desc"
 

@@ -126,7 +126,10 @@ class ApiController < ApplicationController
 		"Banner.Read" => "banner_read",
 
 		"Home" => "home",
-		"Search" => "search"
+		"Search" => "search",
+
+		"Notifications.Get" => "notifications",
+		"Notification.Read" => "notification_get"
 
 	}
 

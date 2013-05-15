@@ -1,26 +1,40 @@
 module Api
 	module NotificationHelper
-		def get
-			# sort = params[:Sort]
-			# p = params[:P].nil? ? 1 : params[:P].to_i
+		def notifications
+			if verify_action_params(['U', 'S', 'UnRead'])
+				user = verify_user_authentication
+				if user
+					p = params[:P].nil? ? 1 : params[:P].to_i
 
-			# people = Person
-			# if sort
-			# 	people = people.order(sort)
-			# else
-			# 	people = people.order("id desc")
-			# end
+					items = Notification.where("unread = :flag", :flag => params[:UnRead]).order("id desc").page(p).per(12)
 
-			# people = people.page(p).per(20)
+					ex = []
+					items.each do |n|
+						ex << ExNotification.init_from_notification(n)
+					end
+					re = ApiReturn.new("000")
+					re.add_data("NextPager", (p < items.num_pages ? p + 1 : 0))
+					re.add_data("Notifications", ex)
+					return_response(re)
+				end
+			end
+		end
 
-			# ex = []
-			# people.each do |n|
-			# 	ex << ExPerson.init_from_person(n)
-			# end
-			# re = ApiReturn.new("000")
-			# re.add_data("NextPager", (p < people.num_pages ? p + 1 : 0))
-			# re.add_data("People", ex)
-			# return_response(re)
+		def notification_read
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+
+					noti = user.notifications.first("id = :id", :id => params[:Id])
+					if noti
+						noti.unread = false
+						noti.save
+					end
+
+					re = ApiReturn.new("000")
+					return_response(re)
+				end
+			end
 		end
 	end
 end
