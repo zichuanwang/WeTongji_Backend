@@ -43,7 +43,6 @@ class ApiController < ApplicationController
 		"User.Update.Password" => "user_update_password",
 		"User.Reset.Password" => "user_reset_password",
 
-		"User.Find" => "user_find",
 		"User.Update.Profile" => "user_update_profile",
 		"User.Profile" => "profile",
 

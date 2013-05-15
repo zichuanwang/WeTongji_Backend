@@ -10,12 +10,12 @@ module Api
 				re = ApiReturn.new("000")
 
 				if type == "1" || type.nil?
-					in1 = Person.order("id desc").where("name like :key or job_title like :key", :key => "%#{key}%").limit(10)
+					in1 = User.order("id desc").where("name = :key or no = :key", :key => key).limit(10)
 					ex1 = []
 					in1.each do |item|
-						ex1 << ExPerson.init_from_person(item, user)
+						ex1 << ExUser.init_from_user(item)
 					end
-					re.add_data("Person", ex1)
+					re.add_data("Users", ex1)
 				end
 
 				if  type == "2" || type.nil?
@@ -43,6 +43,15 @@ module Api
 						ex4 << ExInformation.init_from_information(item, user)
 					end
 					re.add_data("Information", ex4)
+				end
+
+				if type == "5" || type.nil?
+					in5 = Person.order("id desc").where("name like :key or job_title like :key", :key => "%#{key}%").limit(10)
+					ex5 = []
+					in5.each do |item|
+						ex5 << ExPerson.init_from_person(item, user)
+					end
+					re.add_data("Person", ex5)
 				end
 				
 				return_response(re)
