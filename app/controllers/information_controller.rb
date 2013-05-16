@@ -23,6 +23,15 @@ class InformationController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def top
+    @information = Information.find_by_id(params[:id])
+    authorize! :top, @information
+    Information.update_all(:top => false)
+    @information.top = true
+    @information.save
+    redirect_to :action => "index"
+  end
+
   def create
     @information.admin = current_admin
     @information.check

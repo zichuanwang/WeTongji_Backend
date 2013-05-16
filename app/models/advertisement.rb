@@ -1,4 +1,4 @@
-class Banner < ActiveRecord::Base
+class Advertisement < ActiveRecord::Base
   	attr_accessible :title, :url, :read, :image, :bgcolor
 
   	validates_presence_of :title, :url

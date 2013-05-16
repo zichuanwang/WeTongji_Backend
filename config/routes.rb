@@ -1,20 +1,23 @@
 WetongjiWeb::Application.routes.draw do
-  resources :banners
-
+  resources :advertisements
 
   resources :api_logs
 
 
   post "school_news/approve"
+  post "school_news/top"
   resources :school_news
 
-  post "for_staff/approve"
+  post "for_staffs/approve"
+  post "for_staffs/top"
   resources :for_staffs
 
-  post "around/approve"
+  post "arounds/approve"
+  post "arounds/top"
   resources :arounds
 
   post "club_news/approve"
+  post "club_news/top"
   resources :club_news
 
   resources :people
@@ -22,6 +25,7 @@ WetongjiWeb::Application.routes.draw do
   resources :versions
 
   post "information/approve"
+  post "information/top"
   resources :information
 
   post "sensitives/batch_save"
@@ -63,6 +67,7 @@ WetongjiWeb::Application.routes.draw do
   resources :admins
 
   post "activities/approve"
+  post "activities/top"
   resources :activities
 
   resources :channels

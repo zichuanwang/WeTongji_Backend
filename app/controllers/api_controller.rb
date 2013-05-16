@@ -122,8 +122,7 @@ class ApiController < ApplicationController
 		"Like.Remove" => "like_remove",
 		"Like.List" => "like_list",
 
-		"Banners.Get" => "banners_get",
-		"Banner.Read" => "banner_read",
+		"Advertisement.Read" => "advertisement_read",
 
 		"Home" => "home",
 		"Search" => "search",

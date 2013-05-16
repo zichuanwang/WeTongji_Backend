@@ -23,6 +23,15 @@ class ForStaffsController < ApplicationController
     @for_staff.save
     redirect_to :action => "index"
   end
+  
+  def top
+    @for_staff = ForStaff.find_by_id(params[:id])
+    authorize! :top, @for_staff
+    ForStaff.update_all(:top => false)
+    @for_staff.top = true
+    @for_staff.save
+    redirect_to :action => "index"
+  end
 
   def create
     @for_staff.admin = current_admin

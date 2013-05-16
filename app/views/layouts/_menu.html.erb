@@ -48,14 +48,14 @@
 </li>
 <% end %>
 
-<% if can? :manage, Banner %>
+<% if can? :manage, Advertisement %>
 <li>
-	<%= link_to banners_path, { :title => "推荐" } do %>
-	<span class="icon"><img src="/images/icons/application_double.png" alt="推荐" /></span><span>推荐</span>
+	<%= link_to advertisements_path, { :title => "广告" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="广告" /></span><span>广告</span>
 	<% end %>
 	<ul>
-		<li><%= link_to "所有推荐", banners_path %></li>
-		<li class="last"><%= link_to "创建推荐", new_banner_path %></li>
+		<li><%= link_to "所有广告", advertisements_path %></li>
+		<li class="last"><%= link_to "创建广告", new_advertisement_path %></li>
 	</ul>
 </li>
 <% end %>

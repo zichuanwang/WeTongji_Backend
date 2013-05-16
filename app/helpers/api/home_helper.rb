@@ -5,10 +5,22 @@ module Api
 			# banners
 			user = get_current_user
 
-			banners = Banner.order("id desc").limit(4)
-			ex_banners = []
-			banners.each do |n|
-				ex_banners << ExBanner.init_from_banner(n)
+			ads = Advertisement.order("id desc").limit(2)
+			ex_ads = []
+			ads.each do |n|
+				ex_ads << ExAdvertisement.init_from_advertisement(n)
+			end
+
+			activity = Activity.where('top = 1').order("id desc").first
+			ex_act = nil
+			unless activity.nil?
+				ex_act = ExActivity.init_from_activity(activity)
+			end
+				
+			info = Information.where('top = 1').order('id desc').first
+			ex_info = nil
+			unless info.nil?
+				ex_info = ExInformation.init_from_information(info)
 			end
 
 			# information
@@ -37,7 +49,9 @@ module Api
 			account_pop = Admin.order('information_count desc').where("sign_in_count > 0 and role = 'CommonAdmin'").first
 
 			re = ApiReturn.new("000")
-			re.add_data("Banners", ex_banners)
+			re.add_data("BannerAdvertisements", ex_ads)
+			re.add_data("BannerActivity", ex_act)
+			re.add_data("BannerInformation", ex_info)
 			re.add_data("Information", ex_information)
 			re.add_data("Person", ex_person)
 			re.add_data("Activities", ex_activities)

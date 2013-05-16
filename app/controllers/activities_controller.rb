@@ -24,6 +24,15 @@ class ActivitiesController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def top
+    @activity = Activity.find_by_id(params[:id])
+    authorize! :top, @activity
+    Activity.update_all(:top => false)
+    @activity.top = true
+    @activity.save
+    redirect_to :action => "index"
+  end
+
   def create
     @activity.admin = current_admin
     @activity.check

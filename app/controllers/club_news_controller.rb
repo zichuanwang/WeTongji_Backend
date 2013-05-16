@@ -24,6 +24,15 @@ class ClubNewsController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def top
+    @club_news = ClubNews.find_by_id(params[:id])
+    authorize! :top, @club_news
+    ClubNews.update_all(:top => false)
+    @club_news.top = true
+    @club_news.save
+    redirect_to :action => "index"
+  end
+
   def create
     @club_news.admin = current_admin
     @club_news.category = "社团通告"

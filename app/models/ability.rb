@@ -41,24 +41,29 @@ class Ability
             can :manage, Activity, :admin => { :id => admin.id }
             can :create, Activity
             cannot :approve, Activity
+            cannot :top, Activity
 
             can :manage, SchoolNews if admin.has_permission("SchoolNews")
             can :create, SchoolNews
             cannot :approve, SchoolNews
+            cannot :top, SchoolNews
 
             can :manage, ClubNews, :admin => { :id => admin.id } if admin.has_permission("ClubNews")
             #can :read, ClubNews, :admin => { :id => admin.id }
             can :update, ClubNews, :admin => { :id => admin.id }
             can :create, ClubNews
             cannot :approve, ClubNews
+            cannot :top, ClubNews
 
             can :manage, ForStaff if admin.has_permission("ForStaff")
             can :create, ForStaff
             cannot :approve, ForStaff
+            cannot :top, ForStaff
 
             can :manage, Around if admin.has_permission("Around")
             can :create, Around
             cannot :approve, Around
+            cannot :top, Around
 
             can :manage, Person if admin.has_permission("Person")
             can :create, Person

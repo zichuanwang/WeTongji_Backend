@@ -1,6 +1,6 @@
 <div class="box">
     <div class="title">
-        <h5>所有推荐</h5>
+        <h5>所有广告</h5>
     </div>
     <div class="table">
         <table>
@@ -13,20 +13,20 @@
                 </tr>
             </thead>
             <tbody>
-              <% @banners.each do |item| %>
+              <% @advertisements.each do |item| %>
               <tr>
                   <td><%= item.title %></td>
                   <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
                   <td><%= item.read %></td>
                   <td class="last">
                       <%= link_to '详情', item %>
-                      <%= link_to '编辑', edit_banner_path(item) %>
+                      <%= link_to '编辑', edit_advertisement_path(item) %>
                       <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
                   </td>
               </tr>
               <% end %>
             </tbody>
         </table>
-        <%= paginate @banners %>
+        <%= paginate @advertisements %>
     </div>
 </div>

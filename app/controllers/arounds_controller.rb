@@ -24,6 +24,15 @@ class AroundsController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def top
+    @around = Around.find_by_id(params[:id])
+    authorize! :top, @around
+    Around.update_all(:top => false)
+    @around.top = true
+    @around.save
+    redirect_to :action => "index"
+  end
+
   def create
     @around.admin = current_admin
     @around.category = "周边推荐"

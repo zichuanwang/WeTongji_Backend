@@ -24,6 +24,15 @@ class SchoolNewsController < ApplicationController
     redirect_to :action => "index"
   end
 
+  def top
+    @school_news = SchoolNews.find_by_id(params[:id])
+    authorize! :top, @school_news
+    SchoolNews.update_all(:top => false)
+    @school_news.top = true
+    @school_news.save
+    redirect_to :action => "index"
+  end
+
   def create
     @school_news.admin = current_admin
     @school_news.category = "校园新闻"

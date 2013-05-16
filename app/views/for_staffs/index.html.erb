@@ -25,6 +25,11 @@
                   <td class="last">
                       <%= link_to '详情', item %>
                       <%= link_to '编辑', edit_for_staff_path(item) %>
+
+                      <% if can? :top, ForStaff %>
+                      <%= link_to '置顶', for_staffs_top_path(:id => item.id), confirm: '确认置顶?', method: :post %>
+                      <% end %>
+                      
                       <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
                   </td>
               </tr>
