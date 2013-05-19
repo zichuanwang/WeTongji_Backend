@@ -30,10 +30,26 @@
       </div>
       <div class="field">
         <div class="label">
+          <label>发布者</label>
+        </div>
+        <div class="input">
+          <%= f.text_field :publisher, { :class => "large" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
           <label>题图(300K以内,jpeg格式)</label>
         </div>
         <div class="input input-file">
           <%= f.file_field :image, { :size => "40" } %>
+        </div>
+      </div>
+      <div class="field">
+        <div class="label">
+          <label>背景色</label>
+        </div>
+        <div class="select">
+          <%= f.select :bgcolor, { "Aqua" => "#0cc2cb", "Volcano" => "#ea5251", "Carbon" => "#373737" } %>
         </div>
       </div>
       <div class="buttons">

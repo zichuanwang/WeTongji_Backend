@@ -1,6 +1,6 @@
 class ExClubNews
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar
+				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar, :AccountId
 
 	def self.init_from_club_news(club_news, user = nil)
 		model = ExClubNews.new
@@ -16,6 +16,7 @@ class ExClubNews
 		model.Organizer = club_news.admin.display
 		model.OrganizerAvatar = club_news.admin.icon == nil ? '' : Rails.configuration.host + club_news.admin.icon.url(:medium)
 		model.Images = []
+		model.AccountId = club_news.admin.id
 
 		club_news.information_images.each do |image|
 			unless image.nil?

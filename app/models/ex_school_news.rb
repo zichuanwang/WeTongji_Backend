@@ -1,6 +1,6 @@
 class ExSchoolNews
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar
+				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar, :AccountId
 
 	def self.init_from_school_news(school_news, user = nil)
 		model = ExSchoolNews.new
@@ -18,6 +18,7 @@ class ExSchoolNews
 		model.Organizer = school_news.admin.display
 		model.OrganizerAvatar = school_news.admin.icon == nil ? '' : Rails.configuration.host + school_news.admin.icon.url(:medium)
 		model.Images = []
+		model.AccountId = school_news.admin.id
 
 		school_news.information_images.each do |image|
 			unless image.nil?

@@ -1,7 +1,7 @@
 class Advertisement < ActiveRecord::Base
-  	attr_accessible :title, :url, :read, :image, :bgcolor
+  	attr_accessible :title, :url, :read, :image, :bgcolor, :publisher
 
-  	validates_presence_of :title, :url
+  	validates_presence_of :title, :url, :publisher
 
 	paginates_per 20
 

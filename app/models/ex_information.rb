@@ -1,5 +1,5 @@
 class ExInformation
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite,
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite, :AccountId,
 				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location, :HasTicket, :TicketService
 
 	def self.init_from_information(information, user = nil)
@@ -22,6 +22,7 @@ class ExInformation
 		model.Category = information.category
 		model.Favorite = information.favorite
 		model.Like = information.like
+		model.AccountId = information.admin.id
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = information.admin.display

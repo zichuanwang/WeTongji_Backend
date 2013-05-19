@@ -1,6 +1,6 @@
 class ExForStaff
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar
+				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar, :AccountId
 
 	def self.init_from_for_staff(for_staff, user = nil)
 		model = ExForStaff.new
@@ -18,6 +18,7 @@ class ExForStaff
 		model.Organizer = for_staff.admin.display
 		model.OrganizerAvatar = for_staff.admin.icon == nil ? '' : Rails.configuration.host + for_staff.admin.icon.url(:medium)
 		model.Images = []
+		model.AccountId = for_staff.admin.id
 
 		for_staff.information_images.each do |image|
 			unless image.nil?

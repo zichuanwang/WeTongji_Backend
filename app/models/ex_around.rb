@@ -1,6 +1,6 @@
 class ExAround
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location, :HasTicket
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location, :HasTicket, :AccountId
 
 	def self.init_from_around(around, user = nil)
 		model = ExAround.new
@@ -22,6 +22,7 @@ class ExAround
 		model.Organizer = around.admin.display
 		model.OrganizerAvatar = around.admin.icon == nil ? '' : Rails.configuration.host + around.admin.icon.url(:medium)
 		model.Images = []
+		model.AccountId = around.admin.id
 
 		around.information_images.each do |image|
 			unless image.nil?
