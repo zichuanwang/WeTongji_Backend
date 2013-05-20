@@ -19,13 +19,13 @@ class ExInformation
 		model.Like = information.like
 		model.CanFavorite = true
 		model.CanLike = true
-		model.Image = information.image == nil ? '' : Rails.configuration.host + information.image.url
+		model.Image = !information.image.exists? ? '' : Rails.configuration.host + information.image.url
 		model.Organizer = information.admin.display
-		model.OrganizerAvatar = information.admin.icon == nil ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
+		model.OrganizerAvatar = !information.admin.icon.exists? ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 		model.Images = []
 
 		information.information_images.each do |image|
-			unless image.nil?
+			if !image.nil? && image.file.exists?
 				model.Images << Rails.configuration.host + image.file.url
 			end
 		end

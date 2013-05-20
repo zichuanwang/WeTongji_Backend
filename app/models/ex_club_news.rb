@@ -14,11 +14,11 @@ class ExClubNews
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = club_news.admin.display
-		model.OrganizerAvatar = club_news.admin.icon == nil ? '' : Rails.configuration.host + club_news.admin.icon.url(:medium)
+		model.OrganizerAvatar = !club_news.admin.icon.exists? ? '' : Rails.configuration.host + club_news.admin.icon.url(:medium)
 		model.Images = []
 
 		club_news.club_news_images.each do |image|
-			unless image.nil?
+			if !image.nil? && image.file.exists?
 				model.Images << Rails.configuration.host + image.file.url
 			end
 		end

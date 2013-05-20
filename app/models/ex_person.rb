@@ -15,11 +15,11 @@ class ExPerson
 		model.CanLike = true
 		model.Images = Hash.new
 		model.StudentNO = person.student_no
-		model.Avatar = person.avatar == nil ? '' : Rails.configuration.host + person.avatar.url
+		model.Avatar = !person.avatar.exists? ? '' : Rails.configuration.host + person.avatar.url
 		model.NO = person.no
 
 		person.person_images.each do |image|
-			unless image.nil?
+			if !image.nil? && image.file.exists?
 				model.Images[Rails.configuration.host + image.file.url] = image.title
 			end
 		end

@@ -16,11 +16,11 @@ class ExForStaff
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = for_staff.admin.display
-		model.OrganizerAvatar = for_staff.admin.icon == nil ? '' : Rails.configuration.host + for_staff.admin.icon.url(:medium)
+		model.OrganizerAvatar = !for_staff.admin.icon.exists? ? '' : Rails.configuration.host + for_staff.admin.icon.url(:medium)
 		model.Images = []
 
 		for_staff.for_staff_images.each do |image|
-			unless image.nil?
+			if !image.nil? && image.file.exists?
 				model.Images << Rails.configuration.host + image.file.url
 			end
 		end

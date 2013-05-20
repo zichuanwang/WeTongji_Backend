@@ -9,7 +9,7 @@ class ExNews
 		model.Read = news.read
 		model.CreatedAt = news.created_at
 		model.Category = news.category
-		model.Image = news.image == nil ? '' : Rails.configuration.host + news.image.url
+		model.Image = !news.image.exists? ? '' : Rails.configuration.host + news.image.url
 		model
 	end
 end
