@@ -6,14 +6,14 @@ class ExActivity
 	def self.init_from_activity(activity, user = nil)
 		model = ExActivity.new
 		model.Id = activity.id
-		model.Image = activity.image == nil ? '' : Rails.configuration.host + activity.image.url
+		model.Image = !activity.image.exists? ? '' : Rails.configuration.host + activity.image.url
 		model.Begin = activity.begin
 		model.End = activity.end
 		model.Location = activity.location
 		model.Title = activity.title
 		model.Favorite = activity.favorite
 		model.Organizer = activity.admin.display
-		model.OrganizerAvatar = activity.admin.icon == nil ? '' : Rails.configuration.host + activity.admin.icon.url(:medium)
+		model.OrganizerAvatar = !activity.admin.icon.exists? ? '' : Rails.configuration.host + activity.admin.icon.url(:medium)
 		model.Channel_Id = activity.channel.id
 		model.Status = activity.status
 		model.Description = activity.description#.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
