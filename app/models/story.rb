@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Story < ActiveRecord::Base
-	attr_accessible :body, :title, :user_id, :is_pending, :visiable, :pending_reason, :is_anonymous
+	attr_accessible :body, :title, :user_id, :is_pending, :visiable, :pending_reason, :is_anonymous, :for_admin, :report_count
 	has_many :comments, :conditions => { :out_model_name => "Story", :visiable => true }, :foreign_key => "out_id"
 	belongs_to :user
 	has_attached_file :image

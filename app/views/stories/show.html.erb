@@ -1,0 +1,30 @@
+<div class="box">
+    <div class="title">
+        <h5>查看意见</h5>
+    </div>
+    <div class="table">
+        <table>
+          <tr>
+            <td>用户</td>
+            <td class="last"><%= @story.user.name %></td>
+          </tr>
+          <tr>
+            <td>时间</td>
+            <td class="last"><%= @story.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
+          </tr>
+          <tr>
+            <td>标题</td>
+            <td class="last"><%= @story.title %></td>
+          </tr>
+          <tr>
+            <td>内容</td>
+            <td class="last"><%= @story.body %></td>
+          </tr>
+          <tr>
+            <td>图片</td>
+            <td class="last"><%= image_tag @story.image.url %></td>
+          </tr>
+          
+        </table>
+    </div>
+</div>

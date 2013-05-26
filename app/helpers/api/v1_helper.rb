@@ -21,5 +21,6 @@ module Api
 		include Api::SearchHelper
 		include Api::UserLikesHelper
 		include Api::NotificationHelper
+		include Api::ReportsHelper
 	end
 end

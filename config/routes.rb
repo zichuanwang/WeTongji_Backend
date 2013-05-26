@@ -1,4 +1,8 @@
 WetongjiWeb::Application.routes.draw do
+  resources :reports
+
+  resources :stories
+
   resources :advertisements
 
   resources :api_logs

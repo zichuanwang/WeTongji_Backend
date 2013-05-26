@@ -72,6 +72,17 @@
 </li>
 <% end %>
 
+<% if can? :manage, Story %>
+<li>
+	<%= link_to stories_path, { :title => "意见箱" } do %>
+	<span class="icon"><img src="/images/icons/application_double.png" alt="意见箱" /></span><span>意见箱</span>
+	<% end %>
+	<ul>
+		<li class="last"><%= link_to "所有意见", stories_path %></li>
+	</ul>
+</li>
+<% end %>
+
 <% if can? :manage, User %>
 <li>
 	<%= link_to users_path, { :title => "用户" } do %>
@@ -104,6 +115,7 @@
 		<li><%= link_to "创建频道", new_channel_path %></li>
 		<li><%= link_to "所有频道", channels_path %></li>
 		<li><%= link_to "敏感词列表", sensitives_path %></li>
+		<li><%= link_to "所有举报", reports_path %></li>
 		<li class="last"><%= link_to "API日志", api_logs_path %></li>
 	</ul>
 </li>

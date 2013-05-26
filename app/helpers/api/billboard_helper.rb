@@ -29,6 +29,7 @@ module Api
 					story.body = params[:Body]
 					story.image = params[:Image]
 					story.is_anonymous = params[:Anonymous]
+					story.for_admin = params[:ForAdmin]
 					story.user = user
 					story.check
 					story.save

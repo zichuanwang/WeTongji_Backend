@@ -128,8 +128,9 @@ class ApiController < ApplicationController
 		"Search" => "search",
 
 		"Notifications.Get" => "notifications",
-		"Notification.Read" => "notification_read"
+		"Notification.Read" => "notification_read",
 
+		"Report.Add" => "report_add"
 	}
 
 	def call
