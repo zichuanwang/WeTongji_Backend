@@ -59,10 +59,11 @@ module Api
 				if user
 					ex = []
 					user.friends.each do |item|
-						ex << ExFriend.init_from_friend(item)
+						#ex << ExFriend.init_from_friend(item)
+						ex << ExUser.init_from_user(item.other_user, user)
 					end
 					re = ApiReturn.new("000")
-					re.add_data("Friends", ex)
+					re.add_data("Users", ex)
 					return_response(re)
 				end
 			end
