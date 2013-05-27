@@ -12,4 +12,8 @@ class Friend < ActiveRecord::Base
 			friend_that.destroy
 		end
 	end
+
+	def self.keep?(this_user_id, that_user_id)
+		return Friend.where("user_id = :this_id and other_user_id = :that_id", :this_id => this_user_id, :that_id => that_user_id).exists?
+	end
 end

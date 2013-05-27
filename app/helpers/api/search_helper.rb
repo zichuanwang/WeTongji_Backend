@@ -13,7 +13,7 @@ module Api
 					in1 = User.order("id desc").where("name = :key or no = :key", :key => key).limit(10)
 					ex1 = []
 					in1.each do |item|
-						ex1 << ExUser.init_from_user(item)
+						ex1 << ExUser.init_from_user(item, user)
 					end
 					re.add_data("Users", ex1)
 				end
