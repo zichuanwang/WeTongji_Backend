@@ -19,14 +19,8 @@ class ExSchoolNews
 		model.OrganizerAvatar = !school_news.admin.icon.exists? ? '' : Rails.configuration.host + school_news.admin.icon.url(:medium)
 		model.Images = []
 		model.AccountId = school_news.admin.id
-
-<<<<<<< HEAD
-		school_news.information_images.each do |image|
-			unless image.nil?
-=======
 		school_news.school_news_images.each do |image|
 			if !image.nil? && image.file.exists?
->>>>>>> master
 				model.Images << Rails.configuration.host + image.file.url
 			end
 		end
