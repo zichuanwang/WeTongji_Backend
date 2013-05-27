@@ -19,28 +19,18 @@ class ExAround
 		model.HasTicket = around.has_ticket
 		model.CanFavorite = true
 		model.CanLike = true
-<<<<<<< HEAD
-=======
-		model.Image = !around.image.exists? ? '' : Rails.configuration.host + around.image.url
->>>>>>> master
+		#model.Image = !around.image.exists? ? '' : Rails.configuration.host + around.image.url
 		model.Organizer = around.admin.display
 		model.OrganizerAvatar = !around.admin.icon.exists? ? '' : Rails.configuration.host + around.admin.icon.url(:medium)
 		model.Images = []
 		model.AccountId = around.admin.id
-
-<<<<<<< HEAD
 		around.information_images.each do |image|
-			unless image.nil?
+			unless !image.nil? && image.file.exists?
 				if model.Image.nil?
 					model.Image = Rails.configuration.host + image.file.url
 				else
 					model.Images << Rails.configuration.host + image.file.url
 				end
-=======
-		around.around_images.each do |image|
-			if !image.nil? && image.file.exists?
-				model.Images << Rails.configuration.host + image.file.url
->>>>>>> master
 			end
 		end
 		
