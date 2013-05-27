@@ -19,14 +19,8 @@ class ExForStaff
 		model.OrganizerAvatar = !for_staff.admin.icon.exists? ? '' : Rails.configuration.host + for_staff.admin.icon.url(:medium)
 		model.Images = []
 		model.AccountId = for_staff.admin.id
-
-<<<<<<< HEAD
 		for_staff.information_images.each do |image|
-			unless image.nil?
-=======
-		for_staff.for_staff_images.each do |image|
 			if !image.nil? && image.file.exists?
->>>>>>> master
 				model.Images << Rails.configuration.host + image.file.url
 			end
 		end
