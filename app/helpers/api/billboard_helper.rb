@@ -35,6 +35,7 @@ module Api
 					story.save
 
 					re = ApiReturn.new("000")
+					re.add_data("Story", ExStory.init_from_story(story))
 
 					return_response(re)
 				end

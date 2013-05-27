@@ -117,7 +117,7 @@ module Api
 
 		def user_update_password
 			if verify_action_params(['U', 'S', 'Old', 'New'])
-				psw_old = Decrypt(params[:Old]
+				psw_old = Decrypt(params[:Old])
 				psw_new = Decrypt(params[:New])
 				if User.is_password_valid?(psw_new)
 					user = verify_user_authentication
