@@ -25,7 +25,6 @@ class ExInformation
 		model.AccountId = information.admin.id
 		model.CanFavorite = true
 		model.CanLike = true
-		model.Image = !information.image.exists? ? '' : Rails.configuration.host + information.image.url
 		model.Organizer = information.admin.display
 		model.OrganizerAvatar = !information.admin.icon.exists? ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 		model.Images = []
