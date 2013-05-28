@@ -1,3 +1,4 @@
+# encoding: utf-8
 module Api
 	module FriendsHelper
 		def friend_invite
@@ -7,6 +8,12 @@ module Api
 					invite = FriendInvite.invite(user, params[:UID])
 					if invite
 						invite.save
+						noti = Notification.new
+						noti.title = "#{invite.from_user.name}邀请你加为好友."
+						noti.user = invite.to_user
+						noti.out_id = invite.id
+						noti.out_model_name = "FriendInvite"
+						noti.save
 						re = ApiReturn.new("000")
 					else
 						re = ApiReturn.new("015")
@@ -41,7 +48,7 @@ module Api
 				if user
 					friend_invite = FriendInvite.find(params[:Id])
 					
-					if friend_invite
+					if friend_invite && friend_invite.to_user == user
 						friend_invite.reject
 						re = ApiReturn.new("000")
 					else
@@ -59,7 +66,6 @@ module Api
 				if user
 					ex = []
 					user.friends.each do |item|
-						#ex << ExFriend.init_from_friend(item)
 						ex << ExUser.init_from_user(item.other_user, user)
 					end
 					re = ApiReturn.new("000")
@@ -68,17 +74,14 @@ module Api
 				end
 			end
 		end
-#todo
+
 		def friend_remove
 			if verify_action_params(['U', 'S', 'UID'])
 				user = verify_user_authentication
-				if user
-					ex = []
-					user.friends.each do |item|
-						ex << ExFriend.init_from_friend(item)
-					end
+				other = User.find_by_uid(params[:UID])
+				if user && other
+					Friend.break(user.id, other.id)
 					re = ApiReturn.new("000")
-					re.add_data("Friends", ex)
 					return_response(re)
 				end
 			end
@@ -88,7 +91,6 @@ module Api
 			if verify_action_params(['U', 'S'])
 				user = verify_user_authentication
 				if user
-					#Friend.break(user.id, params[:Id])
 					ex = []
 					user.received_invites.each do |item|
 						ex << ExFriendInvite.init_from_friend_invite(item)
