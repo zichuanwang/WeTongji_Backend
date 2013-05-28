@@ -25,7 +25,7 @@ module Api
 					ex_c = []
 					p = params[:P].nil? ? 1 : params[:P].to_i
 
-					coms = Comment.where("visiable = true and out_model_name => :model and out_id = :id", :model => params[:Model], :id => params[:Id]).order("id desc").page(p).per(5)
+					coms = Comment.where("visiable = true and out_model_name = :model and out_id = :id", :model => params[:Model], :id => params[:Id]).order("id desc").page(p).per(5)
 
 					coms.each do |item|
 						ex_c << ExComment.init_from_comment(item)
