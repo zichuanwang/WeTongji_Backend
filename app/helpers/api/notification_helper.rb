@@ -6,7 +6,7 @@ module Api
 				if user
 					p = params[:P].nil? ? 1 : params[:P].to_i
 
-					items = Notification.where("unread = :flag", :flag => params[:UnRead]).order("id desc").page(p).per(12)
+					items = user.notifications.where("unread = :flag", :flag => params[:UnRead]).order("id desc").page(p).per(12)
 
 					ex = []
 					items.each do |n|
