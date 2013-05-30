@@ -9,6 +9,12 @@ class ExNotification
 		model.UnRead = notification.unread
 		model.SourceId = notification.out_id
 		model.SourceType = notification.out_model_name
+		
+		case model.SourceType
+		when "FriendInvite"
+			model.SourceDetails = ExFriendInvite.init_from_friend_invite(FriendInvite.find_by_id(model.SourceId))
+		end
+
 		model
 	end
 end

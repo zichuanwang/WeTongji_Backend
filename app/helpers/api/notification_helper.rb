@@ -14,14 +14,9 @@ module Api
 
 					ex = []
 					items.each do |n|
-						noti = ExNotification.init_from_notification(n)
-						case n.out_model_name
-						when 'FriendInvite'
-							noti.SourceDetails = ExFriendInvite.init_from_friend_invite(FriendInvite.find_by_id(n.out_id))
-						end
 						n.unread = false
 						n.save
-						ex << noti
+						ex << ExNotification.init_from_notification(n)
 					end
 					re = ApiReturn.new("000")
 					re.add_data("NextPager", (p < items.num_pages ? p + 1 : 0))
