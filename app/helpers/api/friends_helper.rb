@@ -28,13 +28,13 @@ module Api
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					friend_invite = FriendInvite.find(params[:Id])
+					friend_invite = FriendInvite.find_by_id(params[:Id])
 					
 					if friend_invite
 						friend_invite.accept
 						re = ApiReturn.new("000")
 					else
-						re = ApiReturn.new("012")
+						re = ApiReturn.new("016")
 					end
 					
 					return_response(re)
@@ -46,13 +46,13 @@ module Api
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					friend_invite = FriendInvite.find(params[:Id])
+					friend_invite = FriendInvite.find_by_id(params[:Id])
 					
 					if friend_invite && friend_invite.to_user == user
 						friend_invite.reject
 						re = ApiReturn.new("000")
 					else
-						re = ApiReturn.new("012")
+						re = ApiReturn.new("016")
 					end
 					
 					return_response(re)
