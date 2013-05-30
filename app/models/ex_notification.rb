@@ -1,5 +1,5 @@
 class ExNotification
-	attr_accessor :Id, :Title, :Description, :SourceType, :UnRead, :SourceId
+	attr_accessor :Id, :Title, :Description, :SourceType, :UnRead, :SourceId, :SourceDetails
 
 	def self.init_from_notification(notification)
 		model = ExNotification.new
