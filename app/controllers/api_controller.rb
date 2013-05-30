@@ -47,6 +47,7 @@ class ApiController < ApplicationController
 		"User.Profile" => "profile",
 
 		"Friend.Invite" => "friend_invite",
+		"Friend.Invite.Get" => "friend_invite_get",
 		"Friend.Invite.Accept" => "friend_invite_accept",
 		"Friend.Invite.Reject" => "friend_invite_reject",
 		"Friends.Get" => "friends",

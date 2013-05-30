@@ -24,6 +24,22 @@ module Api
 			end
 		end
 
+		def friend_invite_get
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					invite = FriendInvite.find_by_id(params[:Id])
+					if invite && invite.to_user == user
+						re = ApiReturn.new("000")
+						re.add_data("Users", ExUser.init_from_user(invite.to_user, user))
+					else
+						re = ApiReturn.new("017")
+					end
+					return_response(re)
+				end
+			end
+		end
+
 		def friend_invite_accept
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
@@ -34,7 +50,7 @@ module Api
 						friend_invite.accept
 						re = ApiReturn.new("000")
 					else
-						re = ApiReturn.new("016")
+						re = ApiReturn.new("017")
 					end
 					
 					return_response(re)
@@ -52,7 +68,7 @@ module Api
 						friend_invite.reject
 						re = ApiReturn.new("000")
 					else
-						re = ApiReturn.new("016")
+						re = ApiReturn.new("017")
 					end
 					
 					return_response(re)
