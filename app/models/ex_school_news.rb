@@ -1,6 +1,6 @@
 class ExSchoolNews
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar, :AccountId
+				  :CanFavorite, :CanLike, :Organizer, :OrganizerAvatar, :AccountId, :AccountDetails
 
 	def self.init_from_school_news(school_news, user = nil)
 		model = ExSchoolNews.new
@@ -19,6 +19,7 @@ class ExSchoolNews
 		model.OrganizerAvatar = !school_news.admin.icon.exists? ? '' : Rails.configuration.host + school_news.admin.icon.url(:medium)
 		model.Images = []
 		model.AccountId = school_news.admin.id
+		model.AccountDetails = ExAccount.init_from_account(school_news.admin, user)
 		school_news.school_news_images.each do |image|
 			if !image.nil? && image.file.exists?
 				model.Images << Rails.configuration.host + image.file.url

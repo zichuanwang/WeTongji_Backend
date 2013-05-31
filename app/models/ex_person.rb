@@ -1,5 +1,6 @@
 class ExPerson
-	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, :Images, :NO, :Avatar, :StudentNO, :CreatedAt
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, 
+				  :Images, :NO, :Avatar, :StudentNO, :CreatedAt
 
 	def self.init_from_person(person, user = nil)
 		model = ExPerson.new

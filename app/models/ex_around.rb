@@ -1,6 +1,7 @@
 class ExAround
 	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Images, :Source, :Summary, :Read, :Like, :Favorite,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location, :HasTicket, :AccountId
+				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :TicketService, :Location, 
+				  :HasTicket, :AccountId, :AccountDetails
 
 	def self.init_from_around(around, user = nil)
 		model = ExAround.new
@@ -24,6 +25,7 @@ class ExAround
 		model.OrganizerAvatar = !around.admin.icon.exists? ? '' : Rails.configuration.host + around.admin.icon.url(:medium)
 		model.Images = []
 		model.AccountId = around.admin.id
+		model.AccountDetails = ExAccount.init_from_account(around.admin, user)
 		around.information_images.each do |image|
 			unless !image.nil? && image.file.exists?
 				if model.Image.nil?
