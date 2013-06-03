@@ -31,7 +31,7 @@ module Api
 					invite = FriendInvite.find_by_id(params[:Id])
 					if invite && invite.to_user == user
 						re = ApiReturn.new("000")
-						re.add_data("Users", ExUser.init_from_user(invite.to_user, user))
+						re.add_data("User", ExUser.init_from_user(invite.to_user, user))
 					else
 						re = ApiReturn.new("017")
 					end
@@ -46,7 +46,7 @@ module Api
 				if user
 					friend_invite = FriendInvite.find_by_id(params[:Id])
 					
-					if friend_invite
+					if friend_invite && friend_invite.to_user == user
 						friend_invite.accept
 						re = ApiReturn.new("000")
 					else

@@ -131,5 +131,80 @@ module Api
 				end
 			end
 		end
+
+		def activity_invite_get
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					invite = ActivityInvite.find_by_id(params[:Id])
+					if invite && invite.to_user == user
+						re = ApiReturn.new("000")
+						re.add_data("AcivityInvite", ExActivityInvite.init_from_activity_invite(invite))
+					else
+						re = ApiReturn.new("017")
+					end
+					return_response(re)
+				end
+			end
+		end
+
+		def activity_invite
+			if verify_action_params(['U', 'S', 'UID', 'Id'])
+				user = verify_user_authentication
+				if user
+					invite = ActivityInvite.invite(user, params[:UID], params[:Id])
+					if invite
+						invite.save
+						noti = Notification.new
+						noti.title = "#{invite.from_user.name}邀请你关注活动."
+						noti.user = invite.to_user
+						noti.out_id = invite.id
+						noti.out_model_name = "ActivityInvite"
+						noti.save
+						re = ApiReturn.new("000")
+					else
+						re = ApiReturn.new("015")
+					end
+					
+					return_response(re)
+				end
+			end
+		end
+
+		def activity_invite_accept
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					invite = ActivityInvite.find_by_id(params[:Id])
+					
+					if invite && invite.to_user == user
+						invite.accept
+						re = ApiReturn.new("000")
+					else
+						re = ApiReturn.new("017")
+					end
+					
+					return_response(re)
+				end
+			end
+		end
+
+		def activity_invite_reject
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					invite = ActivityInvite.find_by_id(params[:Id])
+					
+					if invite && invite.to_user == user
+						invite.reject
+						re = ApiReturn.new("000")
+					else
+						re = ApiReturn.new("017")
+					end
+					
+					return_response(re)
+				end
+			end
+		end
 	end
 end

@@ -23,6 +23,10 @@ class ApiController < ApplicationController
 
 		"Activity.Schedule" => "activity_schedule",
 		"Activity.UnSchedule" => "activity_unschedule",
+		"Activity.Invite" => "activity_invite",
+		"Activity.Invite.Get" => "activity_invite_get",
+		"Activity.Invite.Accept" => "activity_invite_accept",
+		"Activity.Invite.Reject" => "activity_invite_reject",
 
 		"Favorite.Get" => "favorite",
 		"Schedule.Get" => "schedule",
