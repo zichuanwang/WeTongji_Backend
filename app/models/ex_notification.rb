@@ -15,6 +15,8 @@ class ExNotification
 			model.SourceDetails = ExFriendInvite.init_from_friend_invite(FriendInvite.find_by_id(model.SourceId))
 		when "ActivityInvite"
 			model.SourceDetails = ExActivityInvite.init_from_activity_invite(ActivityInvite.find_by_id(model.SourceId))
+		when "CourseInvite"
+			model.SourceDetails = ExCourseInvite.init_from_course_invite(CourseInvite.find_by_id(model.SourceId))
 		end
 
 		model

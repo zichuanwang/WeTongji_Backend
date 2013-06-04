@@ -2,6 +2,7 @@ require 'csv'
 class SeleCourse < ActiveRecord::Base
 	validates_presence_of :course_no, :student_no, :location, :teacher, :week_type, :week_day, :section_start, :section_end
 	paginates_per 20
+  has_and_belongs_to_many :users_schedules, :class_name => "User", :join_table => "sele_courses_users_schedules"
 
 	def self.import(file_path)
 		courses = []
@@ -24,6 +25,18 @@ class SeleCourse < ActiveRecord::Base
 		end
 
   		courses
+  end
+
+  def user_schedule(user)
+    if user && !self.users_schedules.exists?(user)
+      self.users_schedules << user
+    end
+  end
+
+  def user_unschedule(user)
+    if user && self.users_schedules.exists?(user)
+      self.users_schedules.delete(user)
+    end
   end
 
 end

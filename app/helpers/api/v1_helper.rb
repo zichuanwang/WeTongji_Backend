@@ -23,5 +23,6 @@ module Api
 		include Api::NotificationHelper
 		include Api::ReportsHelper
 		include Api::AccountsHelper
+		include Api::CoursesHelper
 	end
 end
