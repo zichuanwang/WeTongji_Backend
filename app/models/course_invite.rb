@@ -8,7 +8,6 @@ class CourseInvite < ActiveRecord::Base
 	def accept
 		if accepted_at.nil? && rejected_at.nil?
 			self.accepted_at = Time.now
-			#add this course to to_user schedule
 			self.sele_course.user_schedule(self.to_user)
 			self.save
 		end
@@ -23,6 +22,7 @@ class CourseInvite < ActiveRecord::Base
 
 	def self.invite(from_user, to, sele_course_id)
 		user = User.find_by_uid(to)
+		
 		invite = CourseInvite.new
 		invite.from = from_user.id
 		invite.from_name = from_user.name

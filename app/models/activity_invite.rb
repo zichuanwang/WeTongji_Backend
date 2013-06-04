@@ -7,9 +7,7 @@ class ActivityInvite < ActiveRecord::Base
 
 	def accept
 		if accepted_at.nil? && rejected_at.nil?
-			#Friend.connect(self.from_user.id, self.to_user.id)
 			self.accepted_at = Time.now
-			#add this activity to to_user schedule
 			self.activity.user_schedule(self.to_user)
 			self.save
 		end
@@ -24,6 +22,7 @@ class ActivityInvite < ActiveRecord::Base
 
 	def self.invite(from_user, to, activity_id)
 		user = User.find_by_uid(to)
+
 		invite = ActivityInvite.new
 		invite.from = from_user.id
 		invite.from_name = from_user.name
