@@ -32,7 +32,7 @@ class Schedule
 		sele_course_instances = []
 		#got take effect sele course first
 		sele_courses = SeleCourse.where("student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
-
+		sele_courses += user.schedule_sele_courses.where(":now between begin and end", :now => Time.now)
 		#fetch days and search sele course at that day
 		day = begin_at.to_datetime
 		while day <= end_at.to_datetime
@@ -64,6 +64,8 @@ class Schedule
 			#get sele course at that day
 			sele_courses = SeleCourse.where("student_no = :no and :now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
 				:no => user.no, :now => Time.now, :week_day => week_day, :week_type => week_type)
+			sele_courses += user.schedule_sele_courses.where(":now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
+				:now => Time.now, :week_day => week_day, :week_type => week_type)
 
 			#generate sele course instance by day
 			sele_courses.each do |sele|
