@@ -8,8 +8,8 @@ class ExLike
 		case model.Model
 		when "Activity"
 			model.ModelDetails = ExActivity.init_from_activity(Activity.find_by_id(model.Id), user)
-		when "News"
-			model.ModelDetails = ExNews.init_from_news(News.find_by_id(model.Id))
+		when "Information"
+			model.ModelDetails = ExInformation.init_from_information(Information.find_by_id(model.Id), user)
 		when "Story"
 			model.ModelDetails = ExStory.init_from_story(Story.find_by_id(model.Id))
 		when "Account"

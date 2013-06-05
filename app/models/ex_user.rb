@@ -1,7 +1,7 @@
 class ExUser
 	attr_accessor :UID, :NO, :Name, :DisplayName, :Avatar, :Phone, :Email, :Major, 
 								:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
-								:Room, :RoomNO, :UserType, :Words, :IsFriend
+								:Room, :RoomNO, :UserType, :Words, :IsFriend, :LikeCount, :FriendCount
 
 	def self.init_from_user(user, current_user = nil)
 		model = ExUser.new
@@ -27,6 +27,16 @@ class ExUser
 			model.RoomNO = user.room_no
 			model.UserType = user.user_type
 			model.Words = user.words
+
+			model.LikeCount = {}
+			model.LikeCount["User"] = user.user_likes.where("out_model_name = 'User'").count
+			model.LikeCount["Activity"] = user.user_likes.where("out_model_name = 'Activity'").count
+			model.LikeCount["Story"] = user.user_likes.where("out_model_name = 'Story'").count
+			model.LikeCount["Information"] = user.user_likes.where("out_model_name = 'Information'").count
+			model.LikeCount["Account"] = user.user_likes.where("out_model_name = 'Account'").count
+			model.LikeCount["Person"] = user.user_likes.where("out_model_name = 'Person'").count
+
+			model.FriendCount = user.friends.count
 
 			model.IsFriend = false
 			unless current_user.nil?
