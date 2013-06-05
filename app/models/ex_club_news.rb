@@ -10,7 +10,7 @@ class ExClubNews
 		model.Read = club_news.read
 		model.CreatedAt = club_news.created_at
 		model.Favorite = club_news.favorite
-		model.Like = club_news.like
+		model.Like = UserLike.get_count("Information", model.Id)
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = club_news.admin.display

@@ -12,7 +12,7 @@ class ExSchoolNews
 		model.Read = school_news.read
 		model.CreatedAt = school_news.created_at
 		model.Favorite = school_news.favorite
-		model.Like = school_news.like
+		model.Like = UserLike.get_count("Information", model.Id)
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = school_news.admin.display

@@ -1,7 +1,7 @@
 class ExUser
 	attr_accessor :UID, :NO, :Name, :DisplayName, :Avatar, :Phone, :Email, :Major, 
-								:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
-								:Room, :RoomNO, :UserType, :Words, :IsFriend, :LikeCount, :FriendCount
+				:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
+				:Room, :RoomNO, :UserType, :Words, :IsFriend, :LikeCount, :FriendCount, :Like
 
 	def self.init_from_user(user, current_user = nil)
 		model = ExUser.new
@@ -27,6 +27,7 @@ class ExUser
 			model.RoomNO = user.room_no
 			model.UserType = user.user_type
 			model.Words = user.words
+			model.Like = UserLike.get_count("User", user.id)
 
 			model.LikeCount = {}
 			model.LikeCount["User"] = user.user_likes.where("out_model_name = 'User'").count

@@ -12,7 +12,7 @@ class ExForStaff
 		model.Read = for_staff.read
 		model.CreatedAt = for_staff.created_at
 		model.Favorite = for_staff.favorite
-		model.Like = for_staff.like
+		model.Like = UserLike.get_count("Information", model.Id)
 		model.CanFavorite = true
 		model.CanLike = true
 		model.Organizer = for_staff.admin.display

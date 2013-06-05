@@ -1,5 +1,5 @@
 class ExStory
-	attr_accessor :Id, :Title, :Image, :Body, :CommentsCount, :PublishedAt, :UserName, :UserDetails
+	attr_accessor :Id, :Title, :Image, :Body, :CommentsCount, :PublishedAt, :UserName, :UserDetails, :Like
 	def self.init_from_story(story)
 		model = ExStory.new
 		unless story.nil?
@@ -11,6 +11,7 @@ class ExStory
 			model.Image = story.image == nil ? '' : Rails.configuration.host + story.image.url
 			model.UserName = nil
 			model.UserDetails = nil
+			model.Like = UserLike.get_count("Story", model.Id)
 			unless story.is_anonymous
 				model.UserName = story.user.display_name
 				model.UserDetails = ExUser.init_from_user(story.user)

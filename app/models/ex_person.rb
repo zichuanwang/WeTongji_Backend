@@ -12,7 +12,7 @@ class ExPerson
 			model.Words = person.words
 			model.JobTitle = person.job_title
 			model.Favorite = person.favorite
-			model.Like = person.like
+			model.Like = UserLike.get_count("Person", model.Id)
 			model.CanFavorite = true
 			model.CanLike = true
 			model.Images = Hash.new

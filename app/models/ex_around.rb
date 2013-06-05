@@ -16,7 +16,7 @@ class ExAround
 		model.Read = around.read
 		model.CreatedAt = around.created_at
 		model.Favorite = around.favorite
-		model.Like = around.like
+		model.Like = UserLike.get_count("Information", model.Id)
 		model.HasTicket = around.has_ticket
 		model.CanFavorite = true
 		model.CanLike = true

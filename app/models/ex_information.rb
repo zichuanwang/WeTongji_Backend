@@ -23,7 +23,7 @@ class ExInformation
 			model.CreatedAt = information.created_at
 			model.Category = information.category
 			model.Favorite = information.favorite
-			model.Like = information.like
+			model.Like = UserLike.get_count("Information", model.Id)
 			model.AccountId = information.admin.id
 			model.AccountDetails = ExAccount.init_from_account(information.admin, user)
 			model.CanFavorite = true
@@ -43,7 +43,7 @@ class ExInformation
 				model.CanLike = information.can_like(user)
 			end
 		end
-		
+
 		model
 	end
 end
