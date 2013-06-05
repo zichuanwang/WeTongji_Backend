@@ -43,10 +43,10 @@ module Api
 		end
 
 		def like_list
-			if verify_action_params(['U', 'S'])
+			if verify_action_params(['U', 'S', 'Model'])
 				user = verify_user_authentication
 				if user
-					list = user.user_likes
+					list = user.user_likes.where("out_model_name = :name", :name => params[:Model])
 					p = params[:P].nil? ? 1 : params[:P].to_i
 					list = list.page(p).per(20)
 					ex = []
