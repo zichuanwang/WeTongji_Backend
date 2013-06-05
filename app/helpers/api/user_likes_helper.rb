@@ -7,6 +7,14 @@ module Api
 					user_like = UserLike.new
 					user_like.out_id = params[:Id]
 					user_like.out_model_name = params[:Model]
+					case user_like.out_model_name
+					when "User"
+						m = User.find_by_uid(params[:Id])
+						user_like.out_id = 0
+						unless m.nil?
+							user_like.out_id = m.id
+						end
+					end
 					user_like.user_id = user.id
 					user_like.save
 					
