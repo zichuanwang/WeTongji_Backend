@@ -43,7 +43,7 @@ module Api
 					list = list.page(p).per(20)
 					ex = []
 					list.each do |l|
-						ex << ExLike.init_from_like(l)
+						ex << ExLike.init_from_like(l, user)
 					end
 
 					re = ApiReturn.new("000")
