@@ -15,7 +15,7 @@ class ExLike
 		when "Account"
 			model.ModelDetails = ExAccount.init_from_account(Admin.find_by_id(model.Id), user)
 		when "User"
-			model.ModelDetails = ExUser.init_from_user(User.find_by_uid(model.Id), user)
+			model.ModelDetails = ExUser.init_from_user(User.find_by_id(model.Id), user)
 		when "Person"
 			model.ModelDetails = ExPerson.init_from_person(Person.find_by_id(model.Id), user)
 		end
