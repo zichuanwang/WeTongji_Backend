@@ -13,7 +13,7 @@ class ExLike
 		when "Story"
 			model.ModelDetails = ExStory.init_from_story(Story.find_by_id(model.Id))
 		when "Account"
-			model.ModelDetails = ExAccount.init_from_account(Account.find_by_id(model.Id), user)
+			model.ModelDetails = ExAccount.init_from_account(Admin.find_by_id(model.Id), user)
 		when "User"
 			model.ModelDetails = ExUser.init_from_user(User.find_by_uid(model.Id), user)
 		when "Person"
