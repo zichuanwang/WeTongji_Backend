@@ -5,33 +5,35 @@ class ExUser
 
 	def self.init_from_user(user, current_user = nil)
 		model = ExUser.new
-		model.UID = user.uid
-		model.DisplayName = user.display_name
-		model.Avatar = !user.avatar.exists? ? '' : Rails.configuration.host + user.avatar.url
-		model.Phone = user.phone
-		model.Email = user.email
-		model.Name = user.name
-		model.NO = user.no
-		model.Major = user.major
-		model.NativePlace = user.native_place
-		model.Degree = user.degree
-		model.Gender = user.gender
-		model.Year = user.year
-		model.Birthday = user.birthday
-		model.Plan = user.plan
-		model.SinaWeibo = user.sina_weibo
-		model.QQ = user.qq
-		model.Department = user.department
-		model.Room = user.room
-		model.RoomNO = user.room_no
-		model.UserType = user.user_type
-		model.Words = user.words
+		unless user.nil?
+			model.UID = user.uid
+			model.DisplayName = user.display_name
+			model.Avatar = !user.avatar.exists? ? '' : Rails.configuration.host + user.avatar.url
+			model.Phone = user.phone
+			model.Email = user.email
+			model.Name = user.name
+			model.NO = user.no
+			model.Major = user.major
+			model.NativePlace = user.native_place
+			model.Degree = user.degree
+			model.Gender = user.gender
+			model.Year = user.year
+			model.Birthday = user.birthday
+			model.Plan = user.plan
+			model.SinaWeibo = user.sina_weibo
+			model.QQ = user.qq
+			model.Department = user.department
+			model.Room = user.room
+			model.RoomNO = user.room_no
+			model.UserType = user.user_type
+			model.Words = user.words
 
-		model.IsFriend = false
-		unless current_user.nil?
-			model.IsFriend = Friend.keep?(current_user.id, user.id)
+			model.IsFriend = false
+			unless current_user.nil?
+				model.IsFriend = Friend.keep?(current_user.id, user.id)
+			end
 		end
-
+		
 		model
 	end
 
