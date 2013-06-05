@@ -11,7 +11,7 @@ class ExLike
 		when "News"
 			model.ModelDetails = ExNews.init_from_news(News.find_by_id(model.Id))
 		when "Story"
-			model.ModelDetails = ExStory.init_from_story(Story.find_by_id(model.Id), user)
+			model.ModelDetails = ExStory.init_from_story(Story.find_by_id(model.Id))
 		when "Account"
 			model.ModelDetails = ExAccount.init_from_account(Story.find_by_id(model.Id), user)
 		when "User"
