@@ -150,23 +150,23 @@ module Api
 		end
 
 		def activity_invite
-			if verify_action_params(['U', 'S', 'UID', 'Id'])
+			if verify_action_params(['U', 'S', 'UID', 'Ids'])
 				user = verify_user_authentication
 				if user
-					invite = ActivityInvite.invite(user, params[:UID], params[:Id])
-					if invite
-						invite.save
-						noti = Notification.new
-						noti.title = "#{invite.from_user.name}邀请你关注活动."
-						noti.user = invite.to_user
-						noti.out_id = invite.id
-						noti.out_model_name = "ActivityInvite"
-						noti.save
-						re = ApiReturn.new("000")
-					else
-						re = ApiReturn.new("015")
+					params[:Ids].split(',').each do |id|
+						invite = ActivityInvite.invite(user, params[:UID], id)
+						if invite
+							invite.save
+							noti = Notification.new
+							noti.title = "#{invite.from_user.name}邀请你关注活动."
+							noti.user = invite.to_user
+							noti.out_id = invite.id
+							noti.out_model_name = "ActivityInvite"
+							noti.save
+						end
 					end
-					
+
+					re = ApiReturn.new("000")
 					return_response(re)
 				end
 			end
