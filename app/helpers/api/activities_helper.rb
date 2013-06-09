@@ -150,11 +150,11 @@ module Api
 		end
 
 		def activity_invite
-			if verify_action_params(['U', 'S', 'UID', 'Ids'])
+			if verify_action_params(['U', 'S', 'UIDs', 'Id'])
 				user = verify_user_authentication
 				if user
-					params[:Ids].split(',').each do |id|
-						invite = ActivityInvite.invite(user, params[:UID], id)
+					params[:UIDs].split(',').each do |uid|
+						invite = ActivityInvite.invite(user, uid, params[:Id])
 						if invite
 							invite.save
 							noti = Notification.new

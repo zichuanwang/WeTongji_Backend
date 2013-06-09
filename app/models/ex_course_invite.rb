@@ -3,14 +3,16 @@ class ExCourseInvite
 
 	def self.init_from_course_invite(course_invite)
 		model = ExCourseInvite.new
-		model.Id = course_invite.id
-		model.From = course_invite.from_name
-		model.To = course_invite.to_name
-		model.SentAt = course_invite.created_at
-		model.AcceptedAt = course_invite.accepted_at
-		model.RejectedAt = course_invite.rejected_at
-		model.UserDetails = ExUser.init_from_user(course_invite.from_user, course_invite.to_user)
-		model.CourseDetails = ExSeleCourse.init_from_sele_course(course_invite.sele_course)
+		unless course_invite.nil?
+			model.Id = course_invite.id
+			model.From = course_invite.from_name
+			model.To = course_invite.to_name
+			model.SentAt = course_invite.created_at
+			model.AcceptedAt = course_invite.accepted_at
+			model.RejectedAt = course_invite.rejected_at
+			model.UserDetails = ExUser.init_from_user(course_invite.from_user, course_invite.to_user)
+			model.CourseDetails = ExSeleCourse.init_from_sele_course(course_invite.sele_course)
+		end
 		model
 	end
 end
