@@ -1,14 +1,19 @@
 class CourseInvite < ActiveRecord::Base
-  	attr_accessible :accepted_at, :sele_course_id, :from, :from_name, :rejected_at, :to, :to_name
+  	attr_accessible :accepted_at, :course_no, :student_no, :from, :from_name, :rejected_at, :to, :to_name
 	
 	belongs_to :from_user, :class_name => "User", :foreign_key => "from"
 	belongs_to :to_user, :class_name => "User", :foreign_key => "to"
-	belongs_to :sele_course
 
 	def accept
 		if accepted_at.nil? && rejected_at.nil?
 			self.accepted_at = Time.now
-			self.sele_course.user_schedule(self.to_user)
+
+			course_list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => self.student_no, :c_no => self.course_no)
+			course_list.each do |course|
+				course.user_schedule(self.to_user)
+				course.save
+			end
+
 			self.save
 		end
 	end
@@ -20,16 +25,19 @@ class CourseInvite < ActiveRecord::Base
 		end
 	end
 
-	def self.invite(from_user, to, sele_course_id)
+	def self.invite(from_user, to, no)
 		user = User.find_by_uid(to)
-		
-		invite = CourseInvite.new
-		invite.from = from_user.id
-		invite.from_name = from_user.name
-		invite.to = user.id
-		invite.to_name = user.name
-		invite.sele_course_id = sele_course_id
 
+		unless user.nil?
+			invite = CourseInvite.new
+			invite.from = from_user.id
+			invite.from_name = from_user.name
+			invite.to = user.id
+			invite.to_name = user.name
+			invite.course_no = no
+			invite.student_no = from_user.no
+		end
+		
 		return invite
 	end
 end

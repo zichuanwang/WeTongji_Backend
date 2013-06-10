@@ -2,11 +2,11 @@
 module Api
 	module CoursesHelper
 		def course_schedule
-			if verify_action_params(['U', 'S', 'Id'])
+			if verify_action_params(['U', 'S', 'NO'])
 				user = verify_user_authentication
 				if user
-					course = SeleCourse.find_by_id(params[:Id])
-					if course
+					course_list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => user.no, :c_no => params[:NO])
+					course_list.each do |course|
 						course.user_schedule(user)
 						course.save
 					end
@@ -17,11 +17,11 @@ module Api
 		end
 
 		def course_unschedule
-			if verify_action_params(['U', 'S', 'Id'])
+			if verify_action_params(['U', 'S', 'NO'])
 				user = verify_user_authentication
 				if user
-					course = SeleCourse.find_by_id(params[:Id])
-					if course
+					course_list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => user.no, :c_no => params[:NO])
+					course_list.each do |course|
 						course.user_unschedule(user)
 						course.save
 					end
@@ -48,11 +48,11 @@ module Api
 		end
 
 		def course_invite
-			if verify_action_params(['U', 'S', 'UIDs', 'Id'])
+			if verify_action_params(['U', 'S', 'UIDs', 'NO'])
 				user = verify_user_authentication
 				if user
 					params[:UIDs].split(',').each do |uid|
-						invite = CourseInvite.invite(user, uid, params[:Id])
+						invite = CourseInvite.invite(user, uid, params[:NO])
 						if invite
 							invite.save
 							noti = Notification.new
