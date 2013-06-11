@@ -64,8 +64,6 @@ class Schedule
 			#get sele course at that day
 			sele_courses = SeleCourse.where("student_no = :no and :now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
 				:no => user.no, :now => Time.now, :week_day => week_day, :week_type => week_type)
-			sele_courses += user.schedule_sele_courses.where(":now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
-				:now => Time.now, :week_day => week_day, :week_type => week_type)
 
 			#generate sele course instance by day
 			sele_courses.each do |sele|
@@ -76,6 +74,32 @@ class Schedule
 				i.section_end = sele.section_end
 				i.teacher = sele.teacher
 				i.day = day
+				i.is_self_schedule = false
+
+				c = Course.find_by_no(sele.course_no)
+				if c
+					i.hours = c.hours
+					i.point = c.point
+					i.required = c.required
+					i.name = c.name
+				end
+
+				sele_course_instances << i
+			end
+
+			sele_courses_1 = user.schedule_sele_courses.where(":now between begin and end and week_day = :week_day and (week_type = :week_type or week_type = '全')", 
+				:now => Time.now, :week_day => week_day, :week_type => week_type)
+
+			#generate sele course instance by day
+			sele_courses_1.each do |sele|
+				i = SeleCourseInstance.new
+				i.no = sele.course_no
+				i.location = sele.location
+				i.section_start = sele.section_start
+				i.section_end = sele.section_end
+				i.teacher = sele.teacher
+				i.day = day
+				i.is_self_schedule = true
 
 				c = Course.find_by_no(sele.course_no)
 				if c
