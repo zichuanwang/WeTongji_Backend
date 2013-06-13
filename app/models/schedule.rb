@@ -74,7 +74,7 @@ class Schedule
 				i.section_end = sele.section_end
 				i.teacher = sele.teacher
 				i.day = day
-				i.is_self_schedule = false
+				i.is_audit = false
 
 				c = Course.find_by_no(sele.course_no)
 				if c
@@ -99,7 +99,7 @@ class Schedule
 				i.section_end = sele.section_end
 				i.teacher = sele.teacher
 				i.day = day
-				i.is_self_schedule = true
+				i.is_audit = true
 
 				c = Course.find_by_no(sele.course_no)
 				if c

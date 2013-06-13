@@ -1,5 +1,5 @@
 class ExSeleCourseInstance
-	attr_accessor :NO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, :Point, :Required, :Day, :IsSelfSechedule
+	attr_accessor :NO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, :Point, :Required, :Day, :IsAudit
 
 	def self.init_from_sele_course_instance(instance, self_schedule = false)
 		model = ExSeleCourseInstance.new
@@ -15,7 +15,7 @@ class ExSeleCourseInstance
 			model.SectionEnd = instance.section_end
 			model.Required = instance.required
 			model.Day = instance.day
-			model.IsSelfSechedule = instance.is_self_schedule
+			model.IsAudit = instance.is_audit
 		end
 
 		model
