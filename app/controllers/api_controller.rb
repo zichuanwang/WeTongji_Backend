@@ -141,7 +141,8 @@ class ApiController < ApplicationController
 
 		"Notifications.Get" => "notifications",
 
-		"Report.Add" => "report_add"
+		"Report.Add" => "report_add",
+		"SchoolYear.Setting" => "school_year_setting"
 	}
 
 	def call

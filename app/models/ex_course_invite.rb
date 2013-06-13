@@ -11,7 +11,7 @@ class ExCourseInvite
 			model.AcceptedAt = course_invite.accepted_at
 			model.RejectedAt = course_invite.rejected_at
 			model.UserDetails = ExUser.init_from_user(course_invite.from_user, course_invite.to_user)
-			model.CourseDetails = ExCourseSetting.init_from_course_setting(SeleCourse.get_timetable(course_invite.student_no, course_invite.course_no))
+			model.CourseDetails = ExCourse.init_from_course(Course.find_by_no(course_invite.course_no))
 		end
 		model
 	end

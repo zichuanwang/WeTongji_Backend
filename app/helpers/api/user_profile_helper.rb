@@ -131,7 +131,7 @@ module Api
 						ex << ExExam.init_from_exam_instance(exam)
 					end
 
-					courses = Schedule.get_courses_by_user(user, params[:Begin], params[:End])
+					courses = Schedule.get_select_course_instances_by_user(user, params[:Begin], params[:End])
 					ci = []
 					courses.each do |course|
 						ci << ExSeleCourseInstance.init_from_sele_course_instance(course)

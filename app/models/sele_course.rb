@@ -39,32 +39,4 @@ class SeleCourse < ActiveRecord::Base
     end
   end
 
-  def self.get_timetable(student_no, course_no)
-    setting = CourseSetting.new
-    setting.no = course_no
-    c = Course.find_by_no(course_no)
-    if c
-      setting.hours = c.hours
-      setting.point = c.point
-      setting.required = c.required
-      setting.name = c.name
-      setting.teacher = c.teacher
-    end
-    setting.timetable = []
-
-    list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => student_no, :c_no => course_no)
-
-    list.each do |item|
-      tb = CourseSettingTimetable.new
-      tb.section_start = item.section_start
-      tb.section_end = item.section_end
-      tb.week_day = item.week_day
-      tb.week_type = item.week_type
-      tb.location = item.location
-      setting.timetable << tb
-    end
-
-    setting
-  end
-
 end

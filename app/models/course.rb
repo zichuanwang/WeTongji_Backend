@@ -4,6 +4,7 @@ class Course < ActiveRecord::Base
 	validates_presence_of :name, :no, :teacher, :point, :hours, :required
 	validates_uniqueness_of :no
 	paginates_per 20
+  has_many :course_sections, :foreign_key => "course_no"
 
 	def self.import(file_path)
 		courses = []
