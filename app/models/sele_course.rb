@@ -55,7 +55,7 @@ class SeleCourse < ActiveRecord::Base
     list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => student_no, :c_no => course_no)
 
     list.each do |item|
-      tb = CourseSettingTimeTable.new
+      tb = CourseSettingTimetable.new
       tb.section_start = item.section_start
       tb.section_end = item.section_end
       tb.week_day = item.week_day
@@ -63,7 +63,7 @@ class SeleCourse < ActiveRecord::Base
       tb.location = item.location
       setting.timetable << tb
     end
-    
+
     setting
   end
 
