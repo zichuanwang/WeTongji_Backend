@@ -9,17 +9,17 @@ class ApiController < ApplicationController
 	METHODS = {
 		"System.Version" => "version",
 
-		"Channels.Get" => "channels",
-		"Channel.Fovorite" => "channel_favorite",
-		"Channel.UnFavorite" => "channel_unfavorite",
+		#"Channels.Get" => "channels",
+		#"Channel.Fovorite" => "channel_favorite",
+		#"Channel.UnFavorite" => "channel_unfavorite",
 
 		"Activities.Get" => "activities",
 
 		# delete at 2.0 api support end
-		"Activity.Favorite" => "activity_favorite",
-		"Activity.UnFavorite" => "activity_unfavorite",
-		"Activity.Like" => "activity_like",
-		"Activity.UnLike" => "activity_unlike",
+		#"Activity.Favorite" => "activity_favorite",
+		#"Activity.UnFavorite" => "activity_unfavorite",
+		#"Activity.Like" => "activity_like",
+		#"Activity.UnLike" => "activity_unlike",
 
 		"Activity.Schedule" => "activity_schedule",
 		"Activity.UnSchedule" => "activity_unschedule",

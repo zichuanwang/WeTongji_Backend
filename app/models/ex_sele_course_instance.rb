@@ -1,7 +1,7 @@
 class ExSeleCourseInstance
 	attr_accessor :NO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, :Point, :Required, :Day, :IsAudit
 
-	def self.init_from_sele_course_instance(instance, self_schedule = false)
+	def self.init_from_sele_course_instance(instance)
 		model = ExSeleCourseInstance.new
 
 		unless instance.nil?
