@@ -14,8 +14,8 @@ class ExCourseSetting
 			ex.Required = setting.required
 			ex.Timetable = []
 
-			setting.Timetable.each do |item|
-				setting.Timetable << ExCourseSettingTimeTable.init_from_course_setting_timetable(item)
+			setting.timetable.each do |item|
+				ex.Timetable << ExCourseSettingTimetable.init_from_course_setting_timetable(item)
 			end
 		end
 
