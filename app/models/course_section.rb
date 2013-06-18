@@ -1,5 +1,5 @@
 class CourseSection < ActiveRecord::Base
-  attr_accessible :location, :course_no, :section_end, :section_start, :week_day, :week_type, :begin, :end
+  attr_accessible :location, :course_no, :section_end, :section_start, :week_day, :week_type
 
   def self.rebuild
   	Course.all.each do |c|
@@ -14,8 +14,6 @@ class CourseSection < ActiveRecord::Base
   				section.week_day = s.week_day
   				section.section_start = s.section_start
   				section.section_end = s.section_end
-  				section.begin = s.begin
-  				section.end = s.end
   				section.save
   				p "build timetable for #{c.no}"
   			end

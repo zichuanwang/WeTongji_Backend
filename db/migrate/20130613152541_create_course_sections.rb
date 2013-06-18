@@ -7,8 +7,6 @@ class CreateCourseSections < ActiveRecord::Migration
       t.string :week_type
       t.string :week_day
       t.string :location
-      t.datetime :begin
-      t.datetime :end
 
       t.timestamps
     end
