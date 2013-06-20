@@ -43,7 +43,7 @@ class ApiController < ApplicationController
 		"News.Get" => "news_get",
 		"News.Read" => "news_read",
 
-		"TimeTable.Get" => "timetable",
+		#"TimeTable.Get" => "timetable",
 
 		"User.Active" => "user_active",
 		"User.LogOn" => "user_logon",

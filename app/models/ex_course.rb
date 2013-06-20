@@ -1,12 +1,13 @@
 # encoding: utf-8
 class ExCourse
-	attr_accessor :NO, :Name, :Teacher, :Hours, :Sections, :Point, :Required
+	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Sections, :Point, :Required
 
 	def self.init_from_course(course)
 		ex = ExCourse.new
 
 		unless course.nil?
 			ex.NO = course.no
+			ex.UNO = course.uno
 			ex.Name = course.name
 			ex.Teacher = course.teacher
 			ex.Hours = course.hours
