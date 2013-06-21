@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
 
   has_many :stories, :conditions => { :visiable => true }
   has_many :notifications
+  has_many :audit_courses, :class_name => "Course", :join_table => "audit_courses" :order => "begin asc"
 
   #has_many :events, :order => "id desc"
 

@@ -48,11 +48,11 @@ module Api
 		end
 
 		def course_invite
-			if verify_action_params(['U', 'S', 'UIDs', 'NO'])
+			if verify_action_params(['U', 'S', 'UIDs', 'UNO'])
 				user = verify_user_authentication
 				if user
 					params[:UIDs].split(',').each do |uid|
-						invite = CourseInvite.invite(user, uid, params[:NO])
+						invite = CourseInvite.invite(user, uid, params[:UNO])
 						if invite
 							invite.save
 							noti = Notification.new
