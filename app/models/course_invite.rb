@@ -7,13 +7,7 @@ class CourseInvite < ActiveRecord::Base
 	def accept
 		if accepted_at.nil? && rejected_at.nil?
 			self.accepted_at = Time.now
-
-			course_list = SeleCourse.where("student_no = :s_no and course_uno = :c_no", :s_no => self.student_no, :c_no => self.course_uno)
-			course_list.each do |course|
-				course.user_schedule(self.to_user)
-				course.save
-			end
-
+			self.to_user.audit_courses << Course.find_by_uno(self.course_uno)
 			self.save
 		end
 	end
