@@ -131,10 +131,10 @@ module Api
 						ex << ExExam.init_from_exam_instance(exam)
 					end
 
-					courses = Schedule.get_select_course_instances_by_user(user, params[:Begin], params[:End])
+					courses = Schedule.get_course_section_instances_by_user(user, params[:Begin], params[:End])
 					ci = []
 					courses.each do |course|
-						ci << ExSeleCourseInstance.init_from_sele_course_instance(course)
+						ci << ExCourseSectionInstance.init_from_course_section_instance(course)
 					end
 
 					re = ApiReturn.new("000")
@@ -146,25 +146,25 @@ module Api
 			end
 		end
 
-		#timetable
-		def timetable
-			if verify_action_params(['U', 'S'])
-				user = verify_user_authentication
-				if user
-					courses = TimeTable.get_by_user(user)
-					ex = []
-					courses.each do |c|
-						ex << ExSeleCourse.init_from_sele_course(c)
-					end
-					re = ApiReturn.new("000")
-					re.add_data("Courses", ex)
-					re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
-					re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
-					re.add_data("SchoolYearCourseWeekCount", Rails.configuration.week_of_school_year_in_course)
-					return_response(re)
-				end
-			end
-		end
+		# #timetable
+		# def timetable
+		# 	if verify_action_params(['U', 'S'])
+		# 		user = verify_user_authentication
+		# 		if user
+		# 			courses = TimeTable.get_by_user(user)
+		# 			ex = []
+		# 			courses.each do |c|
+		# 				ex << ExSeleCourse.init_from_sele_course(c)
+		# 			end
+		# 			re = ApiReturn.new("000")
+		# 			re.add_data("Courses", ex)
+		# 			re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
+		# 			re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
+		# 			re.add_data("SchoolYearCourseWeekCount", Rails.configuration.week_of_school_year_in_course)
+		# 			return_response(re)
+		# 		end
+		# 	end
+		# end
 
 		def user_update_profile
 			if verify_action_params(['U', 'S', 'UserProfile'])
