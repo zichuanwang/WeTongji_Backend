@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-first, generate uno 
+# first, generate uno 
 SeleCourse.select("course_no, begin, end").group("course_no, begin, end").each do |s|
 	uno_prefix = ''
 	if s["begin"] < '2012/03/01'
