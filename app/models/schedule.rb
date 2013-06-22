@@ -86,7 +86,7 @@ class Schedule
 				course_section_instances << i
 			end
 
-			audit_course_sections = user.audit_coures.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
+			audit_course_sections = user.audit_courses.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
 						.where(":now between courses.begin and courses.end and course_sections.week_day = :week_day and (course_sections.week_type = :week_type or course_sections.week_type = '全')", :now => Time.now, :week_day => week_day, :week_type => week_type)
 						.select("courses.no as no, courses.uno as uno, courses.name as name, courses.teacher as teacher, courses.hours as hours, course_sections.location as location, course_sections.section_start as section_start, course_sections.section_end as section_end, courses.point as point, courses.required as required, course_sections.week_type as week_type, course_sections.week_day as week_day")
 

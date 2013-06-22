@@ -1,6 +1,6 @@
 class RenameCourseInviteColumn < ActiveRecord::Migration
   def up
-  	remove_column :course_invites, :course_uno
+  	remove_column :course_invites, :course_no
   	add_column :course_invites, :course_uno, :string
   end
 
