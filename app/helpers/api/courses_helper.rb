@@ -2,14 +2,11 @@
 module Api
 	module CoursesHelper
 		def course_schedule
-			if verify_action_params(['U', 'S', 'NO'])
+			if verify_action_params(['U', 'S', 'UNO'])
 				user = verify_user_authentication
 				if user
-					course_list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => user.no, :c_no => params[:NO])
-					course_list.each do |course|
-						course.user_schedule(user)
-						course.save
-					end
+					user.audit_courses << Course.find_by_uno(params[:UNO])
+					user.save
 					re = ApiReturn.new("000")
 					return_response(re)
 				end
@@ -17,14 +14,11 @@ module Api
 		end
 
 		def course_unschedule
-			if verify_action_params(['U', 'S', 'NO'])
+			if verify_action_params(['U', 'S', 'UNO'])
 				user = verify_user_authentication
 				if user
-					course_list = SeleCourse.where("student_no = :s_no and course_no = :c_no", :s_no => user.no, :c_no => params[:NO])
-					course_list.each do |course|
-						course.user_unschedule(user)
-						course.save
-					end
+					user.audit_courses.delete(Course.find_by_uno(params[:UNO]))
+					user.save
 					re = ApiReturn.new("000")
 					return_response(re)
 				end
