@@ -117,5 +117,37 @@ module Api
 				end
 			end
 		end
+
+		def friends_with_same_course
+			if verify_action_params(['U', 'S', 'UNO'])
+				user = verify_user_authentication
+				if user
+					ex = []
+					friends = user.friends.joins("left join audit_courses a on a.user_id = friends.other_user_id").joins("left join courses c on c.id = a.course_id").where("c.uno = :uno", :uno => params[:UNO])
+					friends.each do |item|
+						ex << ExUser.init_from_user(item.other_user, user)
+					end
+					re = ApiReturn.new("000")
+					re.add_data("Users", ex)
+					return_response(re)
+				end
+			end
+		end
+
+		def friends_with_same_activity
+			if verify_action_params(['U', 'S', 'Id'])
+				user = verify_user_authentication
+				if user
+					ex = []
+					friends = user.friends.joins("left join activities_users_schedules a on a.user_id = friends.other_user_id").where("a.activity_id = :id", :id => params[:Id])
+					friends.each do |item|
+						ex << ExUser.init_from_user(item.other_user, user)
+					end
+					re = ApiReturn.new("000")
+					re.add_data("Users", ex)
+					return_response(re)
+				end
+			end
+		end
 	end
 end
