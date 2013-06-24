@@ -7,6 +7,7 @@ module Api
 			sort = params[:Sort]
 			p = params[:P].nil? ? 1 : params[:P].to_i
 			category_ids = params[:Category_Ids]
+			account_id = params[:Account_Id]
 
 			information = Information.where("visiable = true")
 			if sort
@@ -18,6 +19,10 @@ module Api
 			if category_ids
 				hash = { "1" => "校园新闻", "2" => "社团通告", "3" => "周边推荐", "4" => "校务信息" }
 				information = information.where(:category => category_ids.split(',').collect{ |x| hash[x] })
+			end
+
+			if account_id
+				information = information.where(:admin_id => account_id)
 			end
 
 			information = information.page(p).per(20)

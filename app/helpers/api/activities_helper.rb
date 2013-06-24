@@ -7,7 +7,7 @@ module Api
 			p = params[:P].nil? ? 1 : params[:P].to_i
 			uid = params[:UID]
 			expire = params[:Expire]
-			account = params[:AccountID]
+			account_id = params[:Account_Id]
 
 			activities = Activity.where("visiable = true")
 			if uid
@@ -16,8 +16,8 @@ module Api
 					activities = user.favorite_activities
 				end
 			end
-			if account
-				activities = activities.where(:admin_id => account)
+			if account_id
+				activities = activities.where(:admin_id => account_id)
 			end
 			if channel_ids
 				activities = activities.where(:channel_id => channel_ids.split(','))
