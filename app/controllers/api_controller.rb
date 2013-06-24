@@ -14,6 +14,7 @@ class ApiController < ApplicationController
 		#"Channel.UnFavorite" => "channel_unfavorite",
 
 		"Activities.Get" => "activities",
+		"Activities.Get.ByUser" => "activities_get_by_user",
 
 		# delete at 2.0 api support end
 		#"Activity.Favorite" => "activity_favorite",

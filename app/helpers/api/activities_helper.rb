@@ -43,6 +43,48 @@ module Api
 			return_response(re)
 		end
 
+		def activities_get_by_user
+			if verify_action_params(['U', 'S', 'UID'])
+				user = verify_user_authentication
+				if user
+
+					friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
+					if friend
+						channel_ids = params[:Channel_Ids]
+						sort = params[:Sort]
+						p = params[:P].nil? ? 1 : params[:P].to_i
+						expire = params[:Expire]
+						activities = friend.other_user.schedule_activities.where("visiable = true")
+						if channel_ids
+							activities = activities.where(:channel_id => channel_ids.split(','))
+						end
+						if sort
+							activities = activities.order(sort)
+						else
+							activities = activities.order("begin asc")
+						end
+
+						unless expire && expire == '1'
+							activities = activities.where("end > :end", :end => Time.now)
+						end
+						activities = activities.page(p).per(20)
+
+						activities.each do |activity|
+							ex << ExActivity.init_from_activity(activity, user)
+						end
+
+						ex = []
+						re = ApiReturn.new("000")
+						re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
+						re.add_data("Activities", ex)
+					end
+					
+					re = ApiReturn.new("017")
+					return_response(re)
+				end
+			end
+		end
+
 		def activity_favorite
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
