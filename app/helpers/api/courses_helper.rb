@@ -32,7 +32,7 @@ module Api
 					invite = CourseInvite.find_by_id(params[:Id])
 					if invite && invite.to_user == user
 						re = ApiReturn.new("000")
-						re.add_data("CourseInvite", ExCourseInvite.init_from_course_invite(invite))
+						re.add_data("CourseInvite", ExCourseInvite.init_from_course_invite(invite, user))
 					else
 						re = ApiReturn.new("017")
 					end

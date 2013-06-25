@@ -134,7 +134,7 @@ module Api
 					courses = Schedule.get_course_section_instances_by_user(user, params[:Begin], params[:End])
 					ci = []
 					courses.each do |course|
-						ci << ExCourseSectionInstance.init_from_course_section_instance(course)
+						ci << ExCourseSectionInstance.init_from_course_section_instance(course, user)
 					end
 
 					re = ApiReturn.new("000")

@@ -1,7 +1,7 @@
 class ExCourseInvite
 	attr_accessor :Id, :From, :To, :SentAt, :AcceptedAt, :RejectedAt, :UserDetails, :CourseDetails
 
-	def self.init_from_course_invite(course_invite)
+	def self.init_from_course_invite(course_invite, user = nil)
 		model = ExCourseInvite.new
 		unless course_invite.nil?
 			model.Id = course_invite.id
@@ -11,7 +11,7 @@ class ExCourseInvite
 			model.AcceptedAt = course_invite.accepted_at
 			model.RejectedAt = course_invite.rejected_at
 			model.UserDetails = ExUser.init_from_user(course_invite.from_user, course_invite.to_user)
-			model.CourseDetails = ExCourse.init_from_course(Course.find_by_uno(course_invite.course_uno))
+			model.CourseDetails = ExCourse.init_from_course(Course.find_by_uno(course_invite.course_uno), user)
 		end
 		model
 	end

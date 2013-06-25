@@ -1,8 +1,8 @@
 # encoding: utf-8
 class ExCourse
-	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Sections, :Point, :Required
+	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Sections, :Point, :Required, :FriendsCount, :IsAudit
 
-	def self.init_from_course(course)
+	def self.init_from_course(course, user = nil)
 		ex = ExCourse.new
 
 		unless course.nil?
@@ -13,10 +13,16 @@ class ExCourse
 			ex.Hours = course.hours
 			ex.Point = course.point
 			ex.Required = course.required
+			ex.FriendsCount = 0
 			ex.Sections = []
 
 			course.course_sections.each do |item|
 				ex.Sections << ExCourseSection.init_from_course_section(item)
+			end
+
+			unless user.nil?
+				ex.FriendsCount = 0
+				ex.IsAudit = user.audit_courses.exists?(course)
 			end
 		end
 
