@@ -11,6 +11,9 @@ class Admin < ActiveRecord::Base
 	has_attached_file :icon, :styles => { :medium => "180x180>" }
   validates_attachment :icon, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 
+  has_attached_file :background, :styles => { :medium => "640x260>" }
+  validates_attachment :background, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
+
   has_many :news
   has_many :information
   has_many :activities
