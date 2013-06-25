@@ -33,6 +33,7 @@ class ExActivity
 				model.CanFavorite = activity.can_favorite(user)
 				model.CanSchedule = activity.can_schedule(user)
 				model.CanLike = activity.can_like(user)
+				model.FriendsCount = 0
 			end
 		end
 		
