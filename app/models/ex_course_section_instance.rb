@@ -1,5 +1,6 @@
 class ExCourseSectionInstance
-	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, :Point, :Required, :Day, :IsAudit, :WeekDay, :WeekType
+	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Location, :SectionStart, :SectionEnd, 
+					:Point, :Required, :Day, :IsAudit, :WeekDay, :WeekType, :CourseDetails
 
 	def self.init_from_course_section_instance(instance)
 		model = ExCourseSectionInstance.new
@@ -19,6 +20,7 @@ class ExCourseSectionInstance
 			model.IsAudit = instance.is_audit
 			model.WeekDay = instance.week_day
 			model.WeekType = instance.week_type
+			model.CourseDetails = ExCourse.init_from_course(Course.find_by_uno(instance.uno))
 		end
 
 		model
