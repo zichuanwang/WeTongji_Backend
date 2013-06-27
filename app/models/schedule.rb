@@ -31,6 +31,7 @@ class Schedule
 
 	def self.get_course_section_instances_by_user(user, begin_at, end_at)
 		course_section_instances = []
+		
 		# sections = Course.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
 		# 	.where("course_takes.student_no = :no and :now between begin and end", :no => user.no, :now => Time.now)
 		# 	.select("courses.no as no, courses.uno as uno, courses.name as name, courses.teacher as teacher, courses.hours as hours, course_sections.location as location, course_sections.week_day as week_day, course_sections.week_type as week_type, course_sections.section_start as section_start, course_sections.section_end as section_end, courses.point as point, courses.required as required, course_sections.week_type as week_type, course_sections.week_day as week_day")

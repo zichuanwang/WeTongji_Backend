@@ -118,30 +118,35 @@ module Api
 			if verify_action_params(['U', 'S', 'Begin', 'End'])
 				user = verify_user_authentication
 				if user
-					activities = Schedule.get_activities_by_user(user, params[:Begin], params[:End])
-				
-					ac = []
-					activities.each do |activity|
-						ac << ExActivity.init_from_activity(activity, user)
-					end
+					if params[:Begin].to_datetime + 10 >= params[:End].to_datetime
+						activities = Schedule.get_activities_by_user(user, params[:Begin], params[:End])
+					
+						ac = []
+						activities.each do |activity|
+							ac << ExActivity.init_from_activity(activity, user)
+						end
 
-					exams = Schedule.get_exams_by_user(user, params[:Begin], params[:End])
-					ex = []
-					exams.each do |exam|
-						ex << ExExam.init_from_exam_instance(exam)
-					end
+						exams = Schedule.get_exams_by_user(user, params[:Begin], params[:End])
+						ex = []
+						exams.each do |exam|
+							ex << ExExam.init_from_exam_instance(exam)
+						end
 
-					courses = Schedule.get_course_section_instances_by_user(user, params[:Begin], params[:End])
-					ci = []
-					courses.each do |course|
-						ci << ExCourseSectionInstance.init_from_course_section_instance(course, user)
-					end
+						courses = Schedule.get_course_section_instances_by_user(user, params[:Begin], params[:End])
+						ci = []
+						courses.each do |course|
+							ci << ExCourseSectionInstance.init_from_course_section_instance(course, user)
+						end
 
-					re = ApiReturn.new("000")
-					re.add_data("Activities", ac)
-					re.add_data("Exams", ex)
-					re.add_data("CourseInstances", ci)
-					return_response(re)
+						re = ApiReturn.new("000")
+						re.add_data("Activities", ac)
+						re.add_data("Exams", ex)
+						re.add_data("CourseInstances", ci)
+						return_response(re)
+					else
+						re = ApiReturn.new("018")
+						return_response(re)
+					end
 				end
 			end
 		end
