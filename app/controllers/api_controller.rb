@@ -42,9 +42,9 @@ class ApiController < ApplicationController
 		"Schedule.Get" => "schedule",
 
 		# delete at 2.0 api support end
-		"News.GetList" => "news_getlist",
-		"News.Get" => "news_get",
-		"News.Read" => "news_read",
+		#"News.GetList" => "news_getlist",
+		#"News.Get" => "news_get",
+		#"News.Read" => "news_read",
 
 		#"TimeTable.Get" => "timetable",
 
