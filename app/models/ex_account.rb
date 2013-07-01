@@ -1,5 +1,5 @@
 class ExAccount
-	attr_accessor :Id, :Name, :Description, :Display, :Image, :Like, :Background, :ActivitiesCount, :InformationCount
+	attr_accessor :Id, :Name, :Description, :Display, :Image, :Like, :Background, :ActivitiesCount, :InformationCount, :Title, :Email
 
 	def self.init_from_account(account, user = nil)
 		model = ExAccount.new
@@ -8,6 +8,8 @@ class ExAccount
 			model.Name = account.name
 			model.Display = account.display
 			model.Description = account.description
+			model.Title = account.title
+			model.Email = account.email
 			model.Like = UserLike.get_count("Account", model.Id)
 			model.Image = !account.icon.exists? ? '' : Rails.configuration.host + account.icon.url(:medium)
 			model.Background = !account.background.exists? ? '' : Rails.configuration.host + account.background.url(:medium)
