@@ -100,6 +100,29 @@ module Api
 			end
 		end
 
+		def course_sections_get_by_user
+			if verify_action_params(['U', 'S', 'UID', 'Begin', 'End'])
+				user = verify_user_authentication
+				if user
+					friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
+					if friend
+						ex = []
+						all_c = Schedule.get_courses_by_user(friend.other_user, params[:Begin], params[:End])
+						all_c.each do |item|
+							ex << ExCourseSection.init_from_course_section(item, friend.other_user)
+						end
+
+						re = ApiReturn.new("000")
+						re.add_data("CourseSections", ex)
+						return_response(re)
+					else
+						re = ApiReturn.new("017")
+						return_response(re)
+					end
+				end
+			end
+		end
+
 		def school_year_setting
 			re = ApiReturn.new("000")
 			re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
