@@ -73,11 +73,12 @@ module Api
 						end
 						activities = activities.page(p).per(20)
 
+						ex = []
+						
 						activities.each do |activity|
 							ex << ExActivity.init_from_activity(activity, user)
 						end
 
-						ex = []
 						re = ApiReturn.new("000")
 						re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
 						re.add_data("Activities", ex)

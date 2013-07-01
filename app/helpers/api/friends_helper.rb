@@ -149,5 +149,22 @@ module Api
 				end
 			end
 		end
+
+		#todo 有bug
+		def friends_with_same_friend
+			if verify_action_params(['U', 'S', 'UID'])
+				user = verify_user_authentication
+				if user
+					ex = []
+					friends = user.friends.joins("left join friends f on f.user_id = friends.other_user_id").joins("left join users u on u.id = f.user_id").where("u.uid = :uid", :uid => params[:UID])
+					friends.each do |item|
+						ex << ExUser.init_from_user(item.other_user, user)
+					end
+					re = ApiReturn.new("000")
+					re.add_data("Users", ex)
+					return_response(re)
+				end
+			end
+		end
 	end
 end
