@@ -7,7 +7,7 @@ class Admin < ActiveRecord::Base
 
 	# Setup accessible (or protected) attributes for your model
 	attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :title, :display, :phone, 
-					:description, :name, :address, :student_no, :icon
+					:description, :name, :address, :student_no, :icon, :background
 	has_attached_file :icon, :styles => { :medium => "180x180>" }
   validates_attachment :icon, :presence => true, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 
