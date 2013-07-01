@@ -70,6 +70,7 @@ class ApiController < ApplicationController
 		"Friends.Get.WithSameCourse" => "friends_with_same_course",
 		"Friends.Get.WithSameActivity" => "friends_with_same_activity",
 		"Friends.Get.WithSameFriend" => "friends_with_same_friend",
+		"Friends.Get.ByUser" => "friends_get_by_user",
 
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",

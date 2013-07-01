@@ -166,5 +166,26 @@ module Api
 				end
 			end
 		end
+
+		def friends_get_by_user
+			if verify_action_params(['U', 'S', 'UID'])
+				user = verify_user_authentication
+				if user
+					friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
+					if friend
+						ex = []
+						friend.other_user.friends.each do |item|
+							ex << ExUser.init_from_user(item.other_user, user)
+						end
+						re = ApiReturn.new("000")
+						re.add_data("Users", ex)
+						return_response(re)
+					else
+						re = ApiReturn.new("017")
+						return_response(re)
+					end
+				end
+			end
+		end
 	end
 end
