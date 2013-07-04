@@ -100,7 +100,7 @@ module Api
 			end
 		end
 
-		def course_sections_get_by_user
+		def courses_get_by_user
 			if verify_action_params(['U', 'S', 'UID', 'Begin', 'End'])
 				user = verify_user_authentication
 				if user
@@ -109,11 +109,11 @@ module Api
 						ex = []
 						all_c = Schedule.get_courses_by_user(friend.other_user, params[:Begin], params[:End])
 						all_c.each do |item|
-							ex << ExCourseSection.init_from_course_section(item, friend.other_user)
+							ex << ExCourse.init_from_course(item, friend.other_user)
 						end
 
 						re = ApiReturn.new("000")
-						re.add_data("CourseSections", ex)
+						re.add_data("Courses", ex)
 						return_response(re)
 					else
 						re = ApiReturn.new("017")

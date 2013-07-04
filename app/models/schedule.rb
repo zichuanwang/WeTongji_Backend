@@ -125,11 +125,11 @@ class Schedule
 	def self.get_courses_by_user(user, begin_at, end_at)
 		sections_all = Course.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
 						.where("course_takes.student_no = :no and :now between courses.begin and courses.end", :no => user.no, :now => Time.now)
-						.select("course_sections.*")
+						.select("courses.*")
 
 		sections_all_audit = user.audit_courses.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
 						.where(":now between courses.begin and courses.end", :now => Time.now)
-						.select("course_sections.*")
+						.select("courses.*")
 
 		sections_all_audit + sections_all
 	end
