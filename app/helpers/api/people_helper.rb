@@ -25,7 +25,7 @@ module Api
 		end
 
 		def person_get
-			person = Person.find(params[:Id])
+			person = Person.find_by_id(params[:Id])
 			ex = nil
 			if person
 				person.read = person.read + 1
@@ -119,6 +119,20 @@ module Api
 					return_response(re)
 				end
 			end
+		end
+
+		def users_like_same_person
+			person = Person.find_by_id(params[:Id])
+			ex = []
+			if person
+				ex = []
+				person.users_likes.each do |item|
+					ex << ExUser.init_from_user(item)
+				end
+			end
+			re = ApiReturn.new("000")
+			re.add_data("Users", ex)
+			return_response(re)
 		end
 	end
 end

@@ -93,6 +93,7 @@ class ApiController < ApplicationController
 		"Person.UnLike" => "person_unlike",
 		
 		"Person.Get" => "person_get",
+		"Users.Like.SamePerson" => "users_like_same_person",
 
 		# delete at 2.0 api support end
 		# "SchoolNews.GetList" => "school_news_getlist",
