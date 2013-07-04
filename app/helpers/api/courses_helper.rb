@@ -101,24 +101,25 @@ module Api
 		end
 
 		def courses_get_by_user
-			if verify_action_params(['U', 'S', 'UID', 'Begin', 'End'])
+			if verify_action_params(['U', 'S', 'Begin', 'End'])
 				user = verify_user_authentication
 				if user
-					friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
-					if friend
-						ex = []
-						all_c = Schedule.get_courses_by_user(friend.other_user, params[:Begin], params[:End])
-						all_c.each do |item|
-							ex << ExCourse.init_from_course(item, friend.other_user)
+					u = user
+					ex = []
+					if params["UID"]
+						friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
+						if friend
+							u = friend.other_user
 						end
-
-						re = ApiReturn.new("000")
-						re.add_data("Courses", ex)
-						return_response(re)
-					else
-						re = ApiReturn.new("017")
-						return_response(re)
 					end
+					all_c = Schedule.get_courses_by_user(u, params[:Begin], params[:End])
+					all_c.each do |item|
+						ex << ExCourse.init_from_course(item, u)
+					end
+
+					re = ApiReturn.new("000")
+					re.add_data("Courses", ex)
+					return_response(re)
 				end
 			end
 		end
