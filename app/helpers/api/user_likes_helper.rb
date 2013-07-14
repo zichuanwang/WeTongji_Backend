@@ -14,6 +14,12 @@ module Api
 						unless m.nil?
 							user_like.out_id = m.id
 						end
+					when "Course" 
+						m = Course.find_by_uno(params[:Id])
+						user_like.out_id = 0
+						unless m.nil?
+							user_like.out_id = m.id
+						end
 					end
 					user_like.user_id = user.id
 					user_like.save

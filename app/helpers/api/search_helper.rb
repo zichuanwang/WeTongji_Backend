@@ -53,6 +53,15 @@ module Api
 					end
 					re.add_data("Person", ex5)
 				end
+
+				if type == "6" || type.nil?
+					in6 = Course.order("id desc").where("name like :key or teacher like :key", :key => "%#{key}%").limit(10)
+					ex6 = []
+					in6.each do |item|
+						ex6 << ExCourse.init_from_course(item, user)
+					end
+					re.add_data("Courses", ex6)
+				end
 				
 				return_response(re)
 			end

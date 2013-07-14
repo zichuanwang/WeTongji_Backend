@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :audit_courses, :class_name => "Course", :join_table => "audit_courses", :order => "begin asc", :uniq => true
 
+  # next version move to single table
   has_and_belongs_to_many :schedule_activities, :class_name => "Activity", :join_table => "activities_users_schedules", :order => "begin asc"
 
   has_and_belongs_to_many :favorite_activities, :class_name => "Activity", :join_table => "user_favorites", :order => "begin asc", :association_foreign_key => "out_id", :conditions => "user_favorites.out_model_name = 'Activity'"

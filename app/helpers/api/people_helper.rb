@@ -91,35 +91,35 @@ module Api
 			end
 		end
 
-		def	person_like
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					person = Person.find(params[:Id])
-					if person
-						person.user_like(user)
-						person.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
+		# def	person_like
+		# 	if verify_action_params(['U', 'S', 'Id'])
+		# 		user = verify_user_authentication
+		# 		if user
+		# 			person = Person.find(params[:Id])
+		# 			if person
+		# 				person.user_like(user)
+		# 				person.save
+		# 			end
+		# 			re = ApiReturn.new("000")
+		# 			return_response(re)
+		# 		end
+		# 	end
+		# end
 
-		def	person_unlike
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					person = Person.find(params[:Id])
-					if person
-						person.user_unlike(user)
-						person.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
+		# def	person_unlike
+		# 	if verify_action_params(['U', 'S', 'Id'])
+		# 		user = verify_user_authentication
+		# 		if user
+		# 			person = Person.find(params[:Id])
+		# 			if person
+		# 				person.user_unlike(user)
+		# 				person.save
+		# 			end
+		# 			re = ApiReturn.new("000")
+		# 			return_response(re)
+		# 		end
+		# 	end
+		# end
 
 		def users_like_same_person
 			person = Person.find_by_id(params[:Id])

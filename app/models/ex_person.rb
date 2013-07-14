@@ -1,5 +1,5 @@
 class ExPerson
-	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, :CanFavorite, 
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, 
 				  :Images, :NO, :Avatar, :StudentNO, :CreatedAt
 
 	def self.init_from_person(person, user = nil)
@@ -13,7 +13,6 @@ class ExPerson
 			model.JobTitle = person.job_title
 			model.Favorite = person.favorite
 			model.Like = UserLike.get_count("Person", model.Id)
-			model.CanFavorite = true
 			model.CanLike = true
 			model.Images = Hash.new
 			model.StudentNO = person.student_no
@@ -28,8 +27,7 @@ class ExPerson
 			end
 			
 			if user
-				model.CanFavorite = person.can_favorite(user)
-				model.CanLike = person.can_like(user)
+				model.CanLike = !person.users_likes.exists?(user)
 			end
 		end
 
