@@ -28,6 +28,11 @@ class ExUser
 			model.UserType = user.user_type
 			model.Words = user.words
 			model.Like = UserLike.get_count("User", user.id)
+			model.IsFriend = false
+			unless current_user.nil?
+				model.IsFriend = Friend.keep?(current_user.id, user.id)
+			end
+			model.FriendCount = user.friends.count
 
 			model.LikeCount = {}
 			model.LikeCount["User"] = user.user_likes.where("out_model_name = 'User'").count
@@ -40,12 +45,9 @@ class ExUser
 			model.ScheduleCount["Activity"] = 0
 			model.ScheduleCount["Course"] = 0
 
-			model.FriendCount = user.friends.count
+			
 
-			model.IsFriend = false
-			unless current_user.nil?
-				model.IsFriend = Friend.keep?(current_user.id, user.id)
-			end
+
 		end
 		
 		model

@@ -19,15 +19,13 @@ class FriendInvite < ActiveRecord::Base
 
 	def self.invite(from_user, to)
 		user = User.find_by_uid(to)
-		if user.user_profile && user.user_profile.allow_add_friend == true
+		
+		invite = FriendInvite.new
+		invite.from = from_user.id
+		invite.from_name = from_user.name
+		invite.to = user.id
+		invite.to_name = user.name
 
-			invite = FriendInvite.new
-			invite.from = from_user.id
-			invite.from_name = from_user.name
-			invite.to = user.id
-			invite.to_name = user.name
-
-			return invite
-		end
+		return invite
 	end
 end
