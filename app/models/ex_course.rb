@@ -1,6 +1,6 @@
 # encoding: utf-8
 class ExCourse
-	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Sections, :Point, :Required, :FriendsCount, :IsAudit
+	attr_accessor :NO, :UNO, :Name, :Teacher, :Hours, :Sections, :Point, :Required, :FriendsCount, :IsAudit, :Like, :CanLike
 
 	def self.init_from_course(course, user = nil)
 		ex = ExCourse.new
@@ -14,6 +14,8 @@ class ExCourse
 			ex.Point = course.point
 			ex.Required = course.required
 			ex.FriendsCount = 0
+			ex.Like = UserLike.get_count("Course", course.id)
+			ex.CanLike = user.nil? false : UserLike.can?("Course", course.id, user.id)
 			ex.Sections = []
 
 			course.course_sections.each do |item|

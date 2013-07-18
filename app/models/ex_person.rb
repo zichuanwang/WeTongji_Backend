@@ -1,5 +1,5 @@
 class ExPerson
-	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :Favorite, :CanLike, 
+	attr_accessor :Id, :Name, :JobTitle, :Words, :Description, :Read, :Like, :CanLike, 
 				  :Images, :NO, :Avatar, :StudentNO, :CreatedAt
 
 	def self.init_from_person(person, user = nil)
@@ -7,13 +7,12 @@ class ExPerson
 		unless person.nil?
 			model.Id = person.id
 			model.Name = person.name
-			model.Description = person.description#.gsub(/https?:\/\/[\S]+/,' \0 ').gsub(/[^@\s]+@(?:[-a-z0-9]+\.)+[a-z]{2,}/, ' \0 ').gsub(/[0-9|\-|\(|\)|\#|\+]{7,}/, ' \0 ')
+			model.Description = person.description
 			model.Read = person.read
 			model.Words = person.words
 			model.JobTitle = person.job_title
-			model.Favorite = person.favorite
 			model.Like = UserLike.get_count("Person", model.Id)
-			model.CanLike = true
+			model.CanLike = user.nil? ? false : UserLike.can?("Person", person.id, user.id)
 			model.Images = Hash.new
 			model.StudentNO = person.student_no
 			model.Avatar = !person.avatar.exists? ? '' : Rails.configuration.host + person.avatar.url
@@ -26,9 +25,6 @@ class ExPerson
 				end
 			end
 			
-			if user
-				model.CanLike = !person.users_likes.exists?(user)
-			end
 		end
 
 		model

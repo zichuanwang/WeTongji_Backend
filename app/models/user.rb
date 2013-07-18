@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_school_news, :class_name => "SchoolNews", :join_table => "school_news_users_favorites", :order => "id desc"
   
   has_and_belongs_to_many :favorite_information, :class_name => "Information", :join_table => "user_favorites", :order => "id desc", :association_foreign_key => "out_id", :conditions => "user_favorites.out_model_name = 'Information'"
-  has_many :user_likes
+  has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "user_likes", :foreign_key => "out_id", :conditions => "user_likes.out_model_name = 'User'"
 
   has_one :user_profile
 
@@ -36,8 +36,6 @@ class User < ActiveRecord::Base
 
   has_many :stories, :conditions => { :visiable => true }
   has_many :notifications
-
-  #has_many :events, :order => "id desc"
 
   def self.active_user_from_student(no, name, password)
     student = Student.find_by_no_and_name(no, name)

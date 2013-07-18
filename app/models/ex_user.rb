@@ -1,7 +1,7 @@
 class ExUser
 	attr_accessor :UID, :NO, :Name, :DisplayName, :Avatar, :Phone, :Email, :Major, 
 				:NativePlace, :Degree, :Gender, :Year, :Birthday, :Plan, :SinaWeibo, :QQ, :Department,
-				:Room, :RoomNO, :UserType, :Words, :IsFriend, :LikeCount, :FriendCount, :Like, :ScheduleCount
+				:Room, :UserType, :Words, :IsFriend, :LikeCount, :FriendCount, :Like, :ScheduleCount, :CanLike
 
 	def self.init_from_user(user, current_user = nil)
 		model = ExUser.new
@@ -24,10 +24,10 @@ class ExUser
 			model.QQ = user.qq
 			model.Department = user.department
 			model.Room = user.room
-			model.RoomNO = user.room_no
 			model.UserType = user.user_type
 			model.Words = user.words
 			model.Like = UserLike.get_count("User", user.id)
+			model.CanLike = current_user.nil? ? false : UserLike.can?("User", user.id, current_user.id)
 			model.IsFriend = false
 			unless current_user.nil?
 				model.IsFriend = Friend.keep?(current_user.id, user.id)
@@ -46,9 +46,6 @@ class ExUser
 			model.ScheduleCount["Activity"] = 0
 			model.ScheduleCount["Course"] = 0
 
-			
-
-
 		end
 		
 		model
@@ -61,7 +58,6 @@ class ExUser
 		user.phone = json["User"]["Phone"] == nil ? user.phone : json["User"]["Phone"]
 		user.sina_weibo = json["User"]["SinaWeibo"] == nil ? user.sina_weibo : json["User"]["SinaWeibo"]
 		user.room = json["User"]["Room"] == nil ? user.sina_weibo : json["User"]["Room"]
-		user.room_no = json["User"]["RoomNO"] == nil ? user.sina_weibo : json["User"]["RoomNO"]
 		user.words = json["User"]["Words"] == nil ? user.words : json["User"]["Words"]
 		user
 	end

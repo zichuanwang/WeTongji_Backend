@@ -14,6 +14,8 @@ class Admin < ActiveRecord::Base
   has_attached_file :background, :styles => { :medium => "640x260>" }
   validates_attachment :background, :presence => false, :content_type => { :content_type => ["image/jpeg", "image/jpg"] }, :size => { :in => 0..300.kilobytes }
 
+  has_and_belongs_to_many :users_likes, :class_name => "User", :join_table => "user_likes", :foreign_key => "out_id", :conditions => "user_likes.out_model_name = 'Account'"
+
   has_many :news
   has_many :information
   has_many :activities

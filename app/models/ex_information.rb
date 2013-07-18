@@ -1,6 +1,6 @@
 class ExInformation
-	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :Favorite, :AccountId,
-				  :CanFavorite, :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location, :HasTicket, :TicketService,
+	attr_accessor :Id, :Title, :Context, :Read, :CreatedAt, :Category, :Images, :Source, :Summary, :Read, :Like, :AccountId,
+				  :CanLike, :Image, :Organizer, :OrganizerAvatar, :Contact, :Addition, :Location, :HasTicket, :TicketService,
 				  :AccountDetails
 
 	def self.init_from_information(information, user = nil)
@@ -22,12 +22,10 @@ class ExInformation
 			model.Read = information.read
 			model.CreatedAt = information.created_at
 			model.Category = information.category
-			model.Favorite = information.favorite
 			model.Like = UserLike.get_count("Information", model.Id)
 			model.AccountId = information.admin.id
 			model.AccountDetails = ExAccount.init_from_account(information.admin, user)
-			model.CanFavorite = true
-			model.CanLike = true
+			model.CanLike = user.nil? false : UserLike.can?("Information", information.id, user.id)
 			model.Organizer = information.admin.display
 			model.OrganizerAvatar = !information.admin.icon.exists? ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 			model.Images = []
@@ -38,10 +36,6 @@ class ExInformation
 				end
 			end
 			
-			if user
-				model.CanFavorite = information.can_favorite(user)
-				model.CanLike = information.can_like(user)
-			end
 		end
 
 		model
