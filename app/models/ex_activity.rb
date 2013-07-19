@@ -29,7 +29,7 @@ class ExActivity
 			
 			if user
 				model.CanSchedule = activity.can_schedule(user)
-				model.FriendsCount = 0
+				model.FriendsCount = user.friends.joins("left join activities_users_schedules a on a.user_id = friends.other_user_id").where("a.activity_id = :id", :id => activity.id).count
 			end
 		end
 		

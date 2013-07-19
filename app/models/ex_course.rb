@@ -23,7 +23,7 @@ class ExCourse
 			end
 
 			unless user.nil?
-				ex.FriendsCount = 0
+				ex.FriendsCount = user.friends.joins("left join audit_courses a on a.user_id = friends.other_user_id").joins("left join courses c on c.id = a.course_id").where("c.uno = :uno", :uno => course.uno).count
 				ex.IsAudit = user.audit_courses.exists?(course)
 			end
 		end
