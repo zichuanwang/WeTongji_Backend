@@ -6,6 +6,10 @@ class UserLike < ActiveRecord::Base
   	UserLike.where("out_model_name = :name and out_id = :id and user_id is not null", :name => model, :id => id).select(:user_id).distinct.count
   end
 
+  def self.get_like_count(model, id)
+  	UserLike.where("out_model_name = :name and user_id = :id and out_id is not null", :name => model, :id => id).select(:out_id).distinct.count
+  end
+
   def self.can?(model, id, user_id)
   	UserLike.where("out_model_name = :name and out_id = :id and user_id = :user_id", :name => model, :id => id, :user_id => user_id).exists?
   end
