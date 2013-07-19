@@ -41,6 +41,7 @@ class ExUser
 			model.LikeCount["Information"] = user.user_likes.where("out_model_name = 'Information'").count
 			model.LikeCount["Account"] = user.user_likes.where("out_model_name = 'Account'").count
 			model.LikeCount["Person"] = user.user_likes.where("out_model_name = 'Person'").count
+			model.LikeCount["Course"] = user.user_likes.where("out_model_name = 'Course'").count
 
 			model.ScheduleCount = {}
 			model.ScheduleCount["Activity"] = 0
