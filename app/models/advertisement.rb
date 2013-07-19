@@ -1,5 +1,5 @@
 class Advertisement < ActiveRecord::Base
-  	attr_accessible :title, :url, :read, :image, :bgcolor, :publisher
+  	attr_accessible :title, :url, :read, :image, :publisher
 
   	validates_presence_of :title, :url, :publisher
 

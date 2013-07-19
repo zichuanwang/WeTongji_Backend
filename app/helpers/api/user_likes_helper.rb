@@ -22,8 +22,11 @@ module Api
 						end
 					end
 					user_like.user_id = user.id
-					user_like.save
-					
+
+					if UserLike.can?(user_like.out_model_name, user_like.out_id, user_like.user_id)
+						user_like.save
+					end
+										
 					re = ApiReturn.new("000")
 
 					return_response(re)
