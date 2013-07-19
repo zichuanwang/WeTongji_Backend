@@ -35,11 +35,10 @@ module Api
 			if verify_action_params(['U', 'S', 'Model', 'Id'])
 				user = verify_user_authentication
 				if user
-					user_like = UserLike.find_by_out_id_and_out_model_name(params[:Id], params[:Model])
+					user_like = UserLike.find_by_out_id_and_out_model_name_and_user_id(params[:Id], params[:Model], user.id)
 					
-					if user.user_likes.exists?(user_like)
-						user.user_likes.delete(user_like)
-						user.save
+					unless user_like.nil?
+						user_like.destroy
 					end
 					
 					re = ApiReturn.new("000")

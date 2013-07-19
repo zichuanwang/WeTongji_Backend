@@ -18,6 +18,8 @@ class ExLike
 			model.ModelDetails = ExUser.init_from_user(User.find_by_id(model.Id), user)
 		when "Person"
 			model.ModelDetails = ExPerson.init_from_person(Person.find_by_id(model.Id), user)
+		when "Course"
+			model.ModelDetails = ExCourse.init_from_course(Course.find_by_id(model.Id), user)
 		end
 		model.CreatedAt = like.created_at
 		model
