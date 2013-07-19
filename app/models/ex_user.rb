@@ -35,7 +35,6 @@ class ExUser
 			model.FriendCount = user.friends.count
 
 			model.LikeCount = {}
-			p '================'
 			model.LikeCount["User"] = UserLike.get_like_count("User", user.id)
 			model.LikeCount["Activity"] = UserLike.get_like_count("Activity", user.id)
 			#model.LikeCount["Story"] = user.user_likes.where("out_model_name = 'Story'").distinct.count
@@ -45,8 +44,8 @@ class ExUser
 			model.LikeCount["Course"] = UserLike.get_like_count("Course", user.id)
 
 			model.ScheduleCount = {}
-			model.ScheduleCount["Activity"] = 0
-			model.ScheduleCount["Course"] = 0
+			model.ScheduleCount["Activity"] = user.schedule_activities.count
+			model.ScheduleCount["Course"] = user.audit_courses.count
 
 		end
 		

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   before_create :init_model
   after_create :send_confirmation
 
-  has_and_belongs_to_many :audit_courses, :class_name => "Course", :join_table => "audit_courses", :order => "begin asc", :uniq => true
+  has_and_belongs_to_many :audit_courses, :class_name => "Course", :join_table => "audit_courses", :order => "begin asc"
 
   # next version move to single table
   has_and_belongs_to_many :schedule_activities, :class_name => "Activity", :join_table => "activities_users_schedules", :order => "begin asc"
