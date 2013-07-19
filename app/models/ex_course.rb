@@ -15,7 +15,7 @@ class ExCourse
 			ex.Required = course.required
 			ex.FriendsCount = 0
 			ex.Like = UserLike.get_count("Course", course.id)
-			ex.CanLike = user.nil? false : UserLike.can?("Course", course.id, user.id)
+			ex.CanLike = user.nil? ? false : UserLike.can?("Course", course.id, user.id)
 			ex.Sections = []
 
 			course.course_sections.each do |item|
