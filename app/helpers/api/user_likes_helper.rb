@@ -37,8 +37,8 @@ module Api
 				if user
 					user_like = UserLike.find_by_out_id_and_out_model_name(params[:Id], params[:Model])
 					
-					if user.users_likes.exists?(user_like)
-						user.users_likes.delete(user_like)
+					if user.user_likes.exists?(user_like)
+						user.user_likes.delete(user_like)
 						user.save
 					end
 					
