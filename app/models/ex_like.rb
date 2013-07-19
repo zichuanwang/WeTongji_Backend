@@ -3,7 +3,7 @@ class ExLike
 
 	def self.init_from_like(like, user)
 		model = ExLike.new
-		model.Id = like.out_id
+		model.Id = like.out_model_id
 		model.Model = like.out_model_name
 		case model.Model
 		when "Activity"
