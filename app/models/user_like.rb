@@ -3,11 +3,11 @@ class UserLike < ActiveRecord::Base
   paginates_per 20
 
   def self.get_count(model, id)
-  	UserLike.where("out_model_name = :name and out_id = :id and user_id is not null", :name => model, :id => id).select(:user_id).distinct.count
+  	UserLike.where("out_model_name = :name and out_id = :id and user_id is not null", :name => model, :id => id).select(:user_id).distinct.length
   end
 
   def self.get_like_count(model, id)
-  	UserLike.where("out_model_name = :name and user_id = :id and out_id is not null", :name => model, :id => id).select(:out_id).distinct.count
+  	UserLike.where("out_model_name = :name and user_id = :id and out_id is not null", :name => model, :id => id).select(:out_id).distinct.length
   end
 
   def self.can?(model, id, user_id)
