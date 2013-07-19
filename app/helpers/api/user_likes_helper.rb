@@ -37,8 +37,8 @@ module Api
 				if user
 					user_like = UserLike.find_by_out_id_and_out_model_name(params[:Id], params[:Model])
 					
-					if user.user_likes.exists?(user_like)
-						user.user_likes.delete(user_like)
+					if user.users_likes.exists?(user_like)
+						user.users_likes.delete(user_like)
 						user.save
 					end
 					
@@ -52,7 +52,7 @@ module Api
 			if verify_action_params(['U', 'S', 'Model'])
 				user = verify_user_authentication
 				if user
-					list = user.user_likes.where("out_model_name = :name", :name => params[:Model])
+					list = user.users_likes.where("out_model_name = :name", :name => params[:Model])
 					p = params[:P].nil? ? 1 : params[:P].to_i
 					list = list.page(p).per(20)
 					ex = []
