@@ -25,7 +25,7 @@ class ExInformation
 			model.Like = UserLike.get_count("Information", model.Id)
 			model.AccountId = information.admin.id
 			model.AccountDetails = ExAccount.init_from_account(information.admin, user)
-			model.CanLike = user.nil? false : UserLike.can?("Information", information.id, user.id)
+			model.CanLike = user.nil? ? false : UserLike.can?("Information", information.id, user.id)
 			model.Organizer = information.admin.display
 			model.OrganizerAvatar = !information.admin.icon.exists? ? '' : Rails.configuration.host + information.admin.icon.url(:medium)
 			model.Images = []
