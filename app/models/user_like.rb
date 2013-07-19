@@ -3,7 +3,7 @@ class UserLike < ActiveRecord::Base
   paginates_per 20
 
   def self.get_count(model, id)
-  	UserLike.where("out_model_name = :name and out_id = :id and user_id is not null", :name => model, :id => id).count
+  	UserLike.where("out_model_name = :name and out_id = :id and user_id is not null", :name => model, :id => id).select(:user_id).distinct.count
   end
 
   def self.can?(model, id, user_id)

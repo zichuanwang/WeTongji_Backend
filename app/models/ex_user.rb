@@ -35,13 +35,13 @@ class ExUser
 			model.FriendCount = user.friends.count
 
 			model.LikeCount = {}
-			model.LikeCount["User"] = user.user_likes.where("out_model_name = 'User'").count
-			model.LikeCount["Activity"] = user.user_likes.where("out_model_name = 'Activity'").count
-			model.LikeCount["Story"] = user.user_likes.where("out_model_name = 'Story'").count
-			model.LikeCount["Information"] = user.user_likes.where("out_model_name = 'Information'").count
-			model.LikeCount["Account"] = user.user_likes.where("out_model_name = 'Account'").count
-			model.LikeCount["Person"] = user.user_likes.where("out_model_name = 'Person'").count
-			model.LikeCount["Course"] = user.user_likes.where("out_model_name = 'Course'").count
+			model.LikeCount["User"] = user.user_likes.where("out_model_name = 'User'").distinct.count
+			model.LikeCount["Activity"] = user.user_likes.where("out_model_name = 'Activity'").distinct.count
+			#model.LikeCount["Story"] = user.user_likes.where("out_model_name = 'Story'").distinct.count
+			model.LikeCount["Information"] = user.user_likes.where("out_model_name = 'Information'").distinct.count
+			model.LikeCount["Account"] = user.user_likes.where("out_model_name = 'Account'").distinct.count
+			model.LikeCount["Person"] = user.user_likes.where("out_model_name = 'Person'").distinct.count
+			model.LikeCount["Course"] = user.user_likes.where("out_model_name = 'Course'").distinct.count
 
 			model.ScheduleCount = {}
 			model.ScheduleCount["Activity"] = 0
