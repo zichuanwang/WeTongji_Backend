@@ -35,6 +35,7 @@ class ExUser
 			model.FriendCount = user.friends.count
 
 			model.LikeCount = {}
+			p '================'
 			model.LikeCount["User"] = UserLike.get_like_count("User", user.id)
 			model.LikeCount["Activity"] = UserLike.get_like_count("Activity", user.id)
 			#model.LikeCount["Story"] = user.user_likes.where("out_model_name = 'Story'").distinct.count
