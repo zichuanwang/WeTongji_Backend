@@ -55,7 +55,7 @@ module Api
 			re.add_data("Information", ex_information)
 			re.add_data("Person", ex_person)
 			re.add_data("Activities", ex_activities)
-			re.add_data("AccountPopulor", ExAccount.init_from_account(account_pop, user))
+			re.add_data("AccountPopular", ExAccount.init_from_account(account_pop, user))
 			re.add_data("AccountNewest", ExAccount.init_from_account(account_new, user))
 			return_response(re)
 		end
