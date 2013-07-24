@@ -51,10 +51,7 @@ module Api
 							#find history invites and delete them
 							all = CourseInvite.where("`from` = :from and `to` = :to", :from => invite.from, :to => invite.to)
 							all.each do |item|
-								notif = Notification.find_by_out_model_name_and_out_id("CourseInvite", item.id)
-								unless notif.nil?
-									notif.destroy
-								end
+								Notification.delete_all("out_model_name = 'CourseInvite' and out_id = :id", :id => item.id)
 								item.destroy
 							end
 
