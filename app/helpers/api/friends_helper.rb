@@ -48,6 +48,14 @@ module Api
 					
 					if friend_invite && friend_invite.to_user == user
 						friend_invite.accept
+
+						noti = Notification.new
+						noti.title = "#{invite.to_user.name}已经接受你的邀请."
+						noti.user = friend_invite.from_user
+						noti.out_id = friend_invite.id
+						noti.out_model_name = "FriendInvite"
+						noti.save
+
 						re = ApiReturn.new("000")
 					else
 						re = ApiReturn.new("017")
@@ -66,6 +74,14 @@ module Api
 					
 					if friend_invite && friend_invite.to_user == user
 						friend_invite.reject
+
+						#remove these code at 3.1
+						noti = Notification.find_by_out_model_name_and_out_id("FriendInvite", params[:Id])
+						unless noti.nil?
+							noti.rejected_at = friend_invite.rejected_at
+							noti.save
+						end
+
 						re = ApiReturn.new("000")
 					else
 						re = ApiReturn.new("017")

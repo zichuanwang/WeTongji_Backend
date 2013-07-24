@@ -72,6 +72,14 @@ module Api
 					
 					if invite && invite.to_user == user
 						invite.accept
+
+						noti = Notification.new
+						noti.title = "#{invite.to_user.name}已经接受你的邀请."
+						noti.user = invite.from_user
+						noti.out_id = invite.id
+						noti.out_model_name = "CourseInvite"
+						noti.save
+
 						re = ApiReturn.new("000")
 					else
 						re = ApiReturn.new("017")
@@ -90,6 +98,14 @@ module Api
 					
 					if invite && invite.to_user == user
 						invite.reject
+
+						#remove these code at 3.1
+						noti = Notification.find_by_out_model_name_and_out_id("CourseInvite", params[:Id])
+						unless noti.nil?
+							noti.rejected_at = invite.rejected_at
+							noti.save
+						end
+
 						re = ApiReturn.new("000")
 					else
 						re = ApiReturn.new("017")

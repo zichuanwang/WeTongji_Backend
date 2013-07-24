@@ -6,7 +6,7 @@ module Api
 				if user
 					p = params[:P].nil? ? 1 : params[:P].to_i
 
-					items = user.notifications
+					items = user.notifications.where("rejected_at is null")
 					if params[:OnlyNew] == "1"
 						items = items.where("unread = true")
 					end
