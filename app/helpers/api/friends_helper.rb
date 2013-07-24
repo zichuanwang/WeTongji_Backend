@@ -9,7 +9,7 @@ module Api
 						invite = FriendInvite.invite(user, uid)
 						if invite
 							#find history invites and delete them
-							all = FriendInvite.where("from = :from and to => :to", :from => invite.from, :to => invite.to)
+							all = FriendInvite.where("from = :from and to = :to", :from => invite.from, :to => invite.to)
 							all.each do |item|
 								notif = Notification.find_by_out_model_name_and_out_id("FriendInvite", item.id)
 								unless notif.nil?
