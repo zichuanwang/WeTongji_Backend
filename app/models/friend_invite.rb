@@ -19,7 +19,7 @@ class FriendInvite < ActiveRecord::Base
 
 	def self.invite(from_user, to)
 		user = User.find_by_uid(to)
-		
+
 		invite = FriendInvite.new
 		invite.from = from_user.id
 		invite.from_name = from_user.name

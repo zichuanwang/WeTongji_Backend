@@ -8,6 +8,16 @@ module Api
 					params[:UIDs].split(',').each do |uid|
 						invite = FriendInvite.invite(user, uid)
 						if invite
+							#find history invites and delete them
+							all = FriendInvite.where("from = :from and to => :to", :from => invite.from, :to => invite.to)
+							all.each do |item|
+								notif = Notification.find_by_out_model_name_and_out_id("FriendInvite", item.id)
+								unless notif.nil?
+									notif.destroy
+								end
+								item.destroy
+							end
+
 							invite.save
 							noti = Notification.new
 							noti.title = "#{invite.from_user.name}邀请你加为好友."
@@ -15,6 +25,7 @@ module Api
 							noti.out_id = invite.id
 							noti.out_model_name = "FriendInvite"
 							noti.save
+
 						end
 					end
 					
