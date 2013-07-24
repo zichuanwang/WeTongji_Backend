@@ -205,7 +205,7 @@ module Api
 						invite = ActivityInvite.invite(user, uid, params[:Id])
 						if invite
 							#find history invites and delete them
-							all = ActivityInvite.where("from = :from and to = :to", :from => invite.from, :to => invite.to)
+							all = ActivityInvite.where("`from` = :from and `to` = :to", :from => invite.from, :to => invite.to)
 							all.each do |item|
 								notif = Notification.find_by_out_model_name_and_out_id("ActivityInvite", item.id)
 								unless notif.nil?
