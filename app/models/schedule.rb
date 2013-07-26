@@ -38,11 +38,11 @@ class Schedule
 
 		sections_all = Course.joins("left join course_sections on course_sections.course_uno = courses.uno")
 						.joins("left join course_takes on course_takes.course_uno = courses.uno")
-						.where("course_takes.student_no = :no and (courses.begin between :begin and :end or courses.end between :begin and :end)", :no => user.no, :begin => begin_at, :end => end_at)
+						.where("course_takes.student_no = :no and (courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end)", :no => user.no, :begin => begin_at, :end => end_at)
 						.select("courses.no as no, courses.uno as uno, courses.name as name, courses.teacher as teacher, courses.hours as hours, course_sections.location as location, course_sections.week_day as week_day, course_sections.week_type as week_type, course_sections.section_start as section_start, course_sections.section_end as section_end, courses.point as point, courses.required as required, course_sections.week_type as week_type, course_sections.week_day as week_day")
 
 		sections_all_audit = user.audit_courses.joins("left join course_sections on course_sections.course_uno = courses.uno").joins("left join course_takes on course_takes.course_uno = courses.uno")
-						.where("courses.begin between :begin and :end or courses.end between :begin and :end", :begin => begin_at, :end => end_at)
+						.where("courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end", :begin => begin_at, :end => end_at)
 						.select("courses.no as no, courses.uno as uno, courses.name as name, courses.teacher as teacher, courses.hours as hours, course_sections.location as location, course_sections.section_start as section_start, course_sections.section_end as section_end, courses.point as point, courses.required as required, course_sections.week_type as week_type, course_sections.week_day as week_day")
 
 		day = begin_at.to_datetime
@@ -126,12 +126,12 @@ class Schedule
 	def self.get_courses_by_user(user, begin_at, end_at)
 		sections_all = Course.joins("left join course_sections on course_sections.course_uno = courses.uno")
 						.joins("left join course_takes on course_takes.course_uno = courses.uno")
-						.where("course_takes.student_no = :no and (courses.begin between :begin and :end or courses.end between :begin and :end)", :no => user.no, :begin => begin_at, :end => end_at)
+						.where("course_takes.student_no = :no and (courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end)", :no => user.no, :begin => begin_at, :end => end_at)
 						.select("courses.*")
 
 		sections_all_audit = user.audit_courses.joins("left join course_sections on course_sections.course_uno = courses.uno")
 						.joins("left join course_takes on course_takes.course_uno = courses.uno")
-						.where("courses.begin between :begin and :end or courses.end between :begin and :end", :begin => begin_at, :end => end_at)
+						.where("courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end", :begin => begin_at, :end => end_at)
 						.select("courses.*")
 
 		sections_all_audit + sections_all
