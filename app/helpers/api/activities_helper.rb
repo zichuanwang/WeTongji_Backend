@@ -87,11 +87,11 @@ module Api
 					re = ApiReturn.new("000")
 					re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
 					re.add_data("Activities", ex)
-						return_response(re)
-					else
-						re = ApiReturn.new("017")
-						return_response(re)
-					end
+					return_response(re)
+					
+				else
+					re = ApiReturn.new("017")
+					return_response(re)
 				end
 			end
 		end
