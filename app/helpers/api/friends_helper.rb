@@ -52,15 +52,15 @@ module Api
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					friend_invite = FriendInvite.find_by_id(params[:Id])
+					invite = FriendInvite.find_by_id(params[:Id])
 					
-					if friend_invite && friend_invite.to_user == user
-						friend_invite.accept
+					if invite && invite.to_user == user
+						invite.accept
 
 						noti = Notification.new
 						noti.title = "#{invite.to_user.name}已经接受你的邀请."
-						noti.user = friend_invite.from_user
-						noti.out_id = friend_invite.id
+						noti.user = invite.from_user
+						noti.out_id = invite.id
 						noti.out_model_name = "FriendInvite"
 						noti.save
 
@@ -78,15 +78,15 @@ module Api
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					friend_invite = FriendInvite.find_by_id(params[:Id])
+					invite = FriendInvite.find_by_id(params[:Id])
 					
-					if friend_invite && friend_invite.to_user == user
-						friend_invite.reject
+					if invite && invite.to_user == user
+						invite.reject
 
 						#remove these code at 3.1
 						noti = Notification.find_by_out_model_name_and_out_id("FriendInvite", params[:Id])
 						unless noti.nil?
-							noti.rejected_at = friend_invite.rejected_at
+							noti.rejected_at = invite.rejected_at
 							noti.save
 						end
 
