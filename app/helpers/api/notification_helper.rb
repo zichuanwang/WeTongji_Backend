@@ -16,7 +16,7 @@ module Api
 					items.each do |n|
 						n.unread = false
 						n.save
-						ex << ExNotification.init_from_notification(n)
+						ex << ExNotification.init_from_notification(n, user)
 					end
 					re = ApiReturn.new("000")
 					re.add_data("NextPager", (p < items.num_pages ? p + 1 : 0))

@@ -1,7 +1,7 @@
 class ExNotification
 	attr_accessor :Id, :Title, :Description, :SourceType, :UnRead, :SourceId, :SourceDetails
 
-	def self.init_from_notification(notification)
+	def self.init_from_notification(notification, user = nil)
 		model = ExNotification.new
 		model.Id = notification.id
 		model.Title = notification.title
@@ -12,11 +12,11 @@ class ExNotification
 		
 		case model.SourceType
 		when "FriendInvite"
-			model.SourceDetails = ExFriendInvite.init_from_friend_invite(FriendInvite.find_by_id(model.SourceId))
+			model.SourceDetails = ExFriendInvite.init_from_friend_invite(FriendInvite.find_by_id(model.SourceId), user)
 		when "ActivityInvite"
-			model.SourceDetails = ExActivityInvite.init_from_activity_invite(ActivityInvite.find_by_id(model.SourceId))
+			model.SourceDetails = ExActivityInvite.init_from_activity_invite(ActivityInvite.find_by_id(model.SourceId), user)
 		when "CourseInvite"
-			model.SourceDetails = ExCourseInvite.init_from_course_invite(CourseInvite.find_by_id(model.SourceId))
+			model.SourceDetails = ExCourseInvite.init_from_course_invite(CourseInvite.find_by_id(model.SourceId), user)
 		end
 
 		model
