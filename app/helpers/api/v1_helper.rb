@@ -22,7 +22,7 @@ module Api
 		include Api::UserLikesHelper
 		include Api::NotificationHelper
 		include Api::ReportsHelper
-		include Api::AccountsHelper
+		#include Api::AccountsHelper
 		include Api::CoursesHelper
 	end
 end
