@@ -130,7 +130,7 @@ module Api
 				if user
 					u = user
 					ex = []
-					if params["UID"]
+					if params[:UID]
 						friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
 						if friend
 							u = friend.other_user
