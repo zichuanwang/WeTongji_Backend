@@ -82,6 +82,8 @@ class ApiController < ApplicationController
 
 		"Report.Add" => "report_add",
 		"SchoolYear.Setting" => "school_year_setting",
+
+		"Account.Get" => "account_get",
 	}
 
 	def call
