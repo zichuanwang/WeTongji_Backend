@@ -43,7 +43,7 @@ AroundTmp.all.each do |item|
 	end
 
 	item.users_likes.each do |u|
-		i.users_likes << u
+		i.user_likes << u
 	end
 
 	p i
@@ -85,7 +85,7 @@ ClubNewsTmp.all.each do |item|
 	end
 
 	item.users_likes.each do |u|
-		i.users_likes << u
+		i.user_likes << u
 	end
 
 	p i
@@ -131,7 +131,7 @@ ForStaffTmp.all.each do |item|
 	end
 
 	item.users_likes.each do |u|
-		i.users_likes << u
+		i.user_likes << u
 	end
 
 	p i
@@ -177,7 +177,7 @@ SchoolNewsTmp.all.each do |item|
 	end
 
 	item.users_likes.each do |u|
-		i.users_likes << u
+		i.user_likes << u
 	end
 
 	p i
