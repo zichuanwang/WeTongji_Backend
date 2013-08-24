@@ -78,15 +78,7 @@ module Api
 			if verify_action_params(['U', 'S'])
 				user = verify_user_authentication
 				if user
-					if params[:UID].nil?
-						ex = ExUser.init_from_user(user.reload)
-					else
-						friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
-						unless friend.nil?
-							ex = ExUser.init_from_user(friend.other_user)
-						end
-					end
-					
+					ex = ExUser.init_from_user(user.reload)
 					re = ApiReturn.new("000")
 					re.add_data("User", ex)
 					return_response(re)

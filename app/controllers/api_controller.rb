@@ -51,6 +51,7 @@ class ApiController < ApplicationController
 		"Friends.Get.WithSameActivity" => "friends_with_same_activity",
 		"Friends.Get.WithSameFriend" => "friends_with_same_friend",
 		"Friends.Get.ByUser" => "friends_get_by_user",
+		"Friend.Get" => "friend_get",
 
 		"Information.GetList" => "information_getlist",
 		"Information.Get" => "information_get",
@@ -84,6 +85,8 @@ class ApiController < ApplicationController
 		"SchoolYear.Setting" => "school_year_setting",
 
 		"Account.Get" => "account_get",
+
+		"Exams.Get" => "exams",
 	}
 
 	def call
