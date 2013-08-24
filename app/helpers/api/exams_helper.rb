@@ -22,5 +22,15 @@ module Api
 				end
 			end
 		end
+
+		def exam_get
+			if verify_action_params(['UNO'])
+				exam = Exam.find_by_course_uno(params[:UNO])
+				ex = ExExam.init_from_exam_instance(exam)
+				re = ApiReturn.new("000")
+				re.add_data("Exam", ex)
+				return_response(re)
+			end
+		end
 	end
 end

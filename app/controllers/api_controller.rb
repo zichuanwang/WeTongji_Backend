@@ -87,6 +87,7 @@ class ApiController < ApplicationController
 		"Account.Get" => "account_get",
 
 		"Exams.Get" => "exams",
+		"Exam.Get" => "exam_get",
 	}
 
 	def call
