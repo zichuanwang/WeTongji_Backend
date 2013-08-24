@@ -10,18 +10,6 @@
 </li>
 <% end %>
 
-<% if can? :manage, News %>
-<li>
-	<%= link_to news_index_path, { :title => "新闻" } do %>
-	<span class="icon"><img src="/images/icons/application_double.png" alt="新闻" /></span><span>新闻</span>
-	<% end %>
-	<ul>
-		<li><%= link_to "所有新闻", news_index_path %></li>
-		<li class="last"><%= link_to "创建新闻", new_news_path %></li>
-	</ul>
-</li>
-<% end %>
-
 <% if (can?(:manage, SchoolNews) || can?(:manage, ClubNews) || can?(:manage, ForStaff) || can?(:manage, Around)) %>
 <li>
 	<a href="#" title="资讯">
