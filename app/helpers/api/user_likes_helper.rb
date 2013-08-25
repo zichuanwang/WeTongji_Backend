@@ -54,7 +54,7 @@ module Api
 			if verify_action_params(['U', 'S', 'Model'])
 				user = verify_user_authentication
 				if user
-					list = UserLike.where("out_model_name = :name and user_id = :user_id", :name => params[:Model], :user_id => user.id)
+					list = UserLike.order("id desc").where("out_model_name = :name and user_id = :user_id", :name => params[:Model], :user_id => user.id)
 					p = params[:P].nil? ? 1 : params[:P].to_i
 					list = list.page(p).per(20)
 					ex = []
