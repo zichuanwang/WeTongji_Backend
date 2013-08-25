@@ -92,7 +92,7 @@ class ApiController < ApplicationController
 
 	def call
 	    #check params exists system require params
-	    if verify_sys_params && METHODS[params[:M]]
+	    if verify_sys_params && METHODS[params[:M]] && params[:V] == "3.0"
 	    	ApiLog.create(:m => params[:M], :u => params[:U], :v => params[:V], :d => params[:D])
 	       	send METHODS[params[:M]]
 	    else
