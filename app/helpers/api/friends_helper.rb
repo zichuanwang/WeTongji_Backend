@@ -199,7 +199,7 @@ module Api
 					#friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
 					if friend
 						ex = []
-						friend.other_user.friends.each do |item|
+						friend.friends.each do |item|
 							ex << ExUser.init_from_user(item.other_user, user)
 						end
 						re = ApiReturn.new("000")
