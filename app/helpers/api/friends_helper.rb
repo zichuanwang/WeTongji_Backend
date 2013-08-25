@@ -200,7 +200,7 @@ module Api
 					if friend
 						ex = []
 						friend.friends.each do |item|
-							ex << ExUser.init_from_user(item.other_user, user)
+							ex << ExUser.init_from_user(item, user)
 						end
 						re = ApiReturn.new("000")
 						re.add_data("Users", ex)
