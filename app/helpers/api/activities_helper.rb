@@ -96,66 +96,6 @@ module Api
 			end
 		end
 
-		def activity_favorite
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					activity = Activity.find(params[:Id])
-					if activity
-						activity.user_favorite(user)
-						activity.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
-
-		def activity_unfavorite
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					activity = Activity.find(params[:Id])
-					if activity
-						activity.user_unfavorite(user)
-						activity.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
-
-		def	activity_like
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					activity = Activity.find(params[:Id])
-					if activity
-						activity.user_like(user)
-						activity.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
-
-		def	activity_unlike
-			if verify_action_params(['U', 'S', 'Id'])
-				user = verify_user_authentication
-				if user
-					activity = Activity.find(params[:Id])
-					if activity
-						activity.user_unlike(user)
-						activity.save
-					end
-					re = ApiReturn.new("000")
-					return_response(re)
-				end
-			end
-		end
-
 		def activity_schedule
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
