@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   after_create :send_confirmation
 
   has_and_belongs_to_many :audit_courses, :class_name => "Course", :join_table => "audit_courses"
+  has_many :course_takes, :foreign_key => "student_no", :primary_key => "no"
 
   # next version move to single table
   has_and_belongs_to_many :schedule_activities, :class_name => "Activity", :join_table => "activities_users_schedules"
