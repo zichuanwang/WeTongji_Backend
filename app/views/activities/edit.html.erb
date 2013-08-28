@@ -1,6 +1,13 @@
-<div class="box">
-    <div class="title">
-        <h5>编辑活动</h5>
+<% @title = "活动" %>
+<% @description = "校园活动或者校园周边活动" %>
+<% @controller = "活动" %>
+<% @action = "编辑活动" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>编辑活动</div>
     </div>
-    <%= render 'form' %>
+    <div class="portlet-body form">
+	<%= render 'form' %>
+	</div>
 </div>

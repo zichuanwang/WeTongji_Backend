@@ -1,11 +1,13 @@
 <h3 class="page-title">
-	控制台 <small>快捷方式和仪表板</small>
+	<%= @title %> <small><%= @description %></small>
 </h3>
 <ul class="breadcrumb">
 	<li>
 		<i class="icon-home"></i>
-		<a href="/">首页</a> 
+		<%= @controller %> 
 		<i class="icon-angle-right"></i>
 	</li>
-	<li><a href="/">控制台</a></li>
+	<li>
+		<%= @action %>
+	</li>
 </ul>

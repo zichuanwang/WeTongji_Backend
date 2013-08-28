@@ -19,8 +19,12 @@ class ApplicationController < ActionController::Base
     if devise_controller?
       "out"
     else
-      "application"
-      #"new_schema"
+      case action_name
+      when "index" then "list"
+      when "show" then "form"
+      when "edit" then "form"
+      when "new" then "form"
+      else "application" end
     end
   end
 end
