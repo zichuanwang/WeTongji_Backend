@@ -19,7 +19,7 @@ module Api
 				end
 
 				if  type == "2" || type.nil?
-					in2 = Admin.order("id desc").where("display like :key or name like :key", :key => "%#{key}%").limit(10)
+					in2 = Admin.order("id desc").where("display like :key", :key => "%#{key}%").limit(10)
 					ex2 = []
 					in2.each do |item|
 						ex2 << ExAccount.init_from_account(item, user)

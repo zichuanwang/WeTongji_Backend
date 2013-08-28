@@ -38,7 +38,15 @@ module Api
 			if verify_action_params(['U', 'S', 'Model', 'Id'])
 				user = verify_user_authentication
 				if user
-					user_like = UserLike.find_by_out_id_and_out_model_name_and_user_id(params[:Id], params[:Model], user.id)
+					user_like = nil
+					case params[:Model]
+					when "User"
+						user_like = UserLike.joins("left join users u on u.id = user_likes.out_id").where("user_likes.out_model_name = 'User' and u.uid = :id and user_likes.user_id = :user_id", :id => params[:Id], :user_id => user.id).first
+					when "Course"
+						user_like = UserLike.joins("left join courses c on c.id = user_likes.out_id").where("user_likes.out_model_name = 'Course' and c.uno = :id and user_likes.user_id = :user_id", :id => params[:Id], :user_id => user.id).first
+					else
+						user_like = UserLike.find_by_out_id_and_out_model_name_and_user_id(params[:Id], params[:Model], user.id)
+					end
 					
 					unless user_like.nil?
 						user_like.destroy
@@ -54,7 +62,7 @@ module Api
 			if verify_action_params(['U', 'S', 'Model'])
 				user = verify_user_authentication
 				if user
-					list = UserLike.where("out_model_name = :name and user_id = :user_id", :name => params[:Model], :user_id => user.id)
+					list = UserLike.order("id desc").where("out_model_name = :name and user_id = :user_id", :name => params[:Model], :user_id => user.id)
 					p = params[:P].nil? ? 1 : params[:P].to_i
 					list = list.page(p).per(20)
 					ex = []

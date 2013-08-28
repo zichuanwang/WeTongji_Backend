@@ -19,7 +19,7 @@ class Activity < ActiveRecord::Base
 
 	def delete
 		self.users_favorites.clear
-		self.users_likes.clear
+		self.user_likes.clear
 		self.users_schedules.clear
 		self.destroy
 	end

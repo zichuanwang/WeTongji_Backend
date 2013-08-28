@@ -50,7 +50,7 @@ class Information < ActiveRecord::Base
 		end
 		# add to user like
 		if user && !self.users_likes.exists?(user)
-			self.users_likes << user
+			self.user_likes << user
 			self.like += 1
 		end
 	end
@@ -71,7 +71,7 @@ class Information < ActiveRecord::Base
 	end
 
 	def can_like(user)
-		!self.users_likes.exists?(user)
+		!self.user_likes.exists?(user)
 	end
 
 	private

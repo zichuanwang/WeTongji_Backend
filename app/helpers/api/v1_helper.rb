@@ -24,5 +24,6 @@ module Api
 		include Api::ReportsHelper
 		include Api::AccountsHelper
 		include Api::CoursesHelper
+		include Api::ExamsHelper
 	end
 end

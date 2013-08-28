@@ -45,7 +45,8 @@ class ExUser
 
 			model.ScheduleCount = {}
 			model.ScheduleCount["Activity"] = user.schedule_activities.count
-			model.ScheduleCount["Course"] = user.audit_courses.count
+			model.ScheduleCount["Course"] = user.audit_courses.where("now() between courses.begin and courses.end").count 
+										  + user.course_takes.joins("inner join courses on courses.uno = course_takes.course_uno").where("now() between courses.begin and courses.end").count
 
 		end
 		
