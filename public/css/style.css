@@ -443,14 +443,22 @@ img {
    ========================================================================== */
 
 #page-filters {
-	background:#f4c400;
+	background:#ffffff;
 }
 #page-filters .description {
-	margin:-182px 0 0; position:absolute; top:50%; left:50%; width:510px;
+	margin:-182px 0 0; position:absolute; top:50%; left:50%; width:530px;
 	color:#000;
 }
+#page-filters .description p{
+	font-family: 微软雅黑;
+}
 #page-filters h1 {
-	font-size:63px;
+	font-size:60px;
+}
+#page-filters p strong {
+	color:#0ac2ca;
+	font-family: 微软雅黑;
+	font-size:28px;
 }
 #page-filters strong {
 	text-transform:uppercase;
@@ -458,7 +466,7 @@ img {
 
 #gallery {
 	margin:-205px 40px 0 0; position:absolute; top:50%; right:50%;
-	width:434px; height:411px;
+	width:460px; 
 }
 
 #gallery .default a:hover .image {
@@ -673,7 +681,7 @@ a:focus .windows-phone {
 	text-align:left;
 }
 #page-news h2 {
-	margin:20px 0;
+	color:#eae379;
 }
 #page-news .cross {
 	display:block; margin:25px auto 0; width:17px;
@@ -685,7 +693,7 @@ a:focus .windows-phone {
 	float:left; margin:0 4% 0 0; width:27.8%
 }
 #page-news .description img {
-	margin:10px 0 0 0;
+	margin:20px 0 20px 0;
 }
 #page-news .description .column {
 	padding: 0px 0 0 0;
@@ -717,15 +725,21 @@ a:focus .windows-phone {
    ========================================================================== */
 
 #page-share .description {
-	margin:-130px 0 0 -350px; position:absolute; top:50%; left:50%; width:800px; height:260px;
+	margin:-130px 0 0 -350px; position:absolute; top:44%; left:50%; width:840px; height:260px;
 	text-shadow:0 1px 2px rgba(0,0,0,0.8);
 }
 #page-share .icon {
-	float:left; margin:0 40px 0 0; width:260px;
+	float:left; margin:0px 40px 30px 0px; width:260px;
 }
 #page-share h1 {
-	padding:25px 0 10px;
-	font-size:45px; text-shadow:0 2px 6px rgba(0,0,0,0.6);
+	padding:0 0 10px;
+	font-size:68px;
+}
+#page-share h1 strong{
+	 color:#f8be44;
+}
+#page-share li strong{
+	color: #6ce5ec;
 }
 #page-share ul,
 #page-share li {
@@ -909,7 +923,7 @@ a:focus .windows-phone {
 }
 @media only screen and (max-width:1500px) {
 	#page-news .description {
-		margin:-65px 0 0 -340px; top:15%; width:600px;
+		margin:-65px 0 0 -340px; top:25%; width:720px;
 	}
 	#news-description {
 		margin:-140px 0 0 -450px; width:900px; height:350px;
