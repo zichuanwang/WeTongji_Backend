@@ -20,13 +20,13 @@ class UserMailer < ActionMailer::Base
 
   def reset_password(user)
   	@user = user
-  	mail(:to => user.email, :subject => '重置Wetongji密码!')
+  	mail(:to => "#{user.no}@tongji.edu.cn", :subject => '重置Wetongji密码!')
   end
   
   def new_password(user, password)
     @user = user
     @password = password
-    mail(:to => user.email, :subject => '您的新密码.')
+    mail(:to => "#{user.no}@tongji.edu.cn", :subject => '您的新密码.')
   end
 
 end
