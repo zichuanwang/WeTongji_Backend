@@ -1,64 +1,162 @@
-<div class="box">
-    <div class="title">
-        <h5>查看活动</h5>
+
+<% @title = "活动" %>
+<% @description = "校园活动或者校园周边活动" %>
+<% @controller = "活动" %>
+<% @action = "活动详情" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>活动</div>
     </div>
-    <div class="table">
-        <table>
-          <tr>
-            <td>账号</td>
-            <td class="last"><%= @activity.admin.display %></td>
-          </tr>
-          <tr>
-            <td>起止时间</td>
-            <td class="last"><%= @activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= @activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>标题</td>
-            <td class="last"><%= @activity.title %></td>
-          </tr>
-          <tr>
-            <td>位置</td>
-            <td class="last"><%= @activity.location %></td>
-          </tr>
-          <tr>
-            <td>关注度</td>
-            <td class="last"><%= @activity.favorite %></td>
-          </tr>
-          <tr>
-            <td>标题</td>
-            <td class="last"><%= @activity.like %></td>
-          </tr>
-          <tr>
-            <td>加入日程数</td>
-            <td class="last"><%= @activity.schedule %></td>
-          </tr>
-          <tr>
-            <td>内容</td>
-            <td class="last"><%= @activity.description %></td>
-          </tr>
-          <tr>
-            <td>图片</td>
-            <td class="last"><%= image_tag @activity.image.url %></td>
-          </tr>
-          <tr>
-            <td>是否可见</td>
-            <td class="last"><%= @activity.visiable ? "可见" : "不可见" %></td>
-          </tr>
-          <% if @activity.is_pending %>
-          <tr>
-            <td>原因</td>
-            <td class="last">需要审核,原因:<%= @activity.pending_reason %></td>
-          </tr>
-          <% end %>
-        </table>
-        <% if @activity.is_pending && (can? :approve, @activity) %>
-        <%= form_tag(activities_approve_path(:id => @activity.id), :method => "post") do %>
-        <div class="action">
-          <div class="button">
-            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
-          </div>
+    <div class="portlet-body form">
+
+      <div class="form-horizontal form-view">
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">标题</label>
+                <div class="controls">
+                  <span class="text">
+                    <%= @activity.title %>
+                  </span>
+                </div>
+            </div>
         </div>
-        <% end %>
-        <% end %>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">日期</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= @activity.end.strftime("%Y/%m/%d %H:%M:%S") %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">地点</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.location %>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="control-group">
+                <label class="control-label">关注度</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.favorite %>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="control-group">
+                <label class="control-label">喜欢</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.like %>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="control-group">
+                <label class="control-label">加入日程</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.schedule %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">图片</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= image_tag @activity.image.url %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">说明</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.description %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">账号</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.admin.display %>
+                  </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="span6">
+            <div class="control-group">
+                <label class="control-label">是否可见</label>
+                <div class="controls">
+                  <span class="text">
+                  <%= @activity.visiable ? "可见" : "不可见" %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% if @activity.is_pending %>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="control-group">
+                <label class="control-label">原因</label>
+                <div class="controls">
+                  <span class="text">
+                  需要审核,原因:<%= @activity.pending_reason %>
+                  </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% end %>
+    <% if @activity.is_pending && (can? :approve, @activity) %>
+    <%= form_tag(activities_approve_path(:id => @activity.id), :method => "post") do %>
+    <div class="form-actions">
+        <button type="submit" name="status" class="btn light-grey" onclick="return window.confirm('审核通过?');"><i class="icon-ok"></i> 审核通过</button>
+    </div>
+    <% end %>
+    <% end %>
+
+      </div>
     </div>
 </div>
