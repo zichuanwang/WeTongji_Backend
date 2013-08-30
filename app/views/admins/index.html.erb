@@ -1,19 +1,14 @@
-<div class="box">
-    <div class="title">
-        <h5>所有管理员</h5>
-        <div class="search">
-            <form action="/admins" method="get">
-                <div class="input">
-                    <input type="text" id="keywords" name="keywords" />
-                </div>
-                <div class="button">
-                    <input type="submit" value="搜索" />
-                </div>
-            </form>
-        </div>
+<% @title = "管理员" %>
+<% @description = "系统管理员" %>
+<% @controller = "管理员" %>
+<% @action = "列表" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-group"></i>所有管理账号</div>
     </div>
-    <div class="table">
-        <table>
+    <div class="portlet-body">
+        <table class="table table-hover">
             <thead>
                 <tr>
                   <th>Email</th>
@@ -23,14 +18,12 @@
                   <th>显示名</th>
                   <th>登陆</th>
                   <th>新闻/活动/咨询</th>
-                  <th>审核时间</th>
-                  <th>最后登陆</th>
-                  <th class="last">操作</th>
+                  <th></th>
                 </tr>
             </thead>
             <tbody>
               <% @admins.each do |admin| %>
-              <tr class="<%= admin.locked_at.nil? ? "" : "selected" %>">
+              <tr>
                   <td><%= admin.email %></td>
                   <td><%= admin.name %></td>
                   <td><%= admin.student_no %></td>
@@ -38,9 +31,14 @@
                   <td><%= admin.display %></td>
                   <td><%= admin.sign_in_count %></td>
                   <td><%= admin.news.size %>/<%= admin.activities.size %>/<%= admin.information.size %></td>
-                  <td><%= admin.approved_at.nil? ? "" : admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                  <td><%= admin.last_sign_in_at.nil? ? "" : admin.last_sign_in_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                  <td class="last">
+                  <td>
+                    <% unless admin.locked_at.nil? %>
+                        <span class="label label-info">已锁定</span>
+                    <% else %>
+                        <span class="label label-success">正常</span>
+                    <% end %>
+                  </td>
+                  <td>
                     <%= link_to '详情', admin %>
                     <%= link_to '编辑', edit_admin_path(admin) %>
                     <% if admin.approved_at.nil? %>
@@ -62,4 +60,5 @@
         </table>
         <%= paginate @admins %>
     </div>
+    
 </div>
