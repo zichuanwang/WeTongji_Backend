@@ -1,8 +1,13 @@
-<div class="box">
-    <div class="title">
-        <h5>广告</h5>
+<% @title = "广告" %>
+<% @description = "置顶广告" %>
+<% @controller = "广告" %>
+<% @action = "编辑广告" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>编辑广告</div>
     </div>
-    <div class="table">
-    <%= render 'form' %>
-    </div>
+    <div class="portlet-body form">
+	<%= render 'form' %>
+	</div>
 </div>
