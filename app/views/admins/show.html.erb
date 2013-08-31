@@ -1,175 +1,99 @@
-<div class="box">
-    <div class="title">
-        <h5>管理员详情</h5>
-        <ul class="links">
-            <li><%= link_to "更新资料", edit_admin_path(@admin) %></li>
-        </ul>
+<% @title = "管理员" %>
+<% @description = "系统管理员" %>
+<% @controller = "管理员" %>
+<% @action = "详情" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>管理员</div>
     </div>
-    <div class="table">
-        <table>
-          <tr>
-            <td>邮箱</td>
-            <td class="last"><%= @admin.email %></td>
-          </tr>
-          <tr>
-            <td>角色</td>
-            <td class="last"><%= role_name @admin.role %></td>
-          </tr>
-          <tr>
-            <td>创建时间</td>
-            <td class="last"><%= @admin.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>确认时间</td>
-            <td class="last"><%= @admin.confirmed_at.nil? ? "" : @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>审批时间</td>
-            <td class="last"><%= @admin.approved_at.nil? ? "" : @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>登陆次数</td>
-            <td class="last"><%= @admin.sign_in_count %></td>
-          </tr>
-          <tr>
-            <td>名称</td>
-            <td class="last"><%= @admin.display %></td>
-          </tr>
-          <tr>
-            <td>简介</td>
-            <td class="last"><%= @admin.description %></td>
-          </tr>
-          <tr>
-            <td>姓名</td>
-            <td class="last"><%= @admin.name %></td>
-          </tr>
-          <tr>
-            <td>学号</td>
-            <td class="last"><%= @admin.student_no %></td>
-          </tr>
-          <tr>
-            <td>职位</td>
-            <td class="last"><%= @admin.title %></td>
-          </tr>
-          <tr>
-            <td>手机</td>
-            <td class="last"><%= @admin.phone %></td>
-          </tr>
-          <tr>
-            <td>地址</td>
-            <td class="last"><%= @admin.address %></td>
-          </tr>
-          <tr>
-            <td>图标</td>
-            <td class="last"><%= image_tag @admin.icon.url(:medium) %></td>
-          </tr>
-          <tr>
-            <td>背景</td>
-            <td class="last"><%= image_tag @admin.background.url(:medium) %></td>
-          </tr>
-        </table>
-    </div>
-</div>
-<div class="box">
-    <div class="title">
-        <h5>所有活动</h5>
-    </div>
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                    <th>起止时间</th>
-                    <th>标题</th>
-                    <th>位置</th>
-                    <th>关注度</th>
-                    <th>+1</th>
-                    <th>参与度</th>
-                    <th class="last">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-            <% @admin.activities.order("id desc").each do |activity| %>
-              <tr class="<%= activity.is_pending ? "selected" : "" %>">
-                <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                <td><%= activity.title %></td>
-                <td><%= activity.location %></td>
-                <td><%= activity.favorite %></td>
-                <td><%= activity.like %></td>
-                <td><%= activity.schedule %></td>
-                <td class="last">
-                    <%= link_to '详情', activity %>
-                    <% if can? :edit, activity %>
-                    <%= link_to '编辑', edit_activity_path(activity) %>
-                    <% end %>
-                    <% if can? :delete, activity %>
-                    <%= link_to '删除', activity, confirm: '确认删除?', method: :delete %>
-                    <% end %>
-                </td>
-              </tr>
-            <% end %>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="box">
-    <div class="title">
-        <h5>所有新闻</h5>
-    </div>
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                  <th>标题</th>
-                  <th>发布时间</th>
-                  <th>阅读次数</th>
-                  <th class="last">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-              <% @admin.news.each do |item| %>
-              <tr class="<%= item.is_pending ? "selected" : "" %>">
-                  <td><%= item.title %></td>
-                  <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                  <td><%= item.read %></td>
-                  <td class="last">
-                      <%= link_to '详情', item %>
-                      <%= link_to '编辑', edit_news_path(item) %>
-                      <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
-                  </td>
-              </tr>
-              <% end %>
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="box">
-    <div class="title">
-        <h5>所有资讯</h5>
-    </div>
-    <div class="table">
-        <table>
-            <thead>
-                <tr>
-                  <th>标题</th>
-                  <th>发布时间</th>
-                  <th>阅读次数</th>
-                  <th class="last">操作</th>
-                </tr>
-            </thead>
-            <tbody>
-              <% @admin.information.each do |item| %>
-              <tr class="<%= item.is_pending ? "selected" : "" %>">
-                  <td><%= item.title %></td>
-                  <td><%= item.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-                  <td><%= item.read %></td>
-                  <td class="last">
-                      <%= link_to '详情', item %>
-                      <%= link_to '编辑', edit_news_path(item) %>
-                      <%= link_to '删除', item, confirm: '确认删除?', method: :delete %>
-                  </td>
-              </tr>
-              <% end %>
-            </tbody>
-        </table>
+    <div class="portlet-body form">
+
+      <div class="form-horizontal form-view">
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "邮箱", :content => @admin.email %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "角色", :content => role_name(@admin.role) %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "创建时间", :content => @admin.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "确认时间", :content => @admin.confirmed_at.nil? ? "" : @admin.confirmed_at.strftime("%Y/%m/%d %H:%M:%S") %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "审批时间", :content => @admin.approved_at.nil? ? "" : @admin.approved_at.strftime("%Y/%m/%d %H:%M:%S") %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "登陆次数", :content => @admin.sign_in_count %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "名称", :content => @admin.display %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "简介", :content => @admin.description %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "姓名", :content => @admin.name %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "学号", :content => @admin.student_no %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "职位", :content => @admin.title %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "手机", :content => @admin.phone %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "地址", :content => @admin.address %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "地址", :content => @admin.address %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "图标", :content => image_tag(@admin.icon.url(:medium)) %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "背景", :content => image_tag(@admin.background.url(:medium)) %>
+            </div>
+        </div>
+
+        <div class="form-actions">
+          <%= link_to "更新资料", edit_admin_path(@admin), { :class => "btn light-grey"} %>        </div>
+      </div>
     </div>
 </div>
