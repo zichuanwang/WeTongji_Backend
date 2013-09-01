@@ -1,80 +1,91 @@
-<div class="box">
-    <div class="title">
-        <h5>查看资讯</h5>
-    </div>
-    <div class="table">
-        <table>
-          <tr>
-            <td>标题</td>
-            <td class="last"><%= @around.title %></td>
-          </tr>
-          <tr>
-            <td>来源</td>
-            <td class="last"><%= @around.source %></td>
-          </tr>
-          <tr>
-            <td>发布时间</td>
-            <td class="last"><%= @around.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
-          </tr>
-          <tr>
-            <td>阅读次数</td>
-            <td class="last"><%= @around.read %></td>
-          </tr>
-          <tr>
-            <td>收藏次数</td>
-            <td class="last"><%= @around.favorite %></td>
-          </tr>
-          <tr>
-            <td>喜欢次数</td>
-            <td class="last"><%= @around.like %></td>
-          </tr>
-          <tr>
-            <td>摘要</td>
-            <td class="last"><%= @around.summary %></td>
-          </tr>
-          <tr>
-            <td>内容</td>
-            <td class="last"><%= @around.context %></td>
-          </tr>
-          <tr>
-            <td>票务信息</td>
-            <td class="last"><%= @around.ticket_service %></td>
-          </tr>
-          <tr>
-            <td>联系方式</td>
-            <td class="last"><%= @around.contact %></td>
-          </tr>
-          <tr>
-            <td>位置</td>
-            <td class="last"><%= @around.location %></td>
-          </tr>
+<% @title = "周边推荐" %>
+<% @description = "校园周边推荐" %>
+<% @controller = "资讯" %>
+<% @action = "周边推荐" %>
 
-          <% @around.information_images.each do |image| %>
-          <tr>
-            <td>图片</td>
-            <td class="last"><%= image_tag image.file.url(:medium) %></td>
-          </tr>
-          <% end %>
-          <tr>
-            <td>是否可见</td>
-            <td class="last"><%= @around.visiable ? "可见" : "不可见" %></td>
-          </tr>
-          <% if @around.is_pending %>
-          <tr>
-            <td>原因</td>
-            <td class="last">需要审核,原因:<%= @around.pending_reason %></td>
-          </tr>
-          <% end %>
-        </table>
-        <% if @around.is_pending && (can? :approve, @around) %>
-        <%= form_tag(around_approve_path(:id => @around.id), :method => "post") do %>
-        <div class="action">
-          <div class="button">
-            <input type="submit" name="status" onclick="return window.confirm('审核通过?');" value="审核通过" />
-          </div>
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>查看资讯</div>
+    </div>
+    <div class="portlet-body form">
+
+      <div class="form-horizontal form-view">
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "标题", :content => @around.title %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "发布时间", :content => @around.created_at.strftime("%Y/%m/%d %H:%M:%S") %>
+            </div>
+            <div class="span6">
+              <%= render 'shared/column_show', :name => "来源", :content => @around.source %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "摘要", :content => @around.summary %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "摘要", :content => @around.context %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "票务信息", :content => @around.ticket_service %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "联系方式", :content => @around.contact %>
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "位置", :content => @around.location %>
+            </div>
+        </div>
+
+        <% @around.information_images.each do |image| %>
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "图片", :content => image_tag(image.file.url(:medium)) %>
+            </div>
         </div>
         <% end %>
+
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "是否可见", :content => @around.visiable ? "可见" : "不可见" %>
+            </div>
+        </div>
+
+        <% if @around.is_pending %>
+        <div class="row-fluid">
+            <div class="span12">
+              <%= render 'shared/column_show', :name => "原因", :content => @around.pending_reason %>
+            </div>
+        </div>
         <% end %>
+
+        <div class="form-actions">
+          <%= link_to "更新资料", edit_around_path(@around), { :class => "btn light-grey"} %>
+          <% if @around.is_pending && (can? :approve, @around) %>
+          <%= form_tag(around_approve_path(:id => @around.id), :method => "post") do %>
+          <button type="submit" name="status" class="btn light-grey" onclick="return window.confirm('审核通过?');"><i class="icon-ok"></i> 审核通过</button>
+          <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
 </div>
-

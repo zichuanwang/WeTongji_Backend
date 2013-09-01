@@ -1,8 +1,13 @@
-<div class="box">
-    <div class="title">
-        <h5>创建周边推荐</h5>
+<% @title = "周边推荐" %>
+<% @description = "校园周边推荐" %>
+<% @controller = "资讯" %>
+<% @action = "周边推荐" %>
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>周边推荐</div>
     </div>
-    <div class="table">
-    <%= render 'form' %>
-    </div>
+    <div class="portlet-body form">
+	<%= render 'form' %>
+	</div>
 </div>
