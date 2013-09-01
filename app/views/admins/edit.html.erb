@@ -1,8 +1,14 @@
-<div class="box">
-    <div class="title">
-        <h5>修改管理员</h5>
+<% @title = "管理员" %>
+<% @description = "系统管理员" %>
+<% @controller = "管理员" %>
+<% @action = "修改管理员" %>
+
+
+<div class="portlet box light-grey">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>修改管理员</div>
     </div>
-    <div class="table">
-    	<%= render "form" %>
-    </div>
+    <div class="portlet-body form">
+	<%= render 'form' %>
+	</div>
 </div>

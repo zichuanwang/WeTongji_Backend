@@ -1,132 +1,179 @@
-	<%= form_for(@admin) do |f| %>
-	<div class="form">
-    <div class="fields">
-      <div class="field field-first">
-        <div class="label">
-          <label>邮箱</label>
+<%= form_for(@admin, :html => {:multipart => true, :class => 'form-horizontal'}) do |f| %>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">邮箱</label>
+            <div class="controls">
+              <%= f.text_field :email, { :class => "m-wrap span12" } %>
+            </div>
         </div>
-        <div class="input">
-        	<%= f.text_field :email, :class => "small" %>
-        </div>
-      </div>
-      <% if can?(:manage, Admin) %>
-      <div class="field">
-        <div class="label">
-          <label>角色</label>
-        </div>
-        <div class="select">
-        	<%= f.select :role, { "普通管理员" => "CommonAdmin", "超级管理员" => "SuperAdmin" } %>
-        </div>
-      </div>
-      <% end %>
-      <div class="field">
-        <div class="label">
-          <label>密码</label>
-        </div>
-        <div class="input">
-        	<%= f.password_field :password, :class => "small" %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>确认</label>
-        </div>
-        <div class="input">
-        	<%= f.password_field :password_confirmation, :class => "small" %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>名称</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :display, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>图标</label>
-        </div>
-        <div class="input input-file">
-          <%= f.file_field :icon, { :size => "40" } %>
-          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jpeg,正方形,文件名不能有中文,300K以内</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>背景</label>
-        </div>
-        <div class="input input-file">
-          <%= f.file_field :background, { :size => "40" } %>
-          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jpeg,正方形,文件名不能有中文,300K以内</label>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>简介(200个汉字以内)</label>
-        </div>
-        <div class="input">
-          <%= f.text_area :description, { :rows => 8, :cols => 80 } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>姓名</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :name, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>学号</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :student_no, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>职位</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :title, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>电话</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :phone, { :class => "small" } %>
-        </div>
-      </div>
-      <div class="field">
-        <div class="label">
-          <label>住址</label>
-        </div>
-        <div class="input">
-          <%= f.text_field :address, { :class => "large" } %>
-        </div>
-      </div>
-      <% if can? :manage, Admin %>
-      <div class="field">
-        <div class="label label-checkbox">
-          <label>权限</label>
-        </div>
-        <div class="checkboxes">
-          <input type="checkbox" name="permissions[]" value="SchoolNews" <%= @admin.has_permission("SchoolNews") ? "checked" : "" %> /><label>管理校园新闻</label>
-          <input type="checkbox" name="permissions[]" value="ClubNews" <%= @admin.has_permission("ClubNews") ? "checked" : "" %> /><label>管理团队通告</label>
-          <input type="checkbox" name="permissions[]" value="ForStaff" <%= @admin.has_permission("ForStaff") ? "checked" : "" %> /><label>管理校务信息</label>
-          <input type="checkbox" name="permissions[]" value="Around" <%= @admin.has_permission("Around") ? "checked" : "" %> /><label>管理周边推荐</label>
-          <input type="checkbox" name="permissions[]" value="Person" <%= @admin.has_permission("Person") ? "checked" : "" %> /><label>管理每周人物</label>
-        </div>
-      </div>
-      <% end %>
-      <div class="buttons">
-        <input type="submit" name="submit" value="保存" />
-      </div>
     </div>
   </div>
-	<% end %>
 
+  <% if can?(:manage, Admin) %>
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">角色</label>
+            <div class="controls">
+              <%= f.select :role, { "普通管理员" => "CommonAdmin", "超级管理员" => "SuperAdmin" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">密码</label>
+            <div class="controls">
+              <%= f.password_field :password, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">确认密码</label>
+            <div class="controls">
+              <%= f.password_field :password_confirmation, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">社团名称</label>
+            <div class="controls">
+              <%= f.text_field :display, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">图标(jpeg,正方形,文件名不能有中文,300K以内)</label>
+            <div class="controls">
+              <%= f.file_field :icon, { :size => "40" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">背景(jpeg,正方形,文件名不能有中文,300K以内)</label>
+            <div class="controls">
+              <%= f.file_field :background, { :size => "40" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">简介(200个汉字以内)</label>
+            <div class="controls">
+              <%= f.text_area :description, { :class => "m-wrap span12", :rows => 8, :cols => 80 } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">简介(200个汉字以内)</label>
+            <div class="controls">
+              <%= f.text_area :description, { :class => "m-wrap span12", :rows => 8, :cols => 80 } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">姓名</label>
+            <div class="controls">
+              <%= f.text_field :name, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">学号</label>
+            <div class="controls">
+              <%= f.text_field :student_no, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">职位</label>
+            <div class="controls">
+              <%= f.text_field :title, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">电话</label>
+            <div class="controls">
+              <%= f.text_field :phone, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">住址</label>
+            <div class="controls">
+              <%= f.text_field :address, { :class => "m-wrap span12" } %>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <% if can? :manage, Admin %>
+  <div class="row-fluid">
+    <div class="span12">
+        <div class="control-group">
+            <label class="control-label">权限</label>
+            <div class="controls">
+              <input type="checkbox" name="permissions[]" value="SchoolNews" <%= @admin.has_permission("SchoolNews") ? "checked" : "" %> />管理校园新闻
+              <input type="checkbox" name="permissions[]" value="ClubNews" <%= @admin.has_permission("ClubNews") ? "checked" : "" %> />管理团队通告
+              <input type="checkbox" name="permissions[]" value="ForStaff" <%= @admin.has_permission("ForStaff") ? "checked" : "" %> />管理校务信息
+              <input type="checkbox" name="permissions[]" value="Around" <%= @admin.has_permission("Around") ? "checked" : "" %> />管理周边推荐
+              <input type="checkbox" name="permissions[]" value="Person" <%= @admin.has_permission("Person") ? "checked" : "" %> />管理每周人物
+            </div>
+        </div>
+    </div>
+  </div>
+  <% end %>
+      
+  <div class="form-actions">
+      <button type="submit" class="btn light-grey"><i class="icon-ok"></i> 保存</button>
+  </div>
+<% end %>
