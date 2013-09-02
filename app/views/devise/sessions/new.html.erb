@@ -1,34 +1,39 @@
-<!-- Login block -->
-<div class="login">
-    <div class="navbar">
-        <div class="navbar-inner">
-            <h6><i class="icon-user"></i>登录微同济服务端管理系统</h6>
-            <div class="nav pull-right">
-                <a href="#" class="dropdown-toggle navbar-icon" data-toggle="dropdown"><i class="icon-cog"></i></a>
-                <ul class="dropdown-menu pull-right">
-                    <li><a href="<%= new_admin_registration_path(resource) %>"><i class="icon-plus"></i>申请管理账号</a></li>
-                </ul>
-            </div>
-        </div>
+<div id="login">
+    <!-- login -->
+    <div class="title">
+        <h5>登录微同济服务端管理系统</h5>
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
     </div>
-    <div class="well">
-    	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "row-fluid" }) do |f| %>
-            <div class="control-group">
-                <label class="control-label">邮箱</label>
-                <div class="controls">
-                	<%= f.text_field :email, :class => "span12" %>
+    <div class="inner">
+        <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+        <div class="form">
+            <!-- fields -->
+            <div class="fields">
+                <div class="field">
+                    <div class="label">
+                        <label for="username">邮箱:</label>
+                    </div>
+                    <div class="input">
+                        <%= f.email_field :email, :class => "focus", :size => 40 %>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="label">
+                        <label for="password">密码:</label>
+                    </div>
+                    <div class="input">
+                        <%= f.password_field :password, :class => "focus", :size => 40 %>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <input type="submit" value="登录" />
+                    <input type="submit" value="注册" onclick="window.location.href='<%= new_admin_registration_path(resource) %>';return false;" />
                 </div>
             </div>
-            
-            <div class="control-group">
-                <label class="control-label">密码:</label>
-                <div class="controls">
-                	<%= f.password_field :password, :class => "span12" %>
-                </div>
-            </div>
-
-            <div class="login-btn"><input type="submit" value="登录" class="btn btn-danger btn-block" /></div>
+            <!-- end fields -->
+        </div>
         <% end %>
     </div>
+    <!-- end login -->
 </div>
-<!-- /login block -->

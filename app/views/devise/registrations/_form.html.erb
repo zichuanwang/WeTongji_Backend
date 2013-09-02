@@ -45,6 +45,15 @@
 	      </div>
 	      <div class="field">
 	        <div class="label">
+	          <label>背景图</label>
+	        </div>
+	        <div class="input input-file">
+	          <%= f.file_field :background, { :size => "40" } %>
+	          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jpeg,正方形,文件名不能有中文,300K以内</label>
+	        </div>
+	      </div>
+	      <div class="field">
+	        <div class="label">
 	          <label>简介(200个汉字以内)</label>
 	        </div>
 	        <div class="input">
