@@ -22,11 +22,7 @@
           </tr>
           <tr>
             <td>关注度</td>
-            <td class="last"><%= @activity.favorite %></td>
-          </tr>
-          <tr>
-            <td>标题</td>
-            <td class="last"><%= @activity.like %></td>
+            <td class="last"><%= UserLike.get_count('Activity', @activity.id) %></td>
           </tr>
           <tr>
             <td>加入日程数</td>

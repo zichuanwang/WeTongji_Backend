@@ -10,7 +10,6 @@
                     <th>起止时间</th>
                     <th>标题</th>
                     <th>关注度</th>
-                    <th>+1</th>
                     <th>参与度</th>
                     <th class="last">操作</th>
                 </tr>
@@ -23,8 +22,7 @@
                 </td>
                 <td><%= activity.begin.strftime("%Y/%m/%d %H:%M:%S") %>~<%= activity.end.strftime("%H:%M:%S") %></td>
                 <td><%= activity.title %></td>
-                <td><%= activity.favorite %></td>
-                <td><%= activity.like %></td>
+                <td><%= UserLike.get_count('Activity', activity.id) %></td>
                 <td><%= activity.schedule %></td>
                 <td class="last">
                     <%= link_to '详情', activity %>

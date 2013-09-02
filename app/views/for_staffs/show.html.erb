@@ -17,16 +17,8 @@
             <td class="last"><%= @for_staff.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
-            <td>阅读次数</td>
-            <td class="last"><%= @for_staff.read %></td>
-          </tr>
-          <tr>
-            <td>收藏次数</td>
-            <td class="last"><%= @for_staff.favorite %></td>
-          </tr>
-          <tr>
-            <td>喜欢次数</td>
-            <td class="last"><%= @for_staff.like %></td>
+            <td>关注度</td>
+            <td class="last"><%= UserLike.get_count('Information', @for_staff.id) %></td>
           </tr>
           <tr>
             <td>摘要</td>

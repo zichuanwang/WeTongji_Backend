@@ -13,16 +13,8 @@
             <td class="last"><%= @club_news.created_at.strftime("%Y/%m/%d %H:%M:%S") %></td>
           </tr>
           <tr>
-            <td>阅读次数</td>
-            <td class="last"><%= @club_news.read %></td>
-          </tr>
-          <tr>
-            <td>收藏次数</td>
-            <td class="last"><%= @club_news.favorite %></td>
-          </tr>
-          <tr>
-            <td>喜欢次数</td>
-            <td class="last"><%= @club_news.like %></td>
+            <td>关注度</td>
+            <td class="last"><%= UserLike.get_count('Information', @club_news.id) %></td>
           </tr>
           <tr>
             <td>内容</td>
