@@ -54,38 +54,47 @@ module Api
 					u = user
 					ex = []
 
+					activities = nil
 					if params[:UID]
 						friend = user.friends.joins("left join users u on u.id = friends.other_user_id").where("u.uid = :uid", :uid => params[:UID]).first
 						if friend
 							u = friend.other_user
+							activities = u.schedule_activities.where("visiable = true")
 						end
-					end
-					
-					channel_ids = params[:Channel_Ids]
-					sort = params[:Sort]
-					p = params[:P].nil? ? 1 : params[:P].to_i
-					expire = params[:Expire]
-					activities = u.schedule_activities.where("visiable = true")
-					if channel_ids
-						activities = activities.where(:channel_id => channel_ids.split(','))
-					end
-					if sort
-						activities = activities.order(sort)
 					else
-						activities = activities.order("begin asc")
-					end
-
-					unless expire && expire == '1'
-						activities = activities.where("end > :end", :end => Time.now)
-					end
-					activities = activities.page(p).per(20)
-
-					activities.each do |activity|
-						ex << ExActivity.init_from_activity(activity, u)
+						activities = u.schedule_activities.where("visiable = true")
 					end
 
 					re = ApiReturn.new("000")
-					re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
+					
+					if activities
+						channel_ids = params[:Channel_Ids]
+						sort = params[:Sort]
+						p = params[:P].nil? ? 1 : params[:P].to_i
+						expire = params[:Expire]
+						
+						if channel_ids
+							activities = activities.where(:channel_id => channel_ids.split(','))
+						end
+						if sort
+							activities = activities.order(sort)
+						else
+							activities = activities.order("begin asc")
+						end
+
+						unless expire && expire == '1'
+							activities = activities.where("end > :end", :end => Time.now)
+						end
+						activities = activities.page(p).per(20)
+
+						activities.each do |activity|
+							ex << ExActivity.init_from_activity(activity, u)
+						end
+						re.add_data("NextPager", (p < activities.num_pages ? p + 1 : 0))
+					else
+						re.add_data("NextPager", 0)
+					end
+					
 					re.add_data("Activities", ex)
 					return_response(re)
 				end
