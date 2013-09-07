@@ -152,6 +152,14 @@ module Api
 			end
 		end
 
+		def course
+			if verify_action_params(['UNO'])
+				re = ApiReturn.new("000")
+				re.add_data("Course", ExCourse.init_from_course(Course.find_by_uno(params[:UNO]), get_current_user))
+				return_response(re)
+			end
+		end
+
 		def school_year_setting
 			re = ApiReturn.new("000")
 			re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)

@@ -25,6 +25,7 @@ class ApiController < ApplicationController
 		"Course.Schedule" => "course_schedule",
 		"Course.UnSchedule" => "course_unschedule",
 		"Courses.Get.ByUser" => "courses_get_by_user",
+		"Course.Get" => "course",
 
 		"Favorite.Get" => "favorite",
 		"Schedule.Get" => "schedule",
