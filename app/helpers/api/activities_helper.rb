@@ -101,11 +101,25 @@ module Api
 			end
 		end
 
+		def activity
+			if verify_action_params(['Id'])
+				activity = Activity.find_by_id(params[:Id])
+				ex = nil
+				if activity
+					ex = ExActivity.init_from_activity(activity, get_current_user)
+				end
+
+				re = ApiReturn.new("000")
+				re.add_data("Activity", ex)
+				return_response(re)
+			end
+		end
+
 		def activity_schedule
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					activity = Activity.find(params[:Id])
+					activity = Activity.find_by_id(params[:Id])
 					if activity
 						activity.user_schedule(user)
 						activity.save
@@ -120,7 +134,7 @@ module Api
 			if verify_action_params(['U', 'S', 'Id'])
 				user = verify_user_authentication
 				if user
-					activity = Activity.find(params[:Id])
+					activity = Activity.find_by_id(params[:Id])
 					if activity
 						activity.user_unschedule(user)
 						activity.save

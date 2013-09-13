@@ -17,6 +17,7 @@ class ApiController < ApplicationController
 		"Activity.Invite.Get" => "activity_invite_get",
 		"Activity.Invite.Accept" => "activity_invite_accept",
 		"Activity.Invite.Reject" => "activity_invite_reject",
+		"Activity.Get" => "activity",
 
 		"Course.Invite" => "course_invite",
 		"Course.Invite.Get" => "course_invite_get",
