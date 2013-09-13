@@ -222,12 +222,11 @@ module Api
 						ex = ExUser.init_from_user(friend.other_user)
 						re = ApiReturn.new("000")
 						re.add_data("User", ex)
+						return_response(re)
 					else
 						re = ApiReturn.new("017")
 						return_response(re)
 					end
-
-					return_response(re)
 				end
 			end
 		end

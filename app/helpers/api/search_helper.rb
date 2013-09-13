@@ -9,7 +9,7 @@ module Api
 				type = params[:Type]
 				re = ApiReturn.new("000")
 
-				if type == "1" || type.nil?
+				if user && (type == "1" || type.nil?)
 					in1 = User.order("id desc").where("name = :key or no = :key", :key => key).limit(10)
 					ex1 = []
 					in1.each do |item|
