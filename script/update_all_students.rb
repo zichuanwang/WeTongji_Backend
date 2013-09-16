@@ -9,18 +9,18 @@ csv_text = File.read("#{Rails.root}/public/imports/all_students.csv")
 b = Time.now
 csv = CSV.parse(csv_text, :headers => true)
 csv.each_with_index do |row, index|
-	s = Student.find_by_no(row[0])
+	s = Student.find_by_no(row[2])
 	if s.nil?
 		s = Student.new
-		s.email = "#{row[0]}@tongji.edu.cn"
+		s.email = "#{row[2]}@tongji.edu.cn"
 	end
-	s.no = row[0]
-	s.name = row[1]
-	s.gender = row[2]
-	s.department = row[4]
-	s.major = row[5]
+	s.no = row[2]
+	s.name = row[0]
+	s.gender = row[1]
+	s.department = row[3]
+	s.major = row[4]
 	s.year = row[6]
-	s.plan = row[7]
+	s.plan = row[5]
 	s.birthday = row[8]
 	p "import no:#{index} row!"
 	s.save
