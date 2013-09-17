@@ -1,5 +1,5 @@
 class ExNotification
-	attr_accessor :Id, :Title, :Description, :SourceType, :UnRead, :SourceId, :SourceDetails
+	attr_accessor :Id, :Title, :Description, :SourceType, :UnRead, :SourceId, :SourceDetails, :CreatedAt
 
 	def self.init_from_notification(notification, user = nil)
 		model = ExNotification.new
@@ -9,6 +9,7 @@ class ExNotification
 		model.UnRead = notification.unread
 		model.SourceId = notification.out_id
 		model.SourceType = notification.out_model_name
+		model.CreatedAt = notification.created_at
 		
 		case model.SourceType
 		when "FriendInvite"

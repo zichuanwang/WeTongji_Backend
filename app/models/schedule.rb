@@ -66,9 +66,9 @@ class Schedule
 				week_day = "星期六"
 			end
 
-			#get week type
+			#get week type, this school year
 			week_type = '单'
-			if day.strftime("%U").to_i % 2 == 0
+			if (day.strftime("%U").to_i - 1) % 2 == 0
 				week_type = '双'
 			end
 

@@ -162,7 +162,7 @@ module Api
 
 		def school_year_setting
 			re = ApiReturn.new("000")
-			re.add_data("SchoolYearStartAt", Rails.configuration.data_of_school_year_start)
+			re.add_data("SchoolYearStartAt", Rails.configuration.date_of_school_year_start)
 			re.add_data("SchoolYearWeekCount", Rails.configuration.week_of_school_year)
 			re.add_data("SchoolYearCourseWeekCount", Rails.configuration.week_of_school_year_in_course)
 			return_response(re)
