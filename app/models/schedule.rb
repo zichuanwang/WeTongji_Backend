@@ -127,12 +127,12 @@ class Schedule
 		sections_all = Course.joins("left join course_sections on course_sections.course_uno = courses.uno")
 						.joins("left join course_takes on course_takes.course_uno = courses.uno")
 						.where("course_takes.student_no = :no and (courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end)", :no => user.no, :begin => begin_at, :end => end_at)
-						.select("courses.*")
+						.select("distinct courses.*")
 
 		sections_all_audit = user.audit_courses.joins("left join course_sections on course_sections.course_uno = courses.uno")
 						.joins("left join course_takes on course_takes.course_uno = courses.uno")
 						.where("courses.begin between :begin and :end or courses.end between :begin and :end or :begin between courses.begin and courses.end or :end between courses.begin and courses.end", :begin => begin_at, :end => end_at)
-						.select("courses.*")
+						.select("distinct courses.*")
 
 		sections_all_audit + sections_all
 	end
