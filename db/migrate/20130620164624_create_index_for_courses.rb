@@ -5,7 +5,7 @@ class CreateIndexForCourses < ActiveRecord::Migration
   end
 
   def down
-  	remove_index :name => "index_course_sections_on_course_uno"
-  	remove_index :name => "index_course_takes_on_course_uno"
+  	remove_index "course_sections", :name => "index_course_sections_on_course_uno"
+  	remove_index "course_takes", :name => "index_course_takes_on_course_uno"
   end
 end
