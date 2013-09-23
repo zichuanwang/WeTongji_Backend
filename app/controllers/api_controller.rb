@@ -93,13 +93,15 @@ class ApiController < ApplicationController
 	}
 
 	def call
-	    #check params exists system require params
-	    if verify_sys_params && METHODS[params[:M]] && params[:V] == "3.0"
-	    	ApiLog.create(:m => params[:M], :u => params[:U], :v => params[:V], :d => params[:D])
-	       	send METHODS[params[:M]]
-	    else
-	      	return_response ApiReturn.new("004")
-	    end
+		#check params exists system require params
+		if verify_sys_params && METHODS[params[:M]] && params[:V] == "3.0"
+			t1 = Time.now
+			send METHODS[params[:M]]
+			t2 = Time.now
+			ApiLog.create(:m => params[:M], :u => params[:U], :v => params[:V], :d => params[:D], :begin => t1, :end => t2, :duration => (t2 - t1) * 1000)
+		else
+			return_response ApiReturn.new("004")
+		end
 	end
 
 end
